@@ -32,7 +32,7 @@
 namespace ProjectInfo
 {
     const char* const  projectName    = "OpenPL";
-    const char* const  companyName    = "";
+    const char* const  companyName    = "James Kelly";
     const char* const  versionString  = "1.0.0";
     const int          versionNumber  = 0x10000;
 }
