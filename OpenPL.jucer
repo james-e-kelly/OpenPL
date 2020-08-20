@@ -12,6 +12,8 @@
         <FILE id="LLLhb5" name="OpenPLCommon.h" compile="0" resource="0" file="Source/Public/OpenPLCommon.h"/>
       </GROUP>
       <GROUP id="{D6B2C47F-48EF-9787-9FEB-F706157103EE}" name="Private">
+        <FILE id="o40ms2" name="PLBounds.cpp" compile="1" resource="0" file="Source/Private/PLBounds.cpp"/>
+        <FILE id="PGEO7M" name="PLBounds.h" compile="0" resource="0" file="Source/Private/PLBounds.h"/>
         <FILE id="HT8sEF" name="OpenPL.cpp" compile="1" resource="0" file="Source/Private/OpenPL.cpp"/>
         <FILE id="uP6qIj" name="OpenPL_CPP.cpp" compile="1" resource="0" file="Source/Private/OpenPL_CPP.cpp"/>
       </GROUP>
@@ -21,8 +23,8 @@
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX" extraDefs="JUCE_DLL_BUILD=1">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" targetName="OpenPL" headerPath="/usr/local/include"/>
-        <CONFIGURATION isDebug="0" name="Release" targetName="OpenPL" headerPath="/usr/local/include"/>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="OpenPL" headerPath="/usr/local/include&#10;/usr/local/include/eigen3&#10;../../../libigl/include"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="OpenPL" headerPath="/usr/local/include&#10;/usr/local/include/eigen3&#10;../../../libigl/include"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_core" path="../JUCE/modules"/>

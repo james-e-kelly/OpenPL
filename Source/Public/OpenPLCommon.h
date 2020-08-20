@@ -172,43 +172,6 @@ struct JUCE_API PLVector
     float Z;
 };
 
-struct JUCE_API PLBounds
-{
-    PLVector Min;
-    PLVector Max;
-    
-    PLBounds() = default;
-    PLBounds(const PLBounds& Other) = default;
-    PLBounds(PLBounds&& Other) = default;
-    PLBounds& operator = (const PLBounds& Other)
-    {
-        this->Min = Other.Min;
-        this->Max = Other.Max;
-        
-        return *this;
-    }
-    
-    PLBounds(PLVector Min, PLVector Max)
-    :   Min(Min),
-        Max(Max)
-    { }
-    
-    static PLBounds CreateAABB(const PLVector& Center, const PLVector& Size)
-    {
-        return PLBounds(Center - (Size / 2), Center + (Size / 2));
-    }
-    
-    bool IsInside(const PLVector& Point) const
-    {
-        return Point > Min && Point < Max;
-    }
-    
-    bool IsInsideOrOn(const PLVector& Point) const
-    {
-        return Point >= Min && Point <= Max;
-    }
-};
-
 /**
  * Defines one voxel cell within the voxel geometry
  */
