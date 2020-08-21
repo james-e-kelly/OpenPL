@@ -5,7 +5,9 @@
               companyName="James Kelly" companyCopyright="Copyright &#169; 2020 James Kelly">
   <MAINGROUP id="Gy2ano" name="OpenPL">
     <GROUP id="{24CA4D11-FC16-F8E8-18CB-7794E87812CC}" name="Source">
-      <GROUP id="{10348CF7-CB7B-19A2-B118-8024C6837B9F}" name="ThirdParty"/>
+      <GROUP id="{10348CF7-CB7B-19A2-B118-8024C6837B9F}" name="ThirdParty">
+        <FILE id="Jzvy2S" name="glad.c" compile="1" resource="0" file="../libigl/external/glad/src/glad.c"/>
+      </GROUP>
       <GROUP id="{262279F8-D3BA-44F1-E9A5-D4886273EA73}" name="Public">
         <FILE id="s5sSOW" name="OpenPL.h" compile="0" resource="0" file="Source/Public/OpenPL.h"/>
         <FILE id="CRGnlV" name="OpenPL_CPP.h" compile="0" resource="0" file="Source/Public/OpenPL_CPP.h"/>
@@ -21,15 +23,21 @@
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX" extraDefs="JUCE_DLL_BUILD=1">
+    <XCODE_MAC targetFolder="Builds/MacOSX" extraDefs="JUCE_DLL_BUILD=1" externalLibraries="glfw">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" targetName="OpenPL" headerPath="/usr/local/include&#10;/usr/local/include/eigen3&#10;../../../libigl/include"/>
-        <CONFIGURATION isDebug="0" name="Release" targetName="OpenPL" headerPath="/usr/local/include&#10;/usr/local/include/eigen3&#10;../../../libigl/include"/>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="OpenPL" headerPath="/usr/local/include&#10;../../../libigl/include&#10;../../../libigl/external/eigen&#10;../../../libigl/external/glad/include"
+                       libraryPath="/usr/local/lib"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="OpenPL" headerPath="/usr/local/include&#10;../../../libigl/include&#10;../../../libigl/external/eigen&#10;../../../libigl/external/glad/include"
+                       libraryPath="/usr/local/lib"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_core" path="../JUCE/modules"/>
         <MODULEPATH id="juce_data_structures" path="../JUCE/modules"/>
         <MODULEPATH id="juce_events" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_opengl" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
   </EXPORTFORMATS>
@@ -37,6 +45,10 @@
     <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
     <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
     <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
   </MODULES>
   <LIVE_SETTINGS>
     <OSX/>

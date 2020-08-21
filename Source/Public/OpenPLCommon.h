@@ -22,7 +22,9 @@ enum JUCE_API PL_RESULT
     /** Generic error has occured without any further reason why*/
     PL_ERR,
     /** An error occured with memory. Maybe a null reference was found or memory failed to allocate/deallocate*/
-    PL_ERR_MEMORY
+    PL_ERR_MEMORY,
+    /** An argument passed into the function is invalid. For example, an indices array not being a multiple of 3*/
+    PL_ERR_INVALID_PARAM
 };
 
 /**

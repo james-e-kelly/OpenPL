@@ -87,4 +87,33 @@ extern "C"
      * @param Scene Scene to destroy.
      */
     JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_Release(PL_SCENE* Scene);
+    
+    /**
+     * Adds a mesh (vertices and indices) to the scene.
+     * The function returns an index of where the mesh is stored inside the scene's internal mesh array so you can later remove that mesh.
+     *
+     * @param Scene Scene to add the mesh to.
+     * @param Vertices Pointer to the start of a vertices array.
+     * @param VerticesLength Length of the vertices array.
+     * @param Indices Pointer to the start of an indices array.
+     * @param IndicesLength Length of the indicies array.
+     * @param OutIndex If successful, the index the mesh is stored at for later deletion.
+     */
+    JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_AddMesh(PL_SCENE* Scene, PLVector* Vertices, int VerticesLength, int* Indices, int IndicesLength, int* OutIndex);
+    
+    /**
+     * Removes a mesh from the scene.
+     * Uses the index passed from PL_Scene_AddMesh.
+     *
+     * @param Scene Scene to remove the mesh from.
+     * @param IndexToRemove Index of the mesh to remove.
+     */
+    JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_RemoveMesh(PL_SCENE* Scene, int IndexToRemove);
+    
+    /**
+     * Opens a new OpenGL window and displays the meshes contained within the scene.
+     *
+     * @param Scene Scene to render.
+     */
+    JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_Debug(PL_SCENE* Scene);
 }

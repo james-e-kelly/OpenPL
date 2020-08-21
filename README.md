@@ -14,16 +14,18 @@ Written with [JUCE v6.0.1](https://github.com/juce-framework/JUCE).
 
 3) `git clone https://github.com/libigl/libigl.git`
 
-4) Download [JUCE](https://juce.com/get-juce/download) and place/copy in `DirectoryOfYourChoice`
-
-5) `brew install eigen`
+4) Use libigl to download dependencies for us
 
 ```
--Root/
----JUCE/
----OpenPL/
----libigl/
+cd ligigl
+mkdir build
+cd build
+cmake ../
+make
+
 ```
+
+5) Download [JUCE 6.0.1](https://juce.com/get-juce/download) and place/copy in `DirectoryOfYourChoice`
 
 6) Open the `.jucer` file in the Projucer app
 
