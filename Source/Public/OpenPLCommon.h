@@ -27,6 +27,14 @@ enum JUCE_API PL_RESULT
     PL_ERR_INVALID_PARAM
 };
 
+struct JUCE_API PLQuaternion
+{
+    float X;
+    float Y;
+    float Z;
+    float W;
+};
+
 /**
  * Simple Vector3D struct
  */

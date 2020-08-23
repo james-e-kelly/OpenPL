@@ -57,6 +57,18 @@ typedef struct PL_SCENE     PL_SCENE;
 
 extern "C"
 {
+    enum PL_DEBUG_LEVEL
+    {
+        PL_DEBUG_LEVEL_LOG,
+        PL_DEBUG_LEVEL_WARN,
+        PL_DEBUG_LEVEL_ERR
+    };
+    
+    // Debugging callback
+    typedef PL_RESULT (*PL_Debug_Callback)     (const char* Message, PL_DEBUG_LEVEL Level);
+    
+    JUCE_PUBLIC_FUNCTION PL_RESULT PL_Debug_Initialize (PL_Debug_Callback Callback);
+    
     /**
      * Creates a system object.
      * System objects are management objects for the simulation.
@@ -99,7 +111,7 @@ extern "C"
      * @param IndicesLength Length of the indicies array.
      * @param OutIndex If successful, the index the mesh is stored at for later deletion.
      */
-    JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_AddMesh(PL_SCENE* Scene, PLVector* Vertices, int VerticesLength, int* Indices, int IndicesLength, int* OutIndex);
+    JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_AddMesh(PL_SCENE* Scene, PLVector* WorldPosition, PLQuaternion* WorldRotation, PLVector* WorldScale, PLVector* Vertices, int VerticesLength, int* Indices, int IndicesLength, int* OutIndex);
     
     /**
      * Removes a mesh from the scene.
@@ -112,6 +124,7 @@ extern "C"
     
     /**
      * Opens a new OpenGL window and displays the meshes contained within the scene.
+     * WARNING: Rendering must happen on the main thread, therefore the game will pause while the debug window is open.
      *
      * @param Scene Scene to render.
      */

@@ -82,11 +82,46 @@ public:
         return Meshes;
     }
     
+    PL_RESULT OpenOpenGLDebugWindow()
+    {
+        igl::opengl::glfw::Viewer viewer;
+        for (auto& Mesh : Meshes)
+        {
+            viewer.data().set_mesh(Mesh.Vertices, Mesh.Indices);
+            viewer.append_mesh(true);
+        }
+        
+        int Success = viewer.launch();
+        
+        if (Success == EXIT_SUCCESS)
+        {
+            return PL_OK;
+        }
+        
+        return PL_ERR;
+    }
+    
 private:
     PL_SYSTEM* OwningSystem;
     
     std::vector<PL_MESH> Meshes;
 };
+
+static PL_Debug_Callback DebugCallback = nullptr;
+
+PL_RESULT PL_Debug_Initialize (PL_Debug_Callback Callback)
+{
+    DebugCallback = Callback;
+    return PL_OK;
+}
+
+void Debug(const char* Message, PL_DEBUG_LEVEL Level)
+{
+    if (DebugCallback)
+    {
+        DebugCallback(Message, Level);
+    }
+}
 
 PL_RESULT PL_System_Create (PL_SYSTEM** OutSystem)
 {
@@ -107,9 +142,9 @@ PL_RESULT PL_System_Release (PL_SYSTEM* System)
 
 PL_RESULT PL_System_CreateScene(PL_SYSTEM* System, PL_SCENE** OutScene)
 {
-    if (!System || OutScene)
+    if (!System)
     {
-        return PL_ERR_MEMORY;
+        return PL_ERR_INVALID_PARAM;
     }
     
     PL_SCENE* CreatedScene = new PL_SCENE(System);
@@ -134,10 +169,10 @@ PL_RESULT PL_Scene_Release(PL_SCENE* Scene)
     return PL_ERR_MEMORY;
 }
 
-PL_RESULT PL_Scene_AddMesh(PL_SCENE* Scene, PLVector* Vertices, int VerticesLength, int* Indices, int IndicesLength, int* OutIndex)
+PL_RESULT PL_Scene_AddMesh(PL_SCENE* Scene, PLVector* WorldPosition, PLQuaternion* WorldRotation, PLVector* WorldScale, PLVector* Vertices, int VerticesLength, int* Indices, int IndicesLength, int* OutIndex)
 {
     // Return if any pointers are invalid
-    if (!Scene || !Vertices || !Indices)
+    if (!Scene || !WorldPosition || !WorldRotation || !Vertices || !Indices)
     {
         return PL_ERR_INVALID_PARAM;
     }
@@ -148,24 +183,41 @@ PL_RESULT PL_Scene_AddMesh(PL_SCENE* Scene, PLVector* Vertices, int VerticesLeng
         return PL_ERR_INVALID_PARAM;
     }
     
+    Debug("Test", PL_DEBUG_LEVEL_LOG);
+    
     // Copy vertices into a matrix
     VertexMatrix EigenVertices (VerticesLength, 3); // Eigen::Matrix(Index rows, Index columns);
     
+    Eigen::Vector3d Scale (WorldScale->X, WorldScale->Y, WorldScale->Z);
+    Eigen::Quaterniond Rotation(WorldRotation->W, WorldRotation->X, WorldRotation->Y, WorldRotation->Z);
+    Eigen::Vector3d Translation(WorldPosition->X, WorldPosition->Y, WorldPosition->Z);
+    
+    Eigen::Transform<double, 3, Eigen::Affine> Transform = Eigen::Transform<double, 3, Eigen::Affine>::Identity();
+    Transform.scale(Scale);
+    Transform.rotate(Rotation);
+    Transform.translate(Translation);
+    
     for (int i = 0; i < VerticesLength; i++)
     {
-        EigenVertices(i, 0) = Vertices[i].X;
-        EigenVertices(i, 1) = Vertices[i].Y;
-        EigenVertices(i, 2) = Vertices[i].Z;
+        Eigen::Vector3d Vector (Vertices[i].X, Vertices[i].Y, Vertices[i].Z);
+        Eigen::Vector3d TransformedVector = Transform * Vector;
+        
+        EigenVertices(i, 0) = TransformedVector(0, 0);
+        EigenVertices(i, 1) = TransformedVector(1, 0);
+        EigenVertices(i, 2) = -TransformedVector(2, 0);
     }
     
     // Copy indicies into a matrix
     IndiceMatrix EigenIndices (IndicesLength / 3, 3);
     
-    for (int i = 0; i < IndicesLength; i+=3)
+    int row, i;
+    row = i = 0;
+    
+    for ( ; (row < IndicesLength / 3) && (i < IndicesLength);  row++, i+=3)
     {
-        EigenIndices(i, 0) = Indices[i];
-        EigenIndices(i, 1) = Indices[i+1];
-        EigenIndices(i, 2) = Indices[i+2];
+        EigenIndices(row, 0) = Indices[i];
+        EigenIndices(row, 1) = Indices[i+1];
+        EigenIndices(row, 2) = Indices[i+2];
     }
     
     // Create a mesh
@@ -192,33 +244,7 @@ PL_RESULT PL_Scene_RemoveMesh(PL_SCENE* Scene, int IndexToRemove)
 
 PL_RESULT PL_Scene_Debug(PL_SCENE* Scene)
 {
-    std::vector<PL_MESH>& Meshes = Scene->GetMeshes();
-    
-    int VertexRows = 0;
-    int IndiceRows = 0;
-    
-    // Loop once to get full row size
-    // Doing a double loop means less reallocating
-    for (auto& Mesh : Meshes)
-    {
-        VertexRows += Mesh.Vertices.rows();
-        IndiceRows += Mesh.Indices.rows();
-    }
-    
-    VertexMatrix V(VertexRows, 3);
-    IndiceMatrix F(IndiceRows, 3);
-    
-    for(auto& Mesh : Meshes)
-    {
-        V << Mesh.Vertices;
-        F << Mesh.Indices;
-    }
-
-    igl::opengl::glfw::Viewer viewer;
-    viewer.data().set_mesh(V, F);
-    viewer.launch();
-    
-    return PL_OK;
+    return Scene->OpenOpenGLDebugWindow();
 }
 
 //PL_RESULT PLScene::GetBounds(PLBounds* OutBounds) const
