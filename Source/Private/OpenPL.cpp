@@ -182,8 +182,16 @@ PL_RESULT PL_Scene_AddMesh(PL_SCENE* Scene, PLVector* WorldPosition, PLQuaternio
     {
         return PL_ERR_INVALID_PARAM;
     }
+
+    std::string PositionString;
+    PositionString.append("X: ");
+    PositionString.append(std::to_string(WorldPosition->X));
+    PositionString.append(", Y: ");
+    PositionString.append(std::to_string(WorldPosition->Y));
+    PositionString.append(", Z: ");
+    PositionString.append(std::to_string(WorldPosition->Z));
     
-    Debug("Test", PL_DEBUG_LEVEL_LOG);
+    Debug(PositionString.c_str(), PL_DEBUG_LEVEL_LOG);
     
     // Copy vertices into a matrix
     VertexMatrix EigenVertices (VerticesLength, 3); // Eigen::Matrix(Index rows, Index columns);
