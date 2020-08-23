@@ -27,7 +27,23 @@ enum JUCE_API PL_RESULT
     PL_ERR_INVALID_PARAM
 };
 
-struct JUCE_API PLQuaternion
+/**
+ * Defines what leve to log a debug message at.
+ */
+enum JUCE_API PL_DEBUG_LEVEL
+{
+    PL_DEBUG_LEVEL_LOG,
+    PL_DEBUG_LEVEL_WARN,
+    PL_DEBUG_LEVEL_ERR
+};
+
+// Debugging callback
+typedef PL_RESULT (*PL_Debug_Callback)     (const char* Message, PL_DEBUG_LEVEL Level);
+
+/**
+ * Defines a simple vector 4 with X,Y,Z and W components.
+ */
+struct JUCE_API PLVector4
 {
     float X;
     float Y;
@@ -36,7 +52,12 @@ struct JUCE_API PLQuaternion
 };
 
 /**
- * Simple Vector3D struct
+ * Definition of a quaternion in OpenPL.
+ */
+typedef PLVector4   PLQuaternion;
+
+/**
+ * Simple Vector3 struct
  */
 struct JUCE_API PLVector
 {

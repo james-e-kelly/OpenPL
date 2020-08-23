@@ -57,16 +57,6 @@ typedef struct PL_SCENE     PL_SCENE;
 
 extern "C"
 {
-    enum PL_DEBUG_LEVEL
-    {
-        PL_DEBUG_LEVEL_LOG,
-        PL_DEBUG_LEVEL_WARN,
-        PL_DEBUG_LEVEL_ERR
-    };
-    
-    // Debugging callback
-    typedef PL_RESULT (*PL_Debug_Callback)     (const char* Message, PL_DEBUG_LEVEL Level);
-    
     JUCE_PUBLIC_FUNCTION PL_RESULT PL_Debug_Initialize (PL_Debug_Callback Callback);
     
     /**
@@ -121,6 +111,17 @@ extern "C"
      * @param IndexToRemove Index of the mesh to remove.
      */
     JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_RemoveMesh(PL_SCENE* Scene, int IndexToRemove);
+    
+    /**
+     * Takes the meshes within the scene and turns them into a voxel lattice, ready to simulate over.
+     *
+     * To help with performance, the size of voxel lattice can be set. As there is a fixed size, some meshes/faces could be excluded.
+     *
+     * @param Scene Scene to voxelise.
+     * @param CenterPosition World center position of the lattice.
+     * @param Size Total size of the lattice.
+     */
+    JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_Voxelise(PL_SCENE* Scene, PLVector* CenterPosition, PLVector* Size);
     
     /**
      * Opens a new OpenGL window and displays the meshes contained within the scene.

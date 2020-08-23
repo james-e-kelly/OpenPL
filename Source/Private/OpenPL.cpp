@@ -9,9 +9,18 @@
 */
 
 #include "../Public/OpenPL.h"
+#include "PLBounds.h"
+
+#include <boost/format.hpp>
+
+// Hide warnings from external libraries because it's not up to use to fix them
+#pragma warning(push, 0)
 #include <forward_list>
 #include <Eigen/Core>
+#include <Eigen/Geometry>
 #include <igl/opengl/glfw/Viewer.h>
+#include <igl/voxel_grid.h>
+#pragma warning(pop)
 
 typedef Eigen::MatrixXd     VertexMatrix;
 typedef Eigen::MatrixXi     IndiceMatrix;
@@ -23,6 +32,24 @@ struct PL_MESH
 {
     VertexMatrix Vertices;
     IndiceMatrix Indices;
+};
+
+/**
+ * Defines the voxel lattice of a geometric scene.
+ */
+struct PL_VOXEL_GRID
+{
+    /** Bounding box the voxels are within. Can be used to quickly check if a point is within the lattice*/
+    Eigen::AlignedBox<double, 3> Bounds;
+    /** Matrix of all center positions of the voxels. Matrix is XSize*YSize*ZSize by 3*/
+    Eigen::Matrix<double,-1,-1,0,-1,-1> CenterPositions;
+    /** Contains size of each dimension of the lattice. Ie Size(0,0) would return the size of the lattice along the X axis*/
+    Eigen::Matrix<int,1,3,1,1,3> Size;
+    /** 1D vector containing all voxels. Contains all voxels witin the lattice so must convert 3D indexes to 1D before accessing*/
+    std::vector<PLVoxel> Voxels;
+    /** Width aka Height aka Depth of each voxel. With CenterPositions and Voxels, can use this to create bounding boxes of each voxel*/
+    float VoxelSize;
+    
 };
 
 class PL_SYSTEM
@@ -101,10 +128,17 @@ public:
         return PL_ERR;
     }
     
+    void SetVoxels(PL_VOXEL_GRID& InVoxels)
+    {
+        Voxels = InVoxels;
+    }
+    
 private:
     PL_SYSTEM* OwningSystem;
     
     std::vector<PL_MESH> Meshes;
+    
+    PL_VOXEL_GRID Voxels;
 };
 
 static PL_Debug_Callback DebugCallback = nullptr;
@@ -250,17 +284,79 @@ PL_RESULT PL_Scene_RemoveMesh(PL_SCENE* Scene, int IndexToRemove)
     return Scene->RemoveMesh(IndexToRemove);
 }
 
+PL_RESULT PL_Scene_Voxelise(PL_SCENE* Scene, PLVector* CenterPosition, PLVector* Size)
+{
+    if (!Scene || !CenterPosition || !Size)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
+    // Create AABB
+    const PLVector Min = *CenterPosition - *Size / 2;
+    const PLVector Max = *CenterPosition + *Size / 2;
+    
+    Eigen::Vector3d EigenMin;
+    Eigen::Vector3d EigenMax;
+    EigenMin << (Eigen::Vector3d() << Min.X, Min.Y, Min.Z).finished();
+    EigenMax << (Eigen::Vector3d() << Max.X, Max.Y, Max.Z).finished();
+    
+    Eigen::AlignedBox<double,3> Bounds = Eigen::AlignedBox<double,3>(EigenMin, EigenMax);
+    
+    // TODO: Change voxel size to something set by the user per simulation
+    const float VoxelSize = 5.f;
+    const int VoxelsInSide = static_cast<int>(Size->X / VoxelSize);
+    
+    Debug((std::string("Voxel Size: ") + std::to_string(VoxelSize)).c_str(), PL_DEBUG_LEVEL_LOG);
+    Debug((std::string("Voxels Per Side: ") + std::to_string(VoxelsInSide)).c_str(), PL_DEBUG_LEVEL_LOG);
+    
+    // Matrix<Scalar, Rows, Columns, Options, MaxRows, MaxColumns>
+    Eigen::Matrix<double, -1, -1, 0, -1, -1> CenterPositions;
+    Eigen::MatrixXi Side;
+    
+    // Calculates all center positions of a voxel lattice within a bounding box
+    igl::voxel_grid(Bounds, VoxelsInSide, 0, CenterPositions, Side);
+    
+    const int XSize = Side(0,0);
+    const int YSize = Side(0,1);
+    const int ZSize = Side(0,2);
+    
+    Debug((std::string("X Voxels: ") + std::to_string(XSize)).c_str(), PL_DEBUG_LEVEL_LOG);
+    Debug((std::string("Y Voxels: ") + std::to_string(YSize)).c_str(), PL_DEBUG_LEVEL_LOG);
+    Debug((std::string("Z Voxels: ") + std::to_string(ZSize)).c_str(), PL_DEBUG_LEVEL_LOG);
+    
+    for (int x = 0; x < XSize; x++)
+    {
+        for (int y = 0; y < YSize; y++)
+        {
+            for (int z = 0; z < ZSize; z++)
+            {
+                // The X,Y and Z sides of the lattice are all combined into the rows of the matrix
+                // To access the correct index, we have to convert 3D index to a 1D index
+                // https://stackoverflow.com/questions/16790584/converting-index-of-one-dimensional-array-into-two-dimensional-array-i-e-row-a#16790720
+                // The actual vertex positions of the index are contained within 3 columns
+                const int Index = x + y * XSize + z * XSize * YSize;
+                const double XCor = CenterPositions(Index,0);
+                const double YCor = CenterPositions(Index,1);
+                const double ZCor = CenterPositions(Index,2);
+                char FormatString[] = "X: %s. Y: %s. Z: %s";
+                Debug((boost::format(FormatString) % std::to_string(XCor) % std::to_string(YCor) % std::to_string(ZCor)).str().c_str(), PL_DEBUG_LEVEL_LOG);
+            }
+        }
+    }
+    
+    PL_VOXEL_GRID VoxelGrid;
+    VoxelGrid.Bounds = Bounds;
+    VoxelGrid.CenterPositions = CenterPositions;
+    VoxelGrid.Size = Side;
+    VoxelGrid.VoxelSize = VoxelSize;
+    VoxelGrid.Voxels = std::vector<PLVoxel>(XSize*YSize*ZSize); // TODO: Actually fill the voxels with values
+    
+    Scene->SetVoxels(VoxelGrid);
+    
+    return PL_OK;
+}
+
 PL_RESULT PL_Scene_Debug(PL_SCENE* Scene)
 {
     return Scene->OpenOpenGLDebugWindow();
 }
-
-//PL_RESULT PLScene::GetBounds(PLBounds* OutBounds) const
-//{
-//    if (Impl)
-//    {
-//        *OutBounds = PLBounds::CreateAABB(Impl->SceneCenter, Impl->SceneSize);
-//        return PL_OK;
-//    }
-//    return PL_ERR_MEMORY;
-//}
