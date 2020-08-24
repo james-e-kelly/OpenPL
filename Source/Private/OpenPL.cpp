@@ -148,7 +148,7 @@ PL_RESULT PL_Debug_Initialize (PL_Debug_Callback Callback)
     return PL_OK;
 }
 
-void Debug(const char* Message, PL_DEBUG_LEVEL Level)
+static void Debug(const char* Message, PL_DEBUG_LEVEL Level)
 {
     if (DebugCallback)
     {
@@ -156,17 +156,17 @@ void Debug(const char* Message, PL_DEBUG_LEVEL Level)
     }
 }
 
-void DebugLog(const char* Message)
+static void DebugLog(const char* Message)
 {
     Debug(Message, PL_DEBUG_LEVEL_LOG);
 }
 
-void DebugWarn(const char* Message)
+static void DebugWarn(const char* Message)
 {
     Debug(Message, PL_DEBUG_LEVEL_WARN);
 }
 
-void DebugError(const char* Message)
+static void DebugError(const char* Message)
 {
     Debug(Message, PL_DEBUG_LEVEL_ERR);
 }
