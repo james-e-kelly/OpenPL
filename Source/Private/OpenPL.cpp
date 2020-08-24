@@ -9,21 +9,63 @@
 */
 
 #include "../Public/OpenPL.h"
-#include "PLBounds.h"
-
-#include <boost/format.hpp>
-
-// Hide warnings from external libraries because it's not up to use to fix them
-#pragma warning(push, 0)
 #include <forward_list>
 #include <Eigen/Core>
 #include <Eigen/Geometry>
 #include <igl/opengl/glfw/Viewer.h>
 #include <igl/voxel_grid.h>
-#pragma warning(pop)
 
 typedef Eigen::MatrixXd     VertexMatrix;
 typedef Eigen::MatrixXi     IndiceMatrix;
+
+static PL_Debug_Callback DebugCallback = nullptr;
+
+/**
+ * Log a message to the external debug method.
+ */
+static void Debug(const char* Message, PL_DEBUG_LEVEL Level)
+{
+    if (DebugCallback)
+    {
+        DebugCallback(Message, Level);
+    }
+}
+
+/**
+ * Log a message to the external debug method.
+ */
+static void DebugLog(const char* Message)
+{
+    Debug(Message, PL_DEBUG_LEVEL_LOG);
+}
+
+/**
+ * Log a warning message to the external debug method.
+ */
+static void DebugWarn(const char* Message)
+{
+    Debug(Message, PL_DEBUG_LEVEL_WARN);
+}
+
+/**
+ * Log an error message to the external debug method.
+ */
+static void DebugError(const char* Message)
+{
+    Debug(Message, PL_DEBUG_LEVEL_ERR);
+}
+
+/**
+ * Converts a 3D array index to a 1D index.
+ */
+static int ThreeDimToOneDim(int X, int Y, int Z, int XSize, int YSize)
+{
+    // The X,Y and Z sides of the lattice are all combined into the rows of the matrix
+    // To access the correct index, we have to convert 3D index to a 1D index
+    // https://stackoverflow.com/questions/16790584/converting-index-of-one-dimensional-array-into-two-dimensional-array-i-e-row-a#16790720
+    // The actual vertex positions of the index are contained within 3 columns
+    return  X + Y * XSize + Z * XSize * YSize;
+}
 
 /**
  * Defines a simple mesh with vertices and indices.
@@ -51,6 +93,11 @@ struct PL_VOXEL_GRID
     float VoxelSize;
 };
 
+/**
+ * The system class is a container for scene objects. It's primary purpose is to remove having static variables inside this file.
+ * Users have to create a system object before going further in the simulation.
+ * And because the user has to release the object, it is a nice place to handle memory management.
+ */
 class PL_SYSTEM
 {
 public:
@@ -76,20 +123,128 @@ private:
     std::forward_list<std::unique_ptr<PL_SCENE>> Scenes;
 };
 
+/**
+ * The scene class is the main work horse of the simulation.
+ * 1) Take mesh data from game and convert to internal data types
+ * 2) Convert to voxels
+ * 3) Simulate over voxels
+ * 4) Return simulated data/parameters
+ * 5) Pronably save to disk as well
+ */
 class PL_SCENE
 {
 public:
     
+    /**
+     * Constructor. Scene objects (and any other heap allocated objects) must reference the system object.
+     * @param System System object that owns the scene.
+     */
     PL_SCENE(PL_SYSTEM* System)
     :   OwningSystem(System)
     { }
     
-    PL_RESULT GetSystem(PL_SYSTEM** OutSystem)
+    /**
+     * Get the owning scene object.
+     */
+    PL_RESULT GetSystem(PL_SYSTEM** OutSystem) const
     {
         *OutSystem = OwningSystem;
         return PL_OK;
     }
     
+    /**
+     * Takes generic mesh data from the game, converts it to internal data and stores it within the scene.
+     *
+     * @param Scene Scene to add the mesh to.
+     * @param WorldPosition World Position of the mesh. Used to offset the vertices' position.
+     * @param WorldRotation World Rotation of the mesh. Used to rotate the vertices to reflect its rotation in the game.
+     * @param WorldScale World Scale of the mesh. Used to scale the vertices to reflect their size in the game.
+     * @param Vertices Pointer to the start of a vertices array.
+     * @param VerticesLength Length of the vertices array.
+     * @param Indices Pointer to the start of an indices array.
+     * @param IndicesLength Length of the indicies array.
+     * @param OutIndex If successful, the index the mesh is stored at for later deletion.
+     */
+    PL_RESULT AddAndConvertGameMesh(PLVector WorldPosition, PLQuaternion WorldRotation, PLVector WorldScale, PLVector* Vertices, int VerticesLength, int* Indices, int IndicesLength, int* OutIndex)
+    {
+        // Return if any pointers are invalid
+        if (!Vertices || !Indices)
+        {
+            return PL_ERR_INVALID_PARAM;
+        }
+        
+        if (VerticesLength <= 3)
+        {
+            DebugError("Can't create geometry from a mesh that has less than 3 vertices");
+            return PL_ERR_INVALID_PARAM;
+        }
+        
+        if (IndicesLength <= 3)
+        {
+            DebugError("Can't create geometry from a mesh that has less than 3 indices");
+            return PL_ERR_INVALID_PARAM;
+        }
+        
+        // Indices must be multiple of 3
+        if (IndicesLength % 3 != 0)
+        {
+            DebugError("Can't create mesh. Indices wasn't a multiple of 3");
+            return PL_ERR_INVALID_PARAM;
+        }
+        
+        // Copy vertices into a matrix
+        VertexMatrix EigenVertices (VerticesLength, 3); // Eigen::Matrix(Index rows, Index columns);
+        
+        Eigen::Vector3d Scale (WorldScale.X, WorldScale.Y, WorldScale.Z);
+        Eigen::Quaterniond Rotation(WorldRotation.W, WorldRotation.X, WorldRotation.Y, WorldRotation.Z);
+        Eigen::Vector3d Translation(WorldPosition.X, WorldPosition.Y, WorldPosition.Z);
+        
+        Eigen::Transform<double, 3, Eigen::Affine> Transform = Eigen::Transform<double, 3, Eigen::Affine>::Identity();
+        Transform.scale(Scale);
+        Transform.rotate(Rotation);
+        Transform.translate(Translation);
+        
+        for (int i = 0; i < VerticesLength; i++)
+        {
+            Eigen::Vector3d Vector (Vertices[i].X, Vertices[i].Y, Vertices[i].Z);
+            Eigen::Vector3d TransformedVector = Transform * Vector;
+            
+            EigenVertices(i, 0) = TransformedVector(0, 0);
+            EigenVertices(i, 1) = TransformedVector(1, 0);
+            EigenVertices(i, 2) = -TransformedVector(2, 0);
+        }
+        
+        // Copy indicies into a matrix
+        IndiceMatrix EigenIndices (IndicesLength / 3, 3);
+        
+        int row, i;
+        row = i = 0;
+        
+        for ( ; (row < IndicesLength / 3) && (i < IndicesLength);  row++, i+=3)
+        {
+            EigenIndices(row, 0) = Indices[i];
+            EigenIndices(row, 1) = Indices[i+1];
+            EigenIndices(row, 2) = Indices[i+2];
+        }
+        
+        // Create a mesh
+        PL_MESH Mesh;
+        Mesh.Vertices = EigenVertices;
+        Mesh.Indices = EigenIndices;
+        
+        // Add mesh to scene
+        int Index = -1;
+        PL_RESULT Result = AddMesh(Mesh, Index);
+        *OutIndex = Index;
+        return Result;
+    }
+    
+    /**
+     * Add a PL_MESH to the scene's internal storage.
+     *
+     * @param Mesh Mesh to add.
+     * @param OutIndex Index of the mesh within the array.
+     */
     PL_RESULT AddMesh(PL_MESH& Mesh, int& OutIndex)
     {
         Meshes.push_back(Mesh);
@@ -97,18 +252,21 @@ public:
         return PL_OK;
     }
     
+    /**
+     * Removes a PL_MESH from the internal array using its index.
+     *
+     * @param Index Index to remove.
+     */
     PL_RESULT RemoveMesh(int Index)
     {
         Meshes.erase(Meshes.begin()+Index);
         return PL_OK;
     }
     
-    std::vector<PL_MESH>& GetMeshes()
-    {
-        return Meshes;
-    }
-    
-    PL_RESULT OpenOpenGLDebugWindow()
+    /**
+     * Quick internal debugging method for displaying the meshes within the scene.
+     */
+    PL_RESULT OpenOpenGLDebugWindow() const
     {
         igl::opengl::glfw::Viewer viewer;
         for (auto& Mesh : Meshes)
@@ -127,9 +285,70 @@ public:
         return PL_ERR;
     }
     
-    void SetVoxels(PL_VOXEL_GRID& InVoxels)
+    /**
+     * Converts the scene's geometry to voxels, ready for simulation.
+     *
+     * @param CenterPosition Center of the AABB containing all the voxels.
+     * @param Size Size of the voxel lattice.
+     * @param VoxelSize Size of each voxel cell.
+     */
+    PL_RESULT Voxelise(PLVector CenterPosition, PLVector Size, float VoxelSize = 5.f)
     {
-        Voxels = InVoxels;
+        if (Meshes.size() == 0)
+        {
+            return PL_ERR;
+        }
+        
+        if (Size.X < VoxelSize || Size.Y < VoxelSize || Size.Z < VoxelSize)
+        {
+            DebugWarn("Can't create voxel lattice of that size. No voxels would fit inside it");
+            return PL_ERR_INVALID_PARAM;
+        }
+        
+        // Create AABB
+        const PLVector Min = CenterPosition - Size / 2;
+        const PLVector Max = CenterPosition + Size / 2;
+        
+        Eigen::Vector3d EigenMin;
+        Eigen::Vector3d EigenMax;
+        EigenMin << (Eigen::Vector3d() << Min.X, Min.Y, Min.Z).finished();
+        EigenMax << (Eigen::Vector3d() << Max.X, Max.Y, Max.Z).finished();
+        
+        Eigen::AlignedBox<double,3> Bounds = Eigen::AlignedBox<double,3>(EigenMin, EigenMax);
+        
+        // TODO: Change voxel size to something set by the user per simulation
+        const int VoxelsInSide = static_cast<int>(Size.X / VoxelSize);
+        
+        // Matrix<Scalar, Rows, Columns, Options, MaxRows, MaxColumns>
+        Eigen::Matrix<double, -1, -1, 0, -1, -1> CenterPositions;
+        Eigen::MatrixXi Side;
+        
+        // Calculates all center positions of a voxel lattice within a bounding box
+        igl::voxel_grid(Bounds, VoxelsInSide, 0, CenterPositions, Side);
+        
+        const int XSize = Side(0,0);
+        const int YSize = Side(0,1);
+        const int ZSize = Side(0,2);
+        
+        // We can assume if any sides of the lattice are 0, something went wrong
+        // Even if we wanted a 2D grid, we'd still need at least 1 along the Z
+        if (XSize == 0 || YSize == 0 || ZSize)
+        {
+            DebugError("Failed to create voxels");
+            return PL_ERR;
+        }
+        
+        // Set voxels
+        PL_VOXEL_GRID VoxelGrid;
+        VoxelGrid.Bounds = Bounds;
+        VoxelGrid.CenterPositions = CenterPositions;
+        VoxelGrid.Size = Side;
+        VoxelGrid.VoxelSize = VoxelSize;
+        VoxelGrid.Voxels = std::vector<PLVoxel>(XSize*YSize*ZSize); // TODO: Actually fill the voxels with values
+        
+        Voxels = VoxelGrid;
+        
+        return PL_OK;
     }
     
 private:
@@ -140,35 +359,10 @@ private:
     PL_VOXEL_GRID Voxels;
 };
 
-static PL_Debug_Callback DebugCallback = nullptr;
-
 PL_RESULT PL_Debug_Initialize (PL_Debug_Callback Callback)
 {
     DebugCallback = Callback;
     return PL_OK;
-}
-
-static void Debug(const char* Message, PL_DEBUG_LEVEL Level)
-{
-    if (DebugCallback)
-    {
-        DebugCallback(Message, Level);
-    }
-}
-
-static void DebugLog(const char* Message)
-{
-    Debug(Message, PL_DEBUG_LEVEL_LOG);
-}
-
-static void DebugWarn(const char* Message)
-{
-    Debug(Message, PL_DEBUG_LEVEL_WARN);
-}
-
-static void DebugError(const char* Message)
-{
-    Debug(Message, PL_DEBUG_LEVEL_ERR);
 }
 
 PL_RESULT PL_System_Create (PL_SYSTEM** OutSystem)
@@ -219,73 +413,12 @@ PL_RESULT PL_Scene_Release(PL_SCENE* Scene)
 
 PL_RESULT PL_Scene_AddMesh(PL_SCENE* Scene, PLVector* WorldPosition, PLQuaternion* WorldRotation, PLVector* WorldScale, PLVector* Vertices, int VerticesLength, int* Indices, int IndicesLength, int* OutIndex)
 {
-    // Return if any pointers are invalid
-    if (!Scene || !WorldPosition || !WorldRotation || !Vertices || !Indices)
+    if (!Scene || !WorldPosition || !WorldRotation || !WorldScale)
     {
         return PL_ERR_INVALID_PARAM;
     }
     
-    // Indices must be multiple of 3
-    if (IndicesLength % 3 != 0)
-    {
-        return PL_ERR_INVALID_PARAM;
-    }
-
-    std::string PositionString;
-    PositionString.append("X: ");
-    PositionString.append(std::to_string(WorldPosition->X));
-    PositionString.append(", Y: ");
-    PositionString.append(std::to_string(WorldPosition->Y));
-    PositionString.append(", Z: ");
-    PositionString.append(std::to_string(WorldPosition->Z));
-    
-    Debug(PositionString.c_str(), PL_DEBUG_LEVEL_LOG);
-    
-    // Copy vertices into a matrix
-    VertexMatrix EigenVertices (VerticesLength, 3); // Eigen::Matrix(Index rows, Index columns);
-    
-    Eigen::Vector3d Scale (WorldScale->X, WorldScale->Y, WorldScale->Z);
-    Eigen::Quaterniond Rotation(WorldRotation->W, WorldRotation->X, WorldRotation->Y, WorldRotation->Z);
-    Eigen::Vector3d Translation(WorldPosition->X, WorldPosition->Y, WorldPosition->Z);
-    
-    Eigen::Transform<double, 3, Eigen::Affine> Transform = Eigen::Transform<double, 3, Eigen::Affine>::Identity();
-    Transform.scale(Scale);
-    Transform.rotate(Rotation);
-    Transform.translate(Translation);
-    
-    for (int i = 0; i < VerticesLength; i++)
-    {
-        Eigen::Vector3d Vector (Vertices[i].X, Vertices[i].Y, Vertices[i].Z);
-        Eigen::Vector3d TransformedVector = Transform * Vector;
-        
-        EigenVertices(i, 0) = TransformedVector(0, 0);
-        EigenVertices(i, 1) = TransformedVector(1, 0);
-        EigenVertices(i, 2) = -TransformedVector(2, 0);
-    }
-    
-    // Copy indicies into a matrix
-    IndiceMatrix EigenIndices (IndicesLength / 3, 3);
-    
-    int row, i;
-    row = i = 0;
-    
-    for ( ; (row < IndicesLength / 3) && (i < IndicesLength);  row++, i+=3)
-    {
-        EigenIndices(row, 0) = Indices[i];
-        EigenIndices(row, 1) = Indices[i+1];
-        EigenIndices(row, 2) = Indices[i+2];
-    }
-    
-    // Create a mesh
-    PL_MESH Mesh;
-    Mesh.Vertices = EigenVertices;
-    Mesh.Indices = EigenIndices;
-    
-    // Add mesh to scene
-    int Index = -1;
-    PL_RESULT Result = Scene->AddMesh(Mesh, Index);
-    *OutIndex = Index;
-    return Result;
+    return Scene->AddAndConvertGameMesh(*WorldPosition, *WorldRotation, *WorldScale, Vertices, VerticesLength, Indices, IndicesLength, OutIndex);
 }
 
 PL_RESULT PL_Scene_RemoveMesh(PL_SCENE* Scene, int IndexToRemove)
@@ -305,69 +438,7 @@ PL_RESULT PL_Scene_Voxelise(PL_SCENE* Scene, PLVector* CenterPosition, PLVector*
         return PL_ERR_INVALID_PARAM;
     }
     
-    // Create AABB
-    const PLVector Min = *CenterPosition - *Size / 2;
-    const PLVector Max = *CenterPosition + *Size / 2;
-    
-    Eigen::Vector3d EigenMin;
-    Eigen::Vector3d EigenMax;
-    EigenMin << (Eigen::Vector3d() << Min.X, Min.Y, Min.Z).finished();
-    EigenMax << (Eigen::Vector3d() << Max.X, Max.Y, Max.Z).finished();
-    
-    Eigen::AlignedBox<double,3> Bounds = Eigen::AlignedBox<double,3>(EigenMin, EigenMax);
-    
-    // TODO: Change voxel size to something set by the user per simulation
-    const float VoxelSize = 5.f;
-    const int VoxelsInSide = static_cast<int>(Size->X / VoxelSize);
-    
-    Debug((std::string("Voxel Size: ") + std::to_string(VoxelSize)).c_str(), PL_DEBUG_LEVEL_LOG);
-    Debug((std::string("Voxels Per Side: ") + std::to_string(VoxelsInSide)).c_str(), PL_DEBUG_LEVEL_LOG);
-    
-    // Matrix<Scalar, Rows, Columns, Options, MaxRows, MaxColumns>
-    Eigen::Matrix<double, -1, -1, 0, -1, -1> CenterPositions;
-    Eigen::MatrixXi Side;
-    
-    // Calculates all center positions of a voxel lattice within a bounding box
-    igl::voxel_grid(Bounds, VoxelsInSide, 0, CenterPositions, Side);
-    
-    const int XSize = Side(0,0);
-    const int YSize = Side(0,1);
-    const int ZSize = Side(0,2);
-    
-    Debug((std::string("X Voxels: ") + std::to_string(XSize)).c_str(), PL_DEBUG_LEVEL_LOG);
-    Debug((std::string("Y Voxels: ") + std::to_string(YSize)).c_str(), PL_DEBUG_LEVEL_LOG);
-    Debug((std::string("Z Voxels: ") + std::to_string(ZSize)).c_str(), PL_DEBUG_LEVEL_LOG);
-    
-    for (int x = 0; x < XSize; x++)
-    {
-        for (int y = 0; y < YSize; y++)
-        {
-            for (int z = 0; z < ZSize; z++)
-            {
-                // The X,Y and Z sides of the lattice are all combined into the rows of the matrix
-                // To access the correct index, we have to convert 3D index to a 1D index
-                // https://stackoverflow.com/questions/16790584/converting-index-of-one-dimensional-array-into-two-dimensional-array-i-e-row-a#16790720
-                // The actual vertex positions of the index are contained within 3 columns
-                const int Index = x + y * XSize + z * XSize * YSize;
-                const double XCor = CenterPositions(Index,0);
-                const double YCor = CenterPositions(Index,1);
-                const double ZCor = CenterPositions(Index,2);
-                char FormatString[] = "X: %s. Y: %s. Z: %s";
-                Debug((boost::format(FormatString) % std::to_string(XCor) % std::to_string(YCor) % std::to_string(ZCor)).str().c_str(), PL_DEBUG_LEVEL_LOG);
-            }
-        }
-    }
-    
-    PL_VOXEL_GRID VoxelGrid;
-    VoxelGrid.Bounds = Bounds;
-    VoxelGrid.CenterPositions = CenterPositions;
-    VoxelGrid.Size = Side;
-    VoxelGrid.VoxelSize = VoxelSize;
-    VoxelGrid.Voxels = std::vector<PLVoxel>(XSize*YSize*ZSize); // TODO: Actually fill the voxels with values
-    
-    Scene->SetVoxels(VoxelGrid);
-    
-    return PL_OK;
+    return Scene->Voxelise(*CenterPosition, *Size);
 }
 
 PL_RESULT PL_Scene_Debug(PL_SCENE* Scene)
