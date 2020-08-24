@@ -26,7 +26,7 @@ typedef Eigen::MatrixXd     VertexMatrix;
 typedef Eigen::MatrixXi     IndiceMatrix;
 
 /**
- * Defines simple mesh with vertices and indices.
+ * Defines a simple mesh with vertices and indices.
  */
 struct PL_MESH
 {
@@ -49,7 +49,6 @@ struct PL_VOXEL_GRID
     std::vector<PLVoxel> Voxels;
     /** Width aka Height aka Depth of each voxel. With CenterPositions and Voxels, can use this to create bounding boxes of each voxel*/
     float VoxelSize;
-    
 };
 
 class PL_SYSTEM
@@ -155,6 +154,21 @@ void Debug(const char* Message, PL_DEBUG_LEVEL Level)
     {
         DebugCallback(Message, Level);
     }
+}
+
+void DebugLog(const char* Message)
+{
+    Debug(Message, PL_DEBUG_LEVEL_LOG);
+}
+
+void DebugWarn(const char* Message)
+{
+    Debug(Message, PL_DEBUG_LEVEL_WARN);
+}
+
+void DebugError(const char* Message)
+{
+    Debug(Message, PL_DEBUG_LEVEL_ERR);
 }
 
 PL_RESULT PL_System_Create (PL_SYSTEM** OutSystem)
