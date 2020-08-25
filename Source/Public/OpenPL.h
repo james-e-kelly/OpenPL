@@ -41,7 +41,7 @@
  3. Return the voxel geometry for scene debugging and visualisation
  4. Apply Rectangular Decomposition
  5. Run Simulation
- 6. Pick out key parameters and IRs
+ 6. Pick out salient parameters
  7. Save data to disk
  8. Return success
  
@@ -143,6 +143,49 @@ extern "C"
      * @param Size Total size of the lattice.
      */
     JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_Voxelise(PL_SCENE* Scene, PLVector* CenterPosition, PLVector* Size);
+    
+    /**
+     * Adds a listener location to the scene.
+     *
+     * Scenes must have at least one listener for simulations to work.
+     *
+     * @param Scene Scene to add the listener to.
+     * @param Position Position of the listener.
+     * @param OutIndex Index of the listener in the array.
+     * @see PL_Scene_RemoveListenerLocation
+     */
+    JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_AddListenerLocation(PL_SCENE* Scene, PLVector* Position, int* OutIndex);
+    
+    /**
+     * Removes a listener from the scene.
+     *
+     * @param Scene Scene to remove the listener from.
+     * @param IndexToRemove Listener index to remove.
+     * @see PL_Scene_AddListenerLocation
+     */
+    JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_RemoveListenerLocation(PL_SCENE* Scene, int IndexToRemove);
+    
+    /**
+     * Adds a source location to the scene.
+     * Source locations are audio emitter locations.
+     *
+     * Scenes must have at least one source for simulations to work.
+     *
+     * @param Scene Scene to add the source to.
+     * @param Position Position of the source.
+     * @param OutIndex Index of the source in the array.
+     * @see PL_Scene_RemoveSourceLocation
+     */
+    JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_AddSourceLocation(PL_SCENE* Scene, PLVector* Position, int* OutIndex);
+    
+    /**
+     * Removes a source from the scene.
+     *
+     * @param Scene Scene to remove the source from.
+     * @param IndexToRemove Source index to remove.
+     * @see PL_Scene_AddLSourceLocation
+     */
+    JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_RemoveSourceLocation(PL_SCENE* Scene, int IndexToRemove);
     
     /**
      * Opens a new OpenGL window and displays the meshes contained within the scene.

@@ -271,6 +271,32 @@ public:
         return PL_OK;
     }
     
+    PL_RESULT AddListenerLocation(PLVector& Location, int& OutIndex)
+    {
+        ListenerLocations.push_back(Location);
+        OutIndex = static_cast<int>(ListenerLocations.size()) - 1;
+        return PL_OK;
+    }
+    
+    PL_RESULT RemoveListenerLocation(int Index)
+    {
+        ListenerLocations.erase(ListenerLocations.begin()+Index);
+        return PL_OK;
+    }
+    
+    PL_RESULT AddSourceLocation(PLVector& Location, int& OutIndex)
+    {
+        SourceLocations.push_back(Location);
+        OutIndex = static_cast<int>(SourceLocations.size()) - 1;
+        return PL_OK;
+    }
+    
+    PL_RESULT RemoveSourceLocation(int Index)
+    {
+        SourceLocations.erase(SourceLocations.begin()+Index);
+        return PL_OK;
+    }
+    
     /**
      * Quick internal debugging method for displaying the meshes within the scene.
      */
@@ -475,6 +501,8 @@ private:
     PL_SYSTEM* OwningSystem;
     
     std::vector<PL_MESH> Meshes;
+    std::vector<PLVector> ListenerLocations;
+    std::vector<PLVector> SourceLocations;
     
     PL_VOXEL_GRID Voxels;
 };
@@ -559,6 +587,46 @@ PL_RESULT PL_Scene_Voxelise(PL_SCENE* Scene, PLVector* CenterPosition, PLVector*
     }
     
     return Scene->Voxelise(*CenterPosition, *Size);
+}
+
+PL_RESULT PL_Scene_AddListenerLocation(PL_SCENE* Scene, PLVector* Position, int* OutIndex)
+{
+    if (!Scene || !Position || !OutIndex)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
+    return Scene->AddListenerLocation(*Position, *OutIndex);
+}
+
+PL_RESULT PL_Scene_RemoveListenerLocation(PL_SCENE* Scene, int IndexToRemove)
+{
+    if (!Scene || IndexToRemove < 0)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
+    return Scene->RemoveListenerLocation(IndexToRemove);
+}
+
+PL_RESULT PL_Scene_AddSourceLocation(PL_SCENE* Scene, PLVector* Position, int* OutIndex)
+{
+    if (!Scene || !Position || !OutIndex)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
+    return Scene->AddSourceLocation(*Position, *OutIndex);
+}
+
+PL_RESULT PL_Scene_RemoveSourceLocation(PL_SCENE* Scene, int IndexToRemove)
+{
+    if (!Scene || IndexToRemove < 0)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
+    return Scene->RemoveSourceLocation(IndexToRemove);
 }
 
 PL_RESULT PL_Scene_Debug(PL_SCENE* Scene)
