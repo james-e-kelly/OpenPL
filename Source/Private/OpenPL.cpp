@@ -67,6 +67,16 @@ static int ThreeDimToOneDim(int X, int Y, int Z, int XSize, int YSize)
     return  X + Y * XSize + Z * XSize * YSize;
 }
 
+
+/**
+ * Defines one voxel cell within the voxel geometry
+ */
+struct JUCE_API PLVoxel
+{
+    Eigen::Vector3d WorldPosition;
+    float Absorptivity;
+};
+
 /**
  * Defines a simple mesh with vertices and indices.
  */
@@ -83,8 +93,6 @@ struct PL_VOXEL_GRID
 {
     /** Bounding box the voxels are within. Can be used to quickly check if a point is within the lattice*/
     Eigen::AlignedBox<double, 3> Bounds;
-    /** Matrix of all center positions of the voxels. Matrix is XSize*YSize*ZSize by 3*/
-    Eigen::Matrix<double,-1,-1,0,-1,-1> CenterPositions;
     /** Contains size of each dimension of the lattice. Ie Size(0,0) would return the size of the lattice along the X axis*/
     Eigen::Matrix<int,1,3,1,1,3> Size;
     /** 1D vector containing all voxels. Contains all voxels witin the lattice so must convert 3D indexes to 1D before accessing*/
@@ -341,12 +349,124 @@ public:
         // Set voxels
         PL_VOXEL_GRID VoxelGrid;
         VoxelGrid.Bounds = Bounds;
-        VoxelGrid.CenterPositions = CenterPositions;
         VoxelGrid.Size = Side;
         VoxelGrid.VoxelSize = VoxelSize;
         VoxelGrid.Voxels = std::vector<PLVoxel>(XSize*YSize*ZSize); // TODO: Actually fill the voxels with values
         
+        // Set positions for each voxel
+        for (int X = 0; X < XSize; X++)
+        {
+            for (int Y = 0; Y < YSize; Y++)
+            {
+                for (int Z = 0; Z < ZSize; Z++)
+                {
+                    const int Index = ThreeDimToOneDim(X, Y, Z, XSize, YSize);
+                    const double XCor = CenterPositions(Index, 0);
+                    const double YCor = CenterPositions(Index, 1);
+                    const double ZCor = CenterPositions(Index, 2);
+                    Eigen::Vector3d WorldPosition;
+                    WorldPosition << XCor, YCor, ZCor;
+                    VoxelGrid.Voxels[Index].WorldPosition = WorldPosition;
+                }
+            }
+        }
+        
         Voxels = VoxelGrid;
+        
+        return FillVoxels();
+    }
+    
+    /**
+     * Adds absorption values to the voxel lattice cells based on the absorptivity of each mesh.
+     *
+     * If Voxelise creates the voxels, this method gives them meaning.
+     */
+    PL_RESULT FillVoxels()
+    {
+        // First thought on how to do this:
+        // Create an AABB for each mesh
+        // Find all voxel cells that fit within the box
+        // Interate over each face and find the bounding box of that face
+        // Find the cells which fit within the face AABB
+        // Populate those cells with absorption values
+        
+        // It's probably more accurate to shoot a ray between each vertex
+        // However, at the sizes of the voxels and faces, this shouldn't be too much of a problem
+        // But if accuracy does become a problem, I think that will be the solution
+        
+        for (auto& Mesh : Meshes)
+        {
+            // Full AABB that encloses the mesh
+            Eigen::Vector3d MeshMin = Mesh.Vertices.colwise().minCoeff();
+            Eigen::Vector3d MeshMax = Mesh.Vertices.colwise().maxCoeff();
+            Eigen::AlignedBox<double, 3> MeshBounds (MeshMin, MeshMax);
+            
+            // Ignore mesh if it's not within the lattice
+            if (!Voxels.Bounds.contains(MeshBounds))
+            {
+                continue;
+            }
+            
+            // List of all cells that fit within the mesh
+            std::vector<PLVoxel*> MeshCells;
+            
+            // Vector3 of each voxel size
+            Eigen::Vector3d VoxelSize;
+            VoxelSize << Voxels.VoxelSize, Voxels.VoxelSize, Voxels.VoxelSize;
+            
+            // For each voxel in the lattice, find if it's within the mesh bounds
+            // If it is, add it to the list
+            for (auto& Cell : Voxels.Voxels)
+            {
+                Eigen::Vector3d Pos = Cell.WorldPosition;
+                Eigen::Vector3d Min = Pos - (VoxelSize / 2);
+                Eigen::Vector3d Max = Pos + (VoxelSize / 2);
+                
+                Eigen::AlignedBox<double, 3> VoxelBounds (Min,Max);
+                
+                if (MeshBounds.contains(VoxelBounds))
+                {
+                    MeshCells.push_back(&Cell);
+                }
+            }
+            
+            // Somehow there are no voxels for this mesh, even though it's inside the lattice
+            if (MeshCells.size() == 0)
+            {
+                DebugWarn("Couldn't find voxels for a mesh. This shouldn't be possible");
+                continue;
+            }
+            
+            for (int i = 0; i < Mesh.Indices.size(); i++)
+            {
+                const int Indice1 = Mesh.Indices(i,0);
+                const int Indice2 = Mesh.Indices(i,1);
+                const int Indice3 = Mesh.Indices(i,2);
+                
+                Eigen::Matrix<double,3,3,0,3,3> VertexPositions;
+                VertexPositions <<  Mesh.Vertices(Indice1,0), Mesh.Vertices(Indice1,1), Mesh.Vertices(Indice1,2),
+                                    Mesh.Vertices(Indice2,0), Mesh.Vertices(Indice2,1), Mesh.Vertices(Indice3,2),
+                                    Mesh.Vertices(Indice3,0), Mesh.Vertices(Indice3,1), Mesh.Vertices(Indice3,2);
+                
+                Eigen::Vector3d Min = VertexPositions.colwise().minCoeff();
+                Eigen::Vector3d Max = VertexPositions.colwise().maxCoeff();
+                Eigen::AlignedBox<double, 3> FaceBounds (Min, Max);
+                
+                for (auto& Cell : MeshCells)
+                {
+                    Eigen::Vector3d Pos = Cell->WorldPosition;
+                    Eigen::Vector3d Min = Pos - (VoxelSize / 2);
+                    Eigen::Vector3d Max = Pos + (VoxelSize / 2);
+                    
+                    Eigen::AlignedBox<double, 3> VoxelBounds (Min,Max);
+                    
+                    if (FaceBounds.contains(VoxelBounds))
+                    {
+                        Cell->Absorptivity = 0.75f; // DEBUG. TODO: Fill this with an actual value
+                    }
+                }
+            }
+        }
         
         return PL_OK;
     }

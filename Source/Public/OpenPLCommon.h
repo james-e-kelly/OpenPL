@@ -202,11 +202,3 @@ struct JUCE_API PLVector
     float Y;
     float Z;
 };
-
-/**
- * Defines one voxel cell within the voxel geometry
- */
-struct JUCE_API PLVoxel
-{
-    float Absorptivity;
-};
