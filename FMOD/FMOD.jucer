@@ -4,8 +4,12 @@
               displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="Vxc9cW" name="FMOD">
     <GROUP id="{4C00D09A-30BC-5750-1F52-4A490F4836C6}" name="Source">
-      <GROUP id="{1336D055-A296-2623-576C-2B931D187570}" name="Public"/>
-      <GROUP id="{3EA04A4F-3D9E-9835-F06D-C72FF7936724}" name="Private"/>
+      <GROUP id="{1336D055-A296-2623-576C-2B931D187570}" name="Public">
+        <FILE id="U2DHz1" name="Spatializer.h" compile="0" resource="0" file="Source/Public/Spatializer.h"/>
+      </GROUP>
+      <GROUP id="{3EA04A4F-3D9E-9835-F06D-C72FF7936724}" name="Private">
+        <FILE id="N5XJ6u" name="Spatializer.cpp" compile="1" resource="0" file="Source/Private/Spatializer.cpp"/>
+      </GROUP>
       <GROUP id="{2A417617-50EF-FCDF-BE1B-95C99B2B7DDB}" name="ThirdParty">
         <GROUP id="{02731EF8-8638-04A4-9F18-8B090E874D9A}" name="FMOD">
           <FILE id="xliE8u" name="fmod.h" compile="0" resource="0" file="Source/ThirdParty/FMOD/fmod.h"/>
@@ -25,8 +29,8 @@
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" targetName="FMOD Plugin"/>
-        <CONFIGURATION isDebug="0" name="Release" targetName="FMOD Plugin"/>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="FMOD Plugin" headerPath="../../Source/ThirdParty/FMOD"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="FMOD Plugin" headerPath="../../Source/ThirdParty/FMOD"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_core" path="../../../../../../../../../../../../../Users/k/JUCE/modules"/>
