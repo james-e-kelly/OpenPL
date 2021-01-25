@@ -67,6 +67,14 @@ static int ThreeDimToOneDim(int X, int Y, int Z, int XSize, int YSize)
     return  X + Y * XSize + Z * XSize * YSize;
 }
 
+/**
+ * Testing to try and create the wave equation.
+ * I don't think this will be very needed though
+ */
+static void WaveEquation(Eigen::Vector3d Position, double Time, double PressureValue)
+{
+    // (∂² × p(x,t) / ∂ × t²) - c² × Laplacian × p(x,t) = F(x,t)
+}
 
 /**
  * Defines one voxel cell within the voxel geometry
@@ -137,7 +145,7 @@ private:
  * 2) Convert to voxels
  * 3) Simulate over voxels
  * 4) Return simulated data/parameters
- * 5) Pronably save to disk as well
+ * 5) Probably save to disk as well
  */
 class PL_SCENE
 {
