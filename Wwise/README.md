@@ -1,0 +1,1 @@
+While not implemented, this folder will contain the Wwise plugin code.

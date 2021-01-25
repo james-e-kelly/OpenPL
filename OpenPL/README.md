@@ -1,0 +1,1 @@
+This folder contains the main editor library which should be added to a game engine's editor to allow for wave simulation.

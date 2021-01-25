@@ -1,0 +1,1 @@
+While not implemented, this folder will contain the Unity plugin code. This will likely be implemented as a stripped down Unity project.
