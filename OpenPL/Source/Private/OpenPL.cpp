@@ -31,10 +31,16 @@ PL_RESULT PL_System_Create (PL_SYSTEM** OutSystem)
 {
     if (!OutSystem)
     {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
+    *OutSystem = new (std::nothrow) PL_SYSTEM();
+    
+    if (*OutSystem == nullptr)
+    {
         return PL_ERR_MEMORY;
     }
     
-    *OutSystem = new PL_SYSTEM();
     return PL_OK;
 }
 
@@ -51,7 +57,7 @@ PL_RESULT PL_System_CreateScene(PL_SYSTEM* System, PL_SCENE** OutScene)
         return PL_ERR_INVALID_PARAM;
     }
     
-    PL_SCENE* CreatedScene = new PL_SCENE(System);
+    PL_SCENE* CreatedScene = new (std::nothrow) PL_SCENE(System);
     *OutScene = CreatedScene;
     PL_RESULT Result = System->AddScene(CreatedScene);
     return Result;
