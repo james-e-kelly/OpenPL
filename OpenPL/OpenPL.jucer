@@ -19,13 +19,19 @@
         </GROUP>
         <GROUP id="{9B8C24B8-EC89-215A-E5DC-EAF0E45E0A20}" name="Objects">
           <GROUP id="{40DA73F2-F127-13E5-4508-9FDC7A132274}" name="Private">
+            <FILE id="GKywbc" name="PL_SCENE.cpp" compile="1" resource="0" file="Source/Private/Objects/Private/PL_SCENE.cpp"/>
+            <FILE id="GIjPde" name="PL_SYSTEM.cpp" compile="1" resource="0" file="Source/Private/Objects/Private/PL_SYSTEM.cpp"/>
             <FILE id="leDkLI" name="PLBounds.cpp" compile="1" resource="0" file="Source/Private/Objects/Private/PLBounds.cpp"/>
           </GROUP>
           <GROUP id="{BBA20755-E4BC-29E3-5F76-16D6A74274FD}" name="Public">
+            <FILE id="TmcdGa" name="PL_SCENE.h" compile="0" resource="0" file="Source/Private/Objects/Public/PL_SCENE.h"/>
+            <FILE id="zwxmOR" name="PL_SYSTEM.h" compile="0" resource="0" file="Source/Private/Objects/Public/PL_SYSTEM.h"/>
             <FILE id="XDeOVS" name="PLBounds.h" compile="0" resource="0" file="Source/Private/Objects/Public/PLBounds.h"/>
           </GROUP>
         </GROUP>
         <FILE id="VhB2GJ" name="OpenPL.cpp" compile="1" resource="0" file="Source/Private/OpenPL.cpp"/>
+        <FILE id="uxaNlm" name="OpenPLCommonPrivate.h" compile="1" resource="0"
+              file="Source/Private/OpenPLCommonPrivate.h"/>
       </GROUP>
     </GROUP>
   </MAINGROUP>

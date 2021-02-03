@@ -21,10 +21,7 @@ struct JUCE_API PLBounds
     PLVector Min;
     PLVector Max;
     
-    PLBounds(PLVector Min, PLVector Max)
-    :   Min(Min),
-    Max(Max)
-    { }
+    PLBounds(PLVector Min, PLVector Max);
     
     static PLBounds CreateAABB(const PLVector& Center, const PLVector& Size);
     

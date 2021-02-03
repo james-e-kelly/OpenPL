@@ -12,6 +12,9 @@
 
 #include <JuceHeader.h>
 
+typedef struct PL_SYSTEM    PL_SYSTEM;
+typedef struct PL_SCENE     PL_SCENE;
+
 /**
  * Defines possible results from OpenPL API functions
  */

@@ -10,6 +10,11 @@
 
 #include "../Public/PLBounds.h"
 
+PLBounds::PLBounds(PLVector Min, PLVector Max)
+:   Min(Min),
+Max(Max)
+{ }
+
 PLBounds PLBounds::CreateAABB(const PLVector& Center, const PLVector& Size)
 {
     return PLBounds(Center - (Size / 2), Center + (Size / 2));

@@ -49,11 +49,7 @@
 
 #pragma once
 
-#include <JuceHeader.h>
 #include "OpenPLCommon.h"
-
-typedef struct PL_SYSTEM    PL_SYSTEM;
-typedef struct PL_SCENE     PL_SCENE;
 
 extern "C"
 {
