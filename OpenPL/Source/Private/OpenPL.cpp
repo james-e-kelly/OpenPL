@@ -12,9 +12,6 @@
 #include "../Private/Objects/Public/PL_SYSTEM.h"
 #include "../Private/Objects/Public/PL_SCENE.h"
 
-
-
-
 /**
  * Testing to try and create the wave equation.
  * I don't think this will be very needed though
@@ -26,7 +23,7 @@ static void WaveEquation(Eigen::Vector3d Position, double Time, double PressureV
 
 PL_RESULT PL_Debug_Initialize (PL_Debug_Callback Callback)
 {
-    DebugCallback = Callback;
+    SetDebugCallback(Callback);
     return PL_OK;
 }
 

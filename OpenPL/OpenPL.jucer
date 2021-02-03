@@ -30,6 +30,8 @@
           </GROUP>
         </GROUP>
         <FILE id="VhB2GJ" name="OpenPL.cpp" compile="1" resource="0" file="Source/Private/OpenPL.cpp"/>
+        <FILE id="c0wJl3" name="OpenPLCommonPrivate.cpp" compile="1" resource="0"
+              file="Source/Private/OpenPLCommonPrivate.cpp"/>
         <FILE id="uxaNlm" name="OpenPLCommonPrivate.h" compile="1" resource="0"
               file="Source/Private/OpenPLCommonPrivate.h"/>
       </GROUP>

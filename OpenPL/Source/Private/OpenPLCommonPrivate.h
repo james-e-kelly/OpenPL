@@ -10,60 +10,39 @@
 
 #pragma once
 
+#include "../Public/OpenPLCommon.h"
 #include <Eigen/Core>
 #include <Eigen/Geometry>
 
 typedef Eigen::MatrixXd     VertexMatrix;
 typedef Eigen::MatrixXi     IndiceMatrix;
 
-static PL_Debug_Callback DebugCallback = nullptr;
+void SetDebugCallback(PL_Debug_Callback Callback);
 
 /**
  * Log a message to the external debug method.
  */
-static void Debug(const char* Message, PL_DEBUG_LEVEL Level)
-{
-    if (DebugCallback)
-    {
-        DebugCallback(Message, Level);
-    }
-}
+void Debug(const char* Message, PL_DEBUG_LEVEL Level);
 
 /**
  * Log a message to the external debug method.
  */
-static void DebugLog(const char* Message)
-{
-    Debug(Message, PL_DEBUG_LEVEL_LOG);
-}
+void DebugLog(const char* Message);
 
 /**
  * Log a warning message to the external debug method.
  */
-static void DebugWarn(const char* Message)
-{
-    Debug(Message, PL_DEBUG_LEVEL_WARN);
-}
+void DebugWarn(const char* Message);
 
 /**
  * Log an error message to the external debug method.
  */
-static void DebugError(const char* Message)
-{
-    Debug(Message, PL_DEBUG_LEVEL_ERR);
-}
+void DebugError(const char* Message);
 
 /**
  * Converts a 3D array index to a 1D index.
  */
-static int ThreeDimToOneDim(int X, int Y, int Z, int XSize, int YSize)
-{
-    // The X,Y and Z sides of the lattice are all combined into the rows of the matrix
-    // To access the correct index, we have to convert 3D index to a 1D index
-    // https://stackoverflow.com/questions/16790584/converting-index-of-one-dimensional-array-into-two-dimensional-array-i-e-row-a#16790720
-    // The actual vertex positions of the index are contained within 3 columns
-    return  X + Y * XSize + Z * XSize * YSize;
-}
+int ThreeDimToOneDim(int X, int Y, int Z, int XSize, int YSize);
 
 /**
  * Defines one voxel cell within the voxel geometry
