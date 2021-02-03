@@ -11,7 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "../Public/OpenPLCommon.h"
+#include "../../../Public/OpenPLCommon.h"
 
 /**
  * Represents a AABB.

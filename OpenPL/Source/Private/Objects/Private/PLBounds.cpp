@@ -8,7 +8,7 @@
   ==============================================================================
 */
 
-#include "PLBounds.h"
+#include "../Public/PLBounds.h"
 
 PLBounds PLBounds::CreateAABB(const PLVector& Center, const PLVector& Size)
 {

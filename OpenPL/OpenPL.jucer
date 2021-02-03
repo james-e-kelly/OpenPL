@@ -10,14 +10,22 @@
       </GROUP>
       <GROUP id="{262279F8-D3BA-44F1-E9A5-D4886273EA73}" name="Public">
         <FILE id="s5sSOW" name="OpenPL.h" compile="0" resource="0" file="Source/Public/OpenPL.h"/>
-        <FILE id="CRGnlV" name="OpenPL_CPP.h" compile="0" resource="0" file="Source/Public/OpenPL_CPP.h"/>
+        <FILE id="CRGnlV" name="OpenPL.hpp" compile="0" resource="0" file="Source/Public/OpenPL.hpp"/>
         <FILE id="LLLhb5" name="OpenPLCommon.h" compile="0" resource="0" file="Source/Public/OpenPLCommon.h"/>
       </GROUP>
       <GROUP id="{D6B2C47F-48EF-9787-9FEB-F706157103EE}" name="Private">
-        <FILE id="o40ms2" name="PLBounds.cpp" compile="1" resource="0" file="Source/Private/PLBounds.cpp"/>
-        <FILE id="PGEO7M" name="PLBounds.h" compile="0" resource="0" file="Source/Private/PLBounds.h"/>
-        <FILE id="HT8sEF" name="OpenPL.cpp" compile="1" resource="0" file="Source/Private/OpenPL.cpp"/>
-        <FILE id="uP6qIj" name="OpenPL_CPP.cpp" compile="1" resource="0" file="Source/Private/OpenPL_CPP.cpp"/>
+        <GROUP id="{9188E926-D953-4DD7-13D1-8C500AD4B626}" name="CPP">
+          <FILE id="fzvPd9" name="OpenPL.cpp" compile="1" resource="0" file="Source/Private/CPP/OpenPL.cpp"/>
+        </GROUP>
+        <GROUP id="{9B8C24B8-EC89-215A-E5DC-EAF0E45E0A20}" name="Objects">
+          <GROUP id="{40DA73F2-F127-13E5-4508-9FDC7A132274}" name="Private">
+            <FILE id="leDkLI" name="PLBounds.cpp" compile="1" resource="0" file="Source/Private/Objects/Private/PLBounds.cpp"/>
+          </GROUP>
+          <GROUP id="{BBA20755-E4BC-29E3-5F76-16D6A74274FD}" name="Public">
+            <FILE id="XDeOVS" name="PLBounds.h" compile="0" resource="0" file="Source/Private/Objects/Public/PLBounds.h"/>
+          </GROUP>
+        </GROUP>
+        <FILE id="VhB2GJ" name="OpenPL.cpp" compile="1" resource="0" file="Source/Private/OpenPL.cpp"/>
       </GROUP>
     </GROUP>
   </MAINGROUP>
