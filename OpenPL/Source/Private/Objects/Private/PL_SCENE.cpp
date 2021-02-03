@@ -195,7 +195,7 @@ PL_RESULT PL_SCENE::Voxelise(PLVector CenterPosition, PLVector Size, float Voxel
     
     // We can assume if any sides of the lattice are 0, something went wrong
     // Even if we wanted a 2D grid, we'd still need at least 1 along the Z
-    if (XSize == 0 || YSize == 0 || ZSize)
+    if (XSize == 0 || YSize == 0 || ZSize == 0)
     {
         DebugError("Failed to create voxels");
         return PL_ERR;
