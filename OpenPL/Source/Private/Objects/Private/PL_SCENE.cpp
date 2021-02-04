@@ -70,7 +70,7 @@ PL_RESULT PL_SCENE::AddAndConvertGameMesh(PLVector WorldPosition, PLQuaternion W
         
         EigenVertices(i, 0) = TransformedVector(0, 0);
         EigenVertices(i, 1) = TransformedVector(1, 0);
-        EigenVertices(i, 2) = -TransformedVector(2, 0);
+        EigenVertices(i, 2) = TransformedVector(2, 0);
     }
     
     // Copy indicies into a matrix
