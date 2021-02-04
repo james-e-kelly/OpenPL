@@ -100,6 +100,8 @@ public:
     
     PL_RESULT GetVoxelLocation(PLVector* OutVoxelLocation, int Index);
     
+    PL_RESULT GetVoxelAbsorpivity(float* OutAbsorpivity, int Index);
+    
 private:
     PL_SYSTEM* OwningSystem;
     

@@ -101,7 +101,7 @@ extern "C"
      * @param CenterPosition World center position of the lattice.
      * @param Size Total size of the lattice.
      */
-    JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_Voxelise(PL_SCENE* Scene, PLVector* CenterPosition, PLVector* Size);
+    JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_Voxelise(PL_SCENE* Scene, PLVector* CenterPosition, PLVector* Size, float VoxelSize);
     
     /**
      * Adds a listener location to the scene.
@@ -159,6 +159,8 @@ extern "C"
     JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_GetVoxelsCount(PL_SCENE* Scene, int* OutVoxelCount);
     
     JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_GetVoxelLocation(PL_SCENE* Scene, PLVector* OutVoxelLocation, int Index);
+    
+    JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_GetVoxelAbsorpivity(PL_SCENE* Scene, float* OutAbsorpivity, int Index);
     
 #ifdef __cplusplus
 }

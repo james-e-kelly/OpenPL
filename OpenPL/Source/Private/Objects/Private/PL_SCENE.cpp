@@ -253,7 +253,7 @@ PL_RESULT PL_SCENE::FillVoxels()
         Eigen::AlignedBox<double, 3> MeshBounds (MeshMin, MeshMax);
         
         // Ignore mesh if it's not within the lattice
-        if (!Voxels.Bounds.contains(MeshBounds))
+        if (!Voxels.Bounds.intersects(MeshBounds))
         {
             continue;
         }
@@ -268,14 +268,19 @@ PL_RESULT PL_SCENE::FillVoxels()
         // If it is, add it to the list
         for (auto& Cell : Voxels.Voxels)
         {
-            Eigen::Vector3d Pos = Cell.WorldPosition;
+            Eigen::Vector3d Pos (Cell.WorldPosition);
             Eigen::Vector3d Min = Pos - (VoxelSize / 2);
             Eigen::Vector3d Max = Pos + (VoxelSize / 2);
             
             Eigen::AlignedBox<double, 3> VoxelBounds (Min,Max);
             
-            if (MeshBounds.contains(VoxelBounds))
+            if (MeshBounds.intersects(VoxelBounds))
             {
+                MeshCells.push_back(&Cell);
+            }
+            else  if (VoxelBounds.intersects(MeshBounds))
+            {
+                DebugWarn("Voxel wasn't within the mesh, but the mesh is within the voxel");
                 MeshCells.push_back(&Cell);
             }
         }
@@ -287,7 +292,7 @@ PL_RESULT PL_SCENE::FillVoxels()
             continue;
         }
         
-        for (int i = 0; i < Mesh.Indices.size(); i++)
+        for (int i = 0; i < Mesh.Indices.rows(); i++)
         {
             const int Indice1 = Mesh.Indices(i,0);
             const int Indice2 = Mesh.Indices(i,1);
@@ -310,8 +315,13 @@ PL_RESULT PL_SCENE::FillVoxels()
                 
                 Eigen::AlignedBox<double, 3> VoxelBounds (Min,Max);
                 
-                if (FaceBounds.contains(VoxelBounds))
+                if (FaceBounds.intersects(VoxelBounds))
                 {
+                    Cell->Absorptivity = 0.75f; // DEBUG. TODO: Fill this with an actual value
+                }
+                else if (VoxelBounds.intersects(FaceBounds))
+                {
+                    DebugWarn("Face didn't contain voxel, but voxel contained the face");
                     Cell->Absorptivity = 0.75f; // DEBUG. TODO: Fill this with an actual value
                 }
             }
@@ -355,6 +365,23 @@ PL_RESULT PL_SCENE::GetVoxelLocation(PLVector* OutVoxelLocation, int Index)
     // *OutVoxelLocation = SomeOtherVector
     // This wouldn't copy the Z component over
     // No clue as to why
+    
+    return PL_OK;
+}
+
+PL_RESULT PL_SCENE::GetVoxelAbsorpivity(float* OutAbsorpivity, int Index)
+{
+    if (!OutAbsorpivity || Index < 0)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
+    if (Index >= Voxels.Voxels.size())
+    {
+        return PL_ERR;  // Should change this to a warning or something similar
+    }
+    
+    *OutAbsorpivity = Voxels.Voxels[Index].Absorptivity;
     
     return PL_OK;
 }

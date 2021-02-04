@@ -99,14 +99,14 @@ PL_RESULT PL_Scene_RemoveMesh(PL_SCENE* Scene, int IndexToRemove)
     return Scene->RemoveMesh(IndexToRemove);
 }
 
-PL_RESULT PL_Scene_Voxelise(PL_SCENE* Scene, PLVector* CenterPosition, PLVector* Size)
+PL_RESULT PL_Scene_Voxelise(PL_SCENE* Scene, PLVector* CenterPosition, PLVector* Size, float VoxelSize)
 {
     if (!Scene || !CenterPosition || !Size)
     {
         return PL_ERR_INVALID_PARAM;
     }
     
-    return Scene->Voxelise(*CenterPosition, *Size);
+    return Scene->Voxelise(*CenterPosition, *Size, VoxelSize);
 }
 
 PL_RESULT PL_Scene_AddListenerLocation(PL_SCENE* Scene, PLVector* Position, int* OutIndex)
@@ -162,4 +162,9 @@ PL_RESULT PL_Scene_GetVoxelsCount(PL_SCENE* Scene, int* OutVoxelCount)
 PL_RESULT PL_Scene_GetVoxelLocation(PL_SCENE* Scene, PLVector* OutVoxelLocation, int Index)
 {
     return Scene->GetVoxelLocation(OutVoxelLocation, Index);
+}
+
+PL_RESULT PL_Scene_GetVoxelAbsorpivity(PL_SCENE* Scene, float* OutAbsorpivity, int Index)
+{
+    return Scene->GetVoxelAbsorpivity(OutAbsorpivity, Index);
 }
