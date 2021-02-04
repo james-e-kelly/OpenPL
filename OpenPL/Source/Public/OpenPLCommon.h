@@ -31,7 +31,7 @@ enum JUCE_API PL_RESULT
 };
 
 /**
- * Defines what leve to log a debug message at.
+ * Defines what level to log a debug message at.
  */
 enum JUCE_API PL_DEBUG_LEVEL
 {

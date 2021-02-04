@@ -8,51 +8,14 @@
   ==============================================================================
 */
 
-/**
- Open Propagation Library
-
- Development Notes to Self:
- 
- Editor Flow (Uses this library)
- -------------------
- 
- 1. Engine Editor Loads
- 2. Load OpenPL
- 3. Run Simulation over game scene(s)*
- 4. Shutdown Editor
- 5. Shutdown OpenPL
- 
- Runtime Flow (Uses custom wrapper for Wwise/FMOD)
- -------------------
- At runtime, it's up to the engine to read data previously made by the simulation. OpenPL is not needed at this point.
- 
- 1. Load Game
- 2. Load Scene
- 3. Connect to Wwise/FMOD reverb bus plugin
- 4. Load Simulation Data from Disk as needed
- 5. Send simple simulation data as parameters to event/gameobject
- 6. Send IRs to reverb bus plugin
- 
- *Simulation Flow
- -------------------
- 
- 1. Pass in game geometry
- 2. Voxelise the geometry
- 3. Return the voxel geometry for scene debugging and visualisation
- 4. Apply Rectangular Decomposition
- 5. Run Simulation
- 6. Pick out salient parameters
- 7. Save data to disk
- 8. Return success
- 
-*/
-
 #pragma once
 
 #include "OpenPLCommon.h"
 
+#ifdef __cplusplus
 extern "C"
 {
+#endif
     /**
      * Sets the function OpenPL will call to output debug messages.
      *
@@ -192,4 +155,7 @@ extern "C"
      * @param Scene Scene to render.
      */
     JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_Debug(PL_SCENE* Scene);
+    
+#ifdef __cplusplus
 }
+#endif
