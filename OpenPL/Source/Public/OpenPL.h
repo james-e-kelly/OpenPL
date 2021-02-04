@@ -156,6 +156,10 @@ extern "C"
      */
     JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_Debug(PL_SCENE* Scene);
     
+    JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_GetVoxelsCount(PL_SCENE* Scene, int* OutVoxelCount);
+    
+    JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_GetVoxelLocation(PL_SCENE* Scene, PLVector* OutVoxelLocation, int Index);
+    
 #ifdef __cplusplus
 }
 #endif

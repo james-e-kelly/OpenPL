@@ -153,3 +153,13 @@ PL_RESULT PL_Scene_Debug(PL_SCENE* Scene)
 {
     return Scene->OpenOpenGLDebugWindow();
 }
+
+PL_RESULT PL_Scene_GetVoxelsCount(PL_SCENE* Scene, int* OutVoxelCount)
+{
+    return Scene->GetVoxelsCount(OutVoxelCount);
+}
+
+PL_RESULT PL_Scene_GetVoxelLocation(PL_SCENE* Scene, PLVector* OutVoxelLocation, int Index)
+{
+    return Scene->GetVoxelLocation(OutVoxelLocation, Index);
+}

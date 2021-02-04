@@ -15,7 +15,7 @@
       </GROUP>
       <GROUP id="{D6B2C47F-48EF-9787-9FEB-F706157103EE}" name="Private">
         <GROUP id="{9188E926-D953-4DD7-13D1-8C500AD4B626}" name="CPP">
-          <FILE id="fzvPd9" name="OpenPL.cpp" compile="1" resource="0" file="Source/Private/CPP/OpenPL.cpp"/>
+          <FILE id="fzvPd9" name="OpenPL_CPP.cpp" compile="1" resource="0" file="Source/Private/CPP/OpenPL_CPP.cpp"/>
         </GROUP>
         <GROUP id="{9B8C24B8-EC89-215A-E5DC-EAF0E45E0A20}" name="Objects">
           <GROUP id="{40DA73F2-F127-13E5-4508-9FDC7A132274}" name="Private">

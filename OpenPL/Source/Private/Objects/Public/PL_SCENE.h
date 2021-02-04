@@ -96,6 +96,10 @@ public:
      */
     PL_RESULT FillVoxels();
     
+    PL_RESULT GetVoxelsCount(int* OutVoxelCount);
+    
+    PL_RESULT GetVoxelLocation(PLVector* OutVoxelLocation, int Index);
+    
 private:
     PL_SYSTEM* OwningSystem;
     

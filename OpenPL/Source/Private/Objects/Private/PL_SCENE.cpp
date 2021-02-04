@@ -12,6 +12,7 @@
 #include "../Public/PL_SYSTEM.h"
 #include <igl/opengl/glfw/Viewer.h>
 #include <igl/voxel_grid.h>
+#include <sstream>
 
 PL_SCENE::PL_SCENE(PL_SYSTEM* System)
 :   OwningSystem(System)
@@ -261,8 +262,7 @@ PL_RESULT PL_SCENE::FillVoxels()
         std::vector<PLVoxel*> MeshCells;
         
         // Vector3 of each voxel size
-        Eigen::Vector3d VoxelSize;
-        VoxelSize << Voxels.VoxelSize, Voxels.VoxelSize, Voxels.VoxelSize;
+        Eigen::Vector3d VoxelSize (Voxels.VoxelSize, Voxels.VoxelSize, Voxels.VoxelSize);
         
         // For each voxel in the lattice, find if it's within the mesh bounds
         // If it is, add it to the list
@@ -317,6 +317,44 @@ PL_RESULT PL_SCENE::FillVoxels()
             }
         }
     }
+    
+    return PL_OK;
+}
+
+PL_RESULT PL_SCENE::GetVoxelsCount(int* OutVoxelCount)
+{
+    if (!OutVoxelCount)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
+    *OutVoxelCount = static_cast<int>(Voxels.Voxels.size());
+    
+    return PL_OK;
+}
+
+PL_RESULT PL_SCENE::GetVoxelLocation(PLVector* OutVoxelLocation, int Index)
+{
+    if (!OutVoxelLocation || Index < 0)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
+    if (Index >= Voxels.Voxels.size())
+    {
+        return PL_ERR;  // Should change this to a warning or something similar
+    }
+    
+    const Eigen::Vector3d* VectorLocation = &Voxels.Voxels[Index].WorldPosition;
+    OutVoxelLocation->X = VectorLocation->x();
+    OutVoxelLocation->Y = VectorLocation->y();
+    OutVoxelLocation->Z = VectorLocation->z();
+    
+    // WARNING:
+    // There was previously code here that exposed a bug
+    // *OutVoxelLocation = SomeOtherVector
+    // This wouldn't copy the Z component over
+    // No clue as to why
     
     return PL_OK;
 }
