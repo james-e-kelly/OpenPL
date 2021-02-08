@@ -52,7 +52,7 @@ PL_RESULT PL_SCENE::AddAndConvertGameMesh(PLVector WorldPosition, PLQuaternion W
     }
     
     // Copy vertices into a matrix
-    VertexMatrix EigenVertices (VerticesLength, 3); // Eigen::Matrix(Index rows, Index columns);
+    VertexMatrix EigenVertices(3, VerticesLength); // Eigen::Matrix(Index rows, Index columns);
     
     Eigen::Vector3d Scale (WorldScale.X, WorldScale.Y, WorldScale.Z);
     Eigen::Quaterniond Rotation(WorldRotation.W, WorldRotation.X, WorldRotation.Y, WorldRotation.Z);
@@ -66,29 +66,34 @@ PL_RESULT PL_SCENE::AddAndConvertGameMesh(PLVector WorldPosition, PLQuaternion W
     for (int i = 0; i < VerticesLength; i++)
     {
         Eigen::Vector3d Vector (Vertices[i].X, Vertices[i].Y, Vertices[i].Z);
-        Eigen::Vector3d TransformedVector = Transform * Vector;
         
-        EigenVertices(i, 0) = TransformedVector(0, 0);
-        EigenVertices(i, 1) = TransformedVector(1, 0);
-        EigenVertices(i, 2) = TransformedVector(2, 0);
+        EigenVertices(0,i) = Vector(0, 0);
+        EigenVertices(1,i) = Vector(1, 0);
+        EigenVertices(2,i) = Vector(2, 0);
+//
+//        EigenVertices(i, 0) = TransformedVector(0, 0);
+//        EigenVertices(i, 1) = TransformedVector(1, 0);
+//        EigenVertices(i, 2) = TransformedVector(2, 0);
     }
     
+    VertexMatrix TransformedVertices = Transform * EigenVertices.colwise().homogeneous();
+    
     // Copy indicies into a matrix
-    IndiceMatrix EigenIndices (IndicesLength / 3, 3);
+    IndiceMatrix EigenIndices (3, IndicesLength / 3);
     
     int row, i;
     row = i = 0;
     
     for ( ; (row < IndicesLength / 3) && (i < IndicesLength);  row++, i+=3)
     {
-        EigenIndices(row, 0) = Indices[i];
-        EigenIndices(row, 1) = Indices[i+1];
-        EigenIndices(row, 2) = Indices[i+2];
+        EigenIndices(0, row) = Indices[i];
+        EigenIndices(1, row) = Indices[i+1];
+        EigenIndices(2, row) = Indices[i+2];
     }
     
     // Create a mesh
     PL_MESH Mesh;
-    Mesh.Vertices = EigenVertices;
+    Mesh.Vertices = TransformedVertices;
     Mesh.Indices = EigenIndices;
     
     // Add mesh to scene
@@ -248,8 +253,8 @@ PL_RESULT PL_SCENE::FillVoxels()
     for (auto& Mesh : Meshes)
     {
         // Full AABB that encloses the mesh
-        Eigen::Vector3d MeshMin = Mesh.Vertices.colwise().minCoeff();
-        Eigen::Vector3d MeshMax = Mesh.Vertices.colwise().maxCoeff();
+        Eigen::Vector3d MeshMin = Mesh.Vertices.rowwise().minCoeff();
+        Eigen::Vector3d MeshMax = Mesh.Vertices.rowwise().maxCoeff();
         Eigen::AlignedBox<double, 3> MeshBounds (MeshMin, MeshMax);
         
         // Ignore mesh if it's not within the lattice
@@ -292,19 +297,19 @@ PL_RESULT PL_SCENE::FillVoxels()
             continue;
         }
         
-        for (int i = 0; i < Mesh.Indices.rows(); i++)
+        for (int i = 0; i < Mesh.Indices.cols(); i++)
         {
-            const int Indice1 = Mesh.Indices(i,0);
-            const int Indice2 = Mesh.Indices(i,1);
-            const int Indice3 = Mesh.Indices(i,2);
+            const int Indice1 = Mesh.Indices(0,i);
+            const int Indice2 = Mesh.Indices(1,i);
+            const int Indice3 = Mesh.Indices(2,i);
             
             Eigen::Matrix<double,3,3,0,3,3> VertexPositions;
-            VertexPositions <<  Mesh.Vertices(Indice1,0), Mesh.Vertices(Indice1,1), Mesh.Vertices(Indice1,2),
-            Mesh.Vertices(Indice2,0), Mesh.Vertices(Indice2,1), Mesh.Vertices(Indice3,2),
-            Mesh.Vertices(Indice3,0), Mesh.Vertices(Indice3,1), Mesh.Vertices(Indice3,2);
+            VertexPositions <<  Mesh.Vertices(0,Indice1), Mesh.Vertices(1,Indice1), Mesh.Vertices(2,Indice1),
+            Mesh.Vertices(0,Indice2), Mesh.Vertices(1,Indice2), Mesh.Vertices(2,Indice2),
+            Mesh.Vertices(0,Indice3), Mesh.Vertices(1,Indice3), Mesh.Vertices(2,Indice3);
             
-            Eigen::Vector3d Min = VertexPositions.colwise().minCoeff();
-            Eigen::Vector3d Max = VertexPositions.colwise().maxCoeff();
+            Eigen::Vector3d Min = VertexPositions.rowwise().minCoeff();
+            Eigen::Vector3d Max = VertexPositions.rowwise().maxCoeff();
             Eigen::AlignedBox<double, 3> FaceBounds (Min, Max);
             
             for (auto& Cell : MeshCells)
