@@ -147,7 +147,15 @@ PL_RESULT PL_SCENE::OpenOpenGLDebugWindow() const
     igl::opengl::glfw::Viewer viewer;
     for (auto& Mesh : Meshes)
     {
-        viewer.data().set_mesh(Mesh.Vertices, Mesh.Indices);
+        // Transpose the matrices because we store vectors as:
+        // {x1, x2, x3}
+        // {y1, y2, y3}
+        // {z1, z2, z3}
+        // However, OpenGL expects:
+        // {x1, y1, z1}
+        // {x2, y2, z2}
+        // {x3, y3, z3}
+        viewer.data().set_mesh(Mesh.Vertices.transpose(), Mesh.Indices.transpose());
         viewer.append_mesh(true);
     }
     
