@@ -59,9 +59,7 @@ PL_RESULT PL_SCENE::AddAndConvertGameMesh(PLVector WorldPosition, PLQuaternion W
     Eigen::Vector3d Translation(WorldPosition.X, WorldPosition.Y, WorldPosition.Z);
     
     Eigen::Transform<double, 3, Eigen::Affine> Transform = Eigen::Transform<double, 3, Eigen::Affine>::Identity();
-    Transform.scale(Scale);
-    Transform.rotate(Rotation);
-    Transform.translate(Translation);
+    Transform.rotate(Rotation).translate(Translation).scale(Scale);
     
     for (int i = 0; i < VerticesLength; i++)
     {
@@ -70,10 +68,6 @@ PL_RESULT PL_SCENE::AddAndConvertGameMesh(PLVector WorldPosition, PLQuaternion W
         EigenVertices(0,i) = Vector(0, 0);
         EigenVertices(1,i) = Vector(1, 0);
         EigenVertices(2,i) = Vector(2, 0);
-//
-//        EigenVertices(i, 0) = TransformedVector(0, 0);
-//        EigenVertices(i, 1) = TransformedVector(1, 0);
-//        EigenVertices(i, 2) = TransformedVector(2, 0);
     }
     
     VertexMatrix TransformedVertices = Transform * EigenVertices.colwise().homogeneous();
