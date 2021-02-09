@@ -151,6 +151,48 @@ PL_RESULT PL_SCENE::OpenOpenGLDebugWindow() const
         // {x3, y3, z3}
         viewer.data().set_mesh(Mesh.Vertices.transpose(), Mesh.Indices.transpose());
         viewer.append_mesh(true);
+        
+        Eigen::Vector3d MeshMin = Mesh.Vertices.rowwise().minCoeff();
+        Eigen::Vector3d MeshMax = Mesh.Vertices.rowwise().maxCoeff();
+        Eigen::AlignedBox<double, 3> MeshBounds (MeshMin, MeshMax);
+        
+        VertexMatrix BoundingBoxPoints(8,3);
+        BoundingBoxPoints <<
+        MeshMin(0), MeshMin(1), MeshMin(2),
+        MeshMax(0), MeshMin(1), MeshMin(2),
+        MeshMax(0), MeshMax(1), MeshMin(2),
+        MeshMin(0), MeshMax(1), MeshMin(2),
+        MeshMin(0), MeshMin(1), MeshMax(2),
+        MeshMax(0), MeshMin(1), MeshMax(2),
+        MeshMax(0), MeshMax(1), MeshMax(2),
+        MeshMin(0), MeshMax(1), MeshMax(2);
+        
+        // Edges of the bounding box
+        IndiceMatrix E_box(12,2);
+        E_box <<
+        0, 1,
+        1, 2,
+        2, 3,
+        3, 0,
+        4, 5,
+        5, 6,
+        6, 7,
+        7, 4,
+        0, 4,
+        1, 5,
+        2, 6,
+        7 ,3;
+        
+        viewer.data().add_points(BoundingBoxPoints,Eigen::RowVector3d(1,0,0));
+
+        // Plot the edges of the bounding box
+        for (unsigned i=0;i<E_box.rows(); ++i)
+          viewer.data().add_edges
+          (
+           BoundingBoxPoints.row(E_box(i,0)),
+           BoundingBoxPoints.row(E_box(i,1)),
+            Eigen::RowVector3d(1,0,0)
+          );
     }
     
     int Success = viewer.launch();
