@@ -12,6 +12,7 @@
 #include "../Public/PL_SYSTEM.h"
 #include <igl/opengl/glfw/Viewer.h>
 #include <igl/voxel_grid.h>
+#include <igl/copyleft/cgal/points_inside_component.h>
 #include <sstream>
 
 PL_SCENE::PL_SCENE(PL_SYSTEM* System)
@@ -281,6 +282,59 @@ PL_RESULT PL_SCENE::Voxelise(PLVector CenterPosition, PLVector Size, float Voxel
     return FillVoxels();
 }
 
+VertexMatrix GetPointsToCheckForVoxel(Eigen::Vector3d VoxelPosition, Eigen::Vector3d VoxelSize)
+{
+    VertexMatrix PointsToCheck(9,3);
+    double HalfSize = VoxelSize.x() / 2;
+    
+    // Center
+    PointsToCheck(0,0) = VoxelPosition.x();
+    PointsToCheck(0,1) = VoxelPosition.y();
+    PointsToCheck(0,2) = VoxelPosition.z();
+    
+    // Front, top, left
+    PointsToCheck(1,0) = VoxelPosition.x() + HalfSize;
+    PointsToCheck(1,1) = VoxelPosition.y() + HalfSize;
+    PointsToCheck(1,2) = VoxelPosition.z() - HalfSize;
+    
+    // Front, top, right
+    PointsToCheck(2,0) = VoxelPosition.x() + HalfSize;
+    PointsToCheck(2,1) = VoxelPosition.y() + HalfSize;
+    PointsToCheck(2,2) = VoxelPosition.z() + HalfSize;
+    
+    // Back, top, left
+    PointsToCheck(3,0) = VoxelPosition.x() - HalfSize;
+    PointsToCheck(3,1) = VoxelPosition.y() + HalfSize;
+    PointsToCheck(3,2) = VoxelPosition.z() - HalfSize;
+    
+    // Back, top, right
+    PointsToCheck(4,0) = VoxelPosition.x() - HalfSize;
+    PointsToCheck(4,1) = VoxelPosition.y() + HalfSize;
+    PointsToCheck(4,2) = VoxelPosition.z() + HalfSize;
+    
+    // Front, bottom, left
+    PointsToCheck(5,0) = VoxelPosition.x() + HalfSize;
+    PointsToCheck(5,1) = VoxelPosition.y() - HalfSize;
+    PointsToCheck(5,2) = VoxelPosition.z() - HalfSize;
+    
+    // Front, bottom, right
+    PointsToCheck(6,0) = VoxelPosition.x() + HalfSize;
+    PointsToCheck(6,1) = VoxelPosition.y() - HalfSize;
+    PointsToCheck(6,2) = VoxelPosition.z() + HalfSize;
+    
+    // Back, bottom, left
+    PointsToCheck(7,0) = VoxelPosition.x() - HalfSize;
+    PointsToCheck(7,1) = VoxelPosition.y() - HalfSize;
+    PointsToCheck(7,2) = VoxelPosition.z() - HalfSize;
+    
+    // Back, bottom, right
+    PointsToCheck(8,0) = VoxelPosition.x() - HalfSize;
+    PointsToCheck(8,1) = VoxelPosition.y() - HalfSize;
+    PointsToCheck(8,2) = VoxelPosition.z() + HalfSize;
+    
+    return PointsToCheck;
+}
+
 PL_RESULT PL_SCENE::FillVoxels()
 {
     // First thought on how to do this:
@@ -341,38 +395,32 @@ PL_RESULT PL_SCENE::FillVoxels()
             continue;
         }
         
-        for (int i = 0; i < Mesh.Indices.cols(); i++)
+        VertexMatrix TransposedVertices = Mesh.Vertices.transpose();
+        IndiceMatrix TransposedIndices = Mesh.Indices.transpose();
+        
+        for (auto& MeshCell : MeshCells)
         {
-            const int Indice1 = Mesh.Indices(0,i);
-            const int Indice2 = Mesh.Indices(1,i);
-            const int Indice3 = Mesh.Indices(2,i);
+            VertexMatrix PointsToCheck = GetPointsToCheckForVoxel(MeshCell->WorldPosition, VoxelSize);
+            IndiceMatrix ReturnPointsInside;
             
-            Eigen::Matrix<double,3,3,0,3,3> VertexPositions;
-            VertexPositions <<  Mesh.Vertices(0,Indice1), Mesh.Vertices(1,Indice1), Mesh.Vertices(2,Indice1),
-            Mesh.Vertices(0,Indice2), Mesh.Vertices(1,Indice2), Mesh.Vertices(2,Indice2),
-            Mesh.Vertices(0,Indice3), Mesh.Vertices(1,Indice3), Mesh.Vertices(2,Indice3);
+            igl::copyleft::cgal::points_inside_component(TransposedVertices, TransposedIndices, PointsToCheck, ReturnPointsInside);
+
+            int NumberOfPointsInside = 0;
             
-            Eigen::Vector3d Min = VertexPositions.rowwise().minCoeff();
-            Eigen::Vector3d Max = VertexPositions.rowwise().maxCoeff();
-            Eigen::AlignedBox<double, 3> FaceBounds (Min, Max);
-            
-            for (auto& Cell : MeshCells)
+            for (int i = 0; i < ReturnPointsInside.size(); i++)
             {
-                Eigen::Vector3d Pos = Cell->WorldPosition;
-                Eigen::Vector3d Min = Pos - (VoxelSize / 2);
-                Eigen::Vector3d Max = Pos + (VoxelSize / 2);
+                bool PointIsInside = ReturnPointsInside.data()[i] > 0;
                 
-                Eigen::AlignedBox<double, 3> VoxelBounds (Min,Max);
                 
-                if (FaceBounds.intersects(VoxelBounds))
+                if (PointIsInside)
                 {
-                    Cell->Absorptivity = 0.75f; // DEBUG. TODO: Fill this with an actual value
+                    NumberOfPointsInside++;
                 }
-                else if (VoxelBounds.intersects(FaceBounds))
-                {
-                    DebugWarn("Face didn't contain voxel, but voxel contained the face");
-                    Cell->Absorptivity = 0.75f; // DEBUG. TODO: Fill this with an actual value
-                }
+            }
+            
+            if (NumberOfPointsInside > 2)
+            {
+                MeshCell->Absorptivity = 0.75f;
             }
         }
     }
