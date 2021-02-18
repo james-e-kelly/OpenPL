@@ -42,9 +42,9 @@
     <XCODE_MAC targetFolder="Builds/MacOSX" extraDefs="JUCE_DLL_BUILD=1" externalLibraries="glfw&#10;gmp&#10;mpfr">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" targetName="OpenPL" headerPath="/usr/local/include&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include"
-                       libraryPath="/usr/local/lib"/>
+                       libraryPath="/usr/local/lib" osxCompatibility="10.15 SDK"/>
         <CONFIGURATION isDebug="0" name="Release" targetName="OpenPL" headerPath="/usr/local/include&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include"
-                       libraryPath="/usr/local/lib"/>
+                       libraryPath="/usr/local/lib" osxCompatibility="10.15 SDK"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_core" path="External/JUCE/modules"/>
