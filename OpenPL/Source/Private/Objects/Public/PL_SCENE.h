@@ -13,6 +13,9 @@
 #include "../../../Public/OpenPLCommon.h"
 #include "../../OpenPLCommonPrivate.h"
 #include <vector>
+#include <boost/thread/thread.hpp>
+#include <boost/thread/scoped_thread.hpp>
+#include <atomic>
 
 /**
  * The scene class is the main work horse of the simulation.
@@ -111,12 +114,6 @@ public:
      */
     PL_RESULT Voxelise(PLVector CenterPosition, PLVector Size, float VoxelSize = 5.f);
     
-    /**
-     * Adds absorption values to the voxel lattice cells based on the absorptivity of each mesh.
-     *
-     * If Voxelise creates the voxels, this method gives them meaning.
-     */
-    PL_RESULT FillVoxels();
     
     PL_RESULT GetVoxelsCount(int* OutVoxelCount);
     
@@ -132,4 +129,24 @@ private:
     std::vector<PLVector> SourceLocations;
     
     PL_VOXEL_GRID Voxels;
+    
+    enum ThreadStatus
+    {
+        ThreadStatus_NotStarted,
+        ThreadStatus_Ongoing,
+        ThreadStatus_Finished
+    };
+    
+    boost::scoped_thread<> VoxelThread;
+    boost::mutex VoxelMutex;
+    std::atomic<ThreadStatus> VoxelThreadStatus { ThreadStatus_NotStarted };
+    
+    PL_RESULT VoxeliseInternal(PLVector CenterPosition, PLVector Size, float VoxelSize);
+    
+    /**
+     * Adds absorption values to the voxel lattice cells based on the absorptivity of each mesh.
+     *
+     * If Voxelise creates the voxels, this method gives them meaning.
+     */
+    PL_RESULT FillVoxels();
 };

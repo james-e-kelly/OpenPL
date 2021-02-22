@@ -229,67 +229,39 @@ PL_RESULT PL_SCENE::Voxelise(PLVector CenterPosition, PLVector Size, float Voxel
         return PL_ERR_INVALID_PARAM;
     }
     
-    // Create AABB
-    const PLVector Min = CenterPosition - Size / 2;
-    const PLVector Max = CenterPosition + Size / 2;
+    PL_RESULT ReturnResult = PL_ERR;
     
-    Eigen::Vector3d EigenMin;
-    Eigen::Vector3d EigenMax;
-    EigenMin << (Eigen::Vector3d() << Min.X, Min.Y, Min.Z).finished();
-    EigenMax << (Eigen::Vector3d() << Max.X, Max.Y, Max.Z).finished();
-    
-    Eigen::AlignedBox<double,3> Bounds = Eigen::AlignedBox<double,3>(EigenMin, EigenMax);
-    
-    // TODO: Change voxel size to something set by the user per simulation
-    const int VoxelsInSide = static_cast<int>(Size.X / VoxelSize);
-    
-    // Matrix<Scalar, Rows, Columns, Options, MaxRows, MaxColumns>
-    Eigen::Matrix<double, -1, -1, 0, -1, -1> CenterPositions;
-    Eigen::MatrixXi Side;
-    
-    // Calculates all center positions of a voxel lattice within a bounding box
-    igl::voxel_grid(Bounds, VoxelsInSide, 0, CenterPositions, Side);
-    
-    const int XSize = Side(0,0);
-    const int YSize = Side(0,1);
-    const int ZSize = Side(0,2);
-    
-    // We can assume if any sides of the lattice are 0, something went wrong
-    // Even if we wanted a 2D grid, we'd still need at least 1 along the Z
-    if (XSize == 0 || YSize == 0 || ZSize == 0)
+    switch (VoxelThreadStatus.load())
     {
-        DebugError("Failed to create voxels");
-        return PL_ERR;
-    }
-    
-    // Set voxels
-    PL_VOXEL_GRID VoxelGrid;
-    VoxelGrid.Bounds = Bounds;
-    VoxelGrid.Size = Side;
-    VoxelGrid.VoxelSize = VoxelSize;
-    VoxelGrid.Voxels = std::vector<PLVoxel>(XSize*YSize*ZSize); // TODO: Actually fill the voxels with values
-    
-    // Set positions for each voxel
-    for (int X = 0; X < XSize; X++)
-    {
-        for (int Y = 0; Y < YSize; Y++)
+        case ThreadStatus_NotStarted:
         {
-            for (int Z = 0; Z < ZSize; Z++)
+            // Scoped Threads are RAII
+            // Therefore, you can't do `scoped_thread thread = otherThread;`
+            // However, scoped threads can be moved
+            // So create an object on the stack, then move ownership to the class' member variable
+            boost::scoped_thread<> NewVoxelThread(boost::thread(&PL_SCENE::VoxeliseInternal, this, CenterPosition, Size, VoxelSize));
+            VoxelThread = std::move(NewVoxelThread);
+            ReturnResult = PL_OK;
+            break;
+        }
+        case ThreadStatus_Ongoing:
+        {
+            ReturnResult = PL_OK;
+            break;
+        }
+        case ThreadStatus_Finished:
+        {
+            if (VoxelThread.joinable())
             {
-                const int Index = ThreeDimToOneDim(X, Y, Z, XSize, YSize);
-                const double XCor = CenterPositions(Index, 0);
-                const double YCor = CenterPositions(Index, 1);
-                const double ZCor = CenterPositions(Index, 2);
-                Eigen::Vector3d WorldPosition;
-                WorldPosition << XCor, YCor, ZCor;
-                VoxelGrid.Voxels[Index].WorldPosition = WorldPosition;
+                VoxelThread.join();
             }
+            
+            VoxelThreadStatus.store(ThreadStatus_NotStarted);
+            ReturnResult = PL_OK;
+            break;
         }
     }
-    
-    Voxels = VoxelGrid;
-    
-    return FillVoxels();
+    return ReturnResult;
 }
 
 VertexMatrix GetPointsToCheckForVoxel(Eigen::Vector3d VoxelPosition, Eigen::Vector3d VoxelSize)
@@ -435,11 +407,19 @@ PL_RESULT PL_SCENE::FillVoxels()
         }
     }
     
+    VoxelThreadStatus.store(ThreadStatus_Finished);
+    
     return PL_OK;
 }
 
 PL_RESULT PL_SCENE::GetVoxelsCount(int* OutVoxelCount)
 {
+    if (VoxelThreadStatus.load() == ThreadStatus_Ongoing)
+    {
+        *OutVoxelCount = 0;
+        return PL_OK;
+    }
+    
     if (!OutVoxelCount)
     {
         return PL_ERR_INVALID_PARAM;
@@ -452,6 +432,12 @@ PL_RESULT PL_SCENE::GetVoxelsCount(int* OutVoxelCount)
 
 PL_RESULT PL_SCENE::GetVoxelLocation(PLVector* OutVoxelLocation, int Index)
 {
+    if (VoxelThreadStatus.load() == ThreadStatus_Ongoing)
+    {
+        *OutVoxelLocation = PLVector();
+        return PL_OK;
+    }
+    
     if (!OutVoxelLocation || Index < 0)
     {
         return PL_ERR_INVALID_PARAM;
@@ -488,7 +474,80 @@ PL_RESULT PL_SCENE::GetVoxelAbsorpivity(float* OutAbsorpivity, int Index)
         return PL_ERR;  // Should change this to a warning or something similar
     }
     
+    if (VoxelThreadStatus.load() == ThreadStatus_Ongoing)
+    {
+        *OutAbsorpivity = 0.f;
+        return PL_OK;
+    }
+    
     *OutAbsorpivity = Voxels.Voxels[Index].Absorptivity;
     
     return PL_OK;
+}
+
+PL_RESULT PL_SCENE::VoxeliseInternal(PLVector CenterPosition, PLVector Size, float VoxelSize)
+{
+    VoxelThreadStatus.store(ThreadStatus_Ongoing);
+    
+    // Create AABB
+    const PLVector Min = CenterPosition - Size / 2;
+    const PLVector Max = CenterPosition + Size / 2;
+    
+    Eigen::Vector3d EigenMin;
+    Eigen::Vector3d EigenMax;
+    EigenMin << (Eigen::Vector3d() << Min.X, Min.Y, Min.Z).finished();
+    EigenMax << (Eigen::Vector3d() << Max.X, Max.Y, Max.Z).finished();
+    
+    Eigen::AlignedBox<double,3> Bounds = Eigen::AlignedBox<double,3>(EigenMin, EigenMax);
+    
+    // TODO: Change voxel size to something set by the user per simulation
+    const int VoxelsInSide = static_cast<int>(Size.X / VoxelSize);
+    
+    // Matrix<Scalar, Rows, Columns, Options, MaxRows, MaxColumns>
+    Eigen::Matrix<double, -1, -1, 0, -1, -1> CenterPositions;
+    Eigen::MatrixXi Side;
+    
+    // Calculates all center positions of a voxel lattice within a bounding box
+    igl::voxel_grid(Bounds, VoxelsInSide, 0, CenterPositions, Side);
+    
+    const int XSize = Side(0,0);
+    const int YSize = Side(0,1);
+    const int ZSize = Side(0,2);
+    
+    // We can assume if any sides of the lattice are 0, something went wrong
+    // Even if we wanted a 2D grid, we'd still need at least 1 along the Z
+    if (XSize == 0 || YSize == 0 || ZSize == 0)
+    {
+        DebugError("Failed to create voxels");
+        return PL_ERR;
+    }
+    
+    // Set voxels
+    PL_VOXEL_GRID VoxelGrid;
+    VoxelGrid.Bounds = Bounds;
+    VoxelGrid.Size = Side;
+    VoxelGrid.VoxelSize = VoxelSize;
+    VoxelGrid.Voxels = std::vector<PLVoxel>(XSize*YSize*ZSize); // TODO: Actually fill the voxels with values
+    
+    // Set positions for each voxel
+    for (int X = 0; X < XSize; X++)
+    {
+        for (int Y = 0; Y < YSize; Y++)
+        {
+            for (int Z = 0; Z < ZSize; Z++)
+            {
+                const int Index = ThreeDimToOneDim(X, Y, Z, XSize, YSize);
+                const double XCor = CenterPositions(Index, 0);
+                const double YCor = CenterPositions(Index, 1);
+                const double ZCor = CenterPositions(Index, 2);
+                Eigen::Vector3d WorldPosition;
+                WorldPosition << XCor, YCor, ZCor;
+                VoxelGrid.Voxels[Index].WorldPosition = WorldPosition;
+            }
+        }
+    }
+    
+    Voxels = VoxelGrid;
+    
+    return FillVoxels();
 }
