@@ -67,12 +67,34 @@ public:
      */
     PL_RESULT RemoveMesh(int Index);
     
+    /**
+     * Add a listener to the simulation.
+     *
+     * @param Location Location of the new listener.
+     * @param OutIndex Index of the new listener in the array.
+     */
     PL_RESULT AddListenerLocation(PLVector& Location, int& OutIndex);
     
+    /**
+     * Remove a listener from the simulation.
+     *
+     * @param Index Index of the listener to remove. (Array so 0 =< Index < Size)
+     */
     PL_RESULT RemoveListenerLocation(int Index);
     
+    /**
+     Add a source/emitter location to the simulation.
+     *
+     * @param Location Location of the new emitter.
+     * @param OutIndex Index of the new emitter in the array.
+     */
     PL_RESULT AddSourceLocation(PLVector& Location, int& OutIndex);
     
+    /**
+     * Remove an emitter from the simulation.
+     *
+     * @param Index Index of the emitter to remove. (Array so 0 =< Index < Size)
+     */
     PL_RESULT RemoveSourceLocation(int Index);
     
     /**

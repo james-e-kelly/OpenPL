@@ -120,6 +120,11 @@ PL_RESULT PL_SCENE::AddListenerLocation(PLVector& Location, int& OutIndex)
 
 PL_RESULT PL_SCENE::RemoveListenerLocation(int Index)
 {
+    if (Index >= ListenerLocations.size())
+    {
+        DebugError("Index out of bounds when removing listener");
+        return PL_ERR;
+    }
     ListenerLocations.erase(ListenerLocations.begin()+Index);
     return PL_OK;
 }
@@ -133,6 +138,11 @@ PL_RESULT PL_SCENE::AddSourceLocation(PLVector& Location, int& OutIndex)
 
 PL_RESULT PL_SCENE::RemoveSourceLocation(int Index)
 {
+    if (Index >= SourceLocations.size())
+    {
+        DebugError("Index out of bounds when removing emitter");
+        return PL_ERR;
+    }
     SourceLocations.erase(SourceLocations.begin()+Index);
     return PL_OK;
 }

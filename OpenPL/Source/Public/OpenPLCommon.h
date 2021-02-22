@@ -205,3 +205,16 @@ struct JUCE_API PLVector
     float Y;
     float Z;
 };
+
+/**
+ * Defines the simulated values of an emitter in the simulation.
+ */
+struct JUCE_API PLEmitterOutput
+{
+    float Occlusion;
+    float WetGain;
+    float ReverbTime60;
+    float Lowpass;
+    PLVector Direction;
+    PLVector SourceDirectivity;
+};
