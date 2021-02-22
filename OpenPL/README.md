@@ -31,8 +31,10 @@ This folder contains the main editor library which should be added to a game eng
  2. Voxelise the geometry
  3. Return the voxel geometry for scene debugging and visualisation
  4. Apply Rectangular Decomposition
- 5. Run Simulation
- 6. Pick out salient parameters
- 7. Save data to disk
- 8. Return success
+ 5. Add source/emitter locations
+ 6. Add listener locations
+ 7. Run Simulation
+ 8. Pick out salient parameters
+ 9. Save data to disk
+ 10. Return success
  
