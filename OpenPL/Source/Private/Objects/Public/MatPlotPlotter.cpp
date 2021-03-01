@@ -12,6 +12,7 @@
 #include <matplot/matplot.h>
 #include <thread>
 #include <chrono>
+#include <cstdlib>
 
 using namespace matplot;
 
@@ -29,8 +30,6 @@ void MatPlotPlotter::TestFunction()
 {
     figure_handle f = figure();
     
-    
-    
     std::vector<double> y = {75,  91,  105, 123.5, 131,  150,
                                  179, 203, 226, 249,   281.5};
     
@@ -46,4 +45,33 @@ void MatPlotPlotter::TestFunction()
     f->current_axes()->clear();
     f->current_axes()->bar(z);
     f->draw();
+}
+
+void MatPlotPlotter::PlotOneDimension(int YIndex, int ZIndex)
+{
+    figure_handle PlotFigure = figure(false);
+    
+    for (int TimeStep = 0; TimeStep < TimeSteps; TimeStep++)
+    {
+        PlotFigure->current_axes()->clear();
+        
+        std::vector<double> XPoints;
+        std::vector<double> YPoints;
+        
+        for (int X = 0; X < XSize; X++)
+        {
+            int Index = ThreeDimToOneDim(X, YIndex, ZIndex, XSize, YSize);
+            
+            PLVoxel& Voxel = (*AllVoxels)[Index][TimeStep];
+            
+            XPoints.push_back(static_cast<double>(X));
+            YPoints.push_back(static_cast<double>(std::rand() % 50));
+        }
+        
+        PlotFigure->current_axes()->plot(XPoints, YPoints);
+        
+        PlotFigure->current_axes()->draw();
+        
+//        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+    }
 }

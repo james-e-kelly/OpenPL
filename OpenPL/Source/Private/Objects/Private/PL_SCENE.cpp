@@ -422,6 +422,9 @@ PL_RESULT PL_SCENE::Simulate()
 //        return PL_ERR;
 //    }
     
+    // Yes, we're not multithreaded anymore but I need this to finish
+    VoxelThread.join();
+    
     // Setup for first time
     if (SimulationGrid.size() < 2)
     {
@@ -434,7 +437,7 @@ PL_RESULT PL_SCENE::Simulate()
     }
     
     MatPlotPlotter plotter(SimulationGrid, Voxels.Size(0,0), Voxels.Size(0,1), Voxels.Size(0,2), TimeSteps);
-    plotter.TestFunction();
+    plotter.PlotOneDimension();
     
     return PL_OK;
 }
