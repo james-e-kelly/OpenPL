@@ -114,6 +114,7 @@ public:
      */
     PL_RESULT Voxelise(PLVector CenterPosition, PLVector Size, float VoxelSize = 5.f);
     
+    PL_RESULT Simulate();
     
     PL_RESULT GetVoxelsCount(int* OutVoxelCount);
     

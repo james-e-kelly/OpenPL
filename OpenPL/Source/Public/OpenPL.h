@@ -145,6 +145,13 @@ extern "C"
      * @see PL_Scene_AddLSourceLocation
      */
     JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_RemoveSourceLocation(PL_SCENE* Scene, int IndexToRemove);
+
+    /**
+     * Using the previously passed geometry, emitter locations and listener locations, simulate over the scene and store the resulting simulation data to disk.
+     *
+     * @param Scene Scene to run the simulation over.
+     */
+    JUCE_PUBLIC_FUNCTION PL_RESULT PL_Scene_Simulate(PL_SCENE* Scene);
     
     /**
      * Opens a new OpenGL window and displays the meshes contained within the scene.

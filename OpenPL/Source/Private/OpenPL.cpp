@@ -149,6 +149,16 @@ PL_RESULT PL_Scene_RemoveSourceLocation(PL_SCENE* Scene, int IndexToRemove)
     return Scene->RemoveSourceLocation(IndexToRemove);
 }
 
+PL_RESULT PL_Scene_Simulate(PL_SCENE* Scene)
+{
+    if (!Scene)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
+    return Scene->Simulate();
+}
+
 PL_RESULT PL_Scene_Debug(PL_SCENE* Scene)
 {
     return Scene->OpenOpenGLDebugWindow();

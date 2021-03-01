@@ -412,6 +412,17 @@ PL_RESULT PL_SCENE::FillVoxels()
     return PL_OK;
 }
 
+PL_RESULT PL_SCENE::Simulate()
+{
+    if (Meshes.size() == 0 || ListenerLocations.size() == 0 || SourceLocations.size() == 0)
+    {
+        DebugWarn("Can't run simulation. Either need to provide geometry, emitter locations or listener locations");
+        return PL_ERR;
+    }
+    
+    return PL_OK;
+}
+
 PL_RESULT PL_SCENE::GetVoxelsCount(int* OutVoxelCount)
 {
     if (VoxelThreadStatus.load() == ThreadStatus_Ongoing)
