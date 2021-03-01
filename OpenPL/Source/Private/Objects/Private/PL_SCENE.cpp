@@ -14,6 +14,7 @@
 #include <igl/voxel_grid.h>
 #include <igl/copyleft/cgal/points_inside_component.h>
 #include <sstream>
+#include "../Public/MatPlotPlotter.h"
 
 PL_SCENE::PL_SCENE(PL_SYSTEM* System)
 :   OwningSystem(System)
@@ -414,11 +415,26 @@ PL_RESULT PL_SCENE::FillVoxels()
 
 PL_RESULT PL_SCENE::Simulate()
 {
-    if (Meshes.size() == 0 || ListenerLocations.size() == 0 || SourceLocations.size() == 0)
+    // Ignore for now so it's easier to test
+//    if (Meshes.size() == 0 || ListenerLocations.size() == 0 || SourceLocations.size() == 0)
+//    {
+//        DebugWarn("Can't run simulation. Either need to provide geometry, emitter locations or listener locations");
+//        return PL_ERR;
+//    }
+    
+    // Setup for first time
+    if (SimulationGrid.size() < 2)
     {
-        DebugWarn("Can't run simulation. Either need to provide geometry, emitter locations or listener locations");
-        return PL_ERR;
+        SimulationGrid.resize(Voxels.Voxels.size());
+        
+        for (int i = 0; i < SimulationGrid.size(); i++)
+        {
+            SimulationGrid[i] = std::vector<PLVoxel>(TimeSteps);
+        }
     }
+    
+    MatPlotPlotter plotter(SimulationGrid, Voxels.Size(0,0), Voxels.Size(0,1), Voxels.Size(0,2), TimeSteps);
+    plotter.TestFunction();
     
     return PL_OK;
 }

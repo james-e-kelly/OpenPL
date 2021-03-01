@@ -2,7 +2,8 @@
 
 <JUCERPROJECT id="PdUFPg" name="OpenPL" projectType="dll" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
-              companyName="James Kelly" companyCopyright="Copyright &#169; 2020 James Kelly">
+              companyName="James Kelly" companyCopyright="Copyright &#169; 2020 James Kelly"
+              cppLanguageStandard="17">
   <MAINGROUP id="Gy2ano" name="OpenPL">
     <GROUP id="{24CA4D11-FC16-F8E8-18CB-7794E87812CC}" name="Source">
       <GROUP id="{10348CF7-CB7B-19A2-B118-8024C6837B9F}" name="ThirdParty">
@@ -19,11 +20,15 @@
         </GROUP>
         <GROUP id="{9B8C24B8-EC89-215A-E5DC-EAF0E45E0A20}" name="Objects">
           <GROUP id="{40DA73F2-F127-13E5-4508-9FDC7A132274}" name="Private">
+            <FILE id="xtMQnK" name="MatPlotPlotter.cpp" compile="1" resource="0"
+                  file="Source/Private/Objects/Public/MatPlotPlotter.cpp"/>
             <FILE id="GKywbc" name="PL_SCENE.cpp" compile="1" resource="0" file="Source/Private/Objects/Private/PL_SCENE.cpp"/>
             <FILE id="GIjPde" name="PL_SYSTEM.cpp" compile="1" resource="0" file="Source/Private/Objects/Private/PL_SYSTEM.cpp"/>
             <FILE id="leDkLI" name="PLBounds.cpp" compile="1" resource="0" file="Source/Private/Objects/Private/PLBounds.cpp"/>
           </GROUP>
           <GROUP id="{BBA20755-E4BC-29E3-5F76-16D6A74274FD}" name="Public">
+            <FILE id="wtJlkV" name="MatPlotPlotter.h" compile="0" resource="0"
+                  file="Source/Private/Objects/Public/MatPlotPlotter.h"/>
             <FILE id="TmcdGa" name="PL_SCENE.h" compile="0" resource="0" file="Source/Private/Objects/Public/PL_SCENE.h"/>
             <FILE id="zwxmOR" name="PL_SYSTEM.h" compile="0" resource="0" file="Source/Private/Objects/Public/PL_SYSTEM.h"/>
             <FILE id="XDeOVS" name="PLBounds.h" compile="0" resource="0" file="Source/Private/Objects/Public/PLBounds.h"/>
@@ -39,11 +44,11 @@
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX" extraDefs="JUCE_DLL_BUILD=1" externalLibraries="glfw&#10;gmp&#10;mpfr&#10;boost_thread-mt">
+    <XCODE_MAC targetFolder="Builds/MacOSX" extraDefs="JUCE_DLL_BUILD=1" externalLibraries="glfw&#10;gmp&#10;mpfr&#10;boost_thread-mt&#10;matplot">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" targetName="OpenPL" headerPath="/usr/local/include&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include"
+        <CONFIGURATION isDebug="1" name="Debug" targetName="OpenPL" headerPath="/usr/local/include&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/include"
                        libraryPath="/usr/local/lib" osxCompatibility="10.15 SDK"/>
-        <CONFIGURATION isDebug="0" name="Release" targetName="OpenPL" headerPath="/usr/local/include&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include"
+        <CONFIGURATION isDebug="0" name="Release" targetName="OpenPL" headerPath="/usr/local/include&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/include"
                        libraryPath="/usr/local/lib" osxCompatibility="10.15 SDK"/>
       </CONFIGURATIONS>
       <MODULEPATHS>

@@ -49,8 +49,26 @@ int ThreeDimToOneDim(int X, int Y, int Z, int XSize, int YSize);
  */
 struct JUCE_API PLVoxel
 {
+    /** Position of the voxel in the world. TODO: Replace voxel positions with a position based off of index and grid offset*/
     Eigen::Vector3d WorldPosition;
-    float Absorptivity;
+    
+    /**0-1 absorption of the voxel*/
+    double Absorptivity;
+    
+    /**Used during simulation, defines the current air pressure*/
+    double AirPressure;
+    
+    /**Used during simulation, defines the current velocity of the particle in the x direction*/
+    double ParticleVelocityX;
+    
+    /**Used during simulation, defines the current velocity of the particle in the y direction*/
+    double ParticleVelocityY;
+    
+    /**Used during simulation, defines the current velocity of the particle in the z direction*/
+    double ParticleVelocityZ;
+    
+    /**Used during simulation, defines whether the voxel is open or closed. 0 or 1. 0 = closed. 1 = open*/
+    short Beta;
 };
 
 /**

@@ -131,6 +131,11 @@ private:
     
     PL_VOXEL_GRID Voxels;
     
+    /**Actual grid used during simulation. Holds each grid voxel at every time step*/
+    std::vector<std::vector<PLVoxel>> SimulationGrid;
+    
+    int TimeSteps = 100;
+    
     enum ThreadStatus
     {
         ThreadStatus_NotStarted,
