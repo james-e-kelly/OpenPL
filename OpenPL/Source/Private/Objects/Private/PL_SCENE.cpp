@@ -422,6 +422,25 @@ PL_RESULT PL_SCENE::FillVoxels()
     return PL_OK;
 }
 
+void GaussianPulse(int Resolution, float samplingRate, std::vector<double>& Out, unsigned numSamples)
+{
+    Out.resize(numSamples);
+    
+    const float maxFreq = Resolution;
+    const float pi = std::acos(-1);
+    float sigma = 1.0f / (0.5 * pi * maxFreq);
+
+    const float delay = 2*sigma;
+    const float dt = 1.0f / samplingRate;
+
+    for (unsigned i = 0; i < numSamples; ++i)
+    {
+        double t = static_cast<double>(i) * dt;
+        double val = std::exp(-(t - delay) * (t - delay) / (sigma * sigma));
+        Out[i] = val;
+    }
+}
+
 PL_RESULT PL_SCENE::Simulate()
 {
     // Ignore for now so it's easier to test
@@ -457,6 +476,10 @@ PL_RESULT PL_SCENE::Simulate()
     const int XSize = Voxels.Size(0,0);
     const int YSize = Voxels.Size(0,1);
     const int ZSize = Voxels.Size(0,2);
+    
+    std::vector<double> Pulse;
+    
+    GaussianPulse(275, SamplingRate, Pulse, TimeSteps);
     
     // Reset all pressure and velocity
     {
@@ -563,38 +586,47 @@ PL_RESULT PL_SCENE::Simulate()
         }
         
         // Process Z Velocity
-        {
-            for (int x = 0; x < Voxels.Size(0,0); x++)
-            {
-                for (int y = 1; y < Voxels.Size(0,1); y++)
-                {
-                    for (int z = 0; z < Voxels.Size(0,2); z++)
-                    {
-                        // Basically don't understand any of this!!!
-                        
-                        const PLVoxel& PreviousVoxel = Voxels.Voxels[ThreeDimToOneDim(x, y, z-1, XSize, YSize)];
-                        
-                        const double BetaNext = static_cast<double>(PreviousVoxel.Beta);
-                        const double AbsorptionNext = PreviousVoxel.Absorptivity;
-                        const double YNext = (1.f - AbsorptionNext) / (1.f + AbsorptionNext);  // What is Y?
-                        
-                        PLVoxel& CurrentVoxel = Voxels.Voxels[ThreeDimToOneDim(x, y, z, XSize, YSize)];
-                        
-                        const double BetaThis = static_cast<double>(CurrentVoxel.Beta);
-                        const double AbsorptionThis = CurrentVoxel.Absorptivity;
-                        const double YThis = (1.f - AbsorptionThis) / (1.f + AbsorptionThis);  // What is Y?
-                        
-                        const double GradientZ = (CurrentVoxel.AirPressure - PreviousVoxel.AirPressure);
-                        const double AirCellUpdate = CurrentVoxel.ParticleVelocityZ - UpdateCoefficents * GradientZ;
-                        
-                        const double YBoundary = BetaThis * YNext + BetaNext * YThis;
-                        const double WallCellUpdate = YBoundary * (PreviousVoxel.AirPressure * BetaNext + CurrentVoxel.AirPressure * BetaThis);
-                        
-                        CurrentVoxel.ParticleVelocityZ = BetaThis * BetaNext * AirCellUpdate + (BetaNext - BetaThis) * WallCellUpdate;
-                    }
-                }
-            }
-        }
+//        {
+//            for (int x = 0; x < Voxels.Size(0,0); x++)
+//            {
+//                for (int y = 1; y < Voxels.Size(0,1); y++)
+//                {
+//                    for (int z = 0; z < Voxels.Size(0,2); z++)
+//                    {
+//                        // Basically don't understand any of this!!!
+//
+//                        const PLVoxel& PreviousVoxel = Voxels.Voxels[ThreeDimToOneDim(x, y, z-1, XSize, YSize)];
+//
+//                        const double BetaNext = static_cast<double>(PreviousVoxel.Beta);
+//                        const double AbsorptionNext = PreviousVoxel.Absorptivity;
+//                        const double YNext = (1.f - AbsorptionNext) / (1.f + AbsorptionNext);  // What is Y?
+//
+//                        PLVoxel& CurrentVoxel = Voxels.Voxels[ThreeDimToOneDim(x, y, z, XSize, YSize)];
+//
+//                        const double BetaThis = static_cast<double>(CurrentVoxel.Beta);
+//                        const double AbsorptionThis = CurrentVoxel.Absorptivity;
+//                        const double YThis = (1.f - AbsorptionThis) / (1.f + AbsorptionThis);  // What is Y?
+//
+//                        const double GradientZ = (CurrentVoxel.AirPressure - PreviousVoxel.AirPressure);
+//                        const double AirCellUpdate = CurrentVoxel.ParticleVelocityZ - UpdateCoefficents * GradientZ;
+//
+//                        const double YBoundary = BetaThis * YNext + BetaNext * YThis;
+//                        const double WallCellUpdate = YBoundary * (PreviousVoxel.AirPressure * BetaNext + CurrentVoxel.AirPressure * BetaThis);
+//
+//                        CurrentVoxel.ParticleVelocityZ = BetaThis * BetaNext * AirCellUpdate + (BetaNext - BetaThis) * WallCellUpdate;
+//                    }
+//                }
+//            }
+//        }
+        
+        // Absorption top/bottom
+//        {
+//            for (int i = 0; i < YSize; ++i)
+//            {
+//                int Index1 = i;
+//                index Index2 =
+//            }
+//        }
         
         // Add response
         {
@@ -603,6 +635,9 @@ PL_RESULT PL_SCENE::Simulate()
                 SimulationGrid[i][CurrentTimeStep] = Voxels.Voxels[i];
             }
         }
+        
+        // Add pulse
+        Voxels.Voxels[0].AirPressure += Pulse[CurrentTimeStep];
     }
     
     MatPlotPlotter plotter(SimulationGrid, Voxels.Size(0,0), Voxels.Size(0,1), Voxels.Size(0,2), TimeSteps);
