@@ -65,7 +65,7 @@ void MatPlotPlotter::PlotOneDimension(int YIndex, int ZIndex)
             PLVoxel& Voxel = (*AllVoxels)[Index][TimeStep];
             
             XPoints.push_back(static_cast<double>(X));
-            YPoints.push_back(static_cast<double>(std::rand() % 50));
+            YPoints.push_back(Voxel.AirPressure);
         }
         
         PlotFigure->current_axes()->plot(XPoints, YPoints);
