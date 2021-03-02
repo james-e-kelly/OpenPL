@@ -331,6 +331,14 @@ PL_RESULT PL_SCENE::FillVoxels()
     // However, at the sizes of the voxels and faces, this shouldn't be too much of a problem
     // But if accuracy does become a problem, I think that will be the solution
     
+    // First, init all Beta fields to 1
+    // Ie, to open air
+    
+    for (auto& Voxel : Voxels.Voxels)
+    {
+        Voxel.Beta = 1;
+    }
+    
     for (auto& Mesh : Meshes)
     {
         // Full AABB that encloses the mesh
@@ -404,6 +412,7 @@ PL_RESULT PL_SCENE::FillVoxels()
             if (NumberOfPointsInside > 2)
             {
                 MeshCell->Absorptivity = 0.75f;
+                MeshCell->Beta = 0;
             }
         }
     }
