@@ -552,38 +552,38 @@ PL_RESULT PL_SCENE::Simulate()
         }
         
         // Process Y Velocity
-        {
-            for (int x = 0; x < Voxels.Size(0,0); x++)
-            {
-                for (int y = 1; y < Voxels.Size(0,1); y++)
-                {
-                    for (int z = 0; z < Voxels.Size(0,2); z++)
-                    {
-                        // Basically don't understand any of this!!!
-                        
-                        const PLVoxel& PreviousVoxel = Voxels.Voxels[ThreeDimToOneDim(x, y-1, z, XSize, YSize)];
-                        
-                        const double BetaNext = static_cast<double>(PreviousVoxel.Beta);
-                        const double AbsorptionNext = PreviousVoxel.Absorptivity;
-                        const double YNext = (1.f - AbsorptionNext) / (1.f + AbsorptionNext);  // What is Y?
-                        
-                        PLVoxel& CurrentVoxel = Voxels.Voxels[ThreeDimToOneDim(x, y, z, XSize, YSize)];
-                        
-                        const double BetaThis = static_cast<double>(CurrentVoxel.Beta);
-                        const double AbsorptionThis = CurrentVoxel.Absorptivity;
-                        const double YThis = (1.f - AbsorptionThis) / (1.f + AbsorptionThis);  // What is Y?
-                        
-                        const double GradientY = (CurrentVoxel.AirPressure - PreviousVoxel.AirPressure);
-                        const double AirCellUpdate = CurrentVoxel.ParticleVelocityY - UpdateCoefficents * GradientY;
-                        
-                        const double YBoundary = BetaThis * YNext + BetaNext * YThis;
-                        const double WallCellUpdate = YBoundary * (PreviousVoxel.AirPressure * BetaNext + CurrentVoxel.AirPressure * BetaThis);
-                        
-                        CurrentVoxel.ParticleVelocityY = BetaThis * BetaNext * AirCellUpdate + (BetaNext - BetaThis) * WallCellUpdate;
-                    }
-                }
-            }
-        }
+//        {
+//            for (int x = 0; x < Voxels.Size(0,0); x++)
+//            {
+//                for (int y = 1; y < Voxels.Size(0,1); y++)
+//                {
+//                    for (int z = 0; z < Voxels.Size(0,2); z++)
+//                    {
+//                        // Basically don't understand any of this!!!
+//                        
+//                        const PLVoxel& PreviousVoxel = Voxels.Voxels[ThreeDimToOneDim(x, y-1, z, XSize, YSize)];
+//                        
+//                        const double BetaNext = static_cast<double>(PreviousVoxel.Beta);
+//                        const double AbsorptionNext = PreviousVoxel.Absorptivity;
+//                        const double YNext = (1.f - AbsorptionNext) / (1.f + AbsorptionNext);  // What is Y?
+//                        
+//                        PLVoxel& CurrentVoxel = Voxels.Voxels[ThreeDimToOneDim(x, y, z, XSize, YSize)];
+//                        
+//                        const double BetaThis = static_cast<double>(CurrentVoxel.Beta);
+//                        const double AbsorptionThis = CurrentVoxel.Absorptivity;
+//                        const double YThis = (1.f - AbsorptionThis) / (1.f + AbsorptionThis);  // What is Y?
+//                        
+//                        const double GradientY = (CurrentVoxel.AirPressure - PreviousVoxel.AirPressure);
+//                        const double AirCellUpdate = CurrentVoxel.ParticleVelocityY - UpdateCoefficents * GradientY;
+//                        
+//                        const double YBoundary = BetaThis * YNext + BetaNext * YThis;
+//                        const double WallCellUpdate = YBoundary * (PreviousVoxel.AirPressure * BetaNext + CurrentVoxel.AirPressure * BetaThis);
+//                        
+//                        CurrentVoxel.ParticleVelocityY = BetaThis * BetaNext * AirCellUpdate + (BetaNext - BetaThis) * WallCellUpdate;
+//                    }
+//                }
+//            }
+//        }
         
         // Process Z Velocity
 //        {

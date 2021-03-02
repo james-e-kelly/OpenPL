@@ -70,6 +70,8 @@ void MatPlotPlotter::PlotOneDimension(int YIndex, int ZIndex)
         
         PlotFigure->current_axes()->plot(XPoints, YPoints);
         
+        PlotFigure->current_axes()->ylim({-3,3});
+        
         PlotFigure->current_axes()->draw();
         
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
