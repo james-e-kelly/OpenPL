@@ -72,6 +72,6 @@ void MatPlotPlotter::PlotOneDimension(int YIndex, int ZIndex)
         
         PlotFigure->current_axes()->draw();
         
-//        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 }

@@ -21,7 +21,7 @@ public:
     
     void TestFunction();
     
-    /**Plot all points of the X axis with a constant Y and Z value*/
+    /**Plot all points of the X axis in time with a constant Y and Z value*/
     void PlotOneDimension(int YIndex = 0, int ZIndex = 0);
     
 private:
