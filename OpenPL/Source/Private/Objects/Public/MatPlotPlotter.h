@@ -17,7 +17,7 @@ class MatPlotPlotter
 public:
     
     /** Create a  MatPlotPlotter from a grid of voxels in time*/
-    MatPlotPlotter(std::vector<std::vector<PLVoxel>>& SimulationGrid, int XSize, int YSize, int ZSize, int TimeSteps);
+    MatPlotPlotter(const std::vector<std::vector<PLVoxel>>& SimulationGrid, int XSize, int YSize, int ZSize, int TimeSteps);
     
     void TestFunction();
     

@@ -20,6 +20,11 @@
         </GROUP>
         <GROUP id="{9B8C24B8-EC89-215A-E5DC-EAF0E45E0A20}" name="Objects">
           <GROUP id="{40DA73F2-F127-13E5-4508-9FDC7A132274}" name="Private">
+            <GROUP id="{AA35B122-A72A-E718-61A8-AC918FE2AC4E}" name="Simulators">
+              <FILE id="WAkoFV" name="Simulator.cpp" compile="1" resource="0" file="Source/Private/Objects/Public/Simulator.cpp"/>
+              <FILE id="NI2BJ5" name="SimulatorFDTD.cpp" compile="1" resource="0"
+                    file="Source/Private/Objects/Public/SimulatorFDTD.cpp"/>
+            </GROUP>
             <FILE id="xtMQnK" name="MatPlotPlotter.cpp" compile="1" resource="0"
                   file="Source/Private/Objects/Public/MatPlotPlotter.cpp"/>
             <FILE id="GKywbc" name="PL_SCENE.cpp" compile="1" resource="0" file="Source/Private/Objects/Private/PL_SCENE.cpp"/>
@@ -27,6 +32,10 @@
             <FILE id="leDkLI" name="PLBounds.cpp" compile="1" resource="0" file="Source/Private/Objects/Private/PLBounds.cpp"/>
           </GROUP>
           <GROUP id="{BBA20755-E4BC-29E3-5F76-16D6A74274FD}" name="Public">
+            <GROUP id="{92B25832-B8F4-D1C0-D448-1B219954970B}" name="Simulators">
+              <FILE id="CQrhNU" name="Simulator.h" compile="0" resource="0" file="Source/Private/Objects/Public/Simulator.h"/>
+              <FILE id="CGHVFx" name="SimulatorFDTD.h" compile="0" resource="0" file="Source/Private/Objects/Public/SimulatorFDTD.h"/>
+            </GROUP>
             <FILE id="wtJlkV" name="MatPlotPlotter.h" compile="0" resource="0"
                   file="Source/Private/Objects/Public/MatPlotPlotter.h"/>
             <FILE id="TmcdGa" name="PL_SCENE.h" compile="0" resource="0" file="Source/Private/Objects/Public/PL_SCENE.h"/>
@@ -44,7 +53,8 @@
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX" extraDefs="JUCE_DLL_BUILD=1" externalLibraries="glfw&#10;gmp&#10;mpfr&#10;boost_thread-mt&#10;matplot">
+    <XCODE_MAC targetFolder="Builds/MacOSX" extraDefs="JUCE_DLL_BUILD=1&#10;BUILD_EXPERIMENTAL_OPENGL_BACKEND=ON"
+               externalLibraries="glfw&#10;gmp&#10;mpfr&#10;boost_thread-mt&#10;matplot">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" targetName="OpenPL" headerPath="/usr/local/include&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/include"
                        libraryPath="/usr/local/lib" osxCompatibility="10.15 SDK"/>

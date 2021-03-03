@@ -94,3 +94,17 @@ struct PL_VOXEL_GRID
     /** Width aka Height aka Depth of each voxel. With CenterPositions and Voxels, can use this to create bounding boxes of each voxel*/
     float VoxelSize;
 };
+
+enum PL_SIMULATION_RESOLUTION
+{
+    Low = 275,
+    Med = 500,
+    High = 725,
+    Extreme = 1000
+};
+
+struct PL_SIMULATION_SETTINGS
+{
+    PL_SIMULATION_RESOLUTION Resolution;
+    int TimeSteps;
+};

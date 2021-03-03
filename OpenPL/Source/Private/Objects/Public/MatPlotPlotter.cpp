@@ -16,8 +16,8 @@
 
 using namespace matplot;
 
-MatPlotPlotter::MatPlotPlotter(std::vector<std::vector<PLVoxel>>& SimulationGrid, int XSize, int YSize, int ZSize, int TimeSteps)
-: AllVoxels(&SimulationGrid),
+MatPlotPlotter::MatPlotPlotter(const std::vector<std::vector<PLVoxel>>& SimulationGrid, int XSize, int YSize, int ZSize, int TimeSteps)
+: AllVoxels(const_cast<std::vector<std::vector<PLVoxel>>*>(&SimulationGrid)),
 XSize(XSize),
 YSize(YSize),
 ZSize(ZSize),

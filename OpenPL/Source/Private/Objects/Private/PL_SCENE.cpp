@@ -15,9 +15,13 @@
 #include <igl/copyleft/cgal/points_inside_component.h>
 #include <sstream>
 #include "../Public/MatPlotPlotter.h"
+#include "../Public/SimulatorFDTD.h"
 
 PL_SCENE::PL_SCENE(PL_SYSTEM* System)
 :   OwningSystem(System)
+{ }
+
+PL_SCENE::~PL_SCENE()
 { }
 
 PL_RESULT PL_SCENE::GetSystem(PL_SYSTEM** OutSystem) const
@@ -422,25 +426,6 @@ PL_RESULT PL_SCENE::FillVoxels()
     return PL_OK;
 }
 
-void GaussianPulse(int Resolution, float samplingRate, std::vector<double>& Out, unsigned numSamples)
-{
-    Out.resize(numSamples);
-    
-    const float maxFreq = Resolution;
-    const float pi = std::acos(-1);
-    float sigma = 1.0f / (0.5 * pi * maxFreq);
-
-    const float delay = 2*sigma;
-    const float dt = 1.0f / samplingRate;
-
-    for (unsigned i = 0; i < numSamples; ++i)
-    {
-        double t = static_cast<double>(i) * dt;
-        double val = std::exp(-(t - delay) * (t - delay) / (sigma * sigma));
-        Out[i] = val;
-    }
-}
-
 PL_RESULT PL_SCENE::Simulate()
 {
     // Ignore for now so it's easier to test
@@ -453,194 +438,17 @@ PL_RESULT PL_SCENE::Simulate()
     // Yes, we're not multithreaded anymore but I need this to finish
     VoxelThread.join();
     
-    // Setup for first time
-    if (SimulationGrid.size() < 2)
-    {
-        SimulationGrid.resize(Voxels.Voxels.size());
-        
-        for (int i = 0; i < SimulationGrid.size(); i++)
-        {
-            SimulationGrid[i] = std::vector<PLVoxel>(TimeSteps);
-        }
-    }
+    Simulator = std::unique_ptr<class Simulator>(new SimulatorFDTD());
     
-    const double SpeedOfSound = 343.21f;
-    const double MinWaveLength = SpeedOfSound / 275;    // divided by min frequency for simulation. 275 is pretty low and should be fast
-    const double MetersPerGridCell = MinWaveLength / 3.5f;
-    const double SecondsPerSample = MetersPerGridCell / (SpeedOfSound * 1.5f);
-    const double SamplingRate  = 1.0f / SecondsPerSample;
+    PL_SIMULATION_SETTINGS Settings;
+    Settings.Resolution = Low;
+    Settings.TimeSteps = TimeSteps;
     
-    // Need to calculate these coefficents properly
-    const double UpdateCoefficents = SpeedOfSound * SecondsPerSample / MetersPerGridCell;
+    Simulator->Init(Voxels, Settings);
     
-    const int XSize = Voxels.Size(0,0);
-    const int YSize = Voxels.Size(0,1);
-    const int ZSize = Voxels.Size(0,2);
+    Simulator->Simulate();
     
-    std::vector<double> Pulse;
-    
-    GaussianPulse(275, SamplingRate, Pulse, TimeSteps);
-    
-    // Reset all pressure and velocity
-    {
-        for(auto& Voxel : Voxels.Voxels)
-        {
-            Voxel.AirPressure = 0.0f;
-            Voxel.ParticleVelocityX = 0.0f;
-            Voxel.ParticleVelocityY = 0.0f;
-            Voxel.ParticleVelocityZ = 0.0f;
-        }
-    }
-    
-    // Time-stepped FDTD
-    for (int CurrentTimeStep = 0; CurrentTimeStep < TimeSteps; CurrentTimeStep++)
-    {
-        // Pressure grid
-        {
-            for (int x = 0; x < XSize; x++)
-            {
-                for (int y = 0; y < YSize; y++)
-                {
-                    for (int z = 0; z < ZSize; z++)
-                    {
-                        PLVoxel& CurrentVoxel = Voxels.Voxels[ThreeDimToOneDim(x, y, z, XSize, YSize)];
-                        PLVoxel NextVoxelX = x + 1 >= XSize ? PLVoxel() : Voxels.Voxels[ThreeDimToOneDim(x + 1, y, z, XSize, YSize)];
-                        PLVoxel NextVoxelY = y + 1 >= YSize ? PLVoxel() : Voxels.Voxels[ThreeDimToOneDim(x, y + 1, z, XSize, YSize)];
-                        PLVoxel NextVoxelZ = z + 1 >= ZSize ? PLVoxel() : Voxels.Voxels[ThreeDimToOneDim(x, y, z + 1, XSize, YSize)];
-                        
-                        double Beta = static_cast<double>(CurrentVoxel.Beta);
-                        
-                        const double Divergance = ((NextVoxelX.ParticleVelocityX - CurrentVoxel.ParticleVelocityX) + (NextVoxelY.ParticleVelocityY - CurrentVoxel.ParticleVelocityY) + NextVoxelZ.ParticleVelocityZ - CurrentVoxel.ParticleVelocityZ);
-                        CurrentVoxel.AirPressure = Beta * (CurrentVoxel.AirPressure - UpdateCoefficents * Divergance);
-                    }
-                }
-            }
-        }
-        
-        // Process X Velocity
-        {
-            for (int x = 1; x < Voxels.Size(0,0); x++)
-            {
-                for (int y = 0; y < Voxels.Size(0,1); y++)
-                {
-                    for (int z = 0; z < Voxels.Size(0,2); z++)
-                    {
-                        // Basically don't understand any of this!!!
-                        
-                        const PLVoxel& PreviousVoxel = Voxels.Voxels[ThreeDimToOneDim(x-1, y, z, XSize, YSize)];
-                        
-                        const double BetaNext = static_cast<double>(PreviousVoxel.Beta);
-                        const double AbsorptionNext = PreviousVoxel.Absorptivity;
-                        const double YNext = (1.f - AbsorptionNext) / (1.f + AbsorptionNext);  // What is Y? Yee?
-                        
-                        PLVoxel& CurrentVoxel = Voxels.Voxels[ThreeDimToOneDim(x, y, z, XSize, YSize)];
-                        
-                        const double BetaThis = static_cast<double>(CurrentVoxel.Beta);
-                        const double AbsorptionThis = CurrentVoxel.Absorptivity;
-                        const double YThis = (1.f - AbsorptionThis) / (1.f + AbsorptionThis);  // What is Y?
-                        
-                        const double GradientX = (CurrentVoxel.AirPressure - PreviousVoxel.AirPressure);
-                        const double AirCellUpdate = CurrentVoxel.ParticleVelocityX - UpdateCoefficents * GradientX;
-                        
-                        const double YBoundary = BetaThis * YNext + BetaNext * YThis;
-                        const double WallCellUpdate = YBoundary * (PreviousVoxel.AirPressure * BetaNext + CurrentVoxel.AirPressure * BetaThis);
-                        
-                        CurrentVoxel.ParticleVelocityX = BetaThis * BetaNext * AirCellUpdate + (BetaNext - BetaThis) * WallCellUpdate;
-                    }
-                }
-            }
-        }
-        
-        // Process Y Velocity
-//        {
-//            for (int x = 0; x < Voxels.Size(0,0); x++)
-//            {
-//                for (int y = 1; y < Voxels.Size(0,1); y++)
-//                {
-//                    for (int z = 0; z < Voxels.Size(0,2); z++)
-//                    {
-//                        // Basically don't understand any of this!!!
-//                        
-//                        const PLVoxel& PreviousVoxel = Voxels.Voxels[ThreeDimToOneDim(x, y-1, z, XSize, YSize)];
-//                        
-//                        const double BetaNext = static_cast<double>(PreviousVoxel.Beta);
-//                        const double AbsorptionNext = PreviousVoxel.Absorptivity;
-//                        const double YNext = (1.f - AbsorptionNext) / (1.f + AbsorptionNext);  // What is Y?
-//                        
-//                        PLVoxel& CurrentVoxel = Voxels.Voxels[ThreeDimToOneDim(x, y, z, XSize, YSize)];
-//                        
-//                        const double BetaThis = static_cast<double>(CurrentVoxel.Beta);
-//                        const double AbsorptionThis = CurrentVoxel.Absorptivity;
-//                        const double YThis = (1.f - AbsorptionThis) / (1.f + AbsorptionThis);  // What is Y?
-//                        
-//                        const double GradientY = (CurrentVoxel.AirPressure - PreviousVoxel.AirPressure);
-//                        const double AirCellUpdate = CurrentVoxel.ParticleVelocityY - UpdateCoefficents * GradientY;
-//                        
-//                        const double YBoundary = BetaThis * YNext + BetaNext * YThis;
-//                        const double WallCellUpdate = YBoundary * (PreviousVoxel.AirPressure * BetaNext + CurrentVoxel.AirPressure * BetaThis);
-//                        
-//                        CurrentVoxel.ParticleVelocityY = BetaThis * BetaNext * AirCellUpdate + (BetaNext - BetaThis) * WallCellUpdate;
-//                    }
-//                }
-//            }
-//        }
-        
-        // Process Z Velocity
-//        {
-//            for (int x = 0; x < Voxels.Size(0,0); x++)
-//            {
-//                for (int y = 1; y < Voxels.Size(0,1); y++)
-//                {
-//                    for (int z = 0; z < Voxels.Size(0,2); z++)
-//                    {
-//                        // Basically don't understand any of this!!!
-//
-//                        const PLVoxel& PreviousVoxel = Voxels.Voxels[ThreeDimToOneDim(x, y, z-1, XSize, YSize)];
-//
-//                        const double BetaNext = static_cast<double>(PreviousVoxel.Beta);
-//                        const double AbsorptionNext = PreviousVoxel.Absorptivity;
-//                        const double YNext = (1.f - AbsorptionNext) / (1.f + AbsorptionNext);  // What is Y?
-//
-//                        PLVoxel& CurrentVoxel = Voxels.Voxels[ThreeDimToOneDim(x, y, z, XSize, YSize)];
-//
-//                        const double BetaThis = static_cast<double>(CurrentVoxel.Beta);
-//                        const double AbsorptionThis = CurrentVoxel.Absorptivity;
-//                        const double YThis = (1.f - AbsorptionThis) / (1.f + AbsorptionThis);  // What is Y?
-//
-//                        const double GradientZ = (CurrentVoxel.AirPressure - PreviousVoxel.AirPressure);
-//                        const double AirCellUpdate = CurrentVoxel.ParticleVelocityZ - UpdateCoefficents * GradientZ;
-//
-//                        const double YBoundary = BetaThis * YNext + BetaNext * YThis;
-//                        const double WallCellUpdate = YBoundary * (PreviousVoxel.AirPressure * BetaNext + CurrentVoxel.AirPressure * BetaThis);
-//
-//                        CurrentVoxel.ParticleVelocityZ = BetaThis * BetaNext * AirCellUpdate + (BetaNext - BetaThis) * WallCellUpdate;
-//                    }
-//                }
-//            }
-//        }
-        
-        // Absorption top/bottom
-//        {
-//            for (int i = 0; i < YSize; ++i)
-//            {
-//                int Index1 = i;
-//                index Index2 =
-//            }
-//        }
-        
-        // Add response
-        {
-            for (int i = 0; i < Voxels.Voxels.size(); i++)
-            {
-                SimulationGrid[i][CurrentTimeStep] = Voxels.Voxels[i];
-            }
-        }
-        
-        // Add pulse
-        Voxels.Voxels[0].AirPressure += Pulse[CurrentTimeStep];
-    }
-    
-    MatPlotPlotter plotter(SimulationGrid, Voxels.Size(0,0), Voxels.Size(0,1), Voxels.Size(0,2), TimeSteps);
+    MatPlotPlotter plotter(Simulator->GetSimulatedLattice(), Voxels.Size(0,0), Voxels.Size(0,1), Voxels.Size(0,2), TimeSteps);
     plotter.PlotOneDimension();
     
     return PL_OK;

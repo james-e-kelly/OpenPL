@@ -17,6 +17,8 @@
 #include <boost/thread/scoped_thread.hpp>
 #include <atomic>
 
+class Simulator;
+
 /**
  * The scene class is the main work horse of the simulation.
  * 1) Take mesh data from game and convert to internal data types
@@ -34,6 +36,8 @@ public:
      * @param System System object that owns the scene.
      */
     PL_SCENE(PL_SYSTEM* System);
+    
+    ~PL_SCENE();
     
     /**
      * Get the owning scene object.
@@ -131,10 +135,10 @@ private:
     
     PL_VOXEL_GRID Voxels;
     
-    /**Actual grid used during simulation. Holds each grid voxel at every time step*/
-    std::vector<std::vector<PLVoxel>> SimulationGrid;
-    
     int TimeSteps = 100;
+    
+    /**Pointer to the object that will run our specific simulation. Can be anything from FDTD to rectangular decomposition etc.*/
+    std::unique_ptr<Simulator> Simulator;
     
     enum ThreadStatus
     {
