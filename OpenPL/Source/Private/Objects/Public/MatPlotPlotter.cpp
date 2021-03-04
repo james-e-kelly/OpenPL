@@ -17,7 +17,7 @@
 using namespace matplot;
 
 MatPlotPlotter::MatPlotPlotter(const std::vector<std::vector<PLVoxel>>& SimulationGrid, int XSize, int YSize, int ZSize, int TimeSteps)
-: AllVoxels(const_cast<std::vector<std::vector<PLVoxel>>*>(&SimulationGrid)),
+: Lattice(SimulationGrid),
 XSize(XSize),
 YSize(YSize),
 ZSize(ZSize),
@@ -62,7 +62,7 @@ void MatPlotPlotter::PlotOneDimension(int YIndex, int ZIndex)
         {
             int Index = ThreeDimToOneDim(X, YIndex, ZIndex, XSize, YSize);
             
-            PLVoxel& Voxel = (*AllVoxels)[Index][TimeStep];
+            const PLVoxel& Voxel = Lattice[Index][TimeStep];
             
             XPoints.push_back(static_cast<double>(X));
             YPoints.push_back(Voxel.AirPressure);
@@ -70,7 +70,7 @@ void MatPlotPlotter::PlotOneDimension(int YIndex, int ZIndex)
         
         PlotFigure->current_axes()->plot(XPoints, YPoints);
         
-        PlotFigure->current_axes()->ylim({-3,3});
+        PlotFigure->current_axes()->ylim({-1,1});
         
         PlotFigure->current_axes()->draw();
         

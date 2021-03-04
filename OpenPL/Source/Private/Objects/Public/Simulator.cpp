@@ -28,8 +28,6 @@ void Simulator::Init(PL_VOXEL_GRID& Voxels, PL_SIMULATION_SETTINGS& Settings)
         VoxelVector.resize(TimeSteps);
     }
     
-    GaussianPulse();
-    
     const double SpeedOfSound = 343.21f;
     const double MinWaveLength = SpeedOfSound / Settings.Resolution;    // divided by min frequency for simulation. 275 is pretty low and should be fast
     const double MetersPerGridCell = MinWaveLength / 3.5f;
@@ -38,6 +36,8 @@ void Simulator::Init(PL_VOXEL_GRID& Voxels, PL_SIMULATION_SETTINGS& Settings)
     
     // Need to calculate these coefficents properly
     UpdateCoefficents = SpeedOfSound * SecondsPerSample / MetersPerGridCell;
+    
+    GaussianPulse();
 }
 
 const std::vector<std::vector<PLVoxel>>& Simulator::GetSimulatedLattice() const

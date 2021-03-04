@@ -26,7 +26,7 @@ public:
     
 private:
     
-    std::vector<std::vector<PLVoxel>>* AllVoxels;
+    const std::vector<std::vector<PLVoxel>>& Lattice;
     
     int XSize;
     int YSize;
