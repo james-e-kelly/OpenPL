@@ -450,7 +450,7 @@ PL_RESULT PL_SCENE::Simulate()
     Simulator->Simulate();
     
     MatPlotPlotter plotter(Simulator->GetSimulatedLattice(), Voxels.Size(0,0), Voxels.Size(0,1), Voxels.Size(0,2), TimeSteps);
-    plotter.PlotOneDimension();
+    plotter.PlotOneDimensionWaterfall();
     
     return PL_OK;
 }

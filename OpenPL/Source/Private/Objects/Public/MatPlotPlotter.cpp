@@ -77,3 +77,29 @@ void MatPlotPlotter::PlotOneDimension(int YIndex, int ZIndex)
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 }
+
+void MatPlotPlotter::PlotOneDimensionWaterfall(int YIndex, int ZIndex)
+{
+    figure_handle PlotFigure = figure(false);
+    
+    std::vector<std::vector<double>> XPoints (XSize, std::vector<double>(TimeSteps, 0));
+    std::vector<std::vector<double>> YPoints (XSize, std::vector<double>(TimeSteps, 0));
+    std::vector<std::vector<double>> ZPoints (XSize, std::vector<double>(TimeSteps, 0));
+    
+    for (int x = 0; x < XSize; ++x)
+    {
+        for (int TimeStep = 0; TimeStep < TimeSteps; ++TimeStep)
+        {
+            const PLVoxel& CurrentVoxel = Lattice[ThreeDimToOneDim(x, YIndex, ZIndex, XSize, YSize)][TimeStep];
+            double AirPressure = CurrentVoxel.AirPressure;
+            
+            XPoints[x][TimeStep] = x;
+            YPoints[x][TimeStep] = TimeStep;
+            ZPoints[x][TimeStep] = AirPressure;
+        }
+    }
+    
+    PlotFigure->current_axes()->waterfall(XPoints, YPoints, ZPoints);
+    
+    PlotFigure->draw();
+}
