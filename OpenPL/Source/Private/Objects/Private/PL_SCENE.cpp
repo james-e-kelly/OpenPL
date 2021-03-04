@@ -16,6 +16,7 @@
 #include <sstream>
 #include "../Public/MatPlotPlotter.h"
 #include "../Public/Simulators/SimulatorFDTD.h"
+#include "../Public/Simulators/SimulatorBasic.h"
 
 PL_SCENE::PL_SCENE(PL_SYSTEM* System)
 :   OwningSystem(System)
@@ -438,7 +439,7 @@ PL_RESULT PL_SCENE::Simulate()
     // Yes, we're not multithreaded anymore but I need this to finish
     VoxelThread.join();
     
-    Simulator = std::unique_ptr<class Simulator>(new SimulatorFDTD());
+    Simulator = std::unique_ptr<class Simulator>(new SimulatorBasic());
     
     PL_SIMULATION_SETTINGS Settings;
     Settings.Resolution = Low;
