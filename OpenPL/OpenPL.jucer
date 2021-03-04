@@ -21,9 +21,9 @@
         <GROUP id="{9B8C24B8-EC89-215A-E5DC-EAF0E45E0A20}" name="Objects">
           <GROUP id="{40DA73F2-F127-13E5-4508-9FDC7A132274}" name="Private">
             <GROUP id="{AA35B122-A72A-E718-61A8-AC918FE2AC4E}" name="Simulators">
-              <FILE id="WAkoFV" name="Simulator.cpp" compile="1" resource="0" file="Source/Private/Objects/Public/Simulator.cpp"/>
-              <FILE id="NI2BJ5" name="SimulatorFDTD.cpp" compile="1" resource="0"
-                    file="Source/Private/Objects/Public/SimulatorFDTD.cpp"/>
+              <FILE id="VwHrqr" name="Simulator.cpp" compile="1" resource="0" file="Source/Private/Objects/Private/Simulators/Simulator.cpp"/>
+              <FILE id="sCSpgD" name="SimulatorFDTD.cpp" compile="1" resource="0"
+                    file="Source/Private/Objects/Private/Simulators/SimulatorFDTD.cpp"/>
             </GROUP>
             <FILE id="xtMQnK" name="MatPlotPlotter.cpp" compile="1" resource="0"
                   file="Source/Private/Objects/Public/MatPlotPlotter.cpp"/>
@@ -33,8 +33,8 @@
           </GROUP>
           <GROUP id="{BBA20755-E4BC-29E3-5F76-16D6A74274FD}" name="Public">
             <GROUP id="{92B25832-B8F4-D1C0-D448-1B219954970B}" name="Simulators">
-              <FILE id="CQrhNU" name="Simulator.h" compile="0" resource="0" file="Source/Private/Objects/Public/Simulator.h"/>
-              <FILE id="CGHVFx" name="SimulatorFDTD.h" compile="0" resource="0" file="Source/Private/Objects/Public/SimulatorFDTD.h"/>
+              <FILE id="vycXv9" name="Simulator.h" compile="0" resource="0" file="Source/Private/Objects/Public/Simulators/Simulator.h"/>
+              <FILE id="bL8rOF" name="SimulatorFDTD.h" compile="0" resource="0" file="Source/Private/Objects/Public/Simulators/SimulatorFDTD.h"/>
             </GROUP>
             <FILE id="wtJlkV" name="MatPlotPlotter.h" compile="0" resource="0"
                   file="Source/Private/Objects/Public/MatPlotPlotter.h"/>

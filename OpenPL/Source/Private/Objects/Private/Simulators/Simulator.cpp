@@ -8,7 +8,7 @@
   ==============================================================================
 */
 
-#include "../Public/Simulator.h"
+#include "../../Public/Simulators/Simulator.h"
 
 void Simulator::Init(PL_VOXEL_GRID& Voxels, PL_SIMULATION_SETTINGS& Settings)
 {

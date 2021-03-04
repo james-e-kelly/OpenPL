@@ -15,7 +15,7 @@
 #include <igl/copyleft/cgal/points_inside_component.h>
 #include <sstream>
 #include "../Public/MatPlotPlotter.h"
-#include "../Public/SimulatorFDTD.h"
+#include "../Public/Simulators/SimulatorFDTD.h"
 
 PL_SCENE::PL_SCENE(PL_SYSTEM* System)
 :   OwningSystem(System)
