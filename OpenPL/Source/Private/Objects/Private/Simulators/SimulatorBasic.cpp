@@ -29,17 +29,14 @@ void SimulatorBasic::Simulate()
     for (int CurrentTimeStep = 0; CurrentTimeStep < TimeSteps; CurrentTimeStep++)
     {
         // Update magnetic field for last x values
-        for (int x = XSize - 1; x < XSize; ++x)
+        for (int y = 0; y < YSize; ++y)
         {
-            for (int y = 0; y < YSize; ++y)
+            for (int z = 0; z < ZSize; ++z)
             {
-                for (int z = 0; z < ZSize; ++z)
-                {
-                    PLVoxel& CurrentVoxel = (*Lattice)[ThreeDimToOneDim(x, y, z, XSize, YSize)];
-                    PLVoxel& PreviousVoxel = (*Lattice)[ThreeDimToOneDim(x - 1, y, z, XSize, YSize)];
-                    
-                    CurrentVoxel.AirPressure = PreviousVoxel.AirPressure;
-                }
+                PLVoxel& LastVoxel = (*Lattice)[ThreeDimToOneDim(XSize - 1, y, z, XSize, YSize)];
+                PLVoxel& SecondLastVoxel = (*Lattice)[ThreeDimToOneDim(XSize - 2, y, z, XSize, YSize)];
+                
+                LastVoxel.AirPressure = SecondLastVoxel.AirPressure;
             }
         }
         
@@ -59,17 +56,14 @@ void SimulatorBasic::Simulate()
         }
         
         // Update electric field for first x values
-        for (int x = 0; x < 1; ++x)
+        for (int y = 0; y < YSize; ++y)
         {
-            for (int y = 0; y < YSize; ++y)
+            for (int z = 0; z < ZSize; ++z)
             {
-                for (int z = 0; z < ZSize; ++z)
-                {
-                    PLVoxel& CurrentVoxel = (*Lattice)[ThreeDimToOneDim(x, y, z, XSize, YSize)];
-                    PLVoxel& NextVoxel = (*Lattice)[ThreeDimToOneDim(x + 1, y, z, XSize, YSize)];
-                    
-                    CurrentVoxel.AirPressure = NextVoxel.AirPressure;
-                }
+                PLVoxel& FirstVoxel = (*Lattice)[ThreeDimToOneDim(0, y, z, XSize, YSize)];
+                PLVoxel& SecondVoxel = (*Lattice)[ThreeDimToOneDim(1, y, z, XSize, YSize)];
+                
+                FirstVoxel.ParticleVelocityX = SecondVoxel.ParticleVelocityX;
             }
         }
         
