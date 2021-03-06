@@ -28,6 +28,21 @@ void SimulatorBasic::Simulate()
     // Time-stepped FDTD
     for (int CurrentTimeStep = 0; CurrentTimeStep < TimeSteps; CurrentTimeStep++)
     {
+        // Update magnetic field for last x values
+        for (int x = XSize - 1; x < XSize; ++x)
+        {
+            for (int y = 0; y < YSize; ++y)
+            {
+                for (int z = 0; z < ZSize; ++z)
+                {
+                    PLVoxel& CurrentVoxel = (*Lattice)[ThreeDimToOneDim(x, y, z, XSize, YSize)];
+                    PLVoxel& PreviousVoxel = (*Lattice)[ThreeDimToOneDim(x - 1, y, z, XSize, YSize)];
+                    
+                    CurrentVoxel.AirPressure = PreviousVoxel.AirPressure;
+                }
+            }
+        }
+        
         // Update magnetic field
         for (int x = 0; x < XSize - 1; ++x)
         {
@@ -43,16 +58,17 @@ void SimulatorBasic::Simulate()
             }
         }
         
-        // Update magnetic field for last x values
-        for (int x = XSize - 1; x < XSize; ++x)
+        // Update electric field for first x values
+        for (int x = 0; x < 1; ++x)
         {
             for (int y = 0; y < YSize; ++y)
             {
                 for (int z = 0; z < ZSize; ++z)
                 {
                     PLVoxel& CurrentVoxel = (*Lattice)[ThreeDimToOneDim(x, y, z, XSize, YSize)];
+                    PLVoxel& NextVoxel = (*Lattice)[ThreeDimToOneDim(x + 1, y, z, XSize, YSize)];
                     
-                    CurrentVoxel.AirPressure = CurrentVoxel.AirPressure + (0 - CurrentVoxel.ParticleVelocityX) / Impedance;
+                    CurrentVoxel.AirPressure = NextVoxel.AirPressure;
                 }
             }
         }
@@ -68,20 +84,6 @@ void SimulatorBasic::Simulate()
                     const PLVoxel& PreviousVoxel = (*Lattice)[ThreeDimToOneDim(x - 1, y, z, XSize, YSize)];
                     
                     CurrentVoxel.ParticleVelocityX = CurrentVoxel.ParticleVelocityX + (CurrentVoxel.AirPressure - PreviousVoxel.AirPressure) * Impedance;
-                }
-            }
-        }
-        
-        // Update electric field for first x values
-        for (int x = 0; x < 1; ++x)
-        {
-            for (int y = 0; y < YSize; ++y)
-            {
-                for (int z = 0; z < ZSize; ++z)
-                {
-                    PLVoxel& CurrentVoxel = (*Lattice)[ThreeDimToOneDim(x, y, z, XSize, YSize)];
-                    
-                    CurrentVoxel.ParticleVelocityX = CurrentVoxel.ParticleVelocityX + (CurrentVoxel.AirPressure - 0) * Impedance;
                 }
             }
         }
