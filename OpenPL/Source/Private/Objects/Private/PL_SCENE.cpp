@@ -17,6 +17,7 @@
 #include "../Public/MatPlotPlotter.h"
 #include "../Public/Simulators/SimulatorFDTD.h"
 #include "../Public/Simulators/SimulatorBasic.h"
+#include <boost/timer/timer.hpp>
 
 PL_SCENE::PL_SCENE(PL_SYSTEM* System)
 :   OwningSystem(System)
@@ -447,7 +448,13 @@ PL_RESULT PL_SCENE::Simulate()
     
     Simulator->Init(Voxels, Settings);
     
-    Simulator->Simulate();
+    std::ostringstream Stream;
+    Stream << "Simulating Over " << Voxels.Voxels.size() << " Voxels\n";
+    {
+        boost::timer::auto_cpu_timer SimulationTimer(Stream);
+        Simulator->Simulate();
+    }
+    DebugLog(Stream.str().c_str());
     
     MatPlotPlotter plotter(Simulator->GetSimulatedLattice(), Voxels.Size(0,0), Voxels.Size(0,1), Voxels.Size(0,2), TimeSteps);
     plotter.PlotOneDimensionWaterfall();
