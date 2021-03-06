@@ -101,5 +101,10 @@ void MatPlotPlotter::PlotOneDimensionWaterfall(int YIndex, int ZIndex)
     
     PlotFigure->current_axes()->waterfall(XPoints, YPoints, ZPoints);
     
+    PlotFigure->current_axes()->title(std::string("Air Pressure Along The X Axis"));
+    PlotFigure->current_axes()->xlabel(std::string("X Voxel"));
+    PlotFigure->current_axes()->ylabel(std::string("Time Step"));
+    PlotFigure->current_axes()->zlabel(std::string("Air Pressure"));
+    
     PlotFigure->draw();
 }
