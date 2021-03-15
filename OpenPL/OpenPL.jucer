@@ -24,6 +24,8 @@
               <FILE id="VwHrqr" name="Simulator.cpp" compile="1" resource="0" file="Source/Private/Objects/Private/Simulators/Simulator.cpp"/>
               <FILE id="xedXzR" name="SimulatorBasic.cpp" compile="1" resource="0"
                     file="Source/Private/Objects/Private/Simulators/SimulatorBasic.cpp"/>
+              <FILE id="zQGb1V" name="SimulatorBasic3D.cpp" compile="1" resource="0"
+                    file="Source/Private/Objects/Private/Simulators/SimulatorBasic3D.cpp"/>
               <FILE id="sCSpgD" name="SimulatorFDTD.cpp" compile="1" resource="0"
                     file="Source/Private/Objects/Private/Simulators/SimulatorFDTD.cpp"/>
             </GROUP>
@@ -38,6 +40,8 @@
               <FILE id="vycXv9" name="Simulator.h" compile="0" resource="0" file="Source/Private/Objects/Public/Simulators/Simulator.h"/>
               <FILE id="XZrvzx" name="SimulatorBasic.h" compile="0" resource="0"
                     file="Source/Private/Objects/Public/Simulators/SimulatorBasic.h"/>
+              <FILE id="INVs5d" name="SimulatorBasic3D.h" compile="0" resource="0"
+                    file="Source/Private/Objects/Public/Simulators/SimulatorBasic3D.h"/>
               <FILE id="bL8rOF" name="SimulatorFDTD.h" compile="0" resource="0" file="Source/Private/Objects/Public/Simulators/SimulatorFDTD.h"/>
             </GROUP>
             <FILE id="wtJlkV" name="MatPlotPlotter.h" compile="0" resource="0"

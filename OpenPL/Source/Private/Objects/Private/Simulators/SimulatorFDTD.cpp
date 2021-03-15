@@ -41,7 +41,7 @@ void SimulatorFDTD::Simulate()
                         
                         double Beta = static_cast<double>(CurrentVoxel.Beta);
                         
-                        const double Divergance = ((NextVoxelX.ParticleVelocityX - CurrentVoxel.ParticleVelocityX) + (NextVoxelY.ParticleVelocityY - CurrentVoxel.ParticleVelocityY) + NextVoxelZ.ParticleVelocityZ - CurrentVoxel.ParticleVelocityZ);
+                        const double Divergance = ((NextVoxelX.ParticleVelocityX - CurrentVoxel.ParticleVelocityX) + (NextVoxelY.ParticleVelocityY - CurrentVoxel.ParticleVelocityY) + (NextVoxelZ.ParticleVelocityZ - CurrentVoxel.ParticleVelocityZ));
                         CurrentVoxel.AirPressure = Beta * (CurrentVoxel.AirPressure - UpdateCoefficents * Divergance);
                     }
                 }
@@ -118,21 +118,21 @@ void SimulatorFDTD::Simulate()
         
         // Process Z Velocity
 //        {
-//            for (int x = 0; x < Voxels.Size(0,0); x++)
+//            for (int x = 0; x < XSize; x++)
 //            {
-//                for (int y = 1; y < Voxels.Size(0,1); y++)
+//                for (int y = 1; y < YSize; y++)
 //                {
-//                    for (int z = 0; z < Voxels.Size(0,2); z++)
+//                    for (int z = 0; z < ZSize; z++)
 //                    {
 //                        // Basically don't understand any of this!!!
 //
-//                        const PLVoxel& PreviousVoxel = Voxels.Voxels[ThreeDimToOneDim(x, y, z-1, XSize, YSize)];
+//                        const PLVoxel& PreviousVoxel = (*Lattice)[ThreeDimToOneDim(x, y, z-1, XSize, YSize)];
 //
 //                        const double BetaNext = static_cast<double>(PreviousVoxel.Beta);
 //                        const double AbsorptionNext = PreviousVoxel.Absorptivity;
 //                        const double YNext = (1.f - AbsorptionNext) / (1.f + AbsorptionNext);  // What is Y?
 //
-//                        PLVoxel& CurrentVoxel = Voxels.Voxels[ThreeDimToOneDim(x, y, z, XSize, YSize)];
+//                        PLVoxel& CurrentVoxel = (*Lattice)[ThreeDimToOneDim(x, y, z, XSize, YSize)];
 //
 //                        const double BetaThis = static_cast<double>(CurrentVoxel.Beta);
 //                        const double AbsorptionThis = CurrentVoxel.Absorptivity;

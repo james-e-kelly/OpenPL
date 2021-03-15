@@ -440,7 +440,7 @@ PL_RESULT PL_SCENE::Simulate()
     // Yes, we're not multithreaded anymore but I need this to finish
     VoxelThread.join();
     
-    Simulator = std::unique_ptr<class Simulator>(new SimulatorBasic());
+    Simulator = std::unique_ptr<class Simulator>(new SimulatorFDTD());
     
     PL_SIMULATION_SETTINGS Settings;
     Settings.Resolution = Low;
