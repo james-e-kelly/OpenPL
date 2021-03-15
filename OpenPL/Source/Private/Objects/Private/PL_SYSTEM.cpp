@@ -8,8 +8,8 @@
   ==============================================================================
 */
 
-#include "../Public/PL_SYSTEM.h"
-#include "../Public/PL_SCENE.h"
+#include "PL_SYSTEM.h"
+#include "PL_SCENE.h"
 
 PL_SYSTEM::PL_SYSTEM()
 { }

@@ -8,9 +8,9 @@
   ==============================================================================
 */
 
-#include "../Public/OpenPL.h"
-#include "../Private/Objects/Public/PL_SYSTEM.h"
-#include "../Private/Objects/Public/PL_SCENE.h"
+#include "OpenPL.h"
+#include "PL_SYSTEM.h"
+#include "PL_SCENE.h"
 
 /**
  * Testing to try and create the wave equation.

@@ -14,7 +14,7 @@
 
 #pragma once
 
-#include "../Public/OpenPL.h"
+#include "OpenPL.h"
 
 namespace OpenPL
 {

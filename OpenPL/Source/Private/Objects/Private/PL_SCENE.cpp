@@ -8,15 +8,15 @@
   ==============================================================================
 */
 
-#include "../Public/PL_SCENE.h"
-#include "../Public/PL_SYSTEM.h"
+#include "PL_SCENE.h"
+#include "PL_SYSTEM.h"
 #include <igl/opengl/glfw/Viewer.h>
 #include <igl/voxel_grid.h>
 #include <igl/copyleft/cgal/points_inside_component.h>
 #include <sstream>
-#include "../Public/MatPlotPlotter.h"
-#include "../Public/Simulators/SimulatorFDTD.h"
-#include "../Public/Simulators/SimulatorBasic.h"
+#include "MatPlotPlotter.h"
+#include "Simulators/SimulatorFDTD.h"
+#include "Simulators/SimulatorBasic.h"
 #include <boost/timer/timer.hpp>
 
 PL_SCENE::PL_SCENE(PL_SYSTEM* System)

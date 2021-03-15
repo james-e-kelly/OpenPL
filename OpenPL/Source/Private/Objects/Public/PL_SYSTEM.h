@@ -10,8 +10,8 @@
 
 #pragma once
 
-#include "../../../Public/OpenPLCommon.h"
-#include "../../OpenPLCommonPrivate.h"
+#include "OpenPLCommon.h"
+#include "OpenPLCommonPrivate.h"
 #include <forward_list>
 #include <memory>
 

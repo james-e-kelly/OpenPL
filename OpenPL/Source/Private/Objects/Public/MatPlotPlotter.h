@@ -10,7 +10,7 @@
 
 #pragma once
 
-#include "../../OpenPLCommonPrivate.h"
+#include "OpenPLCommonPrivate.h"
 
 class MatPlotPlotter
 {

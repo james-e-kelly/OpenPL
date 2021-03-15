@@ -8,7 +8,7 @@
   ==============================================================================
 */
 
-#include "../../Public/Simulators/SimulatorBasic.h"
+#include "Simulators/SimulatorBasic.h"
 
 void SimulatorBasic::Simulate()
 {

@@ -10,8 +10,8 @@
 
 #pragma once
 
-#include "../../../Public/OpenPLCommon.h"
-#include "../../OpenPLCommonPrivate.h"
+#include "OpenPLCommon.h"
+#include "OpenPLCommonPrivate.h"
 #include <vector>
 #include <boost/thread/thread.hpp>
 #include <boost/thread/scoped_thread.hpp>

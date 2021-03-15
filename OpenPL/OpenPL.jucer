@@ -3,7 +3,7 @@
 <JUCERPROJECT id="PdUFPg" name="OpenPL" projectType="dll" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
               companyName="James Kelly" companyCopyright="Copyright &#169; 2020 James Kelly"
-              cppLanguageStandard="17">
+              cppLanguageStandard="17" headerPath="../../Source/Public&#10;../../Source/Private&#10;../../Source/Private/Objects/Public">
   <MAINGROUP id="Gy2ano" name="OpenPL">
     <GROUP id="{24CA4D11-FC16-F8E8-18CB-7794E87812CC}" name="Source">
       <GROUP id="{10348CF7-CB7B-19A2-B118-8024C6837B9F}" name="ThirdParty">

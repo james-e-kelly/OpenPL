@@ -8,7 +8,7 @@
   ==============================================================================
 */
 
-#include "../Public/MatPlotPlotter.h"
+#include "MatPlotPlotter.h"
 #include <matplot/matplot.h>
 #include <thread>
 #include <chrono>

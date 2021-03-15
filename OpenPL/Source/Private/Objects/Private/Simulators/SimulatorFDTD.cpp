@@ -8,7 +8,7 @@
   ==============================================================================
 */
 
-#include "../../Public/Simulators/SimulatorFDTD.h"
+#include "Simulators/SimulatorFDTD.h"
 
 void SimulatorFDTD::Simulate()
 {

@@ -10,7 +10,7 @@
 
 #pragma once
 
-#include "../Public/OpenPLCommon.h"
+#include "OpenPLCommon.h"
 #include <Eigen/Core>
 #include <Eigen/Geometry>
 

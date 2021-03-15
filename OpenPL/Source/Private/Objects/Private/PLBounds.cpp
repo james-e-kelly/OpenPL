@@ -8,7 +8,7 @@
   ==============================================================================
 */
 
-#include "../Public/PLBounds.h"
+#include "PLBounds.h"
 
 PLBounds::PLBounds(PLVector Min, PLVector Max)
 :   Min(Min),
