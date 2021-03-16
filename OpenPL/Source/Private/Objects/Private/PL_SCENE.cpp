@@ -440,23 +440,23 @@ PL_RESULT PL_SCENE::Simulate()
     // Yes, we're not multithreaded anymore but I need this to finish
     VoxelThread.join();
     
-    Simulator = std::unique_ptr<class Simulator>(new SimulatorFDTD());
+    SimulatorPointer = std::unique_ptr<class Simulator>(new SimulatorFDTD());
     
     PL_SIMULATION_SETTINGS Settings;
     Settings.Resolution = Low;
     Settings.TimeSteps = TimeSteps;
     
-    Simulator->Init(Voxels, Settings);
+    SimulatorPointer->Init(Voxels, Settings);
     
     std::ostringstream Stream;
     Stream << "Simulating Over " << Voxels.Voxels.size() << " Voxels\n";
     {
         boost::timer::auto_cpu_timer SimulationTimer(Stream);
-        Simulator->Simulate();
+        SimulatorPointer->Simulate();
     }
     DebugLog(Stream.str().c_str());
     
-    MatPlotPlotter plotter(Simulator->GetSimulatedLattice(), Voxels.Size(0,0), Voxels.Size(0,1), Voxels.Size(0,2), TimeSteps);
+    MatPlotPlotter plotter(SimulatorPointer->GetSimulatedLattice(), Voxels.Size(0,0), Voxels.Size(0,1), Voxels.Size(0,2), TimeSteps);
     plotter.PlotOneDimensionWaterfall();
     
     return PL_OK;

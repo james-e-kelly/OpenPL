@@ -138,7 +138,7 @@ private:
     int TimeSteps = 100;
     
     /**Pointer to the object that will run our specific simulation. Can be anything from FDTD to rectangular decomposition etc.*/
-    std::unique_ptr<Simulator> Simulator;
+    std::unique_ptr<Simulator> SimulatorPointer;
     
     enum ThreadStatus
     {
