@@ -3,7 +3,8 @@
 <JUCERPROJECT id="PdUFPg" name="OpenPL" projectType="dll" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
               companyName="James Kelly" companyCopyright="Copyright &#169; 2020 James Kelly"
-              cppLanguageStandard="17" headerPath="../../Source/Public&#10;../../Source/Private&#10;../../Source/Private/Objects/Public">
+              cppLanguageStandard="17" headerPath="../../Source/Public&#10;../../Source/Private&#10;../../Source/Private/Objects/Public"
+              defines="JUCE_DLL_BUILD=1">
   <MAINGROUP id="Gy2ano" name="OpenPL">
     <GROUP id="{24CA4D11-FC16-F8E8-18CB-7794E87812CC}" name="Source">
       <GROUP id="{10348CF7-CB7B-19A2-B118-8024C6837B9F}" name="ThirdParty">
@@ -61,12 +62,11 @@
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX" extraDefs="JUCE_DLL_BUILD=1&#10;BUILD_EXPERIMENTAL_OPENGL_BACKEND=ON"
-               externalLibraries="glfw&#10;gmp&#10;mpfr&#10;boost_thread-mt&#10;boost_timer&#10;matplot">
+    <XCODE_MAC targetFolder="Builds/MacOSX" externalLibraries="glfw&#10;gmp&#10;mpfr&#10;boost_thread-mt&#10;boost_timer&#10;matplot">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" targetName="OpenPL" headerPath="/usr/local/include&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/include"
+        <CONFIGURATION isDebug="1" name="Debug" targetName="OpenPL" headerPath="/usr/local/include&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/source"
                        libraryPath="/usr/local/lib" osxCompatibility="10.15 SDK"/>
-        <CONFIGURATION isDebug="0" name="Release" targetName="OpenPL" headerPath="/usr/local/include&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/include"
+        <CONFIGURATION isDebug="0" name="Release" targetName="OpenPL" headerPath="/usr/local/include&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/source"
                        libraryPath="/usr/local/lib" osxCompatibility="10.15 SDK"/>
       </CONFIGURATIONS>
       <MODULEPATHS>

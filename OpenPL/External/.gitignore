@@ -1,0 +1,3 @@
+# Ignore external folders because they will be cloned by the setup script
+/libigl
+/matplotplusplus
