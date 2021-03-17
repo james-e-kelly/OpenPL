@@ -108,6 +108,8 @@ if [ "$(uname)" = "Darwin" ]; then
     brew install mpfr
 
     brew install boost
+    
+    brew install cgal
 
     brew install matplotplusplus
     
