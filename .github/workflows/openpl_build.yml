@@ -44,4 +44,4 @@ jobs:
         run: ./OpenPL/Setup.sh
  
       - name: Build with make
-        run: make -C OpenPL/Builds/LinuxMakeFile/
+        run: make -C OpenPL/Builds/LinuxMakefile/
