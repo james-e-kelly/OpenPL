@@ -30,6 +30,9 @@ jobs:
         
       - name: Check folder
         run: pwd
+        
+      - name: List files
+        run: ls
       
       - name: Run Setup
         run: ./Setup.sh
