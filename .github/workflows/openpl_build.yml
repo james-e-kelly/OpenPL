@@ -25,20 +25,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
-      - name: Move to Root OpenPL folder
-        run: cd OpenPL
-        
-      - name: Move to OpenPL folder
-        run: cd OpenPL
-        
-      - name: Check folder
-        run: pwd
-        
-      - name: List files
-        run: ls
-      
       - name: Run Setup
-        run: ./Setup.sh
+        run: ./OpenPL/Setup.sh
  
       - name: Build with xcodebuild
-        run: xcodebuild -project Builds/MacOSX/OpenPL.xcodeproj
+        run: xcodebuild -project OpenPL/Builds/MacOSX/OpenPL.xcodeproj
