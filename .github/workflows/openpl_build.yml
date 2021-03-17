@@ -25,6 +25,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
+      - name: Move to Root OpenPL folder
+        run: cd OpenPL
+        
       - name: Move to OpenPL folder
         run: cd OpenPL
         
