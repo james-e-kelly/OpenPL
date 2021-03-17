@@ -62,4 +62,3 @@ extras/Projucer/JUCECompileEngine.dylib
 
 .idea
 **/cmake-build*
-/Builds
