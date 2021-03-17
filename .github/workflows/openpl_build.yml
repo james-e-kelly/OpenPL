@@ -27,6 +27,9 @@ jobs:
       
       - name: Move to OpenPL folder
         run: cd OpenPL
+        
+      - name: Check folder
+        run: pwd
       
       - name: Run Setup
         run: ./Setup.sh
