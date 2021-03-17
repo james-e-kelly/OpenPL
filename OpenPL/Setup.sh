@@ -18,6 +18,25 @@ echo
 # We're not cloning the projects to make commits so this is fine
 git config --global advice.detachedHead false
 
+# If JUCE isn't downloaded, clone
+if [ ! -d "External/JUCE/" ]
+then
+    echo "${RED}Downloading JUCE${NOCOLOR}"
+    echo
+
+    # Clone into External/
+    cd External/
+    mkdir JUCE
+    # Need 2.3.0 because future versions of igl are having major revisions
+    git clone https://github.com/juce-framework/JUCE.git --branch 6.0.7 --depth 1 JUCE
+    
+    cd ../
+    
+else
+    echo "${RED}JUCE is installed${NOCOLOR}"
+    echo
+fi
+
 # If libigl isn't downloaded, clone
 if [ ! -d "External/libigl/" ]
 then

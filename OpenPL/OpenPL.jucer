@@ -88,12 +88,12 @@
                        headerPath="/usr/local/include&#10;/usr/include&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/source"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
-        <MODULEPATH id="juce_gui_extra"/>
-        <MODULEPATH id="juce_gui_basics"/>
-        <MODULEPATH id="juce_graphics"/>
-        <MODULEPATH id="juce_events"/>
-        <MODULEPATH id="juce_data_structures"/>
-        <MODULEPATH id="juce_core"/>
+        <MODULEPATH id="juce_gui_extra" path="External/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="External/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="External/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="External/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="External/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="External/JUCE/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
     <VS2019 targetFolder="Builds/VisualStudio2019" externalLibraries="glfw&#10;gmp&#10;mpfr&#10;boost_thread-mt&#10;boost_timer&#10;matplot">
@@ -102,22 +102,22 @@
         <CONFIGURATION isDebug="0" name="Release"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
-        <MODULEPATH id="juce_gui_extra"/>
-        <MODULEPATH id="juce_gui_basics"/>
-        <MODULEPATH id="juce_graphics"/>
-        <MODULEPATH id="juce_events"/>
-        <MODULEPATH id="juce_data_structures"/>
-        <MODULEPATH id="juce_core"/>
+        <MODULEPATH id="juce_gui_extra" path="External/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="External/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="External/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="External/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="External/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="External/JUCE/modules"/>
       </MODULEPATHS>
     </VS2019>
   </EXPORTFORMATS>
   <MODULES>
-    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
   </MODULES>
   <LIVE_SETTINGS>
     <OSX/>
