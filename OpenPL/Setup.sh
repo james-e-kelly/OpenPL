@@ -7,22 +7,22 @@
 NOCOLOR='\033[0m'
 RED='\033[0;31m'
 BLUE='\033[0;34m'
+BOLD='\033[1m'
 
 # Move into directory we were invoked in
 cd "`dirname "$0"`"
 
-echo "${RED}Generating OpenPL${NOCOLOR}"
-echo
+echo -e "${RED}==> ${NOCOLOR}${BOLD}Installing OpenPL${NOCOLOR}"
 
 # Stop advice for detatched heads
 # We're not cloning the projects to make commits so this is fine
 git config --global advice.detachedHead false
 
+echo -e "${RED}==>${NOCOLOR} Installing JUCE"
+
 # If JUCE isn't downloaded, clone
 if [ ! -d "External/JUCE/" ]
 then
-    echo "${RED}Downloading JUCE${NOCOLOR}"
-    echo
 
     # Clone into External/
     cd External/
@@ -33,15 +33,14 @@ then
     cd ../
     
 else
-    echo "${RED}JUCE is installed${NOCOLOR}"
-    echo
+    echo -e "JUCE is already installed"
 fi
+
+echo -e "${RED}==>${NOCOLOR} Installing lbigl"
 
 # If libigl isn't downloaded, clone
 if [ ! -d "External/libigl/" ]
 then
-    echo "${RED}Downloading libigl${NOCOLOR}"
-    echo
 
     # Clone into External/
     cd External/
@@ -53,50 +52,45 @@ then
     mkdir external
     cd external
 
-    echo "${RED}Downloading libigl dependancies${NOCOLOR}"
-    echo
+    echo -e "${RED}==>${NOCOLOR} Installing lbigl dependencies"
     mkdir eigen
     mkdir glad
     mkdir glfw
 
-    echo "${BLUE}Downloading eigen${NOCOLOR}"
+    echo -e "${BLUE}==>${NOCOLOR} Installing eigen"
     git clone https://github.com/libigl/eigen.git --depth 1 eigen
     
-    echo "${BLUE}Downloading glad${NOCOLOR}"
+    echo -e "${BLUE}==>${NOCOLOR} Installing glad"
     git clone https://github.com/libigl/libigl-glad.git --depth 1 glad
     
-    echo "${BLUE}Downloading glfw${NOCOLOR}"
+    echo -e "${BLUE}==>${NOCOLOR} Installing glfw"
     git clone https://github.com/glfw/glfw.git --depth 1 glfw
 
     # Go back up a folder for the following commands to work
     cd ../../../
     
 else
-    echo "${RED}libigl is installed${NOCOLOR}"
-    echo
+    echo -e "libigl is already installed"
 fi
 
 if [ "$(uname)" = "Darwin" ]; then
-    echo "${RED}Installing packages for macOS${NOCOLOR}"
-    echo "${RED}Checking brew package manager${NOCOLOR}"
-    echo
+    echo -e "${RED}==>${NOCOLOR} Installing macOS packages"
+    echo -e "${RED}==>${NOCOLOR} Checking brew exists"
 
     which -s brew
     if [[ $? != 0 ]] ; then
 
-        echo "${BLUE}Brew is not installed. Without it, you will have to manually install all library dependancies.${NOCOLOR}"
+        echo
+        echo -e "${BLUE}Brew is not installed. Without it, you will have to manually install all library dependancies.${NOCOLOR}"
         echo
         
         read -p "Do you want to install brew? (y/n) " -n 1 -r
         echo
         if [[ $REPLY =~ ^[Yy]$ ]]
             then
-                echo "${RED}Installing brew${NOCOLOR}"
-                echo
                 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
             else
-                echo "${RED}Exiting. Please check the projucer file for all libraries required${NOCOLOR}"
-                echo
+                echo -e "${RED}==>${NOCOLOR} Exiting. Please check the projucer file for all libraries required"
                 exit 1
         fi
     fi
@@ -114,8 +108,7 @@ if [ "$(uname)" = "Darwin" ]; then
     brew install matplotplusplus
     
 else
-    echo "Installing packages for Linux"
-    echo
+    echo -e "${RED}==>${NOCOLOR} Installing Linux packages"
     
     # JUCE Dependencies
     # https://github.com/juce-framework/JUCE/blob/develop/docs/Linux%20Dependencies.md
@@ -177,6 +170,8 @@ else
     # On Linux, it's a bit of a pain to get matplotplusplus installed
     # Because of this, it's easier to clone the repo and update the header search paths
     
+    echo -e "${RED}==>${NOCOLOR} Installing matplotplusplus and compiling from source"
+    
     if [ ! -d "External/matplotplusplus/" ] ; then
     
     cd External
@@ -191,12 +186,9 @@ else
     sudo cmake --install .
     
     else
-    
-    	echo "matplotplusplus installed"
-    
+    	echo -e "matplotplusplus already installed"
     fi
 
 fi
 
-echo
-echo "${RED}Done!${NOCOLOR}"
+echo -e "${RED}==>${NOCOLOR} Done!"
