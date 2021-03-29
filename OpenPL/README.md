@@ -2,7 +2,7 @@
 
 OpenPL is an open source project created for a dissertation project at The University of Portsmouth.
 
-The library connects to games engines like Unreal and Unity to provide wave simulation tools.
+The library connects to game engines like Unreal and Unity to provide audio simulation tools.
 
 ## Installation
 
@@ -10,11 +10,15 @@ This library requires [JUCE](https://juce.com) and [git](https://git-scm.com).
 
 ### Windows
 
-Currently, there is no installation support for Windows.
+Make sure `git` and `7zip` are installed. Then run `Setup.bat`.
 
 ### Mac
 
 External libraries can be downloaded by running `Setup.sh`.
+
+If `brew` is not installed, the script will prompt you to install it automatically.
+
+Once installed, `brew` will install all dependencies.
 
 ### Linux
 

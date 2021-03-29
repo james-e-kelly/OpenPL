@@ -8,7 +8,7 @@
   ==============================================================================
 */
 
-#include "../../Public/OpenPL.hpp"
+#include "OpenPL.hpp"
 
 namespace OpenPL
 {

@@ -26,7 +26,7 @@ namespace OpenPL
      *
      * If any OpenPL object needs to be created, it should be made through the PLSystem.
      */
-    class JUCE_API PLSystem
+    class PLSystem
     {
     private:
         
@@ -38,17 +38,17 @@ namespace OpenPL
         /**
          * Releases and destroys this object.
          */
-        JUCE_PUBLIC_FUNCTION PL_RESULT Release();
+        PL_RESULT Release();
         
         /**
          * Creates a new scene object.
          *
          * @param OutScene The newly created scene object.
          */
-        JUCE_PUBLIC_FUNCTION PL_RESULT CreateScene(PLScene** OutScene);
+        PL_RESULT CreateScene(PLScene** OutScene);
     };
 
-    class JUCE_API PLScene
+    class PLScene
     {
     private:
         
@@ -60,6 +60,6 @@ namespace OpenPL
         /**
          * Releases and destroys this scene.
          */
-        JUCE_PUBLIC_FUNCTION PL_RESULT Release();
+        PL_RESULT Release();
     };
 }
