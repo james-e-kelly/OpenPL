@@ -60,7 +60,7 @@ jobs:
         run: ./OpenPL/Setup.bat
         
       - name: List Externals
-        run: ls -d OpenPL/External/
+        run: ls -d /OpenPL/External/
         
       - name: setup-msbuild
         uses: microsoft/setup-msbuild@v1
