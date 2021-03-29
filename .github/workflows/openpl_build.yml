@@ -47,3 +47,21 @@ jobs:
  
       - name: Build with make
         run: make -C OpenPL/Builds/LinuxMakefile/
+  build_windows:
+    runs-on: windows-latest
+    if: "contains(github.event.head_commit.message, '[B]')"
+    
+        # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      
+      - name: Run Setup
+        run: ./OpenPL/Setup.bat
+        
+      - name: setup-msbuild
+        uses: microsoft/setup-msbuild@v1
+ 
+      - name: Build with visual studio build
+        run: msbuild OpenPL/Builds/VisualStudio2019/OpenPL.sln
+    
