@@ -38,6 +38,8 @@ if exist libigl (
     
     	ECHO Installing glfw
     	git clone https://github.com/glfw/glfw.git --depth 1 glfw
+
+	cd ..\..\
 )
 
 if exist "C:\Program Files\matplotplusplus 1.0.1" (
