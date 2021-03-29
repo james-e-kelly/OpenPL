@@ -25,7 +25,7 @@ extern "C"
      *
      * @param Callback Pointer to a function with the PL_Debug_Callback signature.
      */
-    PL_RESULT PL_Debug_Initialize (PL_Debug_Callback Callback);
+    PL_RESULT JUCE_PUBLIC_FUNCTION PL_Debug_Initialize (PL_Debug_Callback Callback);
     
     /**
      * Creates a system object.
@@ -34,14 +34,14 @@ extern "C"
      *
      * @param OutSystem The created system object.
      */
-     PL_RESULT PL_System_Create (PL_SYSTEM** OutSystem);
+     PL_RESULT JUCE_PUBLIC_FUNCTION PL_System_Create (PL_SYSTEM** OutSystem);
 
     /**
      * Destorys a system object and releases its resources.
      *
      * @param System System to destroy.
      */
-     PL_RESULT PL_System_Release (PL_SYSTEM* System);
+     PL_RESULT JUCE_PUBLIC_FUNCTION PL_System_Release (PL_SYSTEM* System);
 
     /**
      * Creates a new scene object.
@@ -55,14 +55,14 @@ extern "C"
      * @param System System object to create the scene.
      * @param OutScene Created scene.
      */
-     PL_RESULT PL_System_CreateScene(PL_SYSTEM* System, PL_SCENE** OutScene);
+     PL_RESULT JUCE_PUBLIC_FUNCTION PL_System_CreateScene(PL_SYSTEM* System, PL_SCENE** OutScene);
 
     /**
      * Releases and destroys a scene object.
      *
      * @param Scene Scene to destroy.
      */
-     PL_RESULT PL_Scene_Release(PL_SCENE* Scene);
+     PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_Release(PL_SCENE* Scene);
     
     // TODO: AddMesh needs to take the absoption value of the mesh.
     // Can we get away with one absorption per mesh?
@@ -81,7 +81,7 @@ extern "C"
      * @param IndicesLength Length of the indicies array.
      * @param OutIndex If successful, the index the mesh is stored at for later deletion.
      */
-     PL_RESULT PL_Scene_AddMesh(PL_SCENE* Scene, PLVector* WorldPosition, PLQuaternion* WorldRotation, PLVector* WorldScale, PLVector* Vertices, int VerticesLength, int* Indices, int IndicesLength, int* OutIndex);
+     PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_AddMesh(PL_SCENE* Scene, PLVector* WorldPosition, PLQuaternion* WorldRotation, PLVector* WorldScale, PLVector* Vertices, int VerticesLength, int* Indices, int IndicesLength, int* OutIndex);
     
     /**
      * Removes a mesh from the scene.
@@ -90,7 +90,7 @@ extern "C"
      * @param Scene Scene to remove the mesh from.
      * @param IndexToRemove Index of the mesh to remove.
      */
-     PL_RESULT PL_Scene_RemoveMesh(PL_SCENE* Scene, int IndexToRemove);
+     PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_RemoveMesh(PL_SCENE* Scene, int IndexToRemove);
     
     /**
      * Takes all meshes within the scene and turns them into one voxel lattice, ready to simulate over.
@@ -101,7 +101,7 @@ extern "C"
      * @param CenterPosition World center position of the lattice.
      * @param Size Total size of the lattice.
      */
-     PL_RESULT PL_Scene_Voxelise(PL_SCENE* Scene, PLVector* CenterPosition, PLVector* Size, float VoxelSize);
+     PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_Voxelise(PL_SCENE* Scene, PLVector* CenterPosition, PLVector* Size, float VoxelSize);
     
     /**
      * Adds a listener location to the scene.
@@ -113,7 +113,7 @@ extern "C"
      * @param OutIndex Index of the listener in the array.
      * @see PL_Scene_RemoveListenerLocation
      */
-     PL_RESULT PL_Scene_AddListenerLocation(PL_SCENE* Scene, PLVector* Position, int* OutIndex);
+     PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_AddListenerLocation(PL_SCENE* Scene, PLVector* Position, int* OutIndex);
     
     /**
      * Removes a listener from the scene.
@@ -122,7 +122,7 @@ extern "C"
      * @param IndexToRemove Listener index to remove.
      * @see PL_Scene_AddListenerLocation
      */
-     PL_RESULT PL_Scene_RemoveListenerLocation(PL_SCENE* Scene, int IndexToRemove);
+     PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_RemoveListenerLocation(PL_SCENE* Scene, int IndexToRemove);
     
     /**
      * Adds a source location to the scene.
@@ -135,7 +135,7 @@ extern "C"
      * @param OutIndex Index of the source in the array.
      * @see PL_Scene_RemoveSourceLocation
      */
-     PL_RESULT PL_Scene_AddSourceLocation(PL_SCENE* Scene, PLVector* Position, int* OutIndex);
+     PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_AddSourceLocation(PL_SCENE* Scene, PLVector* Position, int* OutIndex);
     
     /**
      * Removes a source from the scene.
@@ -144,14 +144,14 @@ extern "C"
      * @param IndexToRemove Source index to remove.
      * @see PL_Scene_AddLSourceLocation
      */
-     PL_RESULT PL_Scene_RemoveSourceLocation(PL_SCENE* Scene, int IndexToRemove);
+     PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_RemoveSourceLocation(PL_SCENE* Scene, int IndexToRemove);
 
     /**
      * Using the previously passed geometry, emitter locations and listener locations, simulate over the scene and store the resulting simulation data to disk.
      *
      * @param Scene Scene to run the simulation over.
      */
-     PL_RESULT PL_Scene_Simulate(PL_SCENE* Scene);
+     PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_Simulate(PL_SCENE* Scene);
     
     /**
      * Opens a new OpenGL window and displays the meshes contained within the scene.
@@ -161,13 +161,13 @@ extern "C"
      *
      * @param Scene Scene to render.
      */
-     PL_RESULT PL_Scene_Debug(PL_SCENE* Scene);
+     PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_Debug(PL_SCENE* Scene);
     
-     PL_RESULT PL_Scene_GetVoxelsCount(PL_SCENE* Scene, int* OutVoxelCount);
+     PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_GetVoxelsCount(PL_SCENE* Scene, int* OutVoxelCount);
     
-     PL_RESULT PL_Scene_GetVoxelLocation(PL_SCENE* Scene, PLVector* OutVoxelLocation, int Index);
+     PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_GetVoxelLocation(PL_SCENE* Scene, PLVector* OutVoxelLocation, int Index);
     
-     PL_RESULT PL_Scene_GetVoxelAbsorpivity(PL_SCENE* Scene, float* OutAbsorpivity, int Index);
+     PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_GetVoxelAbsorpivity(PL_SCENE* Scene, float* OutAbsorpivity, int Index);
     
 #ifdef __cplusplus
 }

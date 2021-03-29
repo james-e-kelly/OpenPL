@@ -18,7 +18,7 @@ typedef struct PL_SCENE     PL_SCENE;
 /**
  * Defines possible results from OpenPL API functions
  */
-enum PL_RESULT
+enum JUCE_API PL_RESULT
 {
     /** Method executed successfully*/
     PL_OK,
@@ -33,7 +33,7 @@ enum PL_RESULT
 /**
  * Defines what level to log a debug message at.
  */
-enum PL_DEBUG_LEVEL
+enum JUCE_API PL_DEBUG_LEVEL
 {
     PL_DEBUG_LEVEL_LOG,
     PL_DEBUG_LEVEL_WARN,
