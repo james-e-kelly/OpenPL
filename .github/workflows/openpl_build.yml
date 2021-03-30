@@ -32,19 +32,13 @@ jobs:
       - name: Build with xcodebuild
         run: xcodebuild -project OpenPL/Builds/MacOSX/OpenPL.xcodeproj
         
-      - name: Download zip
-        run: brew install zip
-        
-      - name: Zip build
-        run: zip -j OpenPL/Builds/MacOSX/build/Debug/OpenPL.zip OpenPL/Builds/MacOSX/build/Debug/OpenPL.dylib
-        
       - name: Upload Mac Build Artifact
         uses: actions/upload-artifact@v2.2.2
         with:
           # Artifact name
           name: OpenPL.dylib
           # A file, directory or wildcard pattern that describes what to upload
-          path: OpenPL/Builds/MacOSX/build/Debug/OpenPL.zip
+          path: OpenPL/Builds/MacOSX/build/Debug/OpenPL.dylib
         
   build_linux:
     # The type of runner that the job will run on
@@ -62,16 +56,13 @@ jobs:
       - name: Build with make
         run: make -C OpenPL/Builds/LinuxMakefile/
         
-      - name: Zip build
-        run: zip -j OpenPL/Builds/LinuxMakefile/build/OpenPL.zip OpenPL/Builds/LinuxMakefile/build/libOpenPL.so
-        
       - name: Upload Linux Build Artifact
         uses: actions/upload-artifact@v2.2.2
         with:
           # Artifact name
           name: OpenPL.so
           # A file, directory or wildcard pattern that describes what to upload
-          path: OpenPL/Builds/LinuxMakefile/build/OpenPL.zip
+          path: OpenPL/Builds/LinuxMakefile/build/libOpenPL.so
         
   build_windows:
     runs-on: windows-latest
@@ -100,13 +91,10 @@ jobs:
       - name: Build with visual studio build
         run: msbuild OpenPL/Builds/VisualStudio2019/OpenPL.sln
         
-      - name: Zip build
-        run: 7z a 'OpenPL\Builds\VisualStudio2019\x64\Release\Dynamic Library\OpenPL.7z' 'OpenPL\Builds\VisualStudio2019\x64\Release\Dynamic Library\OpenPL.dll'
-        
       - name: Upload Windows Build Artifact
         uses: actions/upload-artifact@v2.2.2
         with:
           # Artifact name
           name: OpenPL.dll
           # A file, directory or wildcard pattern that describes what to upload
-          path: 'OpenPL\Builds\VisualStudio2019\x64\Release\Dynamic Library\OpenPL.7z'
+          path: 'OpenPL\Builds\VisualStudio2019\x64\Release\Dynamic Library\OpenPL.dll'
