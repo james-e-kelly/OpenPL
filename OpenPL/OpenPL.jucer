@@ -99,8 +99,8 @@
     <VS2019 targetFolder="Builds/VisualStudio2019" externalLibraries="gmp.lib&#10;mpfr.lib&#10;boost_thread-vc140-mt.lib&#10;boost_timer-vc140-mt.lib&#10;glfw3dll.lib&#10;nodesoup.lib&#10;matplot.lib"
             extraCompilerFlags="/bigobj" userNotes="There is no Debug configuration because some libraries don't have a debug version - therefore throwing errors">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="0" name="Release" libraryPath="C:\Program Files\matplotplusplus 1.0.1\lib&#10;C:\Program Files\matplotplusplus 1.0.1\lib\Matplot++&#10;..\..\External\vcpkg\installed\x64-windows\lib"
-                       headerPath="../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;C:\Program Files\matplotplusplus 1.0.1\include&#10;../../External/vcpkg/installed/x64-windows/include"/>
+        <CONFIGURATION isDebug="0" name="Release" libraryPath="../../External/matplotplusplus/lib&#10;..\..\External\vcpkg\installed\x64-windows\lib"
+                       headerPath="../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/include&#10;../../External/vcpkg/installed/x64-windows/include"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_gui_extra" path="External/JUCE/modules"/>
