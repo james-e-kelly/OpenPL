@@ -58,7 +58,7 @@ if exist vcpkg (
 	mkdir vcpkg
 	git clone https://github.com/microsoft/vcpkg vcpkg
 	cd vcpkg
-	.\bootstrap-vcpkg.bat
+	call bootstrap-vcpkg.bat
 
 	cd ..
 )
