@@ -82,6 +82,15 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
+      # Cache the vcpkg folder as it compiles all code from scratch everytime
+      - name: Cache vcpkg
+        uses: actions/cache@v2.1.4
+        with:
+          # A list of files, directories, and wildcard patterns to cache and restore
+          path: OpenPL/External/vcpkg
+          # Redo the cahce everytime we change the Setup.bat files
+          key: ${{ hashFiles('OpenPL/Setup.bat') }}
+      
       - name: Run Setup
         run: ./OpenPL/Setup.bat
         
