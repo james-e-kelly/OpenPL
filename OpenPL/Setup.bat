@@ -43,12 +43,11 @@ if exist libigl (
 	cd ..\..\
 )
 
-if exist "C:\Program Files\matplotplusplus 1.0.1" (
+if exist matplotplusplus (
 	ECHO matplot++ installed
 ) else (
-	curl -o matplotplusplus.zip -L https://github.com/alandefreitas/matplotplusplus/releases/download/v1.0.1/Binary.Package.Windows.x64.zip
+	curl -o matplotplusplus.zip http://cdn.jameskellyportfolio.com/matplotplusplus.zip
 	"C:\Program Files\7-Zip\7z.exe" x matplotplusplus.zip
-	START matplotplusplus-1.0.1-win64
 	DEL matplotplusplus.zip
 )
 
