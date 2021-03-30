@@ -59,15 +59,6 @@ jobs:
       - name: Run Setup
         run: ./OpenPL/Setup.bat
         
-      - name: List Root
-        run: ls
-        
-      - name: List OpenPL
-        run: ls OpenPL
-        
-      - name: List Externals
-        run: ls OpenPL/External
-        
       - name: setup-msbuild
         uses: microsoft/setup-msbuild@v1
  
