@@ -1,4 +1,5 @@
 @ECHO OFF
+cd %~dp0
 ECHO Installing OpenPL
 
 cd External
