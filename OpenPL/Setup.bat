@@ -63,7 +63,11 @@ if exist vcpkg (
 	cd ..
 )
 
+ECHO Using vcpkg to install dependencies
+
 if exist vcpkg (
+
+	ECHO Downloading dependencies
 	cd vcpkg
 
 	.\vcpkg.exe install yasm-tool:x86-windows
@@ -74,6 +78,7 @@ if exist vcpkg (
 	.\vcpkg integrate install
 	
 	cd ..
+	ECHO Done downloading
 ) else (
 	ECHO Error! Can't find vcpkg
 )
