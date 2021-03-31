@@ -83,9 +83,9 @@
                 extraDefs="GLFW_INCLUDE_NONE">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" libraryPath="/usr/local/lib&#10;/usr/lib"
-                       headerPath="/usr/local/include&#10;/usr/include&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/source"/>
+                       headerPath="/usr/local/include&#10;/usr/include&#10;/usr/include/freetype2&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/source"/>
         <CONFIGURATION isDebug="0" name="Release" libraryPath="/usr/local/lib&#10;/usr/lib"
-                       headerPath="/usr/local/include&#10;/usr/include&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/source"/>
+                       headerPath="/usr/local/include&#10;/usr/include&#10;/usr/include/freetype2&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/source"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_gui_extra" path="External/JUCE/modules"/>
