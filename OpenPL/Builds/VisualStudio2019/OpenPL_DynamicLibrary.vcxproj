@@ -113,8 +113,12 @@
     <ClCompile Include="..\..\External\matplotplusplus\source\matplot\backend\backend_interface.cpp"/>
     <ClCompile Include="..\..\External\matplotplusplus\source\matplot\backend\backend_registry.cpp"/>
     <ClCompile Include="..\..\External\matplotplusplus\source\matplot\backend\gnuplot.cpp"/>
-    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\backend\opengl.cpp"/>
-    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\backend\opengl_embed.cpp"/>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\backend\opengl.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\backend\opengl_embed.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\External\matplotplusplus\source\matplot\core\axes_object.cpp"/>
     <ClCompile Include="..\..\External\matplotplusplus\source\matplot\core\axes_type.cpp"/>
     <ClCompile Include="..\..\External\matplotplusplus\source\matplot\core\axis_type.cpp"/>

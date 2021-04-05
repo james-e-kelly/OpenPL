@@ -88,9 +88,9 @@
                       file="External/matplotplusplus/source/matplot/backend/backend_registry.h"/>
                 <FILE id="QOdw2e" name="gnuplot.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/backend/gnuplot.cpp"/>
                 <FILE id="JQfkTq" name="gnuplot.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/backend/gnuplot.h"/>
-                <FILE id="hw2FXx" name="opengl.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/backend/opengl.cpp"/>
+                <FILE id="hw2FXx" name="opengl.cpp" compile="0" resource="0" file="External/matplotplusplus/source/matplot/backend/opengl.cpp"/>
                 <FILE id="CGVi8c" name="opengl.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/backend/opengl.h"/>
-                <FILE id="fMgZxw" name="opengl_embed.cpp" compile="1" resource="0"
+                <FILE id="fMgZxw" name="opengl_embed.cpp" compile="0" resource="0"
                       file="External/matplotplusplus/source/matplot/backend/opengl_embed.cpp"/>
                 <FILE id="lzNA9V" name="opengl_embed.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/backend/opengl_embed.h"/>
               </GROUP>

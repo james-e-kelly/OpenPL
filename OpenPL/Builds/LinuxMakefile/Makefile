@@ -97,8 +97,6 @@ OBJECTS_DYNAMIC_LIBRARY := \
   $(JUCE_OBJDIR)/backend_interface_2d608be4.o \
   $(JUCE_OBJDIR)/backend_registry_1c8a553c.o \
   $(JUCE_OBJDIR)/gnuplot_d13509a5.o \
-  $(JUCE_OBJDIR)/opengl_4c3e13a3.o \
-  $(JUCE_OBJDIR)/opengl_embed_eb095dfd.o \
   $(JUCE_OBJDIR)/axes_object_c073f9c2.o \
   $(JUCE_OBJDIR)/axes_type_3ad9ebbd.o \
   $(JUCE_OBJDIR)/axis_type_8e6cb6c1.o \
@@ -270,16 +268,6 @@ $(JUCE_OBJDIR)/backend_registry_1c8a553c.o: ../../External/matplotplusplus/sourc
 $(JUCE_OBJDIR)/gnuplot_d13509a5.o: ../../External/matplotplusplus/source/matplot/backend/gnuplot.cpp
 	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
 	@echo "Compiling gnuplot.cpp"
-	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_DYNAMIC_LIBRARY) $(JUCE_CFLAGS_DYNAMIC_LIBRARY) -o "$@" -c "$<"
-
-$(JUCE_OBJDIR)/opengl_4c3e13a3.o: ../../External/matplotplusplus/source/matplot/backend/opengl.cpp
-	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
-	@echo "Compiling opengl.cpp"
-	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_DYNAMIC_LIBRARY) $(JUCE_CFLAGS_DYNAMIC_LIBRARY) -o "$@" -c "$<"
-
-$(JUCE_OBJDIR)/opengl_embed_eb095dfd.o: ../../External/matplotplusplus/source/matplot/backend/opengl_embed.cpp
-	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
-	@echo "Compiling opengl_embed.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_DYNAMIC_LIBRARY) $(JUCE_CFLAGS_DYNAMIC_LIBRARY) -o "$@" -c "$<"
 
 $(JUCE_OBJDIR)/axes_object_c073f9c2.o: ../../External/matplotplusplus/source/matplot/core/axes_object.cpp
