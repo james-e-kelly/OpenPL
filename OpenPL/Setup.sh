@@ -95,6 +95,10 @@ if [ "$(uname)" = "Darwin" ]; then
         fi
     fi
     
+    brew update
+    
+    brew upgrade
+    
     brew install glfw
 
     brew install gmp
@@ -109,6 +113,8 @@ if [ "$(uname)" = "Darwin" ]; then
     
 else
     echo -e "${RED}==>${NOCOLOR} Installing Linux packages"
+    
+    sudo apt-get update
     
     # JUCE Dependencies
     # https://github.com/juce-framework/JUCE/blob/develop/docs/Linux%20Dependencies.md
