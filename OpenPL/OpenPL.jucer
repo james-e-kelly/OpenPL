@@ -221,13 +221,13 @@
         <MODULEPATH id="juce_graphics" path="External/JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
-    <LINUX_MAKE targetFolder="Builds/LinuxMakefile" externalLibraries="glfw&#10;gmp&#10;mpfr&#10;boost_thread&#10;boost_timer&#10;matplot"
+    <LINUX_MAKE targetFolder="Builds/LinuxMakefile" externalLibraries="glfw&#10;gmp&#10;mpfr&#10;boost_thread&#10;boost_timer&#10;matplot&#10;x11"
                 extraDefs="GLFW_INCLUDE_NONE">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" libraryPath="/usr/local/lib&#10;/usr/lib"
-                       headerPath="/usr/local/include&#10;/usr/include&#10;/usr/include/freetype2&#10;/usr/include/gtk-3.0&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/source"/>
+                       headerPath="/usr/local/include&#10;/usr/include&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/source&#10;../../External/matplotplusplus/source/3rd_party/nodesoup/include&#10;../../External/matplotplusplus/source/3rd_party/cimg"/>
         <CONFIGURATION isDebug="0" name="Release" libraryPath="/usr/local/lib&#10;/usr/lib"
-                       headerPath="/usr/local/include&#10;/usr/include&#10;/usr/include/freetype2&#10;/usr/include/gtk-3.0&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/source"/>
+                       headerPath="/usr/local/include&#10;/usr/include&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/source&#10;../../External/matplotplusplus/source/3rd_party/nodesoup/include&#10;../../External/matplotplusplus/source/3rd_party/cimg"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_gui_extra" path="External/JUCE/modules"/>
