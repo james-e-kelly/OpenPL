@@ -50,6 +50,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
+      - name: Update apt
+        run: sudo apt-get update
+      
       - name: Run Setup
         run: ./OpenPL/Setup.sh
  
