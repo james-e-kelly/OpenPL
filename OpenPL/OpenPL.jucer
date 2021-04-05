@@ -239,10 +239,12 @@
       </MODULEPATHS>
     </LINUX_MAKE>
     <VS2019 targetFolder="Builds/VisualStudio2019" externalLibraries="gmp.lib&#10;mpfr.lib&#10;boost_thread-vc140-mt.lib&#10;boost_timer-vc140-mt.lib&#10;glfw3dll.lib"
-            extraCompilerFlags="/bigobj" userNotes="There is no Debug configuration because some libraries don't have a debug version - therefore throwing errors">
+            extraCompilerFlags="/bigobj" userNotes="There is no Debug configuration because some libraries don't have a debug version - therefore throwing errors"
+            extraDefs="NOMINMAX=1&#10;_USE_MATH_DEFINES">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="0" name="Release" libraryPath="..\..\External\vcpkg\installed\x64-windows\lib"
-                       headerPath="../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/source&#10;../../External/matplotplusplus/source/3rd_party/nodesoup/include&#10;../../External/matplotplusplus/source/3rd_party/cimg&#10;../../External/vcpkg/installed/x64-windows/include"/>
+                       headerPath="../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/source&#10;../../External/matplotplusplus/source/3rd_party/nodesoup/include&#10;../../External/matplotplusplus/source/3rd_party/cimg&#10;../../External/vcpkg/installed/x64-windows/include"
+                       useRuntimeLibDLL="0"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_gui_extra" path="External/JUCE/modules"/>
