@@ -43,12 +43,13 @@ if exist libigl (
 	cd ..\..\
 )
 
+ECHO Installing matplotplusplus
+
 if exist matplotplusplus (
 	ECHO matplot++ installed
 ) else (
-	curl -o matplotplusplus.zip http://cdn.jameskellyportfolio.com/matplotplusplus.zip
-	"C:\Program Files\7-Zip\7z.exe" x matplotplusplus.zip
-	DEL matplotplusplus.zip
+	mkdir matplotplusplus
+	git clone https://github.com/alandefreitas/matplotplusplus.git --branch v1.0.1 --depth 1 matplotplusplus
 )
 
 if exist vcpkg (
