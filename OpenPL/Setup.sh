@@ -73,6 +73,23 @@ else
     echo -e "libigl is already installed"
 fi
 
+echo -e "${RED}==>${NOCOLOR} Installing matplot++"
+
+# If libigl isn't downloaded, clone
+if [ ! -d "External/matplotplusplus/" ]
+then
+
+    # Clone into External/
+    cd External/
+    mkdir matplotplusplus
+    git clone https://github.com/alandefreitas/matplotplusplus.git --branch v1.0.1 --depth 1 matplotplusplus
+    
+    cd ../
+    
+else
+    echo -e "matplot++ is already installed"
+fi
+
 if [ "$(uname)" = "Darwin" ]; then
     echo -e "${RED}==>${NOCOLOR} Installing macOS packages"
     echo -e "${RED}==>${NOCOLOR} Checking brew exists"
@@ -108,8 +125,8 @@ if [ "$(uname)" = "Darwin" ]; then
     brew install boost
     
     brew install cgal
-
-    brew install matplotplusplus
+    
+    brew install libx11
     
 else
     echo -e "${RED}==>${NOCOLOR} Installing Linux packages"
@@ -172,29 +189,6 @@ else
     sudo apt-get -y install gnuplot
     
     sudo apt-get -y install cmake
-    
-    # On Linux, it's a bit of a pain to get matplotplusplus installed
-    # Because of this, it's easier to clone the repo and update the header search paths
-    
-    echo -e "${RED}==>${NOCOLOR} Installing matplotplusplus and compiling from source"
-    
-    if [ ! -d "External/matplotplusplus/" ] ; then
-    
-    cd External
-    mkdir matplotplusplus
-    git clone https://github.com/alandefreitas/matplotplusplus.git --branch v1.0.1 --depth 1 matplotplusplus
-    
-    cd matplotplusplus
-    mkdir build
-    cd build
-    cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_CXX_FLAGS="-O2" -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF
-    sudo cmake --build . --parallel 2 --config Release
-    sudo cmake --install .
-    
-    else
-    	echo -e "matplotplusplus already installed"
-    fi
-
 fi
 
 echo -e "${RED}==>${NOCOLOR} Done!"

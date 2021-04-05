@@ -37,6 +37,178 @@
 			isa = PBXBuildFile;
 			fileRef = F64C6713A4420824D4123860;
 		};
+		B16845179719A02E762DE4C8 = {
+			isa = PBXBuildFile;
+			fileRef = 0A35E0540A8B04DC2F2F8C2E;
+		};
+		F75BCC42F28B07EF37C97BC1 = {
+			isa = PBXBuildFile;
+			fileRef = 5D29D397E87ABDFA17CD84DD;
+		};
+		CA97B7550931680761E1E169 = {
+			isa = PBXBuildFile;
+			fileRef = DC9F170DC96C16862BE4C7E8;
+		};
+		CBD76A7D849072818F40CDFF = {
+			isa = PBXBuildFile;
+			fileRef = 5836E0ABBE001F1360C55B60;
+		};
+		8B31871A99E5967761F29008 = {
+			isa = PBXBuildFile;
+			fileRef = 392CA55CAE9D301EF8FB08D5;
+		};
+		14E5D5751F32CFCB7E093750 = {
+			isa = PBXBuildFile;
+			fileRef = 9A900C557308B8033BEC32D6;
+		};
+		27117E027E82180C671E4FF0 = {
+			isa = PBXBuildFile;
+			fileRef = 6A342D33258EC557425A5DA2;
+		};
+		65B9BAD9D32EE204B0E33368 = {
+			isa = PBXBuildFile;
+			fileRef = F9F329A0CD9A4E8CC15B5F88;
+		};
+		7F8FD76FE3AA8B1EBCB7EE88 = {
+			isa = PBXBuildFile;
+			fileRef = 2A1BF576B3102DE806C65214;
+		};
+		4FF6FDE8AF8039C66D7D7F25 = {
+			isa = PBXBuildFile;
+			fileRef = 3F6B96F5BBC584BD66A31566;
+		};
+		3BF54BD45D62857D8F0E5BEE = {
+			isa = PBXBuildFile;
+			fileRef = 94A629E732520791B69460EC;
+		};
+		93E57B89D162B5D5AC4334D1 = {
+			isa = PBXBuildFile;
+			fileRef = C521B092AD72636009CB9FE7;
+		};
+		C042DFBF43DB19D18D8578A0 = {
+			isa = PBXBuildFile;
+			fileRef = 8D50453AE7D6A885765E61F2;
+		};
+		E8A69AAED1D9B786B325BD69 = {
+			isa = PBXBuildFile;
+			fileRef = 0165C48884AD3A6C372AFDCB;
+		};
+		22492385293DFE8FE3768C4C = {
+			isa = PBXBuildFile;
+			fileRef = 87935D7D2EE0866CF6B00A8A;
+		};
+		9140FBC959D69B82640D6ABE = {
+			isa = PBXBuildFile;
+			fileRef = 4042D4BD8A5514783FC6222E;
+		};
+		2D65BE78D5F508FD9A8EEE98 = {
+			isa = PBXBuildFile;
+			fileRef = 957C522E3A09BE45DBAFFD5A;
+		};
+		8BD95F908B86734C96F271CD = {
+			isa = PBXBuildFile;
+			fileRef = 800406F4BAB6D4B230B080FB;
+		};
+		D2DAD9EE4CA96F2CC57B59EF = {
+			isa = PBXBuildFile;
+			fileRef = AF5E241C55BE0F2A432D40F9;
+		};
+		91D7E5BED6C12327AA34537C = {
+			isa = PBXBuildFile;
+			fileRef = 6E78326A4642FD2BE11DA41E;
+		};
+		ACFD9FE63A50F49F6B26F3AC = {
+			isa = PBXBuildFile;
+			fileRef = CAB3CDD6B69095B744BB1949;
+		};
+		B458866B6F50F7BD2FBF5571 = {
+			isa = PBXBuildFile;
+			fileRef = 455670499E17D77291F4F400;
+		};
+		7D2D619A0F6E132672AA130E = {
+			isa = PBXBuildFile;
+			fileRef = B05538CF378BA4A994C9ADE3;
+		};
+		A837692CB147388ACBA5E938 = {
+			isa = PBXBuildFile;
+			fileRef = 60F1ACF5F83FF9FB02A73B8B;
+		};
+		33B4E96EE841D67BC1B4587C = {
+			isa = PBXBuildFile;
+			fileRef = 30F85E91FD99AB3B9FB28BF1;
+		};
+		4E814703834CFD0DCF4A2DB7 = {
+			isa = PBXBuildFile;
+			fileRef = E73E3178D484DFBB5BA50FE9;
+		};
+		5A1EC30EDF9E998BB0DFBCEC = {
+			isa = PBXBuildFile;
+			fileRef = 63259D9D017B6725B4AAAAEB;
+		};
+		CF18BF284C0853EEF95BF424 = {
+			isa = PBXBuildFile;
+			fileRef = E48BC3863D3A8834A615E671;
+		};
+		DAE17482A7D650FB2AB506E8 = {
+			isa = PBXBuildFile;
+			fileRef = ABF893564A2C1B45BBEDA0AC;
+		};
+		0BF3E688A3AAD93DBA382A8F = {
+			isa = PBXBuildFile;
+			fileRef = A108025783B472856006C303;
+		};
+		3076CF64981D9BF73AA85DE0 = {
+			isa = PBXBuildFile;
+			fileRef = 7DE00050EBF967D20CB3116D;
+		};
+		111258B55E24D0775A06524C = {
+			isa = PBXBuildFile;
+			fileRef = F58F38D045F20D56AFAAED15;
+		};
+		AD16E17533848DC866513A7C = {
+			isa = PBXBuildFile;
+			fileRef = 6FF5E8CCF2AF91A7132889EC;
+		};
+		0377B1EC5650A1C489DF7991 = {
+			isa = PBXBuildFile;
+			fileRef = 61DA759A7DCD1491201628C3;
+		};
+		78D5CEC313F76C07FF305CCF = {
+			isa = PBXBuildFile;
+			fileRef = FC07713B5F839CE3C7190273;
+		};
+		BC5E53601B6DA2D02A73CF80 = {
+			isa = PBXBuildFile;
+			fileRef = 3D7BC5C00E60D4DD1D3B42F3;
+		};
+		BC132284AAC3E65B7BD72519 = {
+			isa = PBXBuildFile;
+			fileRef = 06FB8541E02055EBF9E9C99F;
+		};
+		1DF4CD78FDE827BE5937C4FE = {
+			isa = PBXBuildFile;
+			fileRef = BBB2C52EA2B5469F5994CE3E;
+		};
+		81EF62862D179D7E9F6440BF = {
+			isa = PBXBuildFile;
+			fileRef = BA8AFF733C36DFAA600BCEB8;
+		};
+		82F543D577AB12F12A864B5E = {
+			isa = PBXBuildFile;
+			fileRef = 8946A42D4D4DC484E68C964B;
+		};
+		ABD66A59B5EB0E46DE252470 = {
+			isa = PBXBuildFile;
+			fileRef = 085D756A0165386C552299D3;
+		};
+		C55B1C64F00D553FC36720E6 = {
+			isa = PBXBuildFile;
+			fileRef = B625A62F35224C789943051E;
+		};
+		E26C2AB53BF70A381E44947F = {
+			isa = PBXBuildFile;
+			fileRef = EFEDF0C0E63B849A293D2A8E;
+		};
 		031AB397D2342573684B6B34 = {
 			isa = PBXBuildFile;
 			fileRef = 7D4907623F557A56CEE71974;
@@ -113,6 +285,13 @@
 			isa = PBXBuildFile;
 			fileRef = 034F21FBD6248FA4D5DABA03;
 		};
+		0165C48884AD3A6C372AFDCB = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = labels.cpp;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/labels.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
 		034F21FBD6248FA4D5DABA03 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
@@ -134,6 +313,13 @@
 			path = "../../External/JUCE/modules/juce_gui_extra";
 			sourceTree = "SOURCE_ROOT";
 		};
+		06FB8541E02055EBF9E9C99F = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = colors.cpp;
+			path = ../../External/matplotplusplus/source/matplot/util/colors.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		0707EC3A4E1DDF43301F4913 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -148,6 +334,20 @@
 			path = ../../Source/Private/Objects/Public/MatPlotPlotter.h;
 			sourceTree = "SOURCE_ROOT";
 		};
+		085D756A0165386C552299D3 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "world_map_10m.cpp";
+			path = "../../External/matplotplusplus/source/matplot/util/world_map_10m.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		0A35E0540A8B04DC2F2F8C2E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = algebra.cpp;
+			path = "../../External/matplotplusplus/source/3rd_party/nodesoup/src/algebra.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
 		109678623E9CD0C77202CB08 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -155,11 +355,32 @@
 			path = ../../Source/Private/Objects/Private/Simulators/Simulator.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
+		11DF8EA000AC200CDF7E0F0E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "handle_types.h";
+			path = "../../External/matplotplusplus/source/matplot/util/handle_types.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		15C54D4DCB7ECD3459B9E7F5 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = geodata.h;
+			path = ../../External/matplotplusplus/source/matplot/util/geodata.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		19C4C87B9CD4D8B4324FFAB9 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
 			name = "juce_events";
 			path = "../../External/JUCE/modules/juce_events";
+			sourceTree = "SOURCE_ROOT";
+		};
+		1C5FCE599172085EF6918BC9 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = contourc.h;
+			path = ../../External/matplotplusplus/source/matplot/util/contourc.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		1F6567C8324A14A8D7355A75 = {
@@ -183,6 +404,34 @@
 			path = ../../Source/Private/Objects/Private/PLBounds.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
+		245985BF47361F0039E7BA38 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "backend_registry.h";
+			path = "../../External/matplotplusplus/source/matplot/backend/backend_registry.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		26EA29ABDF71B355D43D85B0 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = popen.h;
+			path = ../../External/matplotplusplus/source/matplot/util/popen.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		2A1BF576B3102DE806C65214 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = contours.cpp;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/contours.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		2CFF8A716DE6D49B2A5062FB = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "backend_interface.h";
+			path = "../../External/matplotplusplus/source/matplot/backend/backend_interface.h";
+			sourceTree = "SOURCE_ROOT";
+		};
 		2E7E0C93B6752CB3D90B7118 = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -195,6 +444,20 @@
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = SimulatorBasic.cpp;
 			path = ../../Source/Private/Objects/Private/Simulators/SimulatorBasic.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		30F85E91FD99AB3B9FB28BF1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = gnuplot.cpp;
+			path = ../../External/matplotplusplus/source/matplot/backend/gnuplot.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		3214A5959F84AB1CF4F08B02 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = line.h;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/line.h";
 			sourceTree = "SOURCE_ROOT";
 		};
 		3225C17C7F122D08015737E4 = {
@@ -225,6 +488,13 @@
 			path = "../../Source/Private/Objects/Public/PL_SYSTEM.h";
 			sourceTree = "SOURCE_ROOT";
 		};
+		392CA55CAE9D301EF8FB08D5 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = nodesoup.cpp;
+			path = "../../External/matplotplusplus/source/3rd_party/nodesoup/src/nodesoup.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
 		3A216E9440DCB4B725246E7C = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
@@ -239,11 +509,46 @@
 			path = ../../Source/Private/Objects/Public/Simulators/Simulator.h;
 			sourceTree = "SOURCE_ROOT";
 		};
+		3D5B9B15F4B37F085A8B3478 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = keywords.h;
+			path = ../../External/matplotplusplus/source/matplot/util/keywords.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		3D7BC5C00E60D4DD1D3B42F3 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = histcounts.cpp;
+			path = ../../External/matplotplusplus/source/matplot/freestanding/histcounts.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		3F6B96F5BBC584BD66A31566 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "error_bar.cpp";
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/error_bar.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		4042D4BD8A5514783FC6222E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = matrix.cpp;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/matrix.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
 		4199D01C883218A4627C273C = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
 			name = "juce_data_structures";
 			path = "../../External/JUCE/modules/juce_data_structures";
+			sourceTree = "SOURCE_ROOT";
+		};
+		444908E7ED577263C47870A8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = stair.h;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/stair.h";
 			sourceTree = "SOURCE_ROOT";
 		};
 		44506EBDD0F51CC4FE8BFD0F = {
@@ -252,6 +557,34 @@
 			name = Foundation.framework;
 			path = System/Library/Frameworks/Foundation.framework;
 			sourceTree = SDKROOT;
+		};
+		44A21E469FF1F753A18A327D = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "axes_type.h";
+			path = "../../External/matplotplusplus/source/matplot/core/axes_type.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		455670499E17D77291F4F400 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = vectors.cpp;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/vectors.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		4599068115DD6CD794E8323F = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = opengl.h;
+			path = ../../External/matplotplusplus/source/matplot/backend/opengl.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		4B358AA5F1728336E3F46C25 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = surface.h;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/surface.h";
+			sourceTree = "SOURCE_ROOT";
 		};
 		4C79FA3AEEFA1E5AC2692723 = {
 			isa = PBXFileReference;
@@ -267,11 +600,25 @@
 			path = "../../Source/Private/Objects/Private/PL_SCENE.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
+		548A3DE89C8D3BFA556E83E9 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = layout.hpp;
+			path = "../../External/matplotplusplus/source/3rd_party/nodesoup/src/layout.hpp";
+			sourceTree = "SOURCE_ROOT";
+		};
 		551E51F15E43947C0B058503 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = OpenPL.cpp;
 			path = ../../Source/Private/OpenPL.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		57094F22BCCCE0F81215803A = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "kamada_kawai.hpp";
+			path = "../../External/matplotplusplus/source/3rd_party/nodesoup/src/kamada_kawai.hpp";
 			sourceTree = "SOURCE_ROOT";
 		};
 		57A3FDE20BEC9994063DB917 = {
@@ -280,6 +627,62 @@
 			name = WebKit.framework;
 			path = System/Library/Frameworks/WebKit.framework;
 			sourceTree = SDKROOT;
+		};
+		5836E0ABBE001F1360C55B60 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = layout.cpp;
+			path = "../../External/matplotplusplus/source/3rd_party/nodesoup/src/layout.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		58A79ADC09960E508617E6BA = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = histogram.h;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/histogram.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		5D29D397E87ABDFA17CD84DD = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "fruchterman_reingold.cpp";
+			path = "../../External/matplotplusplus/source/3rd_party/nodesoup/src/fruchterman_reingold.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		5E8AEA5C086B7E2A2AC5DABF = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "figure_registry.h";
+			path = "../../External/matplotplusplus/source/matplot/core/figure_registry.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		5F357853EB2A9ED3FA92FBC6 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "type_traits.h";
+			path = "../../External/matplotplusplus/source/matplot/util/type_traits.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		60F1ACF5F83FF9FB02A73B8B = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "backend_registry.cpp";
+			path = "../../External/matplotplusplus/source/matplot/backend/backend_registry.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		61DA759A7DCD1491201628C3 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "line_spec.cpp";
+			path = "../../External/matplotplusplus/source/matplot/core/line_spec.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		63259D9D017B6725B4AAAAEB = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "opengl_embed.cpp";
+			path = "../../External/matplotplusplus/source/matplot/backend/opengl_embed.cpp";
+			sourceTree = "SOURCE_ROOT";
 		};
 		65962C6FA98F0FD139666933 = {
 			isa = PBXFileReference;
@@ -295,6 +698,69 @@
 			path = System/Library/Frameworks/Carbon.framework;
 			sourceTree = SDKROOT;
 		};
+		67F9502F9CB3E0BADBD796BC = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = nodesoup.hpp;
+			path = "../../External/matplotplusplus/source/3rd_party/nodesoup/include/nodesoup.hpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		6A342D33258EC557425A5DA2 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "box_chart.cpp";
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/box_chart.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		6B8AB58D0A91A46622D96C01 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = bars.h;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/bars.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		6E78326A4642FD2BE11DA41E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "string_function.cpp";
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/string_function.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		6FF5E8CCF2AF91A7132889EC = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = legend.cpp;
+			path = ../../External/matplotplusplus/source/matplot/core/legend.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		728D14A100DA4D4D9D450248 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "axes_lim.h";
+			path = "../../External/matplotplusplus/source/matplot/freestanding/axes_lim.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		72914E6F88DD21F0B5C6B7B1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = matplot.h;
+			path = ../../External/matplotplusplus/source/matplot/matplot.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		72F81B34151784B7D09C323F = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = CImg.h;
+			path = "../../External/matplotplusplus/source/3rd_party/cimg/CImg.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		785626D835556B4676630E8D = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = labels.h;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/labels.h";
+			sourceTree = "SOURCE_ROOT";
+		};
 		7B35ED6222A689939EE07C49 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
@@ -309,11 +775,32 @@
 			path = ../../External/libigl/external/glad/src/glad.c;
 			sourceTree = "SOURCE_ROOT";
 		};
+		7DE00050EBF967D20CB3116D = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "figure_registry.cpp";
+			path = "../../External/matplotplusplus/source/matplot/core/figure_registry.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
 		7ECD6F06F405D693DBD17B98 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = SimulatorFDTD.cpp;
 			path = ../../Source/Private/Objects/Private/Simulators/SimulatorFDTD.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		800406F4BAB6D4B230B080FB = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "parallel_lines.cpp";
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/parallel_lines.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		8031CBE88B5C18EA24910C03 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "figure_type.h";
+			path = "../../External/matplotplusplus/source/matplot/core/figure_type.h";
 			sourceTree = "SOURCE_ROOT";
 		};
 		81C8D1056733DDD840D09313 = {
@@ -330,11 +817,109 @@
 			path = System/Library/Frameworks/Cocoa.framework;
 			sourceTree = SDKROOT;
 		};
+		87935D7D2EE0866CF6B00A8A = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = line.cpp;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/line.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		8946A42D4D4DC484E68C964B = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "world_cities.cpp";
+			path = "../../External/matplotplusplus/source/matplot/util/world_cities.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		896420793659682975FC0FC1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "function_line.h";
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/function_line.h";
+			sourceTree = "SOURCE_ROOT";
+		};
 		8B1F59E91D8F647F6370892D = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
 			name = "juce_graphics";
 			path = "../../External/JUCE/modules/juce_graphics";
+			sourceTree = "SOURCE_ROOT";
+		};
+		8C0556F443AEDED84636103B = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "string_function.h";
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/string_function.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		8D50453AE7D6A885765E61F2 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = histogram.cpp;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/histogram.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		92F625BA9F3D06F5C4FA74AB = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = histcounts.h;
+			path = ../../External/matplotplusplus/source/matplot/freestanding/histcounts.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		94A629E732520791B69460EC = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "filled_area.cpp";
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/filled_area.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		957C522E3A09BE45DBAFFD5A = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = network.cpp;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/network.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		95A24A57282CCE2D43C9A719 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "error_bar.h";
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/error_bar.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		9A900C557308B8033BEC32D6 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = bars.cpp;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/bars.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		9CFBC738A1A9622EA7C5A910 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = circles.h;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/circles.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		9F466BA5690C104B38D332B8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "line_spec.h";
+			path = "../../External/matplotplusplus/source/matplot/core/line_spec.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		9F82F36FD0486FC5D5CC934E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = contours.h;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/contours.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		A108025783B472856006C303 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "axis_type.cpp";
+			path = "../../External/matplotplusplus/source/matplot/core/axis_type.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
 		A63586C154FECEC69D193103 = {
@@ -344,6 +929,34 @@
 			path = "../../JuceLibraryCode/include_juce_events.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		ABF893564A2C1B45BBEDA0AC = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "axes_type.cpp";
+			path = "../../External/matplotplusplus/source/matplot/core/axes_type.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		AF5E241C55BE0F2A432D40F9 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = stair.cpp;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/stair.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		B05538CF378BA4A994C9ADE3 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "backend_interface.cpp";
+			path = "../../External/matplotplusplus/source/matplot/backend/backend_interface.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		B625A62F35224C789943051E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "world_map_50m.cpp";
+			path = "../../External/matplotplusplus/source/matplot/util/world_map_50m.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
 		B7649519BB9859247D1F7E3D = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -351,11 +964,60 @@
 			path = ../../Source/Private/OpenPLCommonPrivate.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
+		BA8AFF733C36DFAA600BCEB8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = contourc.cpp;
+			path = ../../External/matplotplusplus/source/matplot/util/contourc.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		BBB2C52EA2B5469F5994CE3E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = common.cpp;
+			path = ../../External/matplotplusplus/source/matplot/util/common.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		BCF9C59E23456280E1CBE626 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = algebra.hpp;
+			path = "../../External/matplotplusplus/source/3rd_party/nodesoup/src/algebra.hpp";
+			sourceTree = "SOURCE_ROOT";
+		};
 		BF3DEF76F01006E00CC4BC75 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_graphics.mm";
 			path = "../../JuceLibraryCode/include_juce_graphics.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		C26F3CB1806388D4F9ACC6DA = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "filled_area.h";
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/filled_area.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		C521B092AD72636009CB9FE7 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "function_line.cpp";
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/function_line.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		C752DC04C2E20B809CB45972 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = gnuplot.h;
+			path = ../../External/matplotplusplus/source/matplot/backend/gnuplot.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		CAB3CDD6B69095B744BB1949 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = surface.cpp;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/surface.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
 		CBB59A4EDC42B7D715DBCA46 = {
@@ -372,11 +1034,46 @@
 			path = OpenPL.dylib;
 			sourceTree = "BUILT_PRODUCTS_DIR";
 		};
+		CF78A329FF2DE253FCC1D167 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = colors.h;
+			path = ../../External/matplotplusplus/source/matplot/util/colors.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		D14B2A60205E5DAC956B3FD1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = matrix.h;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/matrix.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		D2E69766F68646B93469D394 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "axes_object.h";
+			path = "../../External/matplotplusplus/source/matplot/core/axes_object.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		D45F6B4ADAFAE30890E24512 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = vectors.h;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/vectors.h";
+			sourceTree = "SOURCE_ROOT";
+		};
 		D4622F60DE1EE12B5DBA41C5 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_gui_basics.mm";
 			path = "../../JuceLibraryCode/include_juce_gui_basics.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		D51037AD17DFC85B89CA5A7E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "opengl_embed.h";
+			path = "../../External/matplotplusplus/source/matplot/backend/opengl_embed.h";
 			sourceTree = "SOURCE_ROOT";
 		};
 		D5989627A864A8B8A4CDC595 = {
@@ -386,11 +1083,32 @@
 			path = ../../Source/Private/Objects/Public/Simulators/SimulatorFDTD.h;
 			sourceTree = "SOURCE_ROOT";
 		};
+		D9370888B40DA2F5AF387E02 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "parallel_lines.h";
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/parallel_lines.h";
+			sourceTree = "SOURCE_ROOT";
+		};
 		D9DAD4F7EFC194BD9055618C = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_core.mm";
 			path = "../../JuceLibraryCode/include_juce_core.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		DB7E663D9100B2EEA77C4B61 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = common.h;
+			path = ../../External/matplotplusplus/source/matplot/util/common.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		DC9F170DC96C16862BE4C7E8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "kamada_kawai.cpp";
+			path = "../../External/matplotplusplus/source/3rd_party/nodesoup/src/kamada_kawai.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
 		DD77E9FDEA5C9FEC1F8586AD = {
@@ -400,6 +1118,34 @@
 			path = "../../JuceLibraryCode/include_juce_data_structures.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		DF5B45A872308FBE5B0823C2 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "fruchterman_reingold.hpp";
+			path = "../../External/matplotplusplus/source/3rd_party/nodesoup/src/fruchterman_reingold.hpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		E48BC3863D3A8834A615E671 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "axes_object.cpp";
+			path = "../../External/matplotplusplus/source/matplot/core/axes_object.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		E65AEEEAF0CF778A8AD9E724 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "figure_functions.h";
+			path = "../../External/matplotplusplus/source/matplot/freestanding/figure_functions.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		E73E3178D484DFBB5BA50FE9 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = opengl.cpp;
+			path = ../../External/matplotplusplus/source/matplot/backend/opengl.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		E880EC1EEE5D0DA1B1A3162F = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -407,11 +1153,46 @@
 			path = ../../Source/Private/Objects/Private/Simulators/SimulatorBasic3D.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
+		ED5DF91ADC96A0F1797321FC = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "axis_type.h";
+			path = "../../External/matplotplusplus/source/matplot/core/axis_type.h";
+			sourceTree = "SOURCE_ROOT";
+		};
 		EE5A4DFBFB083FFA24C04847 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = MatPlotPlotter.cpp;
 			path = ../../Source/Private/Objects/Public/MatPlotPlotter.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		EEE8EF82B6A638076AFA3FF1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = network.h;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/network.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		EFEDF0C0E63B849A293D2A8E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "world_map_110m.cpp";
+			path = "../../External/matplotplusplus/source/matplot/util/world_map_110m.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		F0ABD1C103FE1BA5FB8D25FC = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "box_chart.h";
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/box_chart.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		F58F38D045F20D56AFAAED15 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "figure_type.cpp";
+			path = "../../External/matplotplusplus/source/matplot/core/figure_type.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
 		F64C6713A4420824D4123860 = {
@@ -428,9 +1209,248 @@
 			path = ../../Source/Private/Objects/Public/PLBounds.h;
 			sourceTree = "SOURCE_ROOT";
 		};
+		F9385A1330ACD52834C08E9E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = plot.h;
+			path = ../../External/matplotplusplus/source/matplot/freestanding/plot.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		F9ADE7E66FC423DEABB621B9 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = concepts.h;
+			path = ../../External/matplotplusplus/source/matplot/util/concepts.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		F9F329A0CD9A4E8CC15B5F88 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = circles.cpp;
+			path = "../../External/matplotplusplus/source/matplot/axes_objects/circles.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		FA29305016717FCB03A4ABAD = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "axes_functions.h";
+			path = "../../External/matplotplusplus/source/matplot/freestanding/axes_functions.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		FC07713B5F839CE3C7190273 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "axes_functions.cpp";
+			path = "../../External/matplotplusplus/source/matplot/freestanding/axes_functions.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		FF76A1A39449772B066B593C = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = legend.h;
+			path = ../../External/matplotplusplus/source/matplot/core/legend.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		F3DA3263E543D53576EDC5AB = {
+			isa = PBXGroup;
+			children = (
+				72F81B34151784B7D09C323F,
+			);
+			name = cimg;
+			sourceTree = "<group>";
+		};
+		67FDDAD5A5B4F0D99BB78658 = {
+			isa = PBXGroup;
+			children = (
+				67F9502F9CB3E0BADBD796BC,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		FBC79919287B0C1CB560EEEB = {
+			isa = PBXGroup;
+			children = (
+				0A35E0540A8B04DC2F2F8C2E,
+				BCF9C59E23456280E1CBE626,
+				5D29D397E87ABDFA17CD84DD,
+				DF5B45A872308FBE5B0823C2,
+				DC9F170DC96C16862BE4C7E8,
+				57094F22BCCCE0F81215803A,
+				5836E0ABBE001F1360C55B60,
+				548A3DE89C8D3BFA556E83E9,
+				392CA55CAE9D301EF8FB08D5,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		77C81D0707A709E8DA7CD8D1 = {
+			isa = PBXGroup;
+			children = (
+				67FDDAD5A5B4F0D99BB78658,
+				FBC79919287B0C1CB560EEEB,
+			);
+			name = nodesoup;
+			sourceTree = "<group>";
+		};
+		24A845626A3ABA209B992131 = {
+			isa = PBXGroup;
+			children = (
+				F3DA3263E543D53576EDC5AB,
+				77C81D0707A709E8DA7CD8D1,
+			);
+			name = "3rd_party";
+			sourceTree = "<group>";
+		};
+		371176455202A43D39B96A2D = {
+			isa = PBXGroup;
+			children = (
+				9A900C557308B8033BEC32D6,
+				6B8AB58D0A91A46622D96C01,
+				6A342D33258EC557425A5DA2,
+				F0ABD1C103FE1BA5FB8D25FC,
+				F9F329A0CD9A4E8CC15B5F88,
+				9CFBC738A1A9622EA7C5A910,
+				2A1BF576B3102DE806C65214,
+				9F82F36FD0486FC5D5CC934E,
+				3F6B96F5BBC584BD66A31566,
+				95A24A57282CCE2D43C9A719,
+				94A629E732520791B69460EC,
+				C26F3CB1806388D4F9ACC6DA,
+				C521B092AD72636009CB9FE7,
+				896420793659682975FC0FC1,
+				8D50453AE7D6A885765E61F2,
+				58A79ADC09960E508617E6BA,
+				0165C48884AD3A6C372AFDCB,
+				785626D835556B4676630E8D,
+				87935D7D2EE0866CF6B00A8A,
+				3214A5959F84AB1CF4F08B02,
+				4042D4BD8A5514783FC6222E,
+				D14B2A60205E5DAC956B3FD1,
+				957C522E3A09BE45DBAFFD5A,
+				EEE8EF82B6A638076AFA3FF1,
+				800406F4BAB6D4B230B080FB,
+				D9370888B40DA2F5AF387E02,
+				AF5E241C55BE0F2A432D40F9,
+				444908E7ED577263C47870A8,
+				6E78326A4642FD2BE11DA41E,
+				8C0556F443AEDED84636103B,
+				CAB3CDD6B69095B744BB1949,
+				4B358AA5F1728336E3F46C25,
+				455670499E17D77291F4F400,
+				D45F6B4ADAFAE30890E24512,
+			);
+			name = "axes_objects";
+			sourceTree = "<group>";
+		};
+		E2A9F973D4D5C9E7EC7FE00A = {
+			isa = PBXGroup;
+			children = (
+				B05538CF378BA4A994C9ADE3,
+				2CFF8A716DE6D49B2A5062FB,
+				60F1ACF5F83FF9FB02A73B8B,
+				245985BF47361F0039E7BA38,
+				30F85E91FD99AB3B9FB28BF1,
+				C752DC04C2E20B809CB45972,
+				E73E3178D484DFBB5BA50FE9,
+				4599068115DD6CD794E8323F,
+				63259D9D017B6725B4AAAAEB,
+				D51037AD17DFC85B89CA5A7E,
+			);
+			name = backend;
+			sourceTree = "<group>";
+		};
+		8807B25B52484858B2EB1940 = {
+			isa = PBXGroup;
+			children = (
+				E48BC3863D3A8834A615E671,
+				D2E69766F68646B93469D394,
+				ABF893564A2C1B45BBEDA0AC,
+				44A21E469FF1F753A18A327D,
+				A108025783B472856006C303,
+				ED5DF91ADC96A0F1797321FC,
+				7DE00050EBF967D20CB3116D,
+				5E8AEA5C086B7E2A2AC5DABF,
+				F58F38D045F20D56AFAAED15,
+				8031CBE88B5C18EA24910C03,
+				6FF5E8CCF2AF91A7132889EC,
+				FF76A1A39449772B066B593C,
+				61DA759A7DCD1491201628C3,
+				9F466BA5690C104B38D332B8,
+			);
+			name = core;
+			sourceTree = "<group>";
+		};
+		7C75DBF9FDF893366B284CC4 = {
+			isa = PBXGroup;
+			children = (
+				FC07713B5F839CE3C7190273,
+				FA29305016717FCB03A4ABAD,
+				728D14A100DA4D4D9D450248,
+				E65AEEEAF0CF778A8AD9E724,
+				3D7BC5C00E60D4DD1D3B42F3,
+				92F625BA9F3D06F5C4FA74AB,
+				F9385A1330ACD52834C08E9E,
+			);
+			name = freestanding;
+			sourceTree = "<group>";
+		};
+		7FA590128A2E9660B0437A5D = {
+			isa = PBXGroup;
+			children = (
+				06FB8541E02055EBF9E9C99F,
+				CF78A329FF2DE253FCC1D167,
+				BBB2C52EA2B5469F5994CE3E,
+				DB7E663D9100B2EEA77C4B61,
+				F9ADE7E66FC423DEABB621B9,
+				BA8AFF733C36DFAA600BCEB8,
+				1C5FCE599172085EF6918BC9,
+				15C54D4DCB7ECD3459B9E7F5,
+				11DF8EA000AC200CDF7E0F0E,
+				3D5B9B15F4B37F085A8B3478,
+				26EA29ABDF71B355D43D85B0,
+				5F357853EB2A9ED3FA92FBC6,
+				8946A42D4D4DC484E68C964B,
+				085D756A0165386C552299D3,
+				B625A62F35224C789943051E,
+				EFEDF0C0E63B849A293D2A8E,
+			);
+			name = util;
+			sourceTree = "<group>";
+		};
+		1D85FEEC92765BD8A7131B1D = {
+			isa = PBXGroup;
+			children = (
+				371176455202A43D39B96A2D,
+				E2A9F973D4D5C9E7EC7FE00A,
+				8807B25B52484858B2EB1940,
+				7C75DBF9FDF893366B284CC4,
+				7FA590128A2E9660B0437A5D,
+				72914E6F88DD21F0B5C6B7B1,
+			);
+			name = matplot;
+			sourceTree = "<group>";
+		};
+		B2B997504E5AC8CD152B29CA = {
+			isa = PBXGroup;
+			children = (
+				24A845626A3ABA209B992131,
+				1D85FEEC92765BD8A7131B1D,
+			);
+			name = source;
+			sourceTree = "<group>";
+		};
+		E6A2FC6434AF7B3CECD57FE9 = {
+			isa = PBXGroup;
+			children = (
+				B2B997504E5AC8CD152B29CA,
+			);
+			name = matplotplusplus;
+			sourceTree = "<group>";
+		};
 		67DD36FB6859C3EBD87F85A6 = {
 			isa = PBXGroup;
 			children = (
+				E6A2FC6434AF7B3CECD57FE9,
 				7D4907623F557A56CEE71974,
 			);
 			name = ThirdParty;
@@ -656,6 +1676,9 @@
 					"$(SRCROOT)/../../External/libigl/include",
 					"$(SRCROOT)/../../External/libigl/external/eigen",
 					"$(SRCROOT)/../../External/libigl/external/glad/include",
+					"$(SRCROOT)/../../External/matplotplusplus/source",
+					"$(SRCROOT)/../../External/matplotplusplus/source/3rd_party/nodesoup/include",
+					"$(SRCROOT)/../../External/matplotplusplus/source/3rd_party/cimg",
 					"$(SRCROOT)/../../Source/Public",
 					"$(SRCROOT)/../../Source/Private",
 					"$(SRCROOT)/../../Source/Private/Objects/Public",
@@ -673,11 +1696,14 @@
 					"$(SRCROOT)/../../External/libigl/include",
 					"$(SRCROOT)/../../External/libigl/external/eigen",
 					"$(SRCROOT)/../../External/libigl/external/glad/include",
+					"$(SRCROOT)/../../External/matplotplusplus/source",
+					"$(SRCROOT)/../../External/matplotplusplus/source/3rd_party/nodesoup/include",
+					"$(SRCROOT)/../../External/matplotplusplus/source/3rd_party/cimg",
 					"$(SRCROOT)/../../Source/Public",
 					"$(SRCROOT)/../../Source/Private",
 					"$(SRCROOT)/../../Source/Private/Objects/Public",
 				);
-				OTHER_LDFLAGS = "-lglfw -lgmp -lmpfr -lboost_thread-mt -lboost_timer -lmatplot";
+				OTHER_LDFLAGS = "-lglfw -lgmp -lmpfr -lboost_thread-mt -lboost_timer -lx11";
 				PRODUCT_BUNDLE_IDENTIFIER = com.JamesKelly.OpenPL;
 				PRODUCT_NAME = "OpenPL";
 				USE_HEADERMAP = NO;
@@ -733,6 +1759,9 @@
 					"$(SRCROOT)/../../External/libigl/include",
 					"$(SRCROOT)/../../External/libigl/external/eigen",
 					"$(SRCROOT)/../../External/libigl/external/glad/include",
+					"$(SRCROOT)/../../External/matplotplusplus/source",
+					"$(SRCROOT)/../../External/matplotplusplus/source/3rd_party/nodesoup/include",
+					"$(SRCROOT)/../../External/matplotplusplus/source/3rd_party/cimg",
 					"$(SRCROOT)/../../Source/Public",
 					"$(SRCROOT)/../../Source/Private",
 					"$(SRCROOT)/../../Source/Private/Objects/Public",
@@ -751,11 +1780,14 @@
 					"$(SRCROOT)/../../External/libigl/include",
 					"$(SRCROOT)/../../External/libigl/external/eigen",
 					"$(SRCROOT)/../../External/libigl/external/glad/include",
+					"$(SRCROOT)/../../External/matplotplusplus/source",
+					"$(SRCROOT)/../../External/matplotplusplus/source/3rd_party/nodesoup/include",
+					"$(SRCROOT)/../../External/matplotplusplus/source/3rd_party/cimg",
 					"$(SRCROOT)/../../Source/Public",
 					"$(SRCROOT)/../../Source/Private",
 					"$(SRCROOT)/../../Source/Private/Objects/Public",
 				);
-				OTHER_LDFLAGS = "-lglfw -lgmp -lmpfr -lboost_thread-mt -lboost_timer -lmatplot";
+				OTHER_LDFLAGS = "-lglfw -lgmp -lmpfr -lboost_thread-mt -lboost_timer -lx11";
 				PRODUCT_BUNDLE_IDENTIFIER = com.JamesKelly.OpenPL;
 				PRODUCT_NAME = "OpenPL";
 				USE_HEADERMAP = NO;
@@ -890,6 +1922,49 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B16845179719A02E762DE4C8,
+				F75BCC42F28B07EF37C97BC1,
+				CA97B7550931680761E1E169,
+				CBD76A7D849072818F40CDFF,
+				8B31871A99E5967761F29008,
+				14E5D5751F32CFCB7E093750,
+				27117E027E82180C671E4FF0,
+				65B9BAD9D32EE204B0E33368,
+				7F8FD76FE3AA8B1EBCB7EE88,
+				4FF6FDE8AF8039C66D7D7F25,
+				3BF54BD45D62857D8F0E5BEE,
+				93E57B89D162B5D5AC4334D1,
+				C042DFBF43DB19D18D8578A0,
+				E8A69AAED1D9B786B325BD69,
+				22492385293DFE8FE3768C4C,
+				9140FBC959D69B82640D6ABE,
+				2D65BE78D5F508FD9A8EEE98,
+				8BD95F908B86734C96F271CD,
+				D2DAD9EE4CA96F2CC57B59EF,
+				91D7E5BED6C12327AA34537C,
+				ACFD9FE63A50F49F6B26F3AC,
+				B458866B6F50F7BD2FBF5571,
+				7D2D619A0F6E132672AA130E,
+				A837692CB147388ACBA5E938,
+				33B4E96EE841D67BC1B4587C,
+				4E814703834CFD0DCF4A2DB7,
+				5A1EC30EDF9E998BB0DFBCEC,
+				CF18BF284C0853EEF95BF424,
+				DAE17482A7D650FB2AB506E8,
+				0BF3E688A3AAD93DBA382A8F,
+				3076CF64981D9BF73AA85DE0,
+				111258B55E24D0775A06524C,
+				AD16E17533848DC866513A7C,
+				0377B1EC5650A1C489DF7991,
+				78D5CEC313F76C07FF305CCF,
+				BC5E53601B6DA2D02A73CF80,
+				BC132284AAC3E65B7BD72519,
+				1DF4CD78FDE827BE5937C4FE,
+				81EF62862D179D7E9F6440BF,
+				82F543D577AB12F12A864B5E,
+				ABD66A59B5EB0E46DE252470,
+				C55B1C64F00D553FC36720E6,
+				E26C2AB53BF70A381E44947F,
 				031AB397D2342573684B6B34,
 				EE428D8FB76CBFFC1E3B0A56,
 				FF6A790CCE812891ABF6C1A3,

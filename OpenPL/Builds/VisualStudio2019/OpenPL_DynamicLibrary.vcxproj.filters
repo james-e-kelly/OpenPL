@@ -2,6 +2,45 @@
 
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="OpenPL\Source\ThirdParty\matplotplusplus\source\3rd_party\cimg">
+      <UniqueIdentifier>{FA3756FC-8220-ECA3-C3AE-33B96C5EB245}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenPL\Source\ThirdParty\matplotplusplus\source\3rd_party\nodesoup\include">
+      <UniqueIdentifier>{0402B459-C8D4-B0C1-B9B8-2F6F8CE04F32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenPL\Source\ThirdParty\matplotplusplus\source\3rd_party\nodesoup\src">
+      <UniqueIdentifier>{3F8974C6-7F58-B6F5-19DA-771B54C25F4B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenPL\Source\ThirdParty\matplotplusplus\source\3rd_party\nodesoup">
+      <UniqueIdentifier>{6D2836DF-F2E3-F4E9-ADED-10764AB18A0D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenPL\Source\ThirdParty\matplotplusplus\source\3rd_party">
+      <UniqueIdentifier>{FB444B76-5D31-BAA3-2A08-50A8B9301DD9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects">
+      <UniqueIdentifier>{B8AD953F-69E3-32E5-7671-5D3239035036}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\backend">
+      <UniqueIdentifier>{22401B41-07E9-030A-388B-65822E7F11CC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\core">
+      <UniqueIdentifier>{63DEA43B-9D0C-4590-8D17-E5ECF70C3392}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\freestanding">
+      <UniqueIdentifier>{913B9886-89DE-529E-1E9C-17EAC08997D7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\util">
+      <UniqueIdentifier>{5DF655C8-6767-5263-9E75-9B97951C459F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenPL\Source\ThirdParty\matplotplusplus\source\matplot">
+      <UniqueIdentifier>{4E73FA60-23EF-C284-DD40-0AC3D455D744}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenPL\Source\ThirdParty\matplotplusplus\source">
+      <UniqueIdentifier>{E9F8687B-B78D-092D-DD5E-DAA95AE5CEB0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenPL\Source\ThirdParty\matplotplusplus">
+      <UniqueIdentifier>{F20F456B-067B-3463-BE73-46FD30FF29DD}</UniqueIdentifier>
+    </Filter>
     <Filter Include="OpenPL\Source\ThirdParty">
       <UniqueIdentifier>{0ECBB734-83A7-90F3-4BD6-3320816EBB08}</UniqueIdentifier>
     </Filter>
@@ -247,6 +286,135 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\External\matplotplusplus\source\3rd_party\nodesoup\src\algebra.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\3rd_party\nodesoup\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\3rd_party\nodesoup\src\fruchterman_reingold.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\3rd_party\nodesoup\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\3rd_party\nodesoup\src\kamada_kawai.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\3rd_party\nodesoup\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\3rd_party\nodesoup\src\layout.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\3rd_party\nodesoup\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\3rd_party\nodesoup\src\nodesoup.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\3rd_party\nodesoup\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\axes_objects\bars.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\axes_objects\box_chart.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\axes_objects\circles.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\axes_objects\contours.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\axes_objects\error_bar.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\axes_objects\filled_area.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\axes_objects\function_line.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\axes_objects\histogram.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\axes_objects\labels.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\axes_objects\line.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\axes_objects\matrix.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\axes_objects\network.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\axes_objects\parallel_lines.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\axes_objects\stair.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\axes_objects\string_function.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\axes_objects\surface.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\axes_objects\vectors.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\backend\backend_interface.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\backend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\backend\backend_registry.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\backend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\backend\gnuplot.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\backend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\backend\opengl.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\backend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\backend\opengl_embed.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\backend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\core\axes_object.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\core\axes_type.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\core\axis_type.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\core\figure_registry.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\core\figure_type.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\core\legend.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\core\line_spec.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\freestanding\axes_functions.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\freestanding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\freestanding\histcounts.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\freestanding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\util\colors.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\util\common.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\util\contourc.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\util\world_cities.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\util\world_map_10m.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\util\world_map_50m.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\External\matplotplusplus\source\matplot\util\world_map_110m.cpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\util</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\External\libigl\external\glad\src\glad.c">
       <Filter>OpenPL\Source\ThirdParty</Filter>
     </ClCompile>
@@ -1572,6 +1740,156 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\External\matplotplusplus\source\3rd_party\cimg\CImg.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\3rd_party\cimg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\3rd_party\nodesoup\include\nodesoup.hpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\3rd_party\nodesoup\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\3rd_party\nodesoup\src\algebra.hpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\3rd_party\nodesoup\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\3rd_party\nodesoup\src\fruchterman_reingold.hpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\3rd_party\nodesoup\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\3rd_party\nodesoup\src\kamada_kawai.hpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\3rd_party\nodesoup\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\3rd_party\nodesoup\src\layout.hpp">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\3rd_party\nodesoup\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\axes_objects\bars.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\axes_objects\box_chart.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\axes_objects\circles.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\axes_objects\contours.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\axes_objects\error_bar.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\axes_objects\filled_area.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\axes_objects\function_line.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\axes_objects\histogram.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\axes_objects\labels.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\axes_objects\line.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\axes_objects\matrix.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\axes_objects\network.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\axes_objects\parallel_lines.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\axes_objects\stair.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\axes_objects\string_function.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\axes_objects\surface.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\axes_objects\vectors.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\axes_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\backend\backend_interface.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\backend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\backend\backend_registry.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\backend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\backend\gnuplot.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\backend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\backend\opengl.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\backend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\backend\opengl_embed.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\backend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\core\axes_object.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\core\axes_type.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\core\axis_type.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\core\figure_registry.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\core\figure_type.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\core\legend.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\core\line_spec.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\freestanding\axes_functions.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\freestanding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\freestanding\axes_lim.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\freestanding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\freestanding\figure_functions.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\freestanding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\freestanding\histcounts.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\freestanding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\freestanding\plot.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\freestanding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\util\colors.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\util\common.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\util\concepts.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\util\contourc.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\util\geodata.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\util\handle_types.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\util\keywords.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\util\popen.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\util\type_traits.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\External\matplotplusplus\source\matplot\matplot.h">
+      <Filter>OpenPL\Source\ThirdParty\matplotplusplus\source\matplot</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\Public\OpenPL.h">
       <Filter>OpenPL\Source\Public</Filter>
     </ClInclude>

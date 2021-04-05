@@ -8,6 +8,148 @@
   <MAINGROUP id="Gy2ano" name="OpenPL">
     <GROUP id="{24CA4D11-FC16-F8E8-18CB-7794E87812CC}" name="Source">
       <GROUP id="{10348CF7-CB7B-19A2-B118-8024C6837B9F}" name="ThirdParty">
+        <GROUP id="{B5B2029B-B8A9-67E0-C5ED-0836D81DDC4C}" name="matplotplusplus">
+          <GROUP id="{CF449DFE-7215-1292-89B2-BFADC19382C5}" name="source">
+            <GROUP id="{A72AC567-6C14-106A-A1B8-16DC942FA569}" name="3rd_party">
+              <GROUP id="{EA5BA107-2FBD-8D5E-7C7F-936551B1FC80}" name="cimg">
+                <FILE id="vJETdT" name="CImg.h" compile="0" resource="0" file="External/matplotplusplus/source/3rd_party/cimg/CImg.h"/>
+              </GROUP>
+              <GROUP id="{84401D69-0DF1-0EBD-88C1-111A293DEEA1}" name="nodesoup">
+                <GROUP id="{96E34BA3-6EDB-19B6-A9F7-27D638E1266A}" name="include">
+                  <FILE id="E21ZDe" name="nodesoup.hpp" compile="0" resource="0" file="External/matplotplusplus/source/3rd_party/nodesoup/include/nodesoup.hpp"/>
+                </GROUP>
+                <GROUP id="{E09F18A7-15E2-6F60-F7E2-AE930E593C0B}" name="src">
+                  <FILE id="egxjau" name="algebra.cpp" compile="1" resource="0" file="External/matplotplusplus/source/3rd_party/nodesoup/src/algebra.cpp"/>
+                  <FILE id="kY2jBt" name="algebra.hpp" compile="0" resource="0" file="External/matplotplusplus/source/3rd_party/nodesoup/src/algebra.hpp"/>
+                  <FILE id="r4D8p7" name="fruchterman_reingold.cpp" compile="1" resource="0"
+                        file="External/matplotplusplus/source/3rd_party/nodesoup/src/fruchterman_reingold.cpp"/>
+                  <FILE id="sjbGUR" name="fruchterman_reingold.hpp" compile="0" resource="0"
+                        file="External/matplotplusplus/source/3rd_party/nodesoup/src/fruchterman_reingold.hpp"/>
+                  <FILE id="dNhMAw" name="kamada_kawai.cpp" compile="1" resource="0"
+                        file="External/matplotplusplus/source/3rd_party/nodesoup/src/kamada_kawai.cpp"/>
+                  <FILE id="Kqfh27" name="kamada_kawai.hpp" compile="0" resource="0"
+                        file="External/matplotplusplus/source/3rd_party/nodesoup/src/kamada_kawai.hpp"/>
+                  <FILE id="MshvnI" name="layout.cpp" compile="1" resource="0" file="External/matplotplusplus/source/3rd_party/nodesoup/src/layout.cpp"/>
+                  <FILE id="kkPFUx" name="layout.hpp" compile="0" resource="0" file="External/matplotplusplus/source/3rd_party/nodesoup/src/layout.hpp"/>
+                  <FILE id="V2EW6L" name="nodesoup.cpp" compile="1" resource="0" file="External/matplotplusplus/source/3rd_party/nodesoup/src/nodesoup.cpp"/>
+                </GROUP>
+              </GROUP>
+            </GROUP>
+            <GROUP id="{F2CFDFC5-9B25-5E4D-F298-05DF48F5D62E}" name="matplot">
+              <GROUP id="{503460A6-BC3F-6AB7-03C3-0A74200470FB}" name="axes_objects">
+                <FILE id="E5gj8M" name="bars.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/bars.cpp"/>
+                <FILE id="ay6Zh5" name="bars.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/bars.h"/>
+                <FILE id="AMaEqg" name="box_chart.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/box_chart.cpp"/>
+                <FILE id="vUPNOj" name="box_chart.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/box_chart.h"/>
+                <FILE id="OAhNcy" name="circles.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/circles.cpp"/>
+                <FILE id="QD5DsD" name="circles.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/circles.h"/>
+                <FILE id="a8C4W3" name="contours.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/contours.cpp"/>
+                <FILE id="YgKU7Y" name="contours.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/contours.h"/>
+                <FILE id="YSFwhN" name="error_bar.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/error_bar.cpp"/>
+                <FILE id="s3beK3" name="error_bar.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/error_bar.h"/>
+                <FILE id="NSPwQ4" name="filled_area.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/filled_area.cpp"/>
+                <FILE id="ubY7fl" name="filled_area.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/filled_area.h"/>
+                <FILE id="TEKeFy" name="function_line.cpp" compile="1" resource="0"
+                      file="External/matplotplusplus/source/matplot/axes_objects/function_line.cpp"/>
+                <FILE id="RC46gw" name="function_line.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/function_line.h"/>
+                <FILE id="Mg3b2Q" name="histogram.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/histogram.cpp"/>
+                <FILE id="VshmCQ" name="histogram.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/histogram.h"/>
+                <FILE id="k0qhPQ" name="labels.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/labels.cpp"/>
+                <FILE id="OJwZtW" name="labels.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/labels.h"/>
+                <FILE id="ABX8as" name="line.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/line.cpp"/>
+                <FILE id="CT3L7z" name="line.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/line.h"/>
+                <FILE id="ksDWvV" name="matrix.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/matrix.cpp"/>
+                <FILE id="j9kwlT" name="matrix.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/matrix.h"/>
+                <FILE id="vEkEIO" name="network.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/network.cpp"/>
+                <FILE id="N44WVP" name="network.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/network.h"/>
+                <FILE id="PAMAam" name="parallel_lines.cpp" compile="1" resource="0"
+                      file="External/matplotplusplus/source/matplot/axes_objects/parallel_lines.cpp"/>
+                <FILE id="RNwBTl" name="parallel_lines.h" compile="0" resource="0"
+                      file="External/matplotplusplus/source/matplot/axes_objects/parallel_lines.h"/>
+                <FILE id="LP16v1" name="stair.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/stair.cpp"/>
+                <FILE id="bqRVxG" name="stair.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/stair.h"/>
+                <FILE id="wtLW4r" name="string_function.cpp" compile="1" resource="0"
+                      file="External/matplotplusplus/source/matplot/axes_objects/string_function.cpp"/>
+                <FILE id="UEIPPZ" name="string_function.h" compile="0" resource="0"
+                      file="External/matplotplusplus/source/matplot/axes_objects/string_function.h"/>
+                <FILE id="CiXwaO" name="surface.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/surface.cpp"/>
+                <FILE id="upRmzA" name="surface.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/surface.h"/>
+                <FILE id="GTsq1D" name="vectors.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/vectors.cpp"/>
+                <FILE id="XNwKF4" name="vectors.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/axes_objects/vectors.h"/>
+              </GROUP>
+              <GROUP id="{C2CD8104-FD0A-692C-A800-0F0AA8F5554E}" name="backend">
+                <FILE id="yeRHdR" name="backend_interface.cpp" compile="1" resource="0"
+                      file="External/matplotplusplus/source/matplot/backend/backend_interface.cpp"/>
+                <FILE id="wD5AXD" name="backend_interface.h" compile="0" resource="0"
+                      file="External/matplotplusplus/source/matplot/backend/backend_interface.h"/>
+                <FILE id="TbAhpc" name="backend_registry.cpp" compile="1" resource="0"
+                      file="External/matplotplusplus/source/matplot/backend/backend_registry.cpp"/>
+                <FILE id="QAQu7A" name="backend_registry.h" compile="0" resource="0"
+                      file="External/matplotplusplus/source/matplot/backend/backend_registry.h"/>
+                <FILE id="QOdw2e" name="gnuplot.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/backend/gnuplot.cpp"/>
+                <FILE id="JQfkTq" name="gnuplot.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/backend/gnuplot.h"/>
+                <FILE id="hw2FXx" name="opengl.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/backend/opengl.cpp"/>
+                <FILE id="CGVi8c" name="opengl.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/backend/opengl.h"/>
+                <FILE id="fMgZxw" name="opengl_embed.cpp" compile="1" resource="0"
+                      file="External/matplotplusplus/source/matplot/backend/opengl_embed.cpp"/>
+                <FILE id="lzNA9V" name="opengl_embed.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/backend/opengl_embed.h"/>
+              </GROUP>
+              <GROUP id="{5A4BA840-F310-3F2E-F425-5F314FCEC744}" name="core">
+                <FILE id="im8guC" name="axes_object.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/core/axes_object.cpp"/>
+                <FILE id="W8WBih" name="axes_object.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/core/axes_object.h"/>
+                <FILE id="DZlaf1" name="axes_type.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/core/axes_type.cpp"/>
+                <FILE id="hJXAbc" name="axes_type.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/core/axes_type.h"/>
+                <FILE id="xbdk3N" name="axis_type.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/core/axis_type.cpp"/>
+                <FILE id="KEFsl3" name="axis_type.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/core/axis_type.h"/>
+                <FILE id="rlFvRF" name="figure_registry.cpp" compile="1" resource="0"
+                      file="External/matplotplusplus/source/matplot/core/figure_registry.cpp"/>
+                <FILE id="ftZD9y" name="figure_registry.h" compile="0" resource="0"
+                      file="External/matplotplusplus/source/matplot/core/figure_registry.h"/>
+                <FILE id="F5C4Cg" name="figure_type.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/core/figure_type.cpp"/>
+                <FILE id="zhbl9g" name="figure_type.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/core/figure_type.h"/>
+                <FILE id="pjeqmO" name="legend.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/core/legend.cpp"/>
+                <FILE id="y1Q2vN" name="legend.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/core/legend.h"/>
+                <FILE id="ffFbmu" name="line_spec.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/core/line_spec.cpp"/>
+                <FILE id="HZarYF" name="line_spec.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/core/line_spec.h"/>
+              </GROUP>
+              <GROUP id="{4D2C3FC2-D1A7-6B80-03AA-CAD92CC1B023}" name="freestanding">
+                <FILE id="Q2tULu" name="axes_functions.cpp" compile="1" resource="0"
+                      file="External/matplotplusplus/source/matplot/freestanding/axes_functions.cpp"/>
+                <FILE id="yEVBf3" name="axes_functions.h" compile="0" resource="0"
+                      file="External/matplotplusplus/source/matplot/freestanding/axes_functions.h"/>
+                <FILE id="HP0A2Z" name="axes_lim.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/freestanding/axes_lim.h"/>
+                <FILE id="dZc71R" name="figure_functions.h" compile="0" resource="0"
+                      file="External/matplotplusplus/source/matplot/freestanding/figure_functions.h"/>
+                <FILE id="hiafFw" name="histcounts.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/freestanding/histcounts.cpp"/>
+                <FILE id="hZwgzr" name="histcounts.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/freestanding/histcounts.h"/>
+                <FILE id="eoOXVJ" name="plot.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/freestanding/plot.h"/>
+              </GROUP>
+              <GROUP id="{0276B2AE-3F3C-3D93-5284-75C971F127DF}" name="util">
+                <FILE id="RynkBH" name="colors.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/util/colors.cpp"/>
+                <FILE id="DXAXcH" name="colors.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/util/colors.h"/>
+                <FILE id="oR7HVt" name="common.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/util/common.cpp"/>
+                <FILE id="m3S3hp" name="common.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/util/common.h"/>
+                <FILE id="UQrdpZ" name="concepts.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/util/concepts.h"/>
+                <FILE id="pwXrGO" name="contourc.cpp" compile="1" resource="0" file="External/matplotplusplus/source/matplot/util/contourc.cpp"/>
+                <FILE id="fPVNCk" name="contourc.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/util/contourc.h"/>
+                <FILE id="SXvkT3" name="geodata.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/util/geodata.h"/>
+                <FILE id="LCWKrl" name="handle_types.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/util/handle_types.h"/>
+                <FILE id="prREue" name="keywords.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/util/keywords.h"/>
+                <FILE id="anJraD" name="popen.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/util/popen.h"/>
+                <FILE id="TQQBpv" name="type_traits.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/util/type_traits.h"/>
+                <FILE id="OQEnOe" name="world_cities.cpp" compile="1" resource="0"
+                      file="External/matplotplusplus/source/matplot/util/world_cities.cpp"/>
+                <FILE id="LYRUyV" name="world_map_10m.cpp" compile="1" resource="0"
+                      file="External/matplotplusplus/source/matplot/util/world_map_10m.cpp"/>
+                <FILE id="jSL7E5" name="world_map_50m.cpp" compile="1" resource="0"
+                      file="External/matplotplusplus/source/matplot/util/world_map_50m.cpp"/>
+                <FILE id="ApanRk" name="world_map_110m.cpp" compile="1" resource="0"
+                      file="External/matplotplusplus/source/matplot/util/world_map_110m.cpp"/>
+              </GROUP>
+              <FILE id="zI31G3" name="matplot.h" compile="0" resource="0" file="External/matplotplusplus/source/matplot/matplot.h"/>
+            </GROUP>
+          </GROUP>
+        </GROUP>
         <FILE id="HHF9ZW" name="glad.c" compile="1" resource="0" file="External/libigl/external/glad/src/glad.c"/>
       </GROUP>
       <GROUP id="{262279F8-D3BA-44F1-E9A5-D4886273EA73}" name="Public">
@@ -62,12 +204,12 @@
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX" externalLibraries="glfw&#10;gmp&#10;mpfr&#10;boost_thread-mt&#10;boost_timer&#10;matplot"
+    <XCODE_MAC targetFolder="Builds/MacOSX" externalLibraries="glfw&#10;gmp&#10;mpfr&#10;boost_thread-mt&#10;boost_timer&#10;x11"
                xcodeValidArchs="x86_64">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" targetName="OpenPL" headerPath="/usr/local/include&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include"
+        <CONFIGURATION isDebug="1" name="Debug" targetName="OpenPL" headerPath="/usr/local/include&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/source&#10;../../External/matplotplusplus/source/3rd_party/nodesoup/include&#10;../../External/matplotplusplus/source/3rd_party/cimg"
                        libraryPath="/usr/local/lib" osxCompatibility="10.15 SDK"/>
-        <CONFIGURATION isDebug="0" name="Release" targetName="OpenPL" headerPath="/usr/local/include&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include"
+        <CONFIGURATION isDebug="0" name="Release" targetName="OpenPL" headerPath="/usr/local/include&#10;../../External/libigl/include&#10;../../External/libigl/external/eigen&#10;../../External/libigl/external/glad/include&#10;../../External/matplotplusplus/source&#10;../../External/matplotplusplus/source/3rd_party/nodesoup/include&#10;../../External/matplotplusplus/source/3rd_party/cimg"
                        libraryPath="/usr/local/lib" osxCompatibility="10.15 SDK"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
