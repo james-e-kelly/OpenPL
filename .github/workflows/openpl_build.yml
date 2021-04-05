@@ -100,4 +100,4 @@ jobs:
           # Artifact name
           name: OpenPL.dll
           # A file, directory or wildcard pattern that describes what to upload
-          path: 'OpenPL\Builds\VisualStudio2019\x64\Release\Dynamic Library\OpenPL.dll'
+          path: 'OpenPL\Builds\VisualStudio2019\x64\Release\Dynamic Library\*.dll'
