@@ -256,17 +256,6 @@ VertexMatrix GetPointsToCheckForVoxel(Eigen::Vector3d VoxelPosition, Eigen::Vect
 
 PL_RESULT PL_SCENE::FillVoxels()
 {
-    // First thought on how to do this:
-    // Create an AABB for each mesh
-    // Find all voxel cells that fit within the box
-    // Interate over each face and find the bounding box of that face
-    // Find the cells which fit within the face AABB
-    // Populate those cells with absorption values
-    
-    // It's probably more accurate to shoot a ray between each vertex
-    // However, at the sizes of the voxels and faces, this shouldn't be too much of a problem
-    // But if accuracy does become a problem, I think that will be the solution
-    
     // First, init all Beta fields to 1
     // Ie, to open air
     
