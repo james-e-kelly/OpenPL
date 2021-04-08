@@ -433,6 +433,9 @@
     <ClCompile Include="..\..\Source\Private\Objects\Private\Simulators\SimulatorFDTD.cpp">
       <Filter>OpenPL\Source\Private\Objects\Private\Simulators</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Private\DebugOpenGL.cpp">
+      <Filter>OpenPL\Source\Private\Objects\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Private\Objects\Public\MatPlotPlotter.cpp">
       <Filter>OpenPL\Source\Private\Objects\Private</Filter>
     </ClCompile>
@@ -1910,6 +1913,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Private\Objects\Public\Simulators\SimulatorFDTD.h">
       <Filter>OpenPL\Source\Private\Objects\Public\Simulators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Private\Objects\Public\DebugOpenGL.h">
+      <Filter>OpenPL\Source\Private\Objects\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Private\Objects\Public\MatPlotPlotter.h">
       <Filter>OpenPL\Source\Private\Objects\Public</Filter>

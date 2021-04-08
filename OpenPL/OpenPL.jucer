@@ -172,6 +172,7 @@
               <FILE id="sCSpgD" name="SimulatorFDTD.cpp" compile="1" resource="0"
                     file="Source/Private/Objects/Private/Simulators/SimulatorFDTD.cpp"/>
             </GROUP>
+            <FILE id="w1kcy6" name="DebugOpenGL.cpp" compile="1" resource="0" file="Source/Private/DebugOpenGL.cpp"/>
             <FILE id="xtMQnK" name="MatPlotPlotter.cpp" compile="1" resource="0"
                   file="Source/Private/Objects/Public/MatPlotPlotter.cpp"/>
             <FILE id="GKywbc" name="PL_SCENE.cpp" compile="1" resource="0" file="Source/Private/Objects/Private/PL_SCENE.cpp"/>
@@ -187,6 +188,7 @@
                     file="Source/Private/Objects/Public/Simulators/SimulatorBasic3D.h"/>
               <FILE id="bL8rOF" name="SimulatorFDTD.h" compile="0" resource="0" file="Source/Private/Objects/Public/Simulators/SimulatorFDTD.h"/>
             </GROUP>
+            <FILE id="kiUlDX" name="DebugOpenGL.h" compile="0" resource="0" file="Source/Private/Objects/Public/DebugOpenGL.h"/>
             <FILE id="wtJlkV" name="MatPlotPlotter.h" compile="0" resource="0"
                   file="Source/Private/Objects/Public/MatPlotPlotter.h"/>
             <FILE id="TmcdGa" name="PL_SCENE.h" compile="0" resource="0" file="Source/Private/Objects/Public/PL_SCENE.h"/>

@@ -141,6 +141,7 @@
     <ClCompile Include="..\..\Source\Private\Objects\Private\Simulators\SimulatorBasic.cpp"/>
     <ClCompile Include="..\..\Source\Private\Objects\Private\Simulators\SimulatorBasic3D.cpp"/>
     <ClCompile Include="..\..\Source\Private\Objects\Private\Simulators\SimulatorFDTD.cpp"/>
+    <ClCompile Include="..\..\Source\Private\DebugOpenGL.cpp"/>
     <ClCompile Include="..\..\Source\Private\Objects\Public\MatPlotPlotter.cpp"/>
     <ClCompile Include="..\..\Source\Private\Objects\Private\PL_SCENE.cpp"/>
     <ClCompile Include="..\..\Source\Private\Objects\Private\PL_SYSTEM.cpp"/>
@@ -1400,6 +1401,7 @@
     <ClInclude Include="..\..\Source\Private\Objects\Public\Simulators\SimulatorBasic.h"/>
     <ClInclude Include="..\..\Source\Private\Objects\Public\Simulators\SimulatorBasic3D.h"/>
     <ClInclude Include="..\..\Source\Private\Objects\Public\Simulators\SimulatorFDTD.h"/>
+    <ClInclude Include="..\..\Source\Private\Objects\Public\DebugOpenGL.h"/>
     <ClInclude Include="..\..\Source\Private\Objects\Public\MatPlotPlotter.h"/>
     <ClInclude Include="..\..\Source\Private\Objects\Public\PL_SCENE.h"/>
     <ClInclude Include="..\..\Source\Private\Objects\Public\PL_SYSTEM.h"/>

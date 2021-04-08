@@ -105,11 +105,6 @@ public:
     PL_RESULT RemoveSourceLocation(int Index);
     
     /**
-     * Quick internal debugging method for displaying the meshes within the scene.
-     */
-    PL_RESULT OpenOpenGLDebugWindow() const;
-    
-    /**
      * Converts the scene's geometry to voxels, ready for simulation.
      *
      * @param CenterPosition Center of the AABB containing all the voxels.
@@ -125,6 +120,11 @@ public:
     PL_RESULT GetVoxelLocation(PLVector* OutVoxelLocation, int Index);
     
     PL_RESULT GetVoxelAbsorpivity(float* OutAbsorpivity, int Index);
+    
+    /**
+     * Get all the meshes in this scene.
+     */
+    PL_RESULT GetMeshes(const std::vector<PL_MESH>* OutMeshes) const;
     
 private:
     PL_SYSTEM* OwningSystem;

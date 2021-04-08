@@ -11,6 +11,7 @@
 #include "OpenPL.h"
 #include "PL_SYSTEM.h"
 #include "PL_SCENE.h"
+#include "DebugOpenGL.h"
 
 /**
  * Testing to try and create the wave equation.
@@ -161,7 +162,7 @@ PL_RESULT PL_Scene_Simulate(PL_SCENE* Scene)
 
 PL_RESULT PL_Scene_Debug(PL_SCENE* Scene)
 {
-    return Scene->OpenOpenGLDebugWindow();
+    return OpenOpenGLDebugWindow(Scene);
 }
 
 PL_RESULT PL_Scene_GetVoxelsCount(PL_SCENE* Scene, int* OutVoxelCount)

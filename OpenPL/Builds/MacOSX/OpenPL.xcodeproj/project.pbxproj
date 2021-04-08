@@ -225,6 +225,10 @@
 			isa = PBXBuildFile;
 			fileRef = 7ECD6F06F405D693DBD17B98;
 		};
+		4E0983667197F22375524F37 = {
+			isa = PBXBuildFile;
+			fileRef = 6FA7401ABB0DD0217DFCE0B7;
+		};
 		659436F445C7402412FEBAB6 = {
 			isa = PBXBuildFile;
 			fileRef = EE5A4DFBFB083FFA24C04847;
@@ -718,6 +722,13 @@
 			path = "../../External/matplotplusplus/source/matplot/axes_objects/string_function.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
+		6FA7401ABB0DD0217DFCE0B7 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = DebugOpenGL.cpp;
+			path = ../../Source/Private/DebugOpenGL.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		6FF5E8CCF2AF91A7132889EC = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -828,6 +839,13 @@
 			lastKnownFileType = sourcecode.c.h;
 			name = "function_line.h";
 			path = "../../External/matplotplusplus/source/matplot/axes_objects/function_line.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		8A936F127DFBB7BB4E9A5DD9 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = DebugOpenGL.h;
+			path = ../../Source/Private/Objects/Public/DebugOpenGL.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		8B1F59E91D8F647F6370892D = {
@@ -1481,6 +1499,7 @@
 			isa = PBXGroup;
 			children = (
 				1D29FE4606A2D8DF4D7A696C,
+				6FA7401ABB0DD0217DFCE0B7,
 				EE5A4DFBFB083FFA24C04847,
 				51AEE0E3931BC98051493CD6,
 				2059C9BD7A495C812A606E93,
@@ -1504,6 +1523,7 @@
 			isa = PBXGroup;
 			children = (
 				48CB7AF8385250D3B204FFA8,
+				8A936F127DFBB7BB4E9A5DD9,
 				07894880A7A751895C590D78,
 				CBB59A4EDC42B7D715DBCA46,
 				384C12B37629136E188B646A,
@@ -1961,6 +1981,7 @@
 				CFB17D69D1105BD410A3C27B,
 				126A91437EE679E30DA35E5A,
 				851C4AD42B6A2BE6F064620C,
+				4E0983667197F22375524F37,
 				659436F445C7402412FEBAB6,
 				FF3F43DF8DD11EF9DBAEA2E1,
 				D7894FCB90431EB2E838612D,
