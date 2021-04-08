@@ -155,11 +155,6 @@ PL_RESULT PL_SCENE::RemoveSourceLocation(int Index)
 
 PL_RESULT PL_SCENE::Voxelise(PLVector CenterPosition, PLVector Size, float VoxelSize)
 {
-    if (Meshes.size() == 0)
-    {
-        return PL_ERR;
-    }
-    
     if (Size.X < VoxelSize || Size.Y < VoxelSize || Size.Z < VoxelSize)
     {
         DebugWarn("Can't create voxel lattice of that size. No voxels would fit inside it");
