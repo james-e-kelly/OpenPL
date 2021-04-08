@@ -368,7 +368,10 @@ PL_RESULT PL_SCENE::Simulate()
 //    }
     
     // Yes, we're not multithreaded anymore but I need this to finish
-    VoxelThread.join();
+    if (VoxelThread.joinable())
+    {
+        VoxelThread.join();
+    }
     
     SimulatorPointer = std::unique_ptr<class Simulator>(new SimulatorFDTD());
     
