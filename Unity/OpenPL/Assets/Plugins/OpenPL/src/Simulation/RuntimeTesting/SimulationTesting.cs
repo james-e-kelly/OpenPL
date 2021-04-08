@@ -22,8 +22,28 @@ namespace OpenPL
             }
         }
 
+        [AOT.MonoPInvokeCallback(typeof(DEBUG_CALLBACK))]
+        static RESULT DEBUG_CALLBACK_METHOD(string Message, DEBUG_LEVEL Level)
+        {
+            if (Level == DEBUG_LEVEL.Log)
+            {
+                UnityEngine.Debug.Log(string.Format(("[OpenPL] {0}"), Message));
+            }
+            else if (Level == DEBUG_LEVEL.Warn)
+            {
+                UnityEngine.Debug.LogWarning(string.Format(("[OpenPL] {0}"), Message));
+            }
+            else if (Level == DEBUG_LEVEL.Error)
+            {
+                UnityEngine.Debug.LogError(string.Format(("[OpenPL] {0}"), Message));
+            }
+            return RESULT.OK;
+        }
+
         void Start()
         {
+            CheckResult(Debug.Initialize(DEBUG_CALLBACK_METHOD), "Debug.Init");
+
             CheckResult(System.Create(out SystemInstance), "System.Create");
 
             if(!SystemInstance.HasHandle())
