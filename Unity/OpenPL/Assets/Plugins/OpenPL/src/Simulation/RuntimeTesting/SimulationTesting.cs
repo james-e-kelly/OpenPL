@@ -71,6 +71,12 @@ namespace OpenPL
 
                 MeshFilter mesh = currentGameObject.GetComponent<MeshFilter>();
 
+                if (!mesh.mesh.isReadable)
+                {
+                    UnityEngine.Debug.LogWarning("Mesh is not readable. Won't be added to the simulation");
+                    continue;
+                }
+
                 List<Vector3> Verts = new List<Vector3>();
                 mesh.mesh.GetVertices(Verts);
                 List<int> Inds = new List<int>();
