@@ -58,18 +58,24 @@ namespace OpenPL
                 return;
             }
 
-            GameObject[] allGameObjects = FindObjectsOfType<GameObject>();
+            AcousticGeometry[] allGameObjects = FindObjectsOfType<AcousticGeometry>();
 
             for (int i = 0; i < allGameObjects.Length; i++)
             {
-                GameObject currentGameObject = allGameObjects[i];
+                AcousticGeometry currentGameObject = allGameObjects[i];
 
-                if (!currentGameObject || !currentGameObject.isStatic)
+                if (!currentGameObject)
                 {
                     continue;
                 }
 
                 MeshFilter mesh = currentGameObject.GetComponent<MeshFilter>();
+
+                if (!mesh)
+                {
+                    UnityEngine.Debug.LogError("[OpenPL] Acoustic Geometry object found with no mesh. This should not be possible");
+                    continue;
+                }
 
                 if (!mesh.mesh.isReadable)
                 {
