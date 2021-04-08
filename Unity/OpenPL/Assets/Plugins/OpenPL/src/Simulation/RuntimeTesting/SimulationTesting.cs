@@ -12,6 +12,7 @@ namespace OpenPL
 
         public bool DebugMeshes;
         public float VoxelSize = 1f;
+        public Vector3 simulationSize = new Vector3(10, 10, 10);
 
         void CheckResult(RESULT Result, string Message)
         {
@@ -76,7 +77,7 @@ namespace OpenPL
 
 
             PLVector Pos = new Vector3(0, 0, 0).ToPLVector();
-            PLVector Size = new Vector3(10, 10, 10).ToPLVector();
+            PLVector Size = simulationSize.ToPLVector();
 
             CheckResult(SceneInstance.Voxelise(ref Pos, ref Size, VoxelSize), "Scene.Voxelise");
 
@@ -98,6 +99,9 @@ namespace OpenPL
 
         void OnDrawGizmos()
         {
+            Gizmos.color = Color.white;
+            Gizmos.DrawWireCube(Vector3.zero, simulationSize);
+
             if (SystemInstance.HasHandle() && SceneInstance.HasHandle())
             {
                 int Count = 0;
