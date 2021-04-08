@@ -378,9 +378,14 @@ PL_RESULT PL_SCENE::Simulate()
     }
     DebugLog(Stream.str().c_str());
     
-    MatPlotPlotter plotter(SimulatorPointer->GetSimulatedLattice(), Voxels.Size(0,0), Voxels.Size(0,1), Voxels.Size(0,2), TimeSteps);
-    plotter.PlotOneDimensionWaterfall();
+    const std::vector<std::vector<PLVoxel>>& SimulatedLattice = SimulatorPointer->GetSimulatedLattice();
     
+    if (SimulatedLattice.size() > 0)
+    {
+        MatPlotPlotter plotter(SimulatedLattice, Voxels.Size(0,0), Voxels.Size(0,1), Voxels.Size(0,2), TimeSteps);
+        plotter.PlotOneDimensionWaterfall();
+    }
+
     return PL_OK;
 }
 

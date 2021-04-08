@@ -9,9 +9,16 @@
 */
 
 #include "Simulators/SimulatorFDTD.h"
+#include "OpenPLCommonPrivate.h"
 
 void SimulatorFDTD::Simulate()
 {
+    if (Lattice == nullptr || Lattice->size() == 0)
+    {
+        DebugError("Voxel lattice is either null or has no voxels!");
+        return;
+    }
+    
     // Reset all pressure and velocity
     {
         for(auto& Voxel : *Lattice)
