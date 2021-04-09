@@ -524,8 +524,8 @@ PL_RESULT PL_SCENE::VoxeliseInternal(PLVector CenterPosition, PLVector Size, flo
     return FillVoxels();
 }
 
-PL_RESULT PL_SCENE::GetMeshes(const std::vector<PL_MESH>* OutMeshes) const
+PL_RESULT PL_SCENE::GetMeshes(const std::vector<PL_MESH>** OutMeshes) const
 {
-    OutMeshes = &Meshes;
+    *OutMeshes = &Meshes;
     return PL_OK;
 }

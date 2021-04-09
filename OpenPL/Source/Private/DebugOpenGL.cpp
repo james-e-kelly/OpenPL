@@ -15,8 +15,14 @@
 PL_RESULT OpenOpenGLDebugWindow(PL_SCENE* Scene)
 {
     igl::opengl::glfw::Viewer viewer;
-    const std::vector<PL_MESH>* Meshes;
-    Scene->GetMeshes(Meshes);
+    const std::vector<PL_MESH>* Meshes = nullptr;
+    PL_RESULT GetMeshesResult = Scene->GetMeshes(&Meshes);
+    
+    if (GetMeshesResult != PL_OK || Meshes == nullptr)
+    {
+        DebugWarn("Could not get meshes to render");
+        return PL_ERR;
+    }
     
     for (auto& Mesh : *Meshes)
     {

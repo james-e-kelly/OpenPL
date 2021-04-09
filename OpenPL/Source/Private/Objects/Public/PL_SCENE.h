@@ -124,7 +124,7 @@ public:
     /**
      * Get all the meshes in this scene.
      */
-    PL_RESULT GetMeshes(const std::vector<PL_MESH>* OutMeshes) const;
+    PL_RESULT GetMeshes(const std::vector<PL_MESH>** OutMeshes) const;
     
 private:
     PL_SYSTEM* OwningSystem;
