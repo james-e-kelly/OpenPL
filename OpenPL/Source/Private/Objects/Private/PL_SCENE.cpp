@@ -379,6 +379,8 @@ PL_RESULT PL_SCENE::Simulate()
     {
         MatPlotPlotter plotter(SimulatedLattice, Voxels.Size(0,0), Voxels.Size(0,1), Voxels.Size(0,2), TimeSteps);
         plotter.PlotOneDimensionWaterfall();
+        plotter.PlotOneDimensionWaterfall(1, 0);
+        plotter.PlotOneDimensionWaterfall(5, 0);
     }
 
     return PL_OK;

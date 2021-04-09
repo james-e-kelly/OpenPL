@@ -13,6 +13,7 @@
 #include <thread>
 #include <chrono>
 #include <cstdlib>
+#include <sstream>
 
 using namespace matplot;
 
@@ -90,18 +91,33 @@ void MatPlotPlotter::PlotOneDimensionWaterfall(int YIndex, int ZIndex)
     {
         for (int TimeStep = 0; TimeStep < TimeSteps; ++TimeStep)
         {
-            const PLVoxel& CurrentVoxel = Lattice[ThreeDimToOneDim(x, YIndex, ZIndex, XSize, YSize)][TimeStep];
-            double AirPressure = CurrentVoxel.AirPressure;
+            const int Index = ThreeDimToOneDim(x, YIndex, ZIndex, XSize, YSize);
             
-            XPoints[x][TimeStep] = x;
-            YPoints[x][TimeStep] = TimeStep;
-            ZPoints[x][TimeStep] = AirPressure;
+            if (Index < Lattice.size())
+            {
+                const PLVoxel& CurrentVoxel = Lattice[Index][TimeStep];
+                double AirPressure = CurrentVoxel.AirPressure;
+                
+                XPoints[x][TimeStep] = x;
+                YPoints[x][TimeStep] = TimeStep;
+                ZPoints[x][TimeStep] = AirPressure;
+            }
+            else
+            {
+                XPoints[x][TimeStep] = x;
+                YPoints[x][TimeStep] = TimeStep;
+                ZPoints[x][TimeStep] = 0;
+                DebugWarn("Tried plotting something outside of the lattice. Defaulting to 0 air pressure");
+            }
         }
     }
     
     PlotFigure->current_axes()->waterfall(XPoints, YPoints, ZPoints);
     
-    PlotFigure->current_axes()->title(std::string("Air Pressure Along The X Axis"));
+    std::ostringstream StringStream;
+    StringStream << "Air Pressure Along The X Axis At Y = " << YIndex << ", Z = " << ZIndex;
+    
+    PlotFigure->current_axes()->title(StringStream.str());
     PlotFigure->current_axes()->xlabel(std::string("X Voxel"));
     PlotFigure->current_axes()->ylabel(std::string("Time Step"));
     PlotFigure->current_axes()->zlabel(std::string("Air Pressure"));
