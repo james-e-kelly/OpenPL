@@ -44,14 +44,13 @@ void DebugError(const char* Message);
  */
 int ThreeDimToOneDim(int X, int Y, int Z, int XSize, int YSize);
 
+void IndexToThreeDim(int Index, int XSize, int YSize, int& OutX, int& OutY, int& OutZ);
+
 /**
  * Defines one voxel cell within the voxel geometry
  */
 struct JUCE_API PLVoxel
-{
-    /** Position of the voxel in the world. TODO: Replace voxel positions with a position based off of index and grid offset*/
-    Eigen::Vector3d WorldPosition;
-    
+{    
     /**0-1 absorption of the voxel*/
     double Absorptivity;
     
@@ -69,6 +68,16 @@ struct JUCE_API PLVoxel
     
     /**Used during simulation, defines whether the voxel is open or closed. 0 or 1. 0 = closed. 1 = open*/
     short Beta;
+    
+    bool operator == (const PLVoxel& Other) const
+    {
+        return Absorptivity == Other.Absorptivity &&
+        AirPressure == Other.AirPressure &&
+        ParticleVelocityX == Other.ParticleVelocityX &&
+        ParticleVelocityY == Other.ParticleVelocityY &&
+        ParticleVelocityZ == Other.ParticleVelocityZ &&
+        Beta == Other.Beta;
+    }
 };
 
 /**

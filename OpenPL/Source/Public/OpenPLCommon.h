@@ -80,6 +80,11 @@ struct JUCE_API PLVector
         Z(Z)
     { }
     
+    float Length() const
+    {
+        return X + Y + Z;
+    }
+    
     PLVector& operator = (const PLVector& Other)
     {
         this->X = Other.X;

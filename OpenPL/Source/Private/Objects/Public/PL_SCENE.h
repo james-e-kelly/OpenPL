@@ -45,6 +45,22 @@ public:
     PL_RESULT GetSystem(PL_SYSTEM** OutSystem) const;
     
     /**
+     * Set the position of this scene. Will not create new voxels, but will update voxel position correctly if voxels are already created.
+     *
+     * @param ScenePosition Position of the scene
+     */
+    PL_RESULT SetScenePosition(const PLVector& ScenePosition);
+    
+    /**
+     * Create the voxels for this scene.
+     *
+     * Use SetScenePosition to move the scene away from the default 0,0,0.
+     * @param SceneSize Size of the voxel bounds
+     * @param VoxelSize Size of each voxel
+     */
+    PL_RESULT CreateVoxels(const PLVector& SceneSize, float VoxelSize);
+    
+    /**
      * Takes generic mesh data from the game, converts it to internal data and stores it within the scene.
      *
      * @param Scene Scene to add the mesh to.
@@ -126,8 +142,26 @@ public:
      */
     PL_RESULT GetMeshes(const std::vector<PL_MESH>** OutMeshes) const;
     
+    PL_RESULT GetScenePosition(PLVector* OutScenePosition) const;
+    
+    PL_RESULT GetSceneSize(PLVector* OutSceneSize) const;
+    
+    PL_RESULT GetSceneVoxelSize(float* OutVoxelSize) const;
+    
+    PL_RESULT GetScenePositionBottomBackLeftCorner(PLVector* OutBottomBackLeftCorner) const;
+    
+    PL_RESULT GetVoxelPosition(int VoxelIndex, PLVector* OutVoxelLocation) const;
+    
+    PL_RESULT GetVoxelPosition(const PLVoxel& Voxel, PLVector* OutVoxelLocation) const;
+    
+    PL_RESULT GetVoxelAtPosition(const PLVector& Position, PLVoxel* OutVoxel) const;
+    
 private:
     PL_SYSTEM* OwningSystem;
+    
+    PLVector ScenePosition;
+    PLVector SceneSize;
+    float VoxelSize;
     
     std::vector<PL_MESH> Meshes;
     std::vector<PLVector> ListenerLocations;

@@ -18,6 +18,13 @@
 #include "Simulators/SimulatorBasic.h"
 #include <boost/timer/timer.hpp>
 
+Eigen::Vector3d CreateEigenVectorFromPL(const PLVector& Vector)
+{
+    Eigen::Vector3d EigenVector;
+    EigenVector << (Eigen::Vector3d() << Vector.X, Vector.Y, Vector.Z).finished();
+    return EigenVector;
+}
+
 PL_SCENE::PL_SCENE(PL_SYSTEM* System)
 :   OwningSystem(System)
 { }
@@ -28,6 +35,74 @@ PL_SCENE::~PL_SCENE()
 PL_RESULT PL_SCENE::GetSystem(PL_SYSTEM** OutSystem) const
 {
     *OutSystem = OwningSystem;
+    return PL_OK;
+}
+
+PL_RESULT PL_SCENE::SetScenePosition(const PLVector& ScenePosition)
+{
+    this->ScenePosition = ScenePosition;
+    return PL_OK;
+}
+
+PL_RESULT PL_SCENE::CreateVoxels(const PLVector& SceneSize, float VoxelSize)
+{
+    if (this->SceneSize == SceneSize && this->VoxelSize == VoxelSize)
+    {
+        // Return straight away if the voxels are already created for this size
+        return PL_OK;
+    }
+    
+    if (SceneSize.Length() <= 0.0f || VoxelSize <= 0.0f)
+    {
+        DebugError("Scene size or Voxel size is invalid");
+        return PL_ERR_INVALID_PARAM;
+    }
+    
+    this->SceneSize = SceneSize;
+    this->VoxelSize = VoxelSize;
+    
+    // Create AABB
+    const PLVector Min = ScenePosition - SceneSize / 2;
+    const PLVector Max = ScenePosition + SceneSize / 2;
+    
+    Eigen::Vector3d EigenMin;
+    Eigen::Vector3d EigenMax;
+    EigenMin << (Eigen::Vector3d() << Min.X, Min.Y, Min.Z).finished();
+    EigenMax << (Eigen::Vector3d() << Max.X, Max.Y, Max.Z).finished();
+    
+    Eigen::AlignedBox<double,3> Bounds = Eigen::AlignedBox<double,3>(EigenMin, EigenMax);
+    
+    // TODO: Change voxel size to something set by the user per simulation
+    const int VoxelsInSide = static_cast<int>(SceneSize.X / VoxelSize);
+    
+    // Matrix<Scalar, Rows, Columns, Options, MaxRows, MaxColumns>
+    Eigen::Matrix<double, -1, -1, 0, -1, -1> CenterPositions;
+    Eigen::MatrixXi Side;
+    
+    // Calculates all center positions of a voxel lattice within a bounding box
+    igl::voxel_grid(Bounds, VoxelsInSide, 0, CenterPositions, Side);
+    
+    const int XSize = Side(0,0);
+    const int YSize = Side(0,1);
+    const int ZSize = Side(0,2);
+    
+    // We can assume if any sides of the lattice are 0, something went wrong
+    // Even if we wanted a 2D grid, we'd still need at least 1 along the Z
+    if (XSize == 0 || YSize == 0 || ZSize == 0)
+    {
+        DebugError("Failed to create voxels");
+        return PL_ERR;
+    }
+    
+    // Set voxels
+    PL_VOXEL_GRID VoxelGrid;
+    VoxelGrid.Bounds = Bounds;
+    VoxelGrid.Size = Side;
+    VoxelGrid.VoxelSize = VoxelSize;
+    VoxelGrid.Voxels = std::vector<PLVoxel>(XSize*YSize*ZSize); // TODO: Actually fill the voxels with values
+    
+    Voxels = VoxelGrid;
+    
     return PL_OK;
 }
 
@@ -282,7 +357,9 @@ PL_RESULT PL_SCENE::FillVoxels()
         // If it is, add it to the list
         for (auto& Cell : Voxels.Voxels)
         {
-            Eigen::Vector3d Pos (Cell.WorldPosition);
+            PLVector VoxelWorldPosition;
+            GetVoxelPosition(Cell, &VoxelWorldPosition);
+            Eigen::Vector3d Pos = CreateEigenVectorFromPL(VoxelWorldPosition);
             Eigen::Vector3d Min = Pos - (VoxelSize / 2);
             Eigen::Vector3d Max = Pos + (VoxelSize / 2);
             
@@ -311,7 +388,10 @@ PL_RESULT PL_SCENE::FillVoxels()
         
         for (auto& MeshCell : MeshCells)
         {
-            VertexMatrix PointsToCheck = GetPointsToCheckForVoxel(MeshCell->WorldPosition, VoxelSize);
+            PLVector VoxelWorldPosition;
+            GetVoxelPosition(*MeshCell, &VoxelWorldPosition);
+            Eigen::Vector3d VoxelEigenPosition = CreateEigenVectorFromPL(VoxelWorldPosition);
+            VertexMatrix PointsToCheck = GetPointsToCheckForVoxel(VoxelEigenPosition, VoxelSize);
             IndiceMatrix ReturnPointsInside;
             
             igl::copyleft::cgal::points_inside_component(TransposedVertices, TransposedIndices, PointsToCheck, ReturnPointsInside);
@@ -363,7 +443,7 @@ PL_RESULT PL_SCENE::Simulate()
     Settings.Resolution = Low;
     Settings.TimeSteps = TimeSteps;
     
-    SimulatorPointer->Init(Voxels, Settings);
+    SimulatorPointer->Init(this, Voxels, Settings);
     
     std::ostringstream Stream;
     Stream << "Simulating Over " << Voxels.Voxels.size() << " Voxels\n";
@@ -422,18 +502,7 @@ PL_RESULT PL_SCENE::GetVoxelLocation(PLVector* OutVoxelLocation, int Index)
         return PL_ERR;  // Should change this to a warning or something similar
     }
     
-    const Eigen::Vector3d* VectorLocation = &Voxels.Voxels[Index].WorldPosition;
-    OutVoxelLocation->X = VectorLocation->x();
-    OutVoxelLocation->Y = VectorLocation->y();
-    OutVoxelLocation->Z = VectorLocation->z();
-    
-    // WARNING:
-    // There was previously code here that exposed a bug
-    // *OutVoxelLocation = SomeOtherVector
-    // This wouldn't copy the Z component over
-    // No clue as to why
-    
-    return PL_OK;
+    return GetVoxelPosition(Index, OutVoxelLocation);
 }
 
 PL_RESULT PL_SCENE::GetVoxelAbsorpivity(float* OutAbsorpivity, int Index)
@@ -503,24 +572,6 @@ PL_RESULT PL_SCENE::VoxeliseInternal(PLVector CenterPosition, PLVector Size, flo
     VoxelGrid.VoxelSize = VoxelSize;
     VoxelGrid.Voxels = std::vector<PLVoxel>(XSize*YSize*ZSize); // TODO: Actually fill the voxels with values
     
-    // Set positions for each voxel
-    for (int X = 0; X < XSize; X++)
-    {
-        for (int Y = 0; Y < YSize; Y++)
-        {
-            for (int Z = 0; Z < ZSize; Z++)
-            {
-                const int Index = ThreeDimToOneDim(X, Y, Z, XSize, YSize);
-                const double XCor = CenterPositions(Index, 0);
-                const double YCor = CenterPositions(Index, 1);
-                const double ZCor = CenterPositions(Index, 2);
-                Eigen::Vector3d WorldPosition;
-                WorldPosition << XCor, YCor, ZCor;
-                VoxelGrid.Voxels[Index].WorldPosition = WorldPosition;
-            }
-        }
-    }
-    
     Voxels = VoxelGrid;
     
     return FillVoxels();
@@ -530,4 +581,82 @@ PL_RESULT PL_SCENE::GetMeshes(const std::vector<PL_MESH>** OutMeshes) const
 {
     *OutMeshes = &Meshes;
     return PL_OK;
+}
+
+PL_RESULT PL_SCENE::GetScenePosition(PLVector* OutScenePosition) const
+{
+    *OutScenePosition = ScenePosition;
+    return PL_OK;
+}
+
+PL_RESULT PL_SCENE::GetSceneSize(PLVector* OutSceneSize) const
+{
+    *OutSceneSize = SceneSize;
+    return PL_OK;
+}
+
+PL_RESULT PL_SCENE::GetSceneVoxelSize(float* OutVoxelSize) const
+{
+    *OutVoxelSize = VoxelSize;
+    return PL_OK;
+}
+
+PL_RESULT PL_SCENE::GetScenePositionBottomBackLeftCorner(PLVector* OutBottomBackLeftCorner) const
+{
+    PLVector HalfSize = SceneSize / 2;
+    PLVector BottomBackLeft = ScenePosition - HalfSize;
+    *OutBottomBackLeftCorner = BottomBackLeft;
+    return PL_OK;
+}
+
+PL_RESULT PL_SCENE::GetVoxelPosition(int VoxelIndex, PLVector* OutVoxelLocation) const
+{
+    if (!OutVoxelLocation || VoxelIndex < 0)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
+    if (VoxelIndex >= Voxels.Voxels.size())
+    {
+        return PL_ERR;  // Should change this to a warning or something similar
+    }
+    
+    int X, Y, Z;
+    IndexToThreeDim(VoxelIndex, Voxels.Size(0,0), Voxels.Size(0,1), X,Y,Z);
+    PLVector BottomBackLeft;
+    GetScenePositionBottomBackLeftCorner(&BottomBackLeft);
+    PLVector LocalVoxelPosition(X,Y,Z);
+    PLVector WorldVoxelPosition = BottomBackLeft + LocalVoxelPosition * VoxelSize;
+    *OutVoxelLocation = WorldVoxelPosition;
+    return PL_OK;
+}
+
+PL_RESULT PL_SCENE::GetVoxelPosition(const PLVoxel& Voxel, PLVector* OutVoxelLocation) const
+{
+    auto Iterator = std::find(Voxels.Voxels.begin(), Voxels.Voxels.end(), Voxel);
+     
+    if (Iterator != Voxels.Voxels.end())
+    {
+        int Index = static_cast<int>(Iterator - Voxels.Voxels.begin());
+        return GetVoxelPosition(Index, OutVoxelLocation);
+    }
+    return PL_ERR;
+}
+
+PL_RESULT PL_SCENE::GetVoxelAtPosition(const PLVector& Position, PLVoxel* OutVoxel) const
+{
+    PLVector BottomBackLeft;
+    GetScenePositionBottomBackLeftCorner(&BottomBackLeft);
+    PLVector VoxelPositionLocalToScene = Position - BottomBackLeft;
+    int RoundedX, RoundedY, RoundedZ;
+    RoundedX = static_cast<int>(VoxelPositionLocalToScene.X / VoxelSize);
+    RoundedY = static_cast<int>(VoxelPositionLocalToScene.Y / VoxelSize);
+    RoundedZ = static_cast<int>(VoxelPositionLocalToScene.Z / VoxelSize);
+    int Index = ThreeDimToOneDim(RoundedX, RoundedY, RoundedZ, Voxels.Size(0,0), Voxels.Size(0,1));
+    if (Index < Voxels.Voxels.size())
+    {
+        *OutVoxel = Voxels.Voxels[Index];
+        return PL_OK;
+    }
+    return PL_ERR;
 }

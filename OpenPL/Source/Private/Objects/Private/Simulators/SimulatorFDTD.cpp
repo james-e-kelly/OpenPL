@@ -10,6 +10,8 @@
 
 #include "Simulators/SimulatorFDTD.h"
 #include "OpenPLCommonPrivate.h"
+#include "PL_SCENE.h"
+#include "PL_SYSTEM.h"
 
 void SimulatorFDTD::Simulate()
 {
@@ -173,6 +175,26 @@ void SimulatorFDTD::Simulate()
                 SimulatedLattice[i][CurrentTimeStep] = (*Lattice)[i];
             }
         }
+        
+        PL_SCENE*& Scene = OwningScene;
+        
+        if (!Scene)
+        {
+            DebugError("No scene. Can't simulate");
+            return;
+        }
+        
+        PL_SYSTEM* System;
+        PL_RESULT GetSystemResult = Scene->GetSystem(&System);
+        
+        if (GetSystemResult != PL_OK)
+        {
+            DebugError("Could not get system from scene");
+            return;
+        }
+        
+        PLVector ListenerPosition;
+        System->GetListenerPosition(ListenerPosition);
         
         // Add pulse
         (*Lattice)[4].AirPressure += Pulse[CurrentTimeStep];

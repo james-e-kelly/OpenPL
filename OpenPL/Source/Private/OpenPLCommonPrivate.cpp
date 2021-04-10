@@ -63,3 +63,11 @@ int ThreeDimToOneDim(int X, int Y, int Z, int XSize, int YSize)
     // The actual vertex positions of the index are contained within 3 columns
     return  X + Y * XSize + Z * XSize * YSize;
 }
+
+void IndexToThreeDim(int Index, int XSize, int YSize, int& OutX, int& OutY, int& OutZ)
+{
+    OutZ = Index / (XSize * YSize);
+    Index = Index % (XSize * YSize);
+    OutY = Index / XSize;
+    OutX = Index % XSize;
+}

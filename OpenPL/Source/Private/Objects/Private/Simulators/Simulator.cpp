@@ -10,7 +10,7 @@
 
 #include "Simulators/Simulator.h"
 
-void Simulator::Init(PL_VOXEL_GRID& Voxels, PL_SIMULATION_SETTINGS& Settings)
+void Simulator::Init(PL_SCENE* Scene, PL_VOXEL_GRID& Voxels, PL_SIMULATION_SETTINGS& Settings)
 {
     this->XSize = Voxels.Size(0,0);
     this->YSize = Voxels.Size(0,1);
@@ -20,6 +20,8 @@ void Simulator::Init(PL_VOXEL_GRID& Voxels, PL_SIMULATION_SETTINGS& Settings)
     this->TimeSteps = Settings.TimeSteps;
     this->Lattice = &Voxels.Voxels;
     this->Settings = Settings;
+    
+    this->OwningScene = Scene;
     
     SimulatedLattice.resize(CubeSize);
     

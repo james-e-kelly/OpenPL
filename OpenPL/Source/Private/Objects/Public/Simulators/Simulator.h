@@ -13,11 +13,13 @@
 #include <vector>
 #include "OpenPLCommonPrivate.h"
 
+class PL_SCENE;
+
 class Simulator
 {
 public:
     
-    void Init(PL_VOXEL_GRID& Voxels, PL_SIMULATION_SETTINGS& Settings);
+    void Init(PL_SCENE* Scene, PL_VOXEL_GRID& Voxels, PL_SIMULATION_SETTINGS& Settings);
     
     virtual void Simulate() { }
     
@@ -49,4 +51,6 @@ protected:
     
     /**Gaussian pulse*/
     std::vector<double> Pulse;
+    
+    PL_SCENE* OwningScene;
 };
