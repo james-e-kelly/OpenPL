@@ -31,6 +31,12 @@ public:
     
     PL_RESULT RemoveScene(PL_SCENE* Scene);
     
+    PL_RESULT SetListenerPosition(const PLVector& NewListenerPosition);
+    
+    PL_RESULT GetListenerPosition(PLVector& OutListenerPosition) const;
+    
 private:
     std::forward_list<std::unique_ptr<PL_SCENE>> Scenes;
+    
+    PLVector ListenerPosition;
 };

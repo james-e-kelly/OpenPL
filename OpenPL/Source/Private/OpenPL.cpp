@@ -42,6 +42,16 @@ PL_RESULT PL_System_Release (PL_SYSTEM* System)
     return PL_OK;
 }
 
+PL_RESULT PL_System_SetListenerPosition(PL_SYSTEM* System, PLVector ListenerPosition)
+{
+    if (!System)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    System->SetListenerPosition(ListenerPosition);
+    return PL_OK;
+}
+
 PL_RESULT PL_System_CreateScene(PL_SYSTEM* System, PL_SCENE** OutScene)
 {
     if (!System)

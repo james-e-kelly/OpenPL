@@ -24,24 +24,32 @@ extern "C"
      * In the example of Unity, you could create a method that takes the message and calls Debug.Log to output the message.
      *
      * @param Callback Pointer to a function with the PL_Debug_Callback signature.
-     */
+    */
     PL_RESULT JUCE_PUBLIC_FUNCTION PL_Debug_Initialize (PL_Debug_Callback Callback);
-    
+
     /**
      * Creates a system object.
      * System objects are management objects for the simulation.
      * Only one is needed per game instance.
      *
      * @param OutSystem The created system object.
-     */
-     PL_RESULT JUCE_PUBLIC_FUNCTION PL_System_Create (PL_SYSTEM** OutSystem);
+    */
+    PL_RESULT JUCE_PUBLIC_FUNCTION PL_System_Create (PL_SYSTEM** OutSystem);
 
     /**
      * Destorys a system object and releases its resources.
      *
      * @param System System to destroy.
-     */
-     PL_RESULT JUCE_PUBLIC_FUNCTION PL_System_Release (PL_SYSTEM* System);
+    */
+    PL_RESULT JUCE_PUBLIC_FUNCTION PL_System_Release (PL_SYSTEM* System);
+    
+    /**
+     * Set the main runtime listener position.
+     *
+     * @param System System to the set listener position for.
+     * @param ListenerPosition Position of the new listener position
+    */
+    PL_RESULT JUCE_PUBLIC_FUNCTION PL_System_SetListenerPosition(PL_SYSTEM* System, PLVector ListenerPosition);
 
     /**
      * Creates a new scene object.
@@ -54,8 +62,8 @@ extern "C"
      *
      * @param System System object to create the scene.
      * @param OutScene Created scene.
-     */
-     PL_RESULT JUCE_PUBLIC_FUNCTION PL_System_CreateScene(PL_SYSTEM* System, PL_SCENE** OutScene);
+    */
+    PL_RESULT JUCE_PUBLIC_FUNCTION PL_System_CreateScene(PL_SYSTEM* System, PL_SCENE** OutScene);
 
     /**
      * Releases and destroys a scene object.

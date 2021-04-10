@@ -28,3 +28,15 @@ PL_RESULT PL_SYSTEM::RemoveScene(PL_SCENE* Scene)
     Scenes.remove_if([Scene](std::unique_ptr<PL_SCENE>& Elem) { return Elem.get() == Scene; });
     return PL_OK;
 }
+
+PL_RESULT PL_SYSTEM::SetListenerPosition(const PLVector& NewListenerPosition)
+{
+    ListenerPosition = NewListenerPosition;
+    return PL_OK;
+}
+
+PL_RESULT PL_SYSTEM::GetListenerPosition(PLVector& OutListenerPosition) const
+{
+    OutListenerPosition = ListenerPosition;
+    return PL_OK;
+}
