@@ -409,7 +409,16 @@ PL_RESULT PL_SCENE::FillVoxels()
             VertexMatrix PointsToCheck = GetPointsToCheckForVoxel(VoxelEigenPosition, VoxelSize);
             IndiceMatrix ReturnPointsInside;
             
-            igl::copyleft::cgal::points_inside_component(TransposedVertices, TransposedIndices, PointsToCheck, ReturnPointsInside);
+            // This can throw sometimes if the point its checking is exactly on the mesh
+            try
+            {
+                igl::copyleft::cgal::points_inside_component(TransposedVertices, TransposedIndices, PointsToCheck, ReturnPointsInside);
+            }
+            catch(...)
+            {
+                DebugWarn("Could not check voxel point because it fell exactly on the mesh");
+                continue;
+            }
 
             int NumberOfPointsInside = 0;
             
