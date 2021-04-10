@@ -196,7 +196,17 @@ void SimulatorFDTD::Simulate()
         PLVector ListenerPosition;
         System->GetListenerPosition(ListenerPosition);
         
-        // Add pulse
-        (*Lattice)[4].AirPressure += Pulse[CurrentTimeStep];
+        int ListenerVoxelIndex;
+        if (Scene->GetVoxelIndexOfPosition(ListenerPosition, &ListenerVoxelIndex) == PL_OK)
+        {
+            // Add pulse
+            // For now, this is using the runtime listener position and not baked listener positions
+            (*Lattice)[ListenerVoxelIndex].AirPressure += Pulse[CurrentTimeStep];
+        }
+        else
+        {
+            DebugError("Could not get the voxel for the listener. Can't apply a pulse to the simulation");
+            return;
+        }
     }
 }

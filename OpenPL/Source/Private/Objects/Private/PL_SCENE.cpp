@@ -645,6 +645,17 @@ PL_RESULT PL_SCENE::GetVoxelPosition(const PLVoxel& Voxel, PLVector* OutVoxelLoc
 
 PL_RESULT PL_SCENE::GetVoxelAtPosition(const PLVector& Position, PLVoxel* OutVoxel) const
 {
+    int Index;
+    if (GetVoxelIndexOfPosition(Position, &Index) == PL_OK)
+    {
+        *OutVoxel  = Voxels.Voxels[Index];
+        return PL_OK;
+    }
+    return PL_ERR;
+}
+
+PL_RESULT PL_SCENE::GetVoxelIndexOfPosition(const PLVector& Position, int* OutIndex) const
+{
     PLVector BottomBackLeft;
     GetScenePositionBottomBackLeftCorner(&BottomBackLeft);
     PLVector VoxelPositionLocalToScene = Position - BottomBackLeft;
@@ -655,8 +666,9 @@ PL_RESULT PL_SCENE::GetVoxelAtPosition(const PLVector& Position, PLVoxel* OutVox
     int Index = ThreeDimToOneDim(RoundedX, RoundedY, RoundedZ, Voxels.Size(0,0), Voxels.Size(0,1));
     if (Index < Voxels.Voxels.size())
     {
-        *OutVoxel = Voxels.Voxels[Index];
+        *OutIndex = Index;
         return PL_OK;
     }
+    *OutIndex = -1;
     return PL_ERR;
 }

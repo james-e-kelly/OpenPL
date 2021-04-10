@@ -156,6 +156,8 @@ public:
     
     PL_RESULT GetVoxelAtPosition(const PLVector& Position, PLVoxel* OutVoxel) const;
     
+    PL_RESULT GetVoxelIndexOfPosition(const PLVector& Position, int* OutIndex) const;
+    
 private:
     PL_SYSTEM* OwningSystem;
     
