@@ -361,7 +361,7 @@ PL_RESULT PL_SCENE::FillVoxels()
         }
         
         // List of all cells that fit within the mesh
-        std::vector<PLVoxel*> MeshCells;
+        std::vector<int> MeshCells;
         
         // Vector3 of each voxel size
         Eigen::Vector3d VoxelSize (Voxels.VoxelSize, Voxels.VoxelSize, Voxels.VoxelSize);
@@ -381,12 +381,12 @@ PL_RESULT PL_SCENE::FillVoxels()
             
             if (MeshBounds.intersects(VoxelBounds))
             {
-                MeshCells.push_back(&Cell);
+                MeshCells.push_back(VoxelIndex);
             }
             else  if (VoxelBounds.intersects(MeshBounds))
             {
                 DebugWarn("Voxel wasn't within the mesh, but the mesh is within the voxel");
-                MeshCells.push_back(&Cell);
+                MeshCells.push_back(VoxelIndex);
             }
         }
         
@@ -400,10 +400,11 @@ PL_RESULT PL_SCENE::FillVoxels()
         VertexMatrix TransposedVertices = Mesh.Vertices.transpose();
         IndiceMatrix TransposedIndices = Mesh.Indices.transpose();
         
-        for (auto& MeshCell : MeshCells)
+        for (int VoxelIndex = 0; VoxelIndex < MeshCells.size(); ++VoxelIndex)
         {
+            PLVoxel& MeshCell = Voxels.Voxels[MeshCells[VoxelIndex]];
             PLVector VoxelWorldPosition;
-            GetVoxelPosition(*MeshCell, &VoxelWorldPosition);
+            GetVoxelPosition(MeshCells[VoxelIndex], &VoxelWorldPosition);
             Eigen::Vector3d VoxelEigenPosition = CreateEigenVectorFromPL(VoxelWorldPosition);
             VertexMatrix PointsToCheck = GetPointsToCheckForVoxel(VoxelEigenPosition, VoxelSize);
             IndiceMatrix ReturnPointsInside;
@@ -425,8 +426,8 @@ PL_RESULT PL_SCENE::FillVoxels()
             
             if (NumberOfPointsInside > 2)
             {
-                MeshCell->Absorptivity = 0.75f;
-                MeshCell->Beta = 0;
+                MeshCell.Absorptivity = 0.75f;
+                MeshCell.Beta = 0;
             }
         }
     }
