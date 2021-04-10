@@ -69,8 +69,10 @@ extern "C"
      * Releases and destroys a scene object.
      *
      * @param Scene Scene to destroy.
-     */
-     PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_Release(PL_SCENE* Scene);
+    */
+    PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_Release(PL_SCENE* Scene);
+
+    PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_CreateVoxels(PL_SCENE* Scene, PLVector SceneSize, float VoxelSize);
     
     // TODO: AddMesh needs to take the absoption value of the mesh.
     // Can we get away with one absorption per mesh?
@@ -102,14 +104,8 @@ extern "C"
     
     /**
      * Takes all meshes within the scene and turns them into one voxel lattice, ready to simulate over.
-     *
-     * To help with performance, the size of the voxel lattice can be set. As there is a fixed size, some meshes/faces could be excluded.
-     *
-     * @param Scene Scene to voxelise.
-     * @param CenterPosition World center position of the lattice.
-     * @param Size Total size of the lattice.
      */
-     PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_Voxelise(PL_SCENE* Scene, PLVector* CenterPosition, PLVector* Size, float VoxelSize);
+    PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_FillVoxelsWithGeometry(PL_SCENE* Scene);
     
     /**
      * Adds a listener location to the scene.

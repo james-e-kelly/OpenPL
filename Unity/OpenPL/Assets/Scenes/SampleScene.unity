@@ -261,8 +261,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DebugMeshes: 0
-  VoxelSize: 0.5
-  simulationSize: {x: 10, y: 10, z: 10}
+  ShowVoxels: 1
+  VoxelSize: 1
+  simulationSize: {x: 5, y: 5, z: 5}
 --- !u!4 &104099975
 Transform:
   m_ObjectHideFlags: 0

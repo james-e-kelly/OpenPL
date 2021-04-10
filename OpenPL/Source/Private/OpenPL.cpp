@@ -81,6 +81,16 @@ PL_RESULT PL_Scene_Release(PL_SCENE* Scene)
     return PL_ERR_MEMORY;
 }
 
+PL_RESULT PL_Scene_CreateVoxels(PL_SCENE* Scene, PLVector SceneSize, float VoxelSize)
+{
+    if (!Scene)
+    {
+        return PL_OK;
+    }
+    
+    return Scene->CreateVoxels(SceneSize, VoxelSize);
+}
+
 PL_RESULT PL_Scene_AddMesh(PL_SCENE* Scene, PLVector* WorldPosition, PLQuaternion* WorldRotation, PLVector* WorldScale, PLVector* Vertices, int VerticesLength, int* Indices, int IndicesLength, int* OutIndex)
 {
     if (!Scene || !WorldPosition || !WorldRotation || !WorldScale)
@@ -101,14 +111,14 @@ PL_RESULT PL_Scene_RemoveMesh(PL_SCENE* Scene, int IndexToRemove)
     return Scene->RemoveMesh(IndexToRemove);
 }
 
-PL_RESULT PL_Scene_Voxelise(PL_SCENE* Scene, PLVector* CenterPosition, PLVector* Size, float VoxelSize)
+PL_RESULT PL_Scene_FillVoxelsWithGeometry(PL_SCENE* Scene)
 {
-    if (!Scene || !CenterPosition || !Size)
+    if (!Scene)
     {
         return PL_ERR_INVALID_PARAM;
     }
     
-    return Scene->Voxelise(*CenterPosition, *Size, VoxelSize);
+    return Scene->FillVoxelsWithGeometry();
 }
 
 PL_RESULT PL_Scene_AddListenerLocation(PL_SCENE* Scene, PLVector* Position, int* OutIndex)

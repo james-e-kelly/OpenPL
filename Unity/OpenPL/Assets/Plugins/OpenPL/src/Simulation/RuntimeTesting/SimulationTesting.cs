@@ -11,6 +11,7 @@ namespace OpenPL
         Scene SceneInstance;
 
         public bool DebugMeshes;
+        public bool ShowVoxels;
         public float VoxelSize = 1f;
         public Vector3 simulationSize = new Vector3(10, 10, 10);
 
@@ -57,6 +58,8 @@ namespace OpenPL
             {
                 return;
             }
+
+            CheckResult(SceneInstance.CreateVoxels(simulationSize.ToPLVector(), VoxelSize), "Scene.CreateVoxels");
 
             AcousticGeometry[] allGameObjects = FindObjectsOfType<AcousticGeometry>();
 
@@ -107,11 +110,7 @@ namespace OpenPL
                 }
             }
 
-
-            PLVector Pos = new Vector3(0, 0, 0).ToPLVector();
-            PLVector Size = simulationSize.ToPLVector();
-
-            CheckResult(SceneInstance.Voxelise(ref Pos, ref Size, VoxelSize), "Scene.Voxelise");
+            CheckResult(SceneInstance.FillVoxelsWithGeometry(), "Scene.FillVoxels");
 
             if (DebugMeshes)
             {
@@ -153,14 +152,13 @@ namespace OpenPL
                             Gizmos.color = Color.green;
                             Gizmos.DrawWireCube(Location.ToVector3(), new Vector3(VoxelSize, VoxelSize, VoxelSize));
                         }
-                        //else
-                        //{
-                        //    Color color = Color.white;
-                        //    color.a = 0.1f;
-                        //    Gizmos.color = color;
-
-                        //}
-
+                        else if (ShowVoxels)
+                        {
+                            Color color = Color.white;
+                            color.a = 0.1f;
+                            Gizmos.color = color;
+                            Gizmos.DrawWireCube(Location.ToVector3(), new Vector3(VoxelSize, VoxelSize, VoxelSize));
+                        }
                     }
                 }
             }

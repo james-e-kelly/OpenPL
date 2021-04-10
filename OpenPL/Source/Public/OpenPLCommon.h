@@ -64,7 +64,12 @@ typedef PLVector4   PLQuaternion;
  */
 struct JUCE_API PLVector
 {
-    PLVector() = default;
+    PLVector()
+    :   X(0.0f),
+        Y(0.0f),
+        Z(0.0f)
+    { }
+    
     PLVector(const PLVector& Other) = default;
     PLVector(PLVector&& Other) = default;
     
@@ -210,6 +215,12 @@ struct JUCE_API PLVector
     float Y;
     float Z;
 };
+
+inline std::ostream& operator << (std::ostream &out, const PLVector& Vector)
+{
+    out << "{X} " << Vector.X << ". {Y} " << Vector.Y << ". {Z} " << Vector.Z;
+    return out;
+}
 
 /**
  * Defines the simulated values of an emitter in the simulation.

@@ -27,7 +27,9 @@ Eigen::Vector3d CreateEigenVectorFromPL(const PLVector& Vector)
 
 PL_SCENE::PL_SCENE(PL_SYSTEM* System)
 :   OwningSystem(System)
-{ }
+{
+    SetScenePosition(PLVector(0,0,0));
+}
 
 PL_SCENE::~PL_SCENE()
 { }
@@ -102,6 +104,17 @@ PL_RESULT PL_SCENE::CreateVoxels(const PLVector& SceneSize, float VoxelSize)
     VoxelGrid.Voxels = std::vector<PLVoxel>(XSize*YSize*ZSize); // TODO: Actually fill the voxels with values
     
     Voxels = VoxelGrid;
+    
+    std::ostringstream StringStream;
+    PLVector BottomBackLeft;
+    GetScenePositionBottomBackLeftCorner(&BottomBackLeft);
+    PLVector FirstVoxelPosition;
+    GetVoxelPosition(0, &FirstVoxelPosition);
+    int FirstVoxelIndex;
+    GetVoxelIndexOfPosition(FirstVoxelPosition, &FirstVoxelIndex);
+    StringStream << "Created Voxels. Size: " << Voxels.Voxels.size() << ". Center: " << ScenePosition << ". BottomBackLeft: " << BottomBackLeft << ". First Voxel: " << FirstVoxelPosition << ". First Index: " << FirstVoxelIndex;
+    
+    DebugLog(StringStream.str().c_str());
     
     return PL_OK;
 }
@@ -228,12 +241,12 @@ PL_RESULT PL_SCENE::RemoveSourceLocation(int Index)
     return PL_OK;
 }
 
-PL_RESULT PL_SCENE::Voxelise(PLVector CenterPosition, PLVector Size, float VoxelSize)
+PL_RESULT PL_SCENE::FillVoxelsWithGeometry()
 {
-    if (Size.X < VoxelSize || Size.Y < VoxelSize || Size.Z < VoxelSize)
+    if (Voxels.Voxels.size() == 0)
     {
-        DebugWarn("Can't create voxel lattice of that size. No voxels would fit inside it");
-        return PL_ERR_INVALID_PARAM;
+        DebugError("No voxels to fill. Must call CreateVoxels");
+        return PL_ERR;
     }
     
     PL_RESULT ReturnResult = PL_ERR;
@@ -246,7 +259,7 @@ PL_RESULT PL_SCENE::Voxelise(PLVector CenterPosition, PLVector Size, float Voxel
             // Therefore, you can't do `scoped_thread thread = otherThread;`
             // However, scoped threads can be moved
             // So create an object on the stack, then move ownership to the class' member variable
-            boost::scoped_thread<> NewVoxelThread(boost::thread(&PL_SCENE::VoxeliseInternal, this, CenterPosition, Size, VoxelSize));
+            boost::scoped_thread<> NewVoxelThread(boost::thread(&PL_SCENE::VoxeliseInternal, this));
             VoxelThread = std::move(NewVoxelThread);
             ReturnResult = PL_OK;
             break;
@@ -355,10 +368,11 @@ PL_RESULT PL_SCENE::FillVoxels()
         
         // For each voxel in the lattice, find if it's within the mesh bounds
         // If it is, add it to the list
-        for (auto& Cell : Voxels.Voxels)
+        for (int VoxelIndex = 0; VoxelIndex < Voxels.Voxels.size(); ++VoxelIndex)
         {
+            PLVoxel& Cell = Voxels.Voxels[VoxelIndex];
             PLVector VoxelWorldPosition;
-            GetVoxelPosition(Cell, &VoxelWorldPosition);
+            GetVoxelPosition(VoxelIndex, &VoxelWorldPosition);
             Eigen::Vector3d Pos = CreateEigenVectorFromPL(VoxelWorldPosition);
             Eigen::Vector3d Min = Pos - (VoxelSize / 2);
             Eigen::Vector3d Max = Pos + (VoxelSize / 2);
@@ -457,10 +471,23 @@ PL_RESULT PL_SCENE::Simulate()
     
     if (SimulatedLattice.size() > 0)
     {
-        MatPlotPlotter plotter(SimulatedLattice, Voxels.Size(0,0), Voxels.Size(0,1), Voxels.Size(0,2), TimeSteps);
-        plotter.PlotOneDimensionWaterfall();
-        plotter.PlotOneDimensionWaterfall(0, 1);
-        plotter.PlotOneDimensionWaterfall(0, 2);
+        PL_SYSTEM* System;
+        GetSystem(&System);
+        PLVector ListenerLocation;
+        int ListenerIndex;
+        GetVoxelIndexOfPosition(ListenerLocation, &ListenerIndex);
+        
+        if (ListenerLocation != -1)
+        {
+            MatPlotPlotter plotter(SimulatedLattice, Voxels.Size(0,0), Voxels.Size(0,1), Voxels.Size(0,2), TimeSteps);
+            plotter.PlotOneDimensionWaterfall();
+            plotter.PlotOneDimensionWaterfall(0, 1);
+            plotter.PlotOneDimensionWaterfall(0, 2);
+        }
+        else
+        {
+            DebugError("Can't plot because can't get listener voxel");
+        }
     }
 
     return PL_OK;
@@ -528,51 +555,9 @@ PL_RESULT PL_SCENE::GetVoxelAbsorpivity(float* OutAbsorpivity, int Index)
     return PL_OK;
 }
 
-PL_RESULT PL_SCENE::VoxeliseInternal(PLVector CenterPosition, PLVector Size, float VoxelSize)
+PL_RESULT PL_SCENE::VoxeliseInternal()
 {
     VoxelThreadStatus.store(ThreadStatus_Ongoing);
-    
-    // Create AABB
-    const PLVector Min = CenterPosition - Size / 2;
-    const PLVector Max = CenterPosition + Size / 2;
-    
-    Eigen::Vector3d EigenMin;
-    Eigen::Vector3d EigenMax;
-    EigenMin << (Eigen::Vector3d() << Min.X, Min.Y, Min.Z).finished();
-    EigenMax << (Eigen::Vector3d() << Max.X, Max.Y, Max.Z).finished();
-    
-    Eigen::AlignedBox<double,3> Bounds = Eigen::AlignedBox<double,3>(EigenMin, EigenMax);
-    
-    // TODO: Change voxel size to something set by the user per simulation
-    const int VoxelsInSide = static_cast<int>(Size.X / VoxelSize);
-    
-    // Matrix<Scalar, Rows, Columns, Options, MaxRows, MaxColumns>
-    Eigen::Matrix<double, -1, -1, 0, -1, -1> CenterPositions;
-    Eigen::MatrixXi Side;
-    
-    // Calculates all center positions of a voxel lattice within a bounding box
-    igl::voxel_grid(Bounds, VoxelsInSide, 0, CenterPositions, Side);
-    
-    const int XSize = Side(0,0);
-    const int YSize = Side(0,1);
-    const int ZSize = Side(0,2);
-    
-    // We can assume if any sides of the lattice are 0, something went wrong
-    // Even if we wanted a 2D grid, we'd still need at least 1 along the Z
-    if (XSize == 0 || YSize == 0 || ZSize == 0)
-    {
-        DebugError("Failed to create voxels");
-        return PL_ERR;
-    }
-    
-    // Set voxels
-    PL_VOXEL_GRID VoxelGrid;
-    VoxelGrid.Bounds = Bounds;
-    VoxelGrid.Size = Side;
-    VoxelGrid.VoxelSize = VoxelSize;
-    VoxelGrid.Voxels = std::vector<PLVoxel>(XSize*YSize*ZSize); // TODO: Actually fill the voxels with values
-    
-    Voxels = VoxelGrid;
     
     return FillVoxels();
 }

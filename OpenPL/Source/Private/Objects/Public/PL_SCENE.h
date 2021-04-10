@@ -121,13 +121,9 @@ public:
     PL_RESULT RemoveSourceLocation(int Index);
     
     /**
-     * Converts the scene's geometry to voxels, ready for simulation.
-     *
-     * @param CenterPosition Center of the AABB containing all the voxels.
-     * @param Size Size of the voxel lattice.
-     * @param VoxelSize Size of each voxel cell.
+     * Uses the scene's current geometry to fill all the voxels.
      */
-    PL_RESULT Voxelise(PLVector CenterPosition, PLVector Size, float VoxelSize = 5.f);
+    PL_RESULT FillVoxelsWithGeometry();
     
     PL_RESULT Simulate();
     
@@ -187,7 +183,7 @@ private:
     boost::mutex VoxelMutex;
     std::atomic<ThreadStatus> VoxelThreadStatus { ThreadStatus_NotStarted };
     
-    PL_RESULT VoxeliseInternal(PLVector CenterPosition, PLVector Size, float VoxelSize);
+    PL_RESULT VoxeliseInternal();
     
     /**
      * Adds absorption values to the voxel lattice cells based on the absorptivity of each mesh.

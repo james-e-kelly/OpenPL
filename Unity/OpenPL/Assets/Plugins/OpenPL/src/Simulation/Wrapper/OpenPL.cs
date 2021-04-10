@@ -130,6 +130,11 @@ namespace OpenPL
             return PL_System_CreateScene(Handle, out Scene.Handle);
         }
 
+        public RESULT SetListenerPosition(PLVector ListenerPosition)
+        {
+            return PL_System_SetListenerPosition(Handle, ListenerPosition);
+        }
+
         public IntPtr Handle;
 
         public System(IntPtr Ptr) { Handle = Ptr; }
@@ -144,6 +149,9 @@ namespace OpenPL
 
         [DllImport(PLATFORM.dll)]
         static extern RESULT PL_System_CreateScene(IntPtr System, out IntPtr OutScene);
+
+        [DllImport(PLATFORM.dll)]
+        static extern RESULT PL_System_SetListenerPosition(IntPtr System, PLVector ListenerPosition);
     }
 
     public struct Scene
@@ -194,18 +202,6 @@ namespace OpenPL
         }
 
         /// <summary>
-        /// Convert the meshes to a voxel scene
-        /// </summary>
-        /// <param name="CenterPosition"></param>
-        /// <param name="Size"></param>
-        /// <param name="VoxelSize"></param>
-        /// <returns></returns>
-        public RESULT Voxelise(ref PLVector CenterPosition, ref PLVector Size, float VoxelSize)
-        {
-            return PL_Scene_Voxelise(Handle, ref CenterPosition, ref Size, VoxelSize);
-        }
-
-        /// <summary>
         /// Get the number of voxels in the simulation
         /// </summary>
         /// <param name="OutVoxelCount"></param>
@@ -246,6 +242,16 @@ namespace OpenPL
             return PL_Scene_Simulate(Handle);
         }
 
+        public RESULT CreateVoxels(PLVector SceneSize, float VoxelSize)
+        {
+            return PL_Scene_CreateVoxels(Handle, SceneSize, VoxelSize);
+        }
+
+        public RESULT FillVoxelsWithGeometry()
+        {
+            return PL_Scene_FillVoxelsWithGeometry(Handle);
+        }
+
         public IntPtr Handle;
 
         public Scene(IntPtr Ptr) { Handle = Ptr; }
@@ -265,9 +271,6 @@ namespace OpenPL
         static extern RESULT PL_Scene_Debug(IntPtr Scene);
 
         [DllImport(PLATFORM.dll)]
-        static extern RESULT PL_Scene_Voxelise(IntPtr Scene, ref PLVector CenterPosition, ref PLVector Size, float VoxelSize);
-
-        [DllImport(PLATFORM.dll)]
         static extern RESULT PL_Scene_GetVoxelsCount(IntPtr Scene, ref int OutVoxelCount);
 
         [DllImport(PLATFORM.dll)]
@@ -278,5 +281,11 @@ namespace OpenPL
 
         [DllImport(PLATFORM.dll)]
         static extern RESULT PL_Scene_Simulate(IntPtr Scene);
+
+        [DllImport(PLATFORM.dll)]
+        static extern RESULT PL_Scene_CreateVoxels(IntPtr Scene, PLVector SceneSize, float VoxelSize);
+
+        [DllImport(PLATFORM.dll)]
+        static extern RESULT PL_Scene_FillVoxelsWithGeometry(IntPtr Scene);
     }
 }
