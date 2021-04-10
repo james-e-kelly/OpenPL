@@ -612,7 +612,7 @@ PL_RESULT PL_SCENE::GetVoxelPosition(int VoxelIndex, PLVector* OutVoxelLocation)
     GetScenePositionBottomBackLeftCorner(&BottomBackLeft);
     PLVector LocalVoxelPosition(X,Y,Z);
     PLVector WorldVoxelPosition = BottomBackLeft + LocalVoxelPosition * VoxelSize;
-    *OutVoxelLocation = WorldVoxelPosition;
+    *OutVoxelLocation = WorldVoxelPosition + PLVector(VoxelSize / 2);   // WorldPosition + Vector to move from bottom back left to centre of voxel
     return PL_OK;
 }
 
