@@ -89,7 +89,7 @@ struct JUCE_API PLVector
     {
         this->X = Other.X;
         this->Y = Other.Y;
-        this->Y = Other.Z;
+        this->Z = Other.Z;
         
         return *this;
     }
