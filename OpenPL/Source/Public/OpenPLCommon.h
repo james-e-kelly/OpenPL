@@ -123,7 +123,7 @@ struct JUCE_API PLVector
     
     bool operator == (const PLVector& Other) const
     {
-        return X == Other.X && X == Other.Y && Z == Other.Z;
+        return X == Other.X && Y == Other.Y && Z == Other.Z;
     }
     
     bool operator != (const PLVector& Other) const
@@ -135,12 +135,12 @@ struct JUCE_API PLVector
     
     PLVector operator + (const PLVector& Other) const
     {
-        return PLVector(X + Other.X, Y + Other.Y, Z + Other.Y);
+        return PLVector(X + Other.X, Y + Other.Y, Z + Other.Z);
     }
     
     PLVector operator - (const PLVector& Other) const
     {
-        return PLVector(X - Other.X, Y - Other.Y, Z - Other.Y);
+        return PLVector(X - Other.X, Y - Other.Y, Z - Other.Z);
     }
     
     PLVector operator + (float Scalar) const
