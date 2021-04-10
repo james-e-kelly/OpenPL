@@ -13,15 +13,6 @@
 #include "PL_SCENE.h"
 #include "DebugOpenGL.h"
 
-/**
- * Testing to try and create the wave equation.
- * I don't think this will be very needed though
- */
-static void WaveEquation(Eigen::Vector3d Position, double Time, double PressureValue)
-{
-    // (∂² × p(x,t) / ∂ × t²) - c² × Laplacian × p(x,t) = F(x,t)
-}
-
 PL_RESULT PL_Debug_Initialize (PL_Debug_Callback Callback)
 {
     SetDebugCallback(Callback);
