@@ -172,6 +172,7 @@
               <FILE id="sCSpgD" name="SimulatorFDTD.cpp" compile="1" resource="0"
                     file="Source/Private/Objects/Private/Simulators/SimulatorFDTD.cpp"/>
             </GROUP>
+            <FILE id="sr4Tkr" name="Analyser.cpp" compile="1" resource="0" file="Source/Private/Analyser.cpp"/>
             <FILE id="w1kcy6" name="DebugOpenGL.cpp" compile="1" resource="0" file="Source/Private/DebugOpenGL.cpp"/>
             <FILE id="xtMQnK" name="MatPlotPlotter.cpp" compile="1" resource="0"
                   file="Source/Private/Objects/Public/MatPlotPlotter.cpp"/>
@@ -188,6 +189,7 @@
                     file="Source/Private/Objects/Public/Simulators/SimulatorBasic3D.h"/>
               <FILE id="bL8rOF" name="SimulatorFDTD.h" compile="0" resource="0" file="Source/Private/Objects/Public/Simulators/SimulatorFDTD.h"/>
             </GROUP>
+            <FILE id="JL7rqQ" name="Analyser.h" compile="0" resource="0" file="Source/Private/Objects/Public/Analyser.h"/>
             <FILE id="kiUlDX" name="DebugOpenGL.h" compile="0" resource="0" file="Source/Private/Objects/Public/DebugOpenGL.h"/>
             <FILE id="wtJlkV" name="MatPlotPlotter.h" compile="0" resource="0"
                   file="Source/Private/Objects/Public/MatPlotPlotter.h"/>
@@ -221,6 +223,8 @@
         <MODULEPATH id="juce_gui_extra" path="External/JUCE/modules"/>
         <MODULEPATH id="juce_gui_basics" path="External/JUCE/modules"/>
         <MODULEPATH id="juce_graphics" path="External/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="External/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="External/JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
     <LINUX_MAKE targetFolder="Builds/LinuxMakefile" externalLibraries="glfw&#10;gmp&#10;mpfr&#10;boost_thread&#10;boost_timer&#10;X11"
@@ -238,6 +242,8 @@
         <MODULEPATH id="juce_events" path="External/JUCE/modules"/>
         <MODULEPATH id="juce_data_structures" path="External/JUCE/modules"/>
         <MODULEPATH id="juce_core" path="External/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="External/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="External/JUCE/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
     <VS2019 targetFolder="Builds/VisualStudio2019" externalLibraries="gmp.lib&#10;mpfr.lib&#10;boost_thread-vc140-mt.lib&#10;boost_timer-vc140-mt.lib&#10;glfw3dll.lib"
@@ -255,10 +261,14 @@
         <MODULEPATH id="juce_events" path="External/JUCE/modules"/>
         <MODULEPATH id="juce_data_structures" path="External/JUCE/modules"/>
         <MODULEPATH id="juce_core" path="External/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="External/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="External/JUCE/modules"/>
       </MODULEPATHS>
     </VS2019>
   </EXPORTFORMATS>
   <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
     <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
     <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
     <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>

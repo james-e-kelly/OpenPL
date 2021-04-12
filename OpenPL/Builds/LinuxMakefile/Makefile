@@ -35,7 +35,7 @@ ifeq ($(CONFIG),Debug)
     TARGET_ARCH := 
   endif
 
-  JUCE_CPPFLAGS := $(DEPFLAGS) "-DLINUX=1" "-DDEBUG=1" "-D_DEBUG=1" "-DJUCE_DISPLAY_SPLASH_SCREEN=1" "-DJUCE_USE_DARK_SPLASH_SCREEN=1" "-DJUCE_PROJUCER_VERSION=0x60007" "-DJUCE_MODULE_AVAILABLE_juce_core=1" "-DJUCE_MODULE_AVAILABLE_juce_data_structures=1" "-DJUCE_MODULE_AVAILABLE_juce_events=1" "-DJUCE_MODULE_AVAILABLE_juce_graphics=1" "-DJUCE_MODULE_AVAILABLE_juce_gui_basics=1" "-DJUCE_MODULE_AVAILABLE_juce_gui_extra=1" "-DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1" "-DJUCE_STRICT_REFCOUNTEDPOINTER=1" "-DJUCE_STANDALONE_APPLICATION=0" "-DJUCE_DLL_BUILD=1" "-DGLFW_INCLUDE_NONE" "-DJUCER_LINUX_MAKE_6D53C8B4=1" "-DJUCE_APP_VERSION=1.0.0" "-DJUCE_APP_VERSION_HEX=0x10000" $(shell pkg-config --cflags freetype2 libcurl webkit2gtk-4.0 gtk+-x11-3.0) -pthread -I../../JuceLibraryCode -I../../External/JUCE/modules -I/usr/local/include -I/usr/include -I../../External/libigl/include -I../../External/libigl/external/eigen -I../../External/libigl/external/glad/include -I../../External/matplotplusplus/source -I../../External/matplotplusplus/source/3rd_party/nodesoup/include -I../../External/matplotplusplus/source/3rd_party/cimg -I../../Source/Public -I../../Source/Private -I../../Source/Private/Objects/Public $(CPPFLAGS)
+  JUCE_CPPFLAGS := $(DEPFLAGS) "-DLINUX=1" "-DDEBUG=1" "-D_DEBUG=1" "-DJUCE_DISPLAY_SPLASH_SCREEN=1" "-DJUCE_USE_DARK_SPLASH_SCREEN=1" "-DJUCE_PROJUCER_VERSION=0x60007" "-DJUCE_MODULE_AVAILABLE_juce_audio_basics=1" "-DJUCE_MODULE_AVAILABLE_juce_audio_formats=1" "-DJUCE_MODULE_AVAILABLE_juce_core=1" "-DJUCE_MODULE_AVAILABLE_juce_data_structures=1" "-DJUCE_MODULE_AVAILABLE_juce_events=1" "-DJUCE_MODULE_AVAILABLE_juce_graphics=1" "-DJUCE_MODULE_AVAILABLE_juce_gui_basics=1" "-DJUCE_MODULE_AVAILABLE_juce_gui_extra=1" "-DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1" "-DJUCE_STRICT_REFCOUNTEDPOINTER=1" "-DJUCE_STANDALONE_APPLICATION=0" "-DJUCE_DLL_BUILD=1" "-DGLFW_INCLUDE_NONE" "-DJUCER_LINUX_MAKE_6D53C8B4=1" "-DJUCE_APP_VERSION=1.0.0" "-DJUCE_APP_VERSION_HEX=0x10000" $(shell pkg-config --cflags freetype2 libcurl webkit2gtk-4.0 gtk+-x11-3.0) -pthread -I../../JuceLibraryCode -I../../External/JUCE/modules -I/usr/local/include -I/usr/include -I../../External/libigl/include -I../../External/libigl/external/eigen -I../../External/libigl/external/glad/include -I../../External/matplotplusplus/source -I../../External/matplotplusplus/source/3rd_party/nodesoup/include -I../../External/matplotplusplus/source/3rd_party/cimg -I../../Source/Public -I../../Source/Private -I../../Source/Private/Objects/Public $(CPPFLAGS)
   JUCE_CPPFLAGS_DYNAMIC_LIBRARY :=  "-DJucePlugin_Build_VST=0" "-DJucePlugin_Build_VST3=0" "-DJucePlugin_Build_AU=0" "-DJucePlugin_Build_AUv3=0" "-DJucePlugin_Build_RTAS=0" "-DJucePlugin_Build_AAX=0" "-DJucePlugin_Build_Standalone=0" "-DJucePlugin_Build_Unity=0"
   JUCE_CFLAGS_DYNAMIC_LIBRARY := -fPIC -fvisibility=hidden
   JUCE_LDFLAGS_DYNAMIC_LIBRARY := -shared
@@ -58,7 +58,7 @@ ifeq ($(CONFIG),Release)
     TARGET_ARCH := 
   endif
 
-  JUCE_CPPFLAGS := $(DEPFLAGS) "-DLINUX=1" "-DNDEBUG=1" "-DJUCE_DISPLAY_SPLASH_SCREEN=1" "-DJUCE_USE_DARK_SPLASH_SCREEN=1" "-DJUCE_PROJUCER_VERSION=0x60007" "-DJUCE_MODULE_AVAILABLE_juce_core=1" "-DJUCE_MODULE_AVAILABLE_juce_data_structures=1" "-DJUCE_MODULE_AVAILABLE_juce_events=1" "-DJUCE_MODULE_AVAILABLE_juce_graphics=1" "-DJUCE_MODULE_AVAILABLE_juce_gui_basics=1" "-DJUCE_MODULE_AVAILABLE_juce_gui_extra=1" "-DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1" "-DJUCE_STRICT_REFCOUNTEDPOINTER=1" "-DJUCE_STANDALONE_APPLICATION=0" "-DJUCE_DLL_BUILD=1" "-DGLFW_INCLUDE_NONE" "-DJUCER_LINUX_MAKE_6D53C8B4=1" "-DJUCE_APP_VERSION=1.0.0" "-DJUCE_APP_VERSION_HEX=0x10000" $(shell pkg-config --cflags freetype2 libcurl webkit2gtk-4.0 gtk+-x11-3.0) -pthread -I../../JuceLibraryCode -I../../External/JUCE/modules -I/usr/local/include -I/usr/include -I../../External/libigl/include -I../../External/libigl/external/eigen -I../../External/libigl/external/glad/include -I../../External/matplotplusplus/source -I../../External/matplotplusplus/source/3rd_party/nodesoup/include -I../../External/matplotplusplus/source/3rd_party/cimg -I../../Source/Public -I../../Source/Private -I../../Source/Private/Objects/Public $(CPPFLAGS)
+  JUCE_CPPFLAGS := $(DEPFLAGS) "-DLINUX=1" "-DNDEBUG=1" "-DJUCE_DISPLAY_SPLASH_SCREEN=1" "-DJUCE_USE_DARK_SPLASH_SCREEN=1" "-DJUCE_PROJUCER_VERSION=0x60007" "-DJUCE_MODULE_AVAILABLE_juce_audio_basics=1" "-DJUCE_MODULE_AVAILABLE_juce_audio_formats=1" "-DJUCE_MODULE_AVAILABLE_juce_core=1" "-DJUCE_MODULE_AVAILABLE_juce_data_structures=1" "-DJUCE_MODULE_AVAILABLE_juce_events=1" "-DJUCE_MODULE_AVAILABLE_juce_graphics=1" "-DJUCE_MODULE_AVAILABLE_juce_gui_basics=1" "-DJUCE_MODULE_AVAILABLE_juce_gui_extra=1" "-DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1" "-DJUCE_STRICT_REFCOUNTEDPOINTER=1" "-DJUCE_STANDALONE_APPLICATION=0" "-DJUCE_DLL_BUILD=1" "-DGLFW_INCLUDE_NONE" "-DJUCER_LINUX_MAKE_6D53C8B4=1" "-DJUCE_APP_VERSION=1.0.0" "-DJUCE_APP_VERSION_HEX=0x10000" $(shell pkg-config --cflags freetype2 libcurl webkit2gtk-4.0 gtk+-x11-3.0) -pthread -I../../JuceLibraryCode -I../../External/JUCE/modules -I/usr/local/include -I/usr/include -I../../External/libigl/include -I../../External/libigl/external/eigen -I../../External/libigl/external/glad/include -I../../External/matplotplusplus/source -I../../External/matplotplusplus/source/3rd_party/nodesoup/include -I../../External/matplotplusplus/source/3rd_party/cimg -I../../Source/Public -I../../Source/Private -I../../Source/Private/Objects/Public $(CPPFLAGS)
   JUCE_CPPFLAGS_DYNAMIC_LIBRARY :=  "-DJucePlugin_Build_VST=0" "-DJucePlugin_Build_VST3=0" "-DJucePlugin_Build_AU=0" "-DJucePlugin_Build_AUv3=0" "-DJucePlugin_Build_RTAS=0" "-DJucePlugin_Build_AAX=0" "-DJucePlugin_Build_Standalone=0" "-DJucePlugin_Build_Unity=0"
   JUCE_CFLAGS_DYNAMIC_LIBRARY := -fPIC -fvisibility=hidden
   JUCE_LDFLAGS_DYNAMIC_LIBRARY := -shared
@@ -119,6 +119,7 @@ OBJECTS_DYNAMIC_LIBRARY := \
   $(JUCE_OBJDIR)/SimulatorBasic_9bbcdbf8.o \
   $(JUCE_OBJDIR)/SimulatorBasic3D_a6aafd29.o \
   $(JUCE_OBJDIR)/SimulatorFDTD_2d5ea08e.o \
+  $(JUCE_OBJDIR)/Analyser_3eb4be94.o \
   $(JUCE_OBJDIR)/DebugOpenGL_c9be1d97.o \
   $(JUCE_OBJDIR)/MatPlotPlotter_686b885f.o \
   $(JUCE_OBJDIR)/PL_SCENE_668326e5.o \
@@ -126,6 +127,8 @@ OBJECTS_DYNAMIC_LIBRARY := \
   $(JUCE_OBJDIR)/PLBounds_dc9a924d.o \
   $(JUCE_OBJDIR)/OpenPL_2938867b.o \
   $(JUCE_OBJDIR)/OpenPLCommonPrivate_3e7cb9a7.o \
+  $(JUCE_OBJDIR)/include_juce_audio_basics_8a4e984a.o \
+  $(JUCE_OBJDIR)/include_juce_audio_formats_15f82001.o \
   $(JUCE_OBJDIR)/include_juce_core_f26d17db.o \
   $(JUCE_OBJDIR)/include_juce_data_structures_7471b1e3.o \
   $(JUCE_OBJDIR)/include_juce_events_fd7d695.o \
@@ -381,6 +384,11 @@ $(JUCE_OBJDIR)/SimulatorFDTD_2d5ea08e.o: ../../Source/Private/Objects/Private/Si
 	@echo "Compiling SimulatorFDTD.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_DYNAMIC_LIBRARY) $(JUCE_CFLAGS_DYNAMIC_LIBRARY) -o "$@" -c "$<"
 
+$(JUCE_OBJDIR)/Analyser_3eb4be94.o: ../../Source/Private/Analyser.cpp
+	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
+	@echo "Compiling Analyser.cpp"
+	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_DYNAMIC_LIBRARY) $(JUCE_CFLAGS_DYNAMIC_LIBRARY) -o "$@" -c "$<"
+
 $(JUCE_OBJDIR)/DebugOpenGL_c9be1d97.o: ../../Source/Private/DebugOpenGL.cpp
 	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
 	@echo "Compiling DebugOpenGL.cpp"
@@ -414,6 +422,16 @@ $(JUCE_OBJDIR)/OpenPL_2938867b.o: ../../Source/Private/OpenPL.cpp
 $(JUCE_OBJDIR)/OpenPLCommonPrivate_3e7cb9a7.o: ../../Source/Private/OpenPLCommonPrivate.cpp
 	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
 	@echo "Compiling OpenPLCommonPrivate.cpp"
+	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_DYNAMIC_LIBRARY) $(JUCE_CFLAGS_DYNAMIC_LIBRARY) -o "$@" -c "$<"
+
+$(JUCE_OBJDIR)/include_juce_audio_basics_8a4e984a.o: ../../JuceLibraryCode/include_juce_audio_basics.cpp
+	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
+	@echo "Compiling include_juce_audio_basics.cpp"
+	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_DYNAMIC_LIBRARY) $(JUCE_CFLAGS_DYNAMIC_LIBRARY) -o "$@" -c "$<"
+
+$(JUCE_OBJDIR)/include_juce_audio_formats_15f82001.o: ../../JuceLibraryCode/include_juce_audio_formats.cpp
+	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
+	@echo "Compiling include_juce_audio_formats.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_DYNAMIC_LIBRARY) $(JUCE_CFLAGS_DYNAMIC_LIBRARY) -o "$@" -c "$<"
 
 $(JUCE_OBJDIR)/include_juce_core_f26d17db.o: ../../JuceLibraryCode/include_juce_core.cpp

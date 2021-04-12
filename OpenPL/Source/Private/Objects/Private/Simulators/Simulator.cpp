@@ -47,6 +47,16 @@ const std::vector<std::vector<PLVoxel>>& Simulator::GetSimulatedLattice() const
     return SimulatedLattice;
 }
 
+const PL_SCENE* Simulator::GetScene() const
+{
+    return OwningScene;
+}
+
+float Simulator::GetSamplingRate() const
+{
+    return SamplingRate;
+}
+
 void Simulator::GaussianPulse()
 {
     Pulse.resize(TimeSteps);

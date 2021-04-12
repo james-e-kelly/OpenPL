@@ -25,6 +25,10 @@ public:
     
     const std::vector<std::vector<PLVoxel>>& GetSimulatedLattice() const;
     
+    const PL_SCENE* GetScene() const;
+    
+    float GetSamplingRate() const;
+    
     virtual ~Simulator() { }
     
 protected:

@@ -9,6 +9,14 @@
 			isa = PBXBuildFile;
 			fileRef = CE3C4222DEC3238722C3F509;
 		};
+		A3C40FEAC7F212ADB9BF5ED7 = {
+			isa = PBXBuildFile;
+			fileRef = ECAC3DD7DF4A6C2A3A07A65A;
+		};
+		7E18DF8CEFDE3B0795C043C3 = {
+			isa = PBXBuildFile;
+			fileRef = E8362C8CE88E73ED5746D101;
+		};
 		B156A6678A669903496E7E42 = {
 			isa = PBXBuildFile;
 			fileRef = 66C839285DD9CCEF3EB67ECD;
@@ -16,6 +24,14 @@
 		890DF45C17265D9A2D2DB941 = {
 			isa = PBXBuildFile;
 			fileRef = 86785150F1780F23843A3C8C;
+		};
+		FBF8F0A053F5F4F6CA374CA6 = {
+			isa = PBXBuildFile;
+			fileRef = 1C012FDE811387EA77EDC43B;
+		};
+		9A719EB1FF53683CEC7163F7 = {
+			isa = PBXBuildFile;
+			fileRef = B48978A9E542EDE046C58394;
 		};
 		1878A2C7E7CF2C9BFD25A06B = {
 			isa = PBXBuildFile;
@@ -225,6 +241,10 @@
 			isa = PBXBuildFile;
 			fileRef = 7ECD6F06F405D693DBD17B98;
 		};
+		8C8C2BDEA6B67D5B75FF8ADA = {
+			isa = PBXBuildFile;
+			fileRef = 5B6F58D6B13A170D959F32A1;
+		};
 		4E0983667197F22375524F37 = {
 			isa = PBXBuildFile;
 			fileRef = 6FA7401ABB0DD0217DFCE0B7;
@@ -256,6 +276,14 @@
 		71E812CC40A10F660EEF0DFC = {
 			isa = PBXBuildFile;
 			fileRef = 3225C17C7F122D08015737E4;
+		};
+		08094BFCDC6E9F84A2257B48 = {
+			isa = PBXBuildFile;
+			fileRef = 495AA08F7A1AEBECCA43F307;
+		};
+		1383C34290229302B8F33B9F = {
+			isa = PBXBuildFile;
+			fileRef = CEFBC27442D45844898BE244;
 		};
 		3B3E50F07EF06E0CEE4F7BC7 = {
 			isa = PBXBuildFile;
@@ -371,6 +399,13 @@
 			name = "juce_events";
 			path = "../../External/JUCE/modules/juce_events";
 			sourceTree = "SOURCE_ROOT";
+		};
+		1C012FDE811387EA77EDC43B = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = CoreAudio.framework;
+			path = System/Library/Frameworks/CoreAudio.framework;
+			sourceTree = SDKROOT;
 		};
 		1C5FCE599172085EF6918BC9 = {
 			isa = PBXFileReference;
@@ -575,6 +610,13 @@
 			path = ../../External/matplotplusplus/source/matplot/backend/opengl.h;
 			sourceTree = "SOURCE_ROOT";
 		};
+		495AA08F7A1AEBECCA43F307 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = "include_juce_audio_basics.mm";
+			path = "../../JuceLibraryCode/include_juce_audio_basics.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
 		4B358AA5F1728336E3F46C25 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
@@ -638,6 +680,13 @@
 			path = "../../External/matplotplusplus/source/matplot/axes_objects/histogram.h";
 			sourceTree = "SOURCE_ROOT";
 		};
+		5B6F58D6B13A170D959F32A1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = Analyser.cpp;
+			path = ../../Source/Private/Analyser.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		5D29D397E87ABDFA17CD84DD = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -650,6 +699,13 @@
 			lastKnownFileType = sourcecode.c.h;
 			name = "figure_registry.h";
 			path = "../../External/matplotplusplus/source/matplot/core/figure_registry.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		5EB23311859BFE458F245AC1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file;
+			name = "juce_audio_formats";
+			path = "../../External/JUCE/modules/juce_audio_formats";
 			sourceTree = "SOURCE_ROOT";
 		};
 		5F357853EB2A9ED3FA92FBC6 = {
@@ -827,6 +883,13 @@
 			path = "../../External/matplotplusplus/source/matplot/axes_objects/line.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
+		886B20075970B9BFAB2FEEAD = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = Analyser.h;
+			path = ../../Source/Private/Objects/Public/Analyser.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		8946A42D4D4DC484E68C964B = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -946,6 +1009,13 @@
 			path = "../../External/matplotplusplus/source/matplot/core/axes_type.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
+		AD50042198ADBECF88DBB02A = {
+			isa = PBXFileReference;
+			lastKnownFileType = file;
+			name = "juce_audio_basics";
+			path = "../../External/JUCE/modules/juce_audio_basics";
+			sourceTree = "SOURCE_ROOT";
+		};
 		AF5E241C55BE0F2A432D40F9 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -959,6 +1029,13 @@
 			name = "backend_interface.cpp";
 			path = "../../External/matplotplusplus/source/matplot/backend/backend_interface.cpp";
 			sourceTree = "SOURCE_ROOT";
+		};
+		B48978A9E542EDE046C58394 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = CoreMIDI.framework;
+			path = System/Library/Frameworks/CoreMIDI.framework;
+			sourceTree = SDKROOT;
 		};
 		B625A62F35224C789943051E = {
 			isa = PBXFileReference;
@@ -1043,6 +1120,13 @@
 			includeInIndex = 0;
 			path = OpenPL.dylib;
 			sourceTree = "BUILT_PRODUCTS_DIR";
+		};
+		CEFBC27442D45844898BE244 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = "include_juce_audio_formats.mm";
+			path = "../../JuceLibraryCode/include_juce_audio_formats.mm";
+			sourceTree = "SOURCE_ROOT";
 		};
 		CF78A329FF2DE253FCC1D167 = {
 			isa = PBXFileReference;
@@ -1156,12 +1240,26 @@
 			path = ../../External/matplotplusplus/source/matplot/backend/opengl.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
+		E8362C8CE88E73ED5746D101 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = AudioToolbox.framework;
+			path = System/Library/Frameworks/AudioToolbox.framework;
+			sourceTree = SDKROOT;
+		};
 		E880EC1EEE5D0DA1B1A3162F = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = SimulatorBasic3D.cpp;
 			path = ../../Source/Private/Objects/Private/Simulators/SimulatorBasic3D.cpp;
 			sourceTree = "SOURCE_ROOT";
+		};
+		ECAC3DD7DF4A6C2A3A07A65A = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = Accelerate.framework;
+			path = System/Library/Frameworks/Accelerate.framework;
+			sourceTree = SDKROOT;
 		};
 		ED5DF91ADC96A0F1797321FC = {
 			isa = PBXFileReference;
@@ -1499,6 +1597,7 @@
 			isa = PBXGroup;
 			children = (
 				1D29FE4606A2D8DF4D7A696C,
+				5B6F58D6B13A170D959F32A1,
 				6FA7401ABB0DD0217DFCE0B7,
 				EE5A4DFBFB083FFA24C04847,
 				51AEE0E3931BC98051493CD6,
@@ -1523,6 +1622,7 @@
 			isa = PBXGroup;
 			children = (
 				48CB7AF8385250D3B204FFA8,
+				886B20075970B9BFAB2FEEAD,
 				8A936F127DFBB7BB4E9A5DD9,
 				07894880A7A751895C590D78,
 				CBB59A4EDC42B7D715DBCA46,
@@ -1574,6 +1674,8 @@
 		803D0FA67ECCCCFF55ACAD85 = {
 			isa = PBXGroup;
 			children = (
+				AD50042198ADBECF88DBB02A,
+				5EB23311859BFE458F245AC1,
 				7B35ED6222A689939EE07C49,
 				4199D01C883218A4627C273C,
 				19C4C87B9CD4D8B4324FFAB9,
@@ -1587,6 +1689,8 @@
 		9617DBF9A9CB057697B8A26C = {
 			isa = PBXGroup;
 			children = (
+				495AA08F7A1AEBECCA43F307,
+				CEFBC27442D45844898BE244,
 				D9DAD4F7EFC194BD9055618C,
 				DD77E9FDEA5C9FEC1F8586AD,
 				A63586C154FECEC69D193103,
@@ -1609,8 +1713,12 @@
 		6D01A420E6FC46173DD87C1D = {
 			isa = PBXGroup;
 			children = (
+				ECAC3DD7DF4A6C2A3A07A65A,
+				E8362C8CE88E73ED5746D101,
 				66C839285DD9CCEF3EB67ECD,
 				86785150F1780F23843A3C8C,
+				1C012FDE811387EA77EDC43B,
+				B48978A9E542EDE046C58394,
 				44506EBDD0F51CC4FE8BFD0F,
 				65962C6FA98F0FD139666933,
 				2E7E0C93B6752CB3D90B7118,
@@ -1658,6 +1766,8 @@
 					"JUCE_DISPLAY_SPLASH_SCREEN=1",
 					"JUCE_USE_DARK_SPLASH_SCREEN=1",
 					"JUCE_PROJUCER_VERSION=0x60007",
+					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
 					"JUCE_MODULE_AVAILABLE_juce_core=1",
 					"JUCE_MODULE_AVAILABLE_juce_data_structures=1",
 					"JUCE_MODULE_AVAILABLE_juce_events=1",
@@ -1741,6 +1851,8 @@
 					"JUCE_DISPLAY_SPLASH_SCREEN=1",
 					"JUCE_USE_DARK_SPLASH_SCREEN=1",
 					"JUCE_PROJUCER_VERSION=0x60007",
+					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
 					"JUCE_MODULE_AVAILABLE_juce_core=1",
 					"JUCE_MODULE_AVAILABLE_juce_data_structures=1",
 					"JUCE_MODULE_AVAILABLE_juce_events=1",
@@ -1981,6 +2093,7 @@
 				CFB17D69D1105BD410A3C27B,
 				126A91437EE679E30DA35E5A,
 				851C4AD42B6A2BE6F064620C,
+				8C8C2BDEA6B67D5B75FF8ADA,
 				4E0983667197F22375524F37,
 				659436F445C7402412FEBAB6,
 				FF3F43DF8DD11EF9DBAEA2E1,
@@ -1989,6 +2102,8 @@
 				CFCC44D4AE5B6BA947D78F1A,
 				05AAB0A0F7799DFC5DA83F36,
 				71E812CC40A10F660EEF0DFC,
+				08094BFCDC6E9F84A2257B48,
+				1383C34290229302B8F33B9F,
 				3B3E50F07EF06E0CEE4F7BC7,
 				3AA6796FAC831EB721783F02,
 				ED89B48E37B600C96A37DB2D,
@@ -2002,8 +2117,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3C40FEAC7F212ADB9BF5ED7,
+				7E18DF8CEFDE3B0795C043C3,
 				B156A6678A669903496E7E42,
 				890DF45C17265D9A2D2DB941,
+				FBF8F0A053F5F4F6CA374CA6,
+				9A719EB1FF53683CEC7163F7,
 				1878A2C7E7CF2C9BFD25A06B,
 				FA4148195505F09468E3CE16,
 				F49E08706B179F3F38AA17D4,
