@@ -487,12 +487,18 @@ PL_RESULT PL_SCENE::Simulate()
         int ListenerIndex;
         GetVoxelIndexOfPosition(ListenerLocation, &ListenerIndex);
         
-        if (ListenerLocation != -1)
+        if (ListenerIndex != -1)
         {
             MatPlotPlotter plotter(SimulatedLattice, Voxels.Size(0,0), Voxels.Size(0,1), Voxels.Size(0,2), TimeSteps);
-            plotter.PlotOneDimensionWaterfall();
-            plotter.PlotOneDimensionWaterfall(0, 1);
-            plotter.PlotOneDimensionWaterfall(0, 2);
+            
+            //void IndexToThreeDim(int Index, int XSize, int YSize, int& OutX, int& OutY, int& OutZ);
+            
+            int ListenerX, ListenerY, ListenerZ;
+            IndexToThreeDim(ListenerIndex, Voxels.Size(0,0), Voxels.Size(0,1), ListenerX, ListenerY, ListenerZ);
+            
+            plotter.PlotOneDimensionWaterfall(ListenerY, ListenerZ);
+            plotter.PlotOneDimensionWaterfall(ListenerY+1, ListenerZ);
+            plotter.PlotOneDimensionWaterfall(ListenerY, ListenerZ+1);
         }
         else
         {
