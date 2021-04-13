@@ -17,34 +17,58 @@ void Analyser::Encode(Simulator* Simulator, PLVector EncodingPosition)
     juce::File DesktopDirectory = juce::File::getSpecialLocation(juce::File::userDesktopDirectory);
     juce::File OutputFile = DesktopDirectory.getNonexistentChildFile("TestImpulseResponse", ".wav");
     OutputFile.deleteFile();    // Delete so we can override ???
-    
+
     float SamplingRate = Simulator->GetSamplingRate();
-    
+
     if (std::unique_ptr<juce::FileOutputStream> FileStream = std::unique_ptr<juce::FileOutputStream>(OutputFile.createOutputStream()))
     {
         juce::WavAudioFormat WavFormat;
-        
+
         if (auto Writer = WavFormat.createWriterFor(FileStream.get(), SamplingRate, 1, 16, {}, 0))
         {
             FileStream.release(); // (passes responsibility for deleting the stream to the writer object that is now using it)
-            
-            juce::AudioBuffer<float> AudioBuffer;
-            
+
+            juce::AudioBuffer<float> AudioBuffer (1, SamplingRate);
+
             const std::vector<std::vector<PLVoxel>>& SimulatedLattice = Simulator->GetSimulatedLattice();
-            
+
             int EncodingIndex;
             Simulator->GetScene()->GetVoxelIndexOfPosition(EncodingPosition, &EncodingIndex);
-            
+
             const std::vector<PLVoxel>& Response = SimulatedLattice[EncodingIndex];
-            
+
             for(int i = 0; i < Response.size(); ++i)
             {
                 AudioBuffer.addSample(0, i, static_cast<float>(Response[i].AirPressure));
             }
-            
+
             Writer->writeFromAudioSampleBuffer(AudioBuffer, 0, static_cast<int>(Response.size()));
+
+            delete Writer;
+        }
+    }
+    
+    juce::File TestFile = DesktopDirectory.getNonexistentChildFile("TestFile", ".wav");
+    TestFile.deleteFile();
+    
+    if (std::unique_ptr<juce::FileOutputStream> FileStream = std::unique_ptr<juce::FileOutputStream>(TestFile.createOutputStream()))
+    {
+        juce::WavAudioFormat WavFormat;
+        
+        if (auto Writer = WavFormat.createWriterFor(FileStream.get(), 48000, 1, 16, {}, 0))
+        {
+            FileStream.release(); // (passes responsibility for deleting the stream to the writer object that is now using it)
             
-            //PL_RESULT GetVoxelIndexOfPosition(const PLVector& Position, int* OutIndex) const;
+            juce::AudioBuffer<float> AudioBuffer (1, 48000);
+
+            for(int i = 0; i < 48000; ++i)
+            {
+                AudioBuffer.setSample(0, i, 0);
+            }
+            
+            Writer->writeFromAudioSampleBuffer(AudioBuffer, 0, 48000);
+            
+            delete Writer;
         }
     }
     
