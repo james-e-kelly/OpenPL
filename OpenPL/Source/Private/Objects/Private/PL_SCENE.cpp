@@ -482,12 +482,8 @@ PL_RESULT PL_SCENE::Simulate()
     
     if (SimulatedLattice.size() > 0)
     {
-        PL_SYSTEM* System;
-        GetSystem(&System);
-        PLVector ListenerLocation;
-        System->GetListenerPosition(ListenerLocation);
         int ListenerIndex;
-        GetVoxelIndexOfPosition(ListenerLocation, &ListenerIndex);
+        GetListenerVoxelIndex(&ListenerIndex);
         
         if (ListenerIndex != -1)
         {
@@ -502,6 +498,8 @@ PL_RESULT PL_SCENE::Simulate()
             plotter.PlotOneDimensionWaterfall(ListenerY+1, ListenerZ);
             plotter.PlotOneDimensionWaterfall(ListenerY, ListenerZ+1);
             
+            PLVector ListenerLocation;
+            GetListenerLocation(&ListenerLocation);
             Analyser Analyser;
             Analyser.Encode(SimulatorPointer.get(), ListenerLocation + PLVector(1,0,1));
         }
@@ -514,7 +512,14 @@ PL_RESULT PL_SCENE::Simulate()
     return PL_OK;
 }
 
-PL_RESULT PL_SCENE::GetVoxelsCount(int* OutVoxelCount)
+PL_RESULT PL_SCENE::VoxeliseInternal()
+{
+    VoxelThreadStatus.store(ThreadStatus_Ongoing);
+    
+    return FillVoxels();
+}
+
+PL_RESULT PL_SCENE::GetVoxelsCount(int* OutVoxelCount) const
 {
     if (VoxelThreadStatus.load() == ThreadStatus_Ongoing)
     {
@@ -532,7 +537,7 @@ PL_RESULT PL_SCENE::GetVoxelsCount(int* OutVoxelCount)
     return PL_OK;
 }
 
-PL_RESULT PL_SCENE::GetVoxelLocation(PLVector* OutVoxelLocation, int Index)
+PL_RESULT PL_SCENE::GetVoxelLocation(PLVector* OutVoxelLocation, int Index) const
 {
     if (VoxelThreadStatus.load() == ThreadStatus_Ongoing)
     {
@@ -553,7 +558,7 @@ PL_RESULT PL_SCENE::GetVoxelLocation(PLVector* OutVoxelLocation, int Index)
     return GetVoxelPosition(Index, OutVoxelLocation);
 }
 
-PL_RESULT PL_SCENE::GetVoxelAbsorpivity(float* OutAbsorpivity, int Index)
+PL_RESULT PL_SCENE::GetVoxelAbsorpivity(float* OutAbsorpivity, int Index) const
 {
     if (!OutAbsorpivity || Index < 0)
     {
@@ -574,13 +579,6 @@ PL_RESULT PL_SCENE::GetVoxelAbsorpivity(float* OutAbsorpivity, int Index)
     *OutAbsorpivity = Voxels.Voxels[Index].Absorptivity;
     
     return PL_OK;
-}
-
-PL_RESULT PL_SCENE::VoxeliseInternal()
-{
-    VoxelThreadStatus.store(ThreadStatus_Ongoing);
-    
-    return FillVoxels();
 }
 
 PL_RESULT PL_SCENE::GetMeshes(const std::vector<PL_MESH>** OutMeshes) const
@@ -677,4 +675,24 @@ PL_RESULT PL_SCENE::GetVoxelIndexOfPosition(const PLVector& Position, int* OutIn
     }
     *OutIndex = -1;
     return PL_ERR;
+}
+
+PL_RESULT PL_SCENE::GetListenerLocation(PLVector* OutListenerLocation) const
+{
+    PL_SYSTEM* System;
+    GetSystem(&System);
+    PLVector ListenerLocation;
+    System->GetListenerPosition(ListenerLocation);
+    *OutListenerLocation = ListenerLocation;
+    return PL_OK;
+}
+
+PL_RESULT PL_SCENE::GetListenerVoxelIndex(int* OutIndex) const
+{
+    PLVector ListenerLocation;
+    GetListenerLocation(&ListenerLocation);
+    int ListenerIndex;
+    GetVoxelIndexOfPosition(ListenerLocation, &ListenerIndex);
+    *OutIndex = ListenerIndex;
+    return PL_OK;
 }

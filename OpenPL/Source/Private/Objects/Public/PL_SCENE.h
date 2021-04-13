@@ -125,17 +125,17 @@ public:
      */
     PL_RESULT FillVoxelsWithGeometry();
     
+    /**
+     * Run the wave simulation over the geometry currently in the scene.
+     */
     PL_RESULT Simulate();
     
-    PL_RESULT GetVoxelsCount(int* OutVoxelCount);
+    PL_RESULT GetVoxelsCount(int* OutVoxelCount) const;
     
-    PL_RESULT GetVoxelLocation(PLVector* OutVoxelLocation, int Index);
+    PL_RESULT GetVoxelLocation(PLVector* OutVoxelLocation, int Index) const;
     
-    PL_RESULT GetVoxelAbsorpivity(float* OutAbsorpivity, int Index);
-    
-    /**
-     * Get all the meshes in this scene.
-     */
+    PL_RESULT GetVoxelAbsorpivity(float* OutAbsorpivity, int Index) const;
+
     PL_RESULT GetMeshes(const std::vector<PL_MESH>** OutMeshes) const;
     
     PL_RESULT GetScenePosition(PLVector* OutScenePosition) const;
@@ -153,6 +153,10 @@ public:
     PL_RESULT GetVoxelAtPosition(const PLVector& Position, PLVoxel* OutVoxel) const;
     
     PL_RESULT GetVoxelIndexOfPosition(const PLVector& Position, int* OutIndex) const;
+
+    PL_RESULT GetListenerLocation(PLVector* OutListenerLocation) const;
+    
+    PL_RESULT GetListenerVoxelIndex(int* OutIndex) const;
     
 private:
     PL_SYSTEM* OwningSystem;
