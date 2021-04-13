@@ -485,6 +485,7 @@ PL_RESULT PL_SCENE::Simulate()
         PL_SYSTEM* System;
         GetSystem(&System);
         PLVector ListenerLocation;
+        System->GetListenerPosition(ListenerLocation);
         int ListenerIndex;
         GetVoxelIndexOfPosition(ListenerLocation, &ListenerIndex);
         
