@@ -17,6 +17,7 @@
 #include "Simulators/SimulatorFDTD.h"
 #include "Simulators/SimulatorBasic.h"
 #include <boost/timer/timer.hpp>
+#include "Analyser.h"
 
 Eigen::Vector3d CreateEigenVectorFromPL(const PLVector& Vector)
 {
@@ -499,6 +500,9 @@ PL_RESULT PL_SCENE::Simulate()
             plotter.PlotOneDimensionWaterfall(ListenerY, ListenerZ);
             plotter.PlotOneDimensionWaterfall(ListenerY+1, ListenerZ);
             plotter.PlotOneDimensionWaterfall(ListenerY, ListenerZ+1);
+            
+            Analyser Analyser;
+            Analyser.Encode(SimulatorPointer.get(), ListenerLocation + PLVector(1,0,1));
         }
         else
         {
