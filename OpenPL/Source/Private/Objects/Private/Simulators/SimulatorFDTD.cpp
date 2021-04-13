@@ -160,13 +160,28 @@ void SimulatorFDTD::Simulate()
         }
         
         // Absorption top/bottom
-//        {
-//            for (int i = 0; i < YSize; ++i)
-//            {
-//                int Index1 = i;
-//                index Index2 =
-//            }
-//        }
+        {
+            for (int i = 0; i < ZSize; ++i)
+            {
+                const int Index1 = i;
+                const int Index2 = XSize * (ZSize + 1) + i;
+                
+                (*Lattice)[Index1].ParticleVelocityX = -(*Lattice)[Index1].AirPressure;
+                (*Lattice)[Index2].ParticleVelocityX = (*Lattice)[Index2 - YSize - 1].AirPressure;
+            }
+        }
+        
+        // Absorption left/right
+        {
+            for (int i = 0; i < XSize; ++i)
+            {
+                const int Index1 = i * (ZSize + 1);
+                const int Index2 = i * (ZSize + 1) + ZSize;
+                
+                (*Lattice)[Index1].ParticleVelocityZ = -(*Lattice)[Index1].AirPressure;
+                (*Lattice)[Index2].ParticleVelocityZ = (*Lattice)[Index2 - 1].AirPressure;
+            }
+        }
         
         // Add response
         {
