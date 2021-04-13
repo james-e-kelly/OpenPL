@@ -43,24 +43,6 @@ namespace OpenPL
 
         void Start()
         {
-            CheckResult(Debug.Initialize(DEBUG_CALLBACK_METHOD), "Debug.Init");
-
-            CheckResult(System.Create(out SystemInstance), "System.Create");
-
-            if(!SystemInstance.HasHandle())
-            {
-                return;
-            }
-
-            CheckResult(SystemInstance.CreateScene(out SceneInstance), "System.CreateScene");
-
-            if (!SceneInstance.HasHandle())
-            {
-                return;
-            }
-
-            CheckResult(SceneInstance.CreateVoxels(simulationSize.ToPLVector(), VoxelSize), "Scene.CreateVoxels");
-
             AcousticGeometry[] allGameObjects = FindObjectsOfType<AcousticGeometry>();
 
             for (int i = 0; i < allGameObjects.Length; i++)
@@ -121,6 +103,8 @@ namespace OpenPL
             SceneInstance.GetVoxelsCount(ref Count);
 
             CheckResult(SceneInstance.Simulate(), "Scene.Simulate");
+
+
         }
 
         void OnDestroy()
