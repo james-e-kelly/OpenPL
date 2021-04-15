@@ -38,6 +38,11 @@ PL_RESULT PL_System_Create (PL_SYSTEM** OutSystem)
 
 PL_RESULT PL_System_Release (PL_SYSTEM* System)
 {
+    if (!System)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
     delete System;
     return PL_OK;
 }
@@ -173,20 +178,40 @@ PL_RESULT PL_Scene_Simulate(PL_SCENE* Scene)
 
 PL_RESULT PL_Scene_Debug(PL_SCENE* Scene)
 {
+    if (!Scene)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
     return OpenOpenGLDebugWindow(Scene);
 }
 
 PL_RESULT PL_Scene_GetVoxelsCount(PL_SCENE* Scene, int* OutVoxelCount)
 {
+    if (!Scene)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
     return Scene->GetVoxelsCount(OutVoxelCount);
 }
 
 PL_RESULT PL_Scene_GetVoxelLocation(PL_SCENE* Scene, PLVector* OutVoxelLocation, int Index)
 {
+    if (!Scene)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
     return Scene->GetVoxelLocation(OutVoxelLocation, Index);
 }
 
 PL_RESULT PL_Scene_GetVoxelAbsorpivity(PL_SCENE* Scene, float* OutAbsorpivity, int Index)
 {
+    if (!Scene)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
     return Scene->GetVoxelAbsorpivity(OutAbsorpivity, Index);
 }
