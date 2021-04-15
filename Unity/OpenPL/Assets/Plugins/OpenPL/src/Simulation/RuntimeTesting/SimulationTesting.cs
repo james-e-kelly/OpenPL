@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.InteropServices;
+using System;
 
 namespace OpenPL
 {
@@ -16,6 +17,7 @@ namespace OpenPL
         public bool ShowVoxels;
         public float VoxelSize = 1f;
         public Vector3 simulationSize = new Vector3(10, 10, 10);
+        public string irSamplePath;
 
         void Start()
         {
@@ -114,6 +116,15 @@ namespace OpenPL
                         if (type == FMOD.DSP_TYPE.CONVOLUTIONREVERB)
                         {
                             UnityEngine.Debug.Log("FOUND REVERB!");
+
+                            int channels, sampleRate;
+                            float[] ir = WAV.Read(irSamplePath, out channels, out sampleRate);
+
+                            byte[] array = new byte[ir.Length + 1];
+                            array[0] = (byte)channels;
+                            Buffer.BlockCopy(array, 0, ir, 1, array.Length);
+
+                            UnityEngine.Debug.Log(dsp.setParameterData((int)FMOD.DSP_CONVOLUTION_REVERB.IR, array));
                         }
                     }
                 }

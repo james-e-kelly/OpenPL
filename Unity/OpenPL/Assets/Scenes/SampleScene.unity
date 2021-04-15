@@ -266,6 +266,7 @@ MonoBehaviour:
   ShowVoxels: 0
   VoxelSize: 0.5
   simulationSize: {x: 10, y: 10, z: 10}
+  irSamplePath: /Users/james/Desktop/TestImpulseResponse.wav
 --- !u!4 &104099975
 Transform:
   m_ObjectHideFlags: 0
