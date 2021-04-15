@@ -241,6 +241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 104099975}
   - component: {fileID: 104099974}
+  - component: {fileID: 104099976}
   m_Layer: 0
   m_Name: OpenPL
   m_TagString: Untagged
@@ -260,8 +261,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22538540503904285a83ee1607d3a92a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventEmitter: {fileID: 1330372536}
   DebugMeshes: 0
-  ShowVoxels: 1
+  ShowVoxels: 0
   VoxelSize: 0.5
   simulationSize: {x: 10, y: 10, z: 10}
 --- !u!4 &104099975
@@ -278,6 +280,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &104099976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104099973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71d6af792e0454b7dbcf207eef22ad26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VoxelSize: 0.5
+  simulationSize: {x: 10, y: 10, z: 10}
 --- !u!1 &542626427
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,6 +603,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -659,6 +676,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
+  ListenerNumber: -1
 --- !u!1 &1235483681
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,6 +811,7 @@ GameObject:
   - component: {fileID: 1330372532}
   - component: {fileID: 1330372531}
   - component: {fileID: 1330372535}
+  - component: {fileID: 1330372536}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -875,3 +907,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c1d9c71a737141afa6c40836f7d6d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1330372536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330372530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Test
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
