@@ -7,39 +7,15 @@ namespace OpenPL
 {
     public class SimulationTesting : MonoBehaviour
     {
-        System SystemInstance;
-        Scene SceneInstance;
+        System SystemInstance => RuntimeManager.Instance.System;
+        Scene SceneInstance => RuntimeManager.Instance.Scene;
+
+        public FMODUnity.StudioEventEmitter eventEmitter;
 
         public bool DebugMeshes;
         public bool ShowVoxels;
         public float VoxelSize = 1f;
         public Vector3 simulationSize = new Vector3(10, 10, 10);
-
-        void CheckResult(RESULT Result, string Message)
-        {
-            if (Result != RESULT.OK)
-            {
-                UnityEngine.Debug.LogError($"[OpenPL] {Result} : {Message}");
-            }
-        }
-
-        [AOT.MonoPInvokeCallback(typeof(DEBUG_CALLBACK))]
-        static RESULT DEBUG_CALLBACK_METHOD(string Message, DEBUG_LEVEL Level)
-        {
-            if (Level == DEBUG_LEVEL.Log)
-            {
-                UnityEngine.Debug.Log(string.Format(("[OpenPL] {0}"), Message));
-            }
-            else if (Level == DEBUG_LEVEL.Warn)
-            {
-                UnityEngine.Debug.LogWarning(string.Format(("[OpenPL] {0}"), Message));
-            }
-            else if (Level == DEBUG_LEVEL.Error)
-            {
-                UnityEngine.Debug.LogError(string.Format(("[OpenPL] {0}"), Message));
-            }
-            return RESULT.OK;
-        }
 
         void Start()
         {
@@ -92,30 +68,55 @@ namespace OpenPL
                 }
             }
 
-            CheckResult(SceneInstance.FillVoxelsWithGeometry(), "Scene.FillVoxels");
+            RuntimeManager.CheckResult(SceneInstance.FillVoxelsWithGeometry(), "Scene.FillVoxels");
 
             if (DebugMeshes)
             {
-                CheckResult(SceneInstance.Debug(), "Scene.Debug");
+                RuntimeManager.CheckResult(SceneInstance.Debug(), "Scene.Debug");
             }
 
             int Count = 0;
             SceneInstance.GetVoxelsCount(ref Count);
 
-            CheckResult(SceneInstance.Simulate(), "Scene.Simulate");
+            RuntimeManager.CheckResult(SceneInstance.Simulate(), "Scene.Simulate");
 
+            if (!eventEmitter)
+            {
+                UnityEngine.Debug.LogError("No event");
+                return;
+            }
+            
+            if (eventEmitter.EventInstance.getChannelGroup(out FMOD.ChannelGroup group) == FMOD.RESULT.OK)
+            {
+                int dspNum = -1;
+                group.getNumDSPs(out dspNum);
 
-        }
+                for (int i = 0; i < dspNum; i++)
+                {
+                    FMOD.DSP dsp;
+                    if (group.getDSP(i, out dsp) == FMOD.RESULT.OK)
+                    {
+                        FMOD.DSP_TYPE type;
+                        dsp.getType(out type);
 
-        void OnDestroy()
-        {
-            CheckResult(SystemInstance.Release(), "System.Release");
+                        if (type == FMOD.DSP_TYPE.CONVOLUTIONREVERB)
+                        {
+                            UnityEngine.Debug.Log("FOUND REVERB!");
+                        }
+                    }
+                }
+            }
         }
 
         void OnDrawGizmos()
         {
             Gizmos.color = Color.white;
             Gizmos.DrawWireCube(Vector3.zero, simulationSize);
+
+            if (RuntimeManager.Instance == null)
+            {
+                return;
+            }
 
             if (SystemInstance.HasHandle() && SceneInstance.HasHandle())
             {

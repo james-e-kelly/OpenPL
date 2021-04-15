@@ -18,7 +18,7 @@ namespace OpenPL
         static RuntimeManager instance;
         public static RuntimeManager Instance => instance;
 
-        void CheckResult(RESULT Result, string Message)
+        public static void CheckResult(RESULT Result, string Message)
         {
             if (Result != RESULT.OK)
             {
@@ -68,6 +68,11 @@ namespace OpenPL
             }
 
             CheckResult(scene.CreateVoxels(simulationSize.ToPLVector(), VoxelSize), "Scene.CreateVoxels");
+        }
+
+        private void OnDestroy()
+        {
+           CheckResult(System.Release(), "System.Release");
         }
     }
 }
