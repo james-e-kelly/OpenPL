@@ -159,7 +159,7 @@
 	</object>
 	<object class="ConvolutionReverbEffect" id="{a6604246-b7cc-4f50-91f5-a2e1f2ee16df}">
 		<property name="dryLevel">
-			<value>0</value>
+			<value>-76</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{95209b3a-c65a-4ebc-a186-612444644d39}" />
