@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{683AAEA1-CBB9-469A-B75D-08F615C38D70}" SchemaVersion="103">
+	<AudioObjects>
+		<WorkUnit Name="Default Work Unit" ID="{683AAEA1-CBB9-469A-B75D-08F615C38D70}" PersistMode="Standalone">
+			<ChildrenList>
+				<Sound Name="Testing" ID="{E1E982B1-E509-4EF9-B619-DBFD9217697F}" ShortID="119655959">
+					<PropertyList>
+						<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{157BA5A5-A95D-48A0-A8FE-4912FD129BBC}"/>
+						</Reference>
+						<Reference Name="Effect0">
+							<Custom>
+								<Effect Name="Wwise Convolution Reverb (Custom)" ID="{6020EFCF-EF93-44AF-AA6C-4413EDA97F58}" ShortID="749911355" PluginName="Wwise Convolution Reverb" CompanyID="0" PluginID="127" PluginType="3">									<PluginData>
+	<ConvolutionData>
+		<CurveList Version="1">
+			<CurveInfo Name="IRGraphicEQ">
+				<Curve Name="" ID="{F88557AF-B03C-46BE-9018-6B0D83DE0E53}">
+					<PropertyList>
+						<Property Name="Flags" Type="int32" Value="19"/>
+					</PropertyList>
+					<PointList>
+						<Point>
+							<XPos>20</XPos>
+							<YPos>0</YPos>
+							<Flags>5</Flags>
+						</Point>
+						<Point>
+							<XPos>20000</XPos>
+							<YPos>0</YPos>
+							<Flags>37</Flags>
+						</Point>
+					</PointList>
+				</Curve>
+			</CurveInfo>
+		</CurveList>
+	</ConvolutionData>
+</PluginData>
+								</Effect>
+							</Custom>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E437D71E-2B8A-44D6-8DFE-872A27BB66E5}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="TestingTesting" ID="{081390FE-6B26-4435-B9EF-E4D7F687F339}">
+							<Language>SFX</Language>
+							<AudioFile>TestingTesting.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="541599446"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ObjectLists/>
+					<ActiveSourceList>
+						<ActiveSource Name="TestingTesting" ID="{081390FE-6B26-4435-B9EF-E4D7F687F339}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>
