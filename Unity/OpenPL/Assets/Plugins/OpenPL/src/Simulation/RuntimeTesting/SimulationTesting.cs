@@ -6,10 +6,18 @@ using System;
 
 namespace OpenPL
 {
+    public enum MiddlewarePlatform
+    {
+        FMOD,
+        Wwise
+    }
+
     public class SimulationTesting : MonoBehaviour
     {
         System SystemInstance => RuntimeManager.Instance.System;
         Scene SceneInstance => RuntimeManager.Instance.Scene;
+
+        public MiddlewarePlatform middlewarePlatform;
 
         public FMODUnity.StudioEventEmitter eventEmitter;
 
@@ -82,7 +90,10 @@ namespace OpenPL
 
             RuntimeManager.CheckResult(SceneInstance.Simulate(), "Scene.Simulate");
 
-            StartCoroutine(WaitForEventInstance());
+            if (middlewarePlatform == MiddlewarePlatform.FMOD)
+            {
+                StartCoroutine(WaitForEventInstance());
+            }
         }
 
         IEnumerator WaitForEventInstance()
