@@ -122,7 +122,7 @@ namespace OpenPL
 
                             byte[] array = new byte[ir.Length + 1];
                             array[0] = (byte)channels;
-                            Buffer.BlockCopy(array, 0, ir, 1, array.Length);
+                            Buffer.BlockCopy(ir, 0, array, 1, ir.Length);
 
                             UnityEngine.Debug.Log(dsp.setParameterData((int)FMOD.DSP_CONVOLUTION_REVERB.IR, array));
                         }
