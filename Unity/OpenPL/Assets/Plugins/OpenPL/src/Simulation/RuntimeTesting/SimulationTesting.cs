@@ -97,26 +97,19 @@ namespace OpenPL
 
             if (eventEmitter.EventInstance.getChannelGroup(out FMOD.ChannelGroup group) == FMOD.RESULT.OK)
             {
-                UnityEngine.Debug.Log("Got channel group");
                 int dspNum = -1;
                 group.getNumDSPs(out dspNum);
 
                 for (int i = 0; i < dspNum; i++)
                 {
-                    UnityEngine.Debug.Log("Loop");
                     FMOD.DSP dsp;
                     if (group.getDSP(i, out dsp) == FMOD.RESULT.OK)
                     {
-                        UnityEngine.Debug.Log("Got dsp");
                         FMOD.DSP_TYPE type;
                         dsp.getType(out type);
 
-                        UnityEngine.Debug.Log(type);
-
                         if (type == FMOD.DSP_TYPE.CONVOLUTIONREVERB)
                         {
-                            UnityEngine.Debug.Log("FOUND REVERB!");
-
                             int channels, sampleRate;
                             float[] ir = WAV.Read(irSamplePath, out channels, out sampleRate);
 
@@ -124,7 +117,7 @@ namespace OpenPL
                             array[0] = (byte)channels;
                             Buffer.BlockCopy(ir, 0, array, 1, ir.Length);
 
-                            UnityEngine.Debug.Log(dsp.setParameterData((int)FMOD.DSP_CONVOLUTION_REVERB.IR, array));
+                            dsp.setParameterData((int)FMOD.DSP_CONVOLUTION_REVERB.IR, array);
                         }
                     }
                 }
