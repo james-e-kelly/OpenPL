@@ -436,7 +436,7 @@ PL_RESULT PL_SCENE::FillVoxels()
             
             if (NumberOfPointsInside > 2)
             {
-                MeshCell.Absorptivity = 0.75f;
+                MeshCell.Absorptivity = 0.25f;
                 MeshCell.Beta = 0;
             }
         }
