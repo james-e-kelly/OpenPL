@@ -135,6 +135,11 @@ namespace OpenPL
             return PL_System_SetListenerPosition(Handle, ListenerPosition);
         }
 
+        public RESULT GetListenerPosition(out PLVector ListernPosition)
+        {
+            return PL_System_GetListenerPosition(Handle, out ListernPosition);
+        }
+
         public IntPtr Handle;
 
         public System(IntPtr Ptr) { Handle = Ptr; }
@@ -152,6 +157,9 @@ namespace OpenPL
 
         [DllImport(PLATFORM.dll)]
         static extern RESULT PL_System_SetListenerPosition(IntPtr System, PLVector ListenerPosition);
+
+        [DllImport(PLATFORM.dll)]
+        static extern RESULT PL_System_GetListenerPosition(IntPtr System, out PLVector ListenerPosition);
     }
 
     public struct Scene
@@ -252,6 +260,16 @@ namespace OpenPL
             return PL_Scene_FillVoxelsWithGeometry(Handle);
         }
 
+        public RESULT DrawGraph(PLVector GraphPosition)
+        {
+            return PL_Scene_DrawGraph(Handle, GraphPosition);
+        }
+
+        public RESULT Encode(PLVector EncodingPosition)
+        {
+            return PL_Scene_Encode(Handle, EncodingPosition);
+        }
+
         public IntPtr Handle;
 
         public Scene(IntPtr Ptr) { Handle = Ptr; }
@@ -287,5 +305,11 @@ namespace OpenPL
 
         [DllImport(PLATFORM.dll)]
         static extern RESULT PL_Scene_FillVoxelsWithGeometry(IntPtr Scene);
+
+        [DllImport(PLATFORM.dll)]
+        static extern RESULT PL_Scene_DrawGraph(IntPtr Scene, PLVector GraphPosition);
+
+        [DllImport(PLATFORM.dll)]
+        static extern RESULT PL_Scene_Encode(IntPtr Scene, PLVector EncodingPosition);
     }
 }
