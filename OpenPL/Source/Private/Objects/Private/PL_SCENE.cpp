@@ -477,37 +477,6 @@ PL_RESULT PL_SCENE::Simulate()
         SimulatorPointer->Simulate();
     }
     DebugLog(Stream.str().c_str());
-    
-    const std::vector<std::vector<PLVoxel>>& SimulatedLattice = SimulatorPointer->GetSimulatedLattice();
-    
-    if (SimulatedLattice.size() > 0)
-    {
-        int ListenerIndex;
-        GetListenerVoxelIndex(&ListenerIndex);
-        
-        if (ListenerIndex != -1)
-        {
-            MatPlotPlotter plotter(SimulatedLattice, Voxels.Size(0,0), Voxels.Size(0,1), Voxels.Size(0,2), TimeSteps);
-            
-            //void IndexToThreeDim(int Index, int XSize, int YSize, int& OutX, int& OutY, int& OutZ);
-            
-            int ListenerX, ListenerY, ListenerZ;
-            IndexToThreeDim(ListenerIndex, Voxels.Size(0,0), Voxels.Size(0,1), ListenerX, ListenerY, ListenerZ);
-            
-            plotter.PlotOneDimensionWaterfall(ListenerY, ListenerZ);
-            plotter.PlotOneDimensionWaterfall(ListenerY+1, ListenerZ);
-            plotter.PlotOneDimensionWaterfall(ListenerY, ListenerZ+1);
-            
-            PLVector ListenerLocation;
-            GetListenerLocation(&ListenerLocation);
-            Analyser Analyser;
-            Analyser.Encode(SimulatorPointer.get(), ListenerLocation + PLVector(1,0,1));
-        }
-        else
-        {
-            DebugError("Can't plot because can't get listener voxel");
-        }
-    }
 
     return PL_OK;
 }
@@ -694,5 +663,37 @@ PL_RESULT PL_SCENE::GetListenerVoxelIndex(int* OutIndex) const
     int ListenerIndex;
     GetVoxelIndexOfPosition(ListenerLocation, &ListenerIndex);
     *OutIndex = ListenerIndex;
+    return PL_OK;
+}
+
+PL_RESULT PL_SCENE::GetSimulator(Simulator** OutSimulator) const
+{
+    if (!OutSimulator)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
+    *OutSimulator = SimulatorPointer.get();
+    
+    return PL_OK;
+}
+
+PL_RESULT PL_SCENE::GetVoxelLatticeSize(int& X, int& Y, int& Z) const
+{
+    X = Voxels.Size(0,0);
+    Y = Voxels.Size(0,1);
+    Z = Voxels.Size(0,2);
+    return PL_OK;
+}
+
+PL_RESULT PL_SCENE::GetTimeSteps(int& OutTimeSteps)
+{
+    OutTimeSteps = TimeSteps;
+    return PL_OK;
+}
+
+PL_RESULT PL_SCENE::GetThreeDimensionalIndexOfIndex(int Index, int& IndexX, int& IndexY, int& IndexZ) const
+{
+    IndexToThreeDim(Index, Voxels.Size(0,0), Voxels.Size(0,1), IndexX, IndexY, IndexZ);
     return PL_OK;
 }

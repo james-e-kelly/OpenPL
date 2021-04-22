@@ -158,6 +158,14 @@ public:
     
     PL_RESULT GetListenerVoxelIndex(int* OutIndex) const;
     
+    PL_RESULT GetSimulator(Simulator** OutSimulator) const;
+    
+    PL_RESULT GetVoxelLatticeSize(int& X, int& Y, int& Z) const;
+    
+    PL_RESULT GetTimeSteps(int& OutTimeSteps);
+    
+    PL_RESULT GetThreeDimensionalIndexOfIndex(int Index, int& IndexX, int& IndexY, int& IndexZ) const;
+    
 private:
     PL_SYSTEM* OwningSystem;
     

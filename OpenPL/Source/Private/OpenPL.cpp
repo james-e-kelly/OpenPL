@@ -12,6 +12,9 @@
 #include "PL_SYSTEM.h"
 #include "PL_SCENE.h"
 #include "DebugOpenGL.h"
+#include "MatPlotPlotter.h"
+#include "Simulators/Simulator.h"
+#include "Analyser.h"
 
 PL_RESULT PL_Debug_Initialize (PL_Debug_Callback Callback)
 {
@@ -53,8 +56,16 @@ PL_RESULT PL_System_SetListenerPosition(PL_SYSTEM* System, PLVector ListenerPosi
     {
         return PL_ERR_INVALID_PARAM;
     }
-    System->SetListenerPosition(ListenerPosition);
-    return PL_OK;
+    return System->SetListenerPosition(ListenerPosition);
+}
+
+PL_RESULT PL_System_GetListenerPosition(PL_SYSTEM* System, PLVector* OutListenerPosition)
+{
+    if (!System || !OutListenerPosition)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    return System->GetListenerPosition(*OutListenerPosition);
 }
 
 PL_RESULT PL_System_CreateScene(PL_SYSTEM* System, PL_SCENE** OutScene)
@@ -214,4 +225,59 @@ PL_RESULT PL_Scene_GetVoxelAbsorpivity(PL_SCENE* Scene, float* OutAbsorpivity, i
     }
     
     return Scene->GetVoxelAbsorpivity(OutAbsorpivity, Index);
+}
+
+PL_RESULT PL_Scene_DrawGraph(PL_SCENE* Scene, PLVector GraphPosition)
+{
+    if (!Scene)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
+    Simulator* Simulator;
+    Scene->GetSimulator(&Simulator);
+    
+    if (!Simulator)
+    {
+        return PL_ERR;
+    }
+    
+    int XSize,YSize,ZSize;
+    Scene->GetVoxelLatticeSize(XSize,YSize,ZSize);
+    
+    int TimeSteps;
+    Scene->GetTimeSteps(TimeSteps);
+    
+    int Index;
+    Scene->GetVoxelIndexOfPosition(GraphPosition, &Index);
+    
+    MatPlotPlotter plotter(Simulator->GetSimulatedLattice(), XSize, YSize, ZSize, TimeSteps);
+    
+    int X,Y,Z;
+    Scene->GetThreeDimensionalIndexOfIndex(Index, X, Y, Z);
+    
+    plotter.PlotOneDimensionWaterfall(Y,Z);
+    
+    return PL_OK;
+}
+
+PL_RESULT PL_Scene_Encode(PL_SCENE* Scene, PLVector EncodingPosition)
+{
+    if (!Scene)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
+    Simulator* Simulator;
+    Scene->GetSimulator(&Simulator);
+    
+    if (!Simulator)
+    {
+        return PL_ERR;
+    }
+    
+    Analyser Analyser;
+    Analyser.Encode(Simulator, EncodingPosition);
+    
+    return PL_OK;
 }
