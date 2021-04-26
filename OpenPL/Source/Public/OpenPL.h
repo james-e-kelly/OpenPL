@@ -201,7 +201,7 @@ extern "C"
      * @param Scene Scene to build the impulse response from.
      * @param EncodingPosition Position of the impulse response.
      */
-    PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_Encode(PL_SCENE* Scene, PLVector EncodingPosition);
+    PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_Encode(PL_SCENE* Scene, PLVector EncodingPosition, int* OutVoxelIndex);
     
 #ifdef __cplusplus
 }

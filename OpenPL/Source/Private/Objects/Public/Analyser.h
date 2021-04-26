@@ -21,5 +21,5 @@ class Analyser
 {
 public:
     
-    void Encode(Simulator* Simulator, PLVector EncodingPosition);
+    void Encode(Simulator* Simulator, PLVector EncodingPosition, int* OutVoxelIndex);
 };

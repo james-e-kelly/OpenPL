@@ -265,9 +265,9 @@ namespace OpenPL
             return PL_Scene_DrawGraph(Handle, GraphPosition);
         }
 
-        public RESULT Encode(PLVector EncodingPosition)
+        public RESULT Encode(PLVector EncodingPosition, out int OutVoxelIndex)
         {
-            return PL_Scene_Encode(Handle, EncodingPosition);
+            return PL_Scene_Encode(Handle, EncodingPosition, out OutVoxelIndex);
         }
 
         public IntPtr Handle;
@@ -310,6 +310,6 @@ namespace OpenPL
         static extern RESULT PL_Scene_DrawGraph(IntPtr Scene, PLVector GraphPosition);
 
         [DllImport(PLATFORM.dll)]
-        static extern RESULT PL_Scene_Encode(IntPtr Scene, PLVector EncodingPosition);
+        static extern RESULT PL_Scene_Encode(IntPtr Scene, PLVector EncodingPosition, out int OutVoxelIndex);
     }
 }

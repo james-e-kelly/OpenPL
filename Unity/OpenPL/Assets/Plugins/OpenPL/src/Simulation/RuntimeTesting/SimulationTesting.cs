@@ -27,7 +27,6 @@ namespace OpenPL
         public bool ShowVoxels;
         public float VoxelSize = 1f;
         public Vector3 simulationSize = new Vector3(10, 10, 10);
-        public string irSamplePath;
 
         void Start()
         {
@@ -87,19 +86,17 @@ namespace OpenPL
                 RuntimeManager.CheckResult(SceneInstance.Debug(), "Scene.Debug");
             }
 
-            Vector3 listenerLocation = Listener.transform.position;
+            listenerLocation = Listener.transform.position;
             SystemInstance.SetListenerPosition(listenerLocation.ToPLVector());
 
             int Count = 0;
             SceneInstance.GetVoxelsCount(ref Count);
 
-            Vector3 emitterLocation = eventEmitter.transform.position;
+            emitterLocation = eventEmitter.transform.position;
 
             RuntimeManager.CheckResult(SceneInstance.Simulate(emitterLocation.ToPLVector()), "Scene.Simulate");
             
-            Vector3 listenerEmitterLocation = new Vector3(listenerLocation.x, emitterLocation.y, listenerLocation.z);
-
-            RuntimeManager.CheckResult(SceneInstance.Encode(listenerEmitterLocation.ToPLVector()), "Encode");
+            listenerEmitterLocation = new Vector3(listenerLocation.x, emitterLocation.y, listenerLocation.z);
 
             RuntimeManager.CheckResult(SceneInstance.DrawGraph(listenerEmitterLocation.ToPLVector()), "DrawGraph");
             RuntimeManager.CheckResult(SceneInstance.DrawGraph(emitterLocation.ToPLVector()), "DrawGraph");
@@ -111,6 +108,48 @@ namespace OpenPL
         }
 
         FMOD.DSP reverbDSP;
+        Vector3 emitterLocation;
+        Vector3 listenerEmitterLocation;
+        Vector3 listenerLocation;
+
+        int lastVoxel = -1;
+
+        IEnumerator UpdateSimulation()
+        {
+            while (eventEmitter && eventEmitter.IsPlaying())
+            {
+                listenerLocation = Listener.transform.position;
+                listenerEmitterLocation = new Vector3(listenerLocation.x, emitterLocation.y, listenerLocation.z);
+
+                int VoxelIndex;
+                RuntimeManager.CheckResult(SceneInstance.Encode(listenerEmitterLocation.ToPLVector(), out VoxelIndex), "Encode");
+                string DesktopPath = global::System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string currentIRFilePath = DesktopPath + "/" + VoxelIndex.ToString() + ".wav";
+                if (global::System.IO.File.Exists(currentIRFilePath) && lastVoxel == VoxelIndex)
+                {
+                    yield return new WaitForSeconds(1f);
+                    continue;
+                }
+                UnityEngine.Debug.Log(currentIRFilePath);
+
+                lastVoxel = VoxelIndex;
+
+                int channels, sampleRate;
+                float[] ir = WAV.Read(currentIRFilePath, out channels, out sampleRate);
+
+                byte[] array = new byte[ir.Length + 1];
+                array[0] = (byte)channels;
+                Buffer.BlockCopy(ir, 0, array, 1, ir.Length);
+
+                reverbDSP.setParameterData((int)FMOD.DSP_CONVOLUTION_REVERB.IR, array);
+
+                UnityEngine.Debug.Log("SENT IR");
+
+                yield return new WaitForSeconds(0.2f);
+            }
+
+            yield return null;
+        }
 
         IEnumerator WaitForEventInstance()
         {
@@ -138,16 +177,7 @@ namespace OpenPL
                         if (type == FMOD.DSP_TYPE.CONVOLUTIONREVERB)
                         {
                             reverbDSP = dsp;
-                            int channels, sampleRate;
-                            float[] ir = WAV.Read(irSamplePath, out channels, out sampleRate);
-
-                            byte[] array = new byte[ir.Length + 1];
-                            array[0] = (byte)channels;
-                            Buffer.BlockCopy(ir, 0, array, 1, ir.Length);
-
-                            dsp.setParameterData((int)FMOD.DSP_CONVOLUTION_REVERB.IR, array);
-
-                            UnityEngine.Debug.Log("SENT IR");
+                            yield return UpdateSimulation();
                         }
                     }
                 }

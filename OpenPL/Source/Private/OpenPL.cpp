@@ -261,7 +261,7 @@ PL_RESULT PL_Scene_DrawGraph(PL_SCENE* Scene, PLVector GraphPosition)
     return PL_OK;
 }
 
-PL_RESULT PL_Scene_Encode(PL_SCENE* Scene, PLVector EncodingPosition)
+PL_RESULT PL_Scene_Encode(PL_SCENE* Scene, PLVector EncodingPosition, int* OutVoxelIndex)
 {
     if (!Scene)
     {
@@ -277,7 +277,7 @@ PL_RESULT PL_Scene_Encode(PL_SCENE* Scene, PLVector EncodingPosition)
     }
     
     Analyser Analyser;
-    Analyser.Encode(Simulator, EncodingPosition);
+    Analyser.Encode(Simulator, EncodingPosition, OutVoxelIndex);
     
     return PL_OK;
 }

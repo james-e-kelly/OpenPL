@@ -11,11 +11,24 @@
 #include "Analyser.h"
 #include "Simulators/Simulator.h"
 #include "PL_SCENE.h"
+#include <sstream>
 
-void Analyser::Encode(Simulator* Simulator, PLVector EncodingPosition)
+void Analyser::Encode(Simulator* Simulator, PLVector EncodingPosition, int* OutVoxelIndex)
 {
+    if (!Simulator || !OutVoxelIndex)
+    {
+        return;
+    }
+    
+    int EncodingIndex;
+    Simulator->GetScene()->GetVoxelIndexOfPosition(EncodingPosition, &EncodingIndex);
+    
+    *OutVoxelIndex = EncodingIndex;
+    
+    std::string EncodingIndexString = std::to_string(EncodingIndex) + ".wav";
+    
     juce::File DesktopDirectory = juce::File::getSpecialLocation(juce::File::userDesktopDirectory);
-    juce::File OutputFile = DesktopDirectory.getNonexistentChildFile("TestImpulseResponse", ".wav");
+    juce::File OutputFile = DesktopDirectory.getChildFile(EncodingIndexString);
     OutputFile.deleteFile();    // Delete so we can override ???
 
     float SamplingRate = Simulator->GetSamplingRate();
@@ -31,9 +44,6 @@ void Analyser::Encode(Simulator* Simulator, PLVector EncodingPosition)
             juce::AudioBuffer<float> AudioBuffer (1, SamplingRate);
 
             const std::vector<std::vector<PLVoxel>>& SimulatedLattice = Simulator->GetSimulatedLattice();
-
-            int EncodingIndex;
-            Simulator->GetScene()->GetVoxelIndexOfPosition(EncodingPosition, &EncodingIndex);
 
             const std::vector<PLVoxel>& Response = SimulatedLattice[EncodingIndex];
 
