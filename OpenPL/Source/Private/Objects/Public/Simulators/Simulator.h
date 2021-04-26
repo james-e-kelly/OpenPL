@@ -21,7 +21,7 @@ public:
     
     void Init(PL_SCENE* Scene, PL_VOXEL_GRID& Voxels, PL_SIMULATION_SETTINGS& Settings);
     
-    virtual void Simulate() { }
+    virtual void Simulate(int SimulateVoxelIndex) { }
     
     const std::vector<std::vector<PLVoxel>>& GetSimulatedLattice() const;
     

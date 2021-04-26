@@ -13,7 +13,7 @@
 #include "PL_SCENE.h"
 #include "PL_SYSTEM.h"
 
-void SimulatorFDTD::Simulate()
+void SimulatorFDTD::Simulate(int SimulateVoxelIndex)
 {
     if (Lattice == nullptr || Lattice->size() == 0)
     {
@@ -216,7 +216,7 @@ void SimulatorFDTD::Simulate()
         {
             // Add pulse
             // For now, this is using the runtime listener position and not baked listener positions
-            (*Lattice)[ListenerVoxelIndex].AirPressure += Pulse[CurrentTimeStep];
+            (*Lattice)[SimulateVoxelIndex].AirPressure += Pulse[CurrentTimeStep];
         }
         else
         {

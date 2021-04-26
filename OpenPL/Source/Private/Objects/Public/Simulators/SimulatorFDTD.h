@@ -14,7 +14,7 @@
 
 class SimulatorFDTD : public Simulator
 {
-    virtual void Simulate() override;
+    virtual void Simulate(int SimulateVoxelIndex) override;
     
     ~SimulatorFDTD() { }
 };

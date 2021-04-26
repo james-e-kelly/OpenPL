@@ -474,7 +474,7 @@ PL_RESULT PL_SCENE::Simulate()
     Stream << "Simulating Over " << Voxels.Voxels.size() << " Voxels\n";
     {
         boost::timer::auto_cpu_timer SimulationTimer(Stream);
-        SimulatorPointer->Simulate();
+        SimulatorPointer->Simulate(0);
     }
     DebugLog(Stream.str().c_str());
 

@@ -10,7 +10,7 @@
 
 #include "Simulators/SimulatorBasic3D.h"
 
-void SimulatorBasic3D::Simulate()
+void SimulatorBasic3D::Simulate(int SimulateVoxelIndex)
 {
     // Courant number contains the ratio of the temporal step to the spatial step
     // So if we are simulating 1 sec per 1 meter, the courant is 1 (or Unity)

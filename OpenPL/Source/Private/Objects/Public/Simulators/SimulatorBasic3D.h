@@ -14,7 +14,7 @@
 
 class SimulatorBasic3D : public Simulator
 {
-    virtual void Simulate() override;
+    virtual void Simulate(int SimulateVoxelIndex) override;
     
     ~SimulatorBasic3D() { }
 };
