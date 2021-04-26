@@ -110,6 +110,8 @@ namespace OpenPL
             }
         }
 
+        FMOD.DSP reverbDSP;
+
         IEnumerator WaitForEventInstance()
         {
             yield return new WaitForSeconds(5);
@@ -135,6 +137,7 @@ namespace OpenPL
 
                         if (type == FMOD.DSP_TYPE.CONVOLUTIONREVERB)
                         {
+                            reverbDSP = dsp;
                             int channels, sampleRate;
                             float[] ir = WAV.Read(irSamplePath, out channels, out sampleRate);
 
