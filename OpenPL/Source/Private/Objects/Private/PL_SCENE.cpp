@@ -447,7 +447,7 @@ PL_RESULT PL_SCENE::FillVoxels()
     return PL_OK;
 }
 
-PL_RESULT PL_SCENE::Simulate()
+PL_RESULT PL_SCENE::Simulate(PLVector SimulationLocation)
 {
     // Ignore for now so it's easier to test
 //    if (Meshes.size() == 0 || ListenerLocations.size() == 0 || SourceLocations.size() == 0)
@@ -470,13 +470,22 @@ PL_RESULT PL_SCENE::Simulate()
     
     SimulatorPointer->Init(this, Voxels, Settings);
     
-    std::ostringstream Stream;
-    Stream << "Simulating Over " << Voxels.Voxels.size() << " Voxels\n";
+    int VoxelIndex;
+    if (GetVoxelIndexOfPosition(SimulationLocation, &VoxelIndex) == PL_OK)
     {
-        boost::timer::auto_cpu_timer SimulationTimer(Stream);
-        SimulatorPointer->Simulate(0);
+        std::ostringstream Stream;
+        Stream << "Simulating Over " << Voxels.Voxels.size() << " Voxels\n";
+        {
+            boost::timer::auto_cpu_timer SimulationTimer(Stream);
+            SimulatorPointer->Simulate(VoxelIndex);
+        }
+        DebugLog(Stream.str().c_str());
     }
-    DebugLog(Stream.str().c_str());
+    else
+    {
+        DebugError("Could not get the voxel for the listener. Can't apply a pulse to the simulation");
+        return PL_ERR;
+    }
 
     return PL_OK;
 }

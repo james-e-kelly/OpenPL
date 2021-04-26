@@ -128,7 +128,7 @@ public:
     /**
      * Run the wave simulation over the geometry currently in the scene.
      */
-    PL_RESULT Simulate();
+    PL_RESULT Simulate(PLVector SimulationLocation);
     
     PL_RESULT GetVoxelsCount(int* OutVoxelCount) const;
     

@@ -177,14 +177,14 @@ PL_RESULT PL_Scene_RemoveSourceLocation(PL_SCENE* Scene, int IndexToRemove)
     return Scene->RemoveSourceLocation(IndexToRemove);
 }
 
-PL_RESULT PL_Scene_Simulate(PL_SCENE* Scene)
+PL_RESULT PL_Scene_Simulate(PL_SCENE* Scene, PLVector SimulationLocation)
 {
     if (!Scene)
     {
         return PL_ERR_INVALID_PARAM;
     }
     
-    return Scene->Simulate();
+    return Scene->Simulate(SimulationLocation);
 }
 
 PL_RESULT PL_Scene_Debug(PL_SCENE* Scene)

@@ -169,7 +169,7 @@ extern "C"
      *
      * @param Scene Scene to run the simulation over.
      */
-    PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_Simulate(PL_SCENE* Scene);
+    PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_Simulate(PL_SCENE* Scene, PLVector SimulationLocation);
     
     /**
      * Opens a new OpenGL window and displays the meshes contained within the scene.

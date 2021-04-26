@@ -191,37 +191,6 @@ void SimulatorFDTD::Simulate(int SimulateVoxelIndex)
             }
         }
         
-        PL_SCENE*& Scene = OwningScene;
-        
-        if (!Scene)
-        {
-            DebugError("No scene. Can't simulate");
-            return;
-        }
-        
-        PL_SYSTEM* System;
-        PL_RESULT GetSystemResult = Scene->GetSystem(&System);
-        
-        if (GetSystemResult != PL_OK)
-        {
-            DebugError("Could not get system from scene");
-            return;
-        }
-        
-        PLVector ListenerPosition;
-        System->GetListenerPosition(ListenerPosition);
-        
-        int ListenerVoxelIndex;
-        if (Scene->GetVoxelIndexOfPosition(ListenerPosition, &ListenerVoxelIndex) == PL_OK)
-        {
-            // Add pulse
-            // For now, this is using the runtime listener position and not baked listener positions
-            (*Lattice)[SimulateVoxelIndex].AirPressure += Pulse[CurrentTimeStep];
-        }
-        else
-        {
-            DebugError("Could not get the voxel for the listener. Can't apply a pulse to the simulation");
-            return;
-        }
+        (*Lattice)[SimulateVoxelIndex].AirPressure += Pulse[CurrentTimeStep];
     }
 }
