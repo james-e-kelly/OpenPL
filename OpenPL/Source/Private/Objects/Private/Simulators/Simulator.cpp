@@ -9,6 +9,7 @@
 */
 
 #include "Simulators/Simulator.h"
+#include "PL_SCENE.h"
 
 void Simulator::Init(PL_SCENE* Scene, PL_VOXEL_GRID& Voxels, PL_SIMULATION_SETTINGS& Settings)
 {
