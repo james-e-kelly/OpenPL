@@ -93,15 +93,16 @@ namespace OpenPL
             int Count = 0;
             SceneInstance.GetVoxelsCount(ref Count);
 
-            RuntimeManager.CheckResult(SceneInstance.Simulate(), "Scene.Simulate");
-
             Vector3 emitterLocation = eventEmitter.transform.position;
-            Vector3 listenerEmitterLocation = new Vector3(emitterLocation.x, listenerLocation.y, emitterLocation.z);
+
+            RuntimeManager.CheckResult(SceneInstance.Simulate(emitterLocation.ToPLVector()), "Scene.Simulate");
+            
+            Vector3 listenerEmitterLocation = new Vector3(listenerLocation.x, emitterLocation.y, listenerLocation.z);
 
             RuntimeManager.CheckResult(SceneInstance.Encode(listenerEmitterLocation.ToPLVector()), "Encode");
 
             RuntimeManager.CheckResult(SceneInstance.DrawGraph(listenerEmitterLocation.ToPLVector()), "DrawGraph");
-            RuntimeManager.CheckResult(SceneInstance.DrawGraph(listenerLocation.ToPLVector()), "DrawGraph");
+            RuntimeManager.CheckResult(SceneInstance.DrawGraph(emitterLocation.ToPLVector()), "DrawGraph");
 
             if (middlewarePlatform == MiddlewarePlatform.FMOD)
             {

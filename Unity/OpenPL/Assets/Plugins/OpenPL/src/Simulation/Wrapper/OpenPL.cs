@@ -245,9 +245,9 @@ namespace OpenPL
         /// Run the wave simulation
         /// </summary>
         /// <returns></returns>
-        public RESULT Simulate()
+        public RESULT Simulate(PLVector SimulationLocation)
         {
-            return PL_Scene_Simulate(Handle);
+            return PL_Scene_Simulate(Handle, SimulationLocation);
         }
 
         public RESULT CreateVoxels(PLVector SceneSize, float VoxelSize)
@@ -298,7 +298,7 @@ namespace OpenPL
         static extern RESULT PL_Scene_GetVoxelAbsorpivity(IntPtr Scene, ref float OutVoxelAbsorpivity, int Index);
 
         [DllImport(PLATFORM.dll)]
-        static extern RESULT PL_Scene_Simulate(IntPtr Scene);
+        static extern RESULT PL_Scene_Simulate(IntPtr Scene, PLVector SimulationLocation);
 
         [DllImport(PLATFORM.dll)]
         static extern RESULT PL_Scene_CreateVoxels(IntPtr Scene, PLVector SceneSize, float VoxelSize);
