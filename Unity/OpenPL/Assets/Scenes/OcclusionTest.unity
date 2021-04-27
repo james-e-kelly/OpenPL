@@ -605,10 +605,7 @@ MonoBehaviour:
   middlewarePlatform: 0
   eventEmitter: {fileID: 1348753776}
   DebugMeshes: 0
-  ShowVoxels: 1
-  VoxelSize: 0.5
-  simulationSize: {x: 20, y: 10, z: 20}
-  irSamplePath: /Users/james/Desktop/TestImpulseResponse.wav
+  ShowVoxels: 0
 --- !u!114 &1919804530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,5 +618,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d6af792e0454b7dbcf207eef22ad26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VoxelSize: 0.5
-  simulationSize: {x: 20, y: 10, z: 20}
+  VoxelSize: 1
+  simulationSize: {x: 100, y: 100, z: 100}
