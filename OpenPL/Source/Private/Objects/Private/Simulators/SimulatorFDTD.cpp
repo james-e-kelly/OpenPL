@@ -32,6 +32,11 @@ void SimulatorFDTD::Simulate(int SimulateVoxelIndex)
         }
     }
     
+    int X,Y,Z;
+    OwningScene->GetThreeDimensionalIndexOfIndex(SimulateVoxelIndex,X,Y,Z);
+    
+    int y = Y;
+    
     // Time-stepped FDTD
     for (int CurrentTimeStep = 0; CurrentTimeStep < TimeSteps; CurrentTimeStep++)
     {
@@ -39,20 +44,17 @@ void SimulatorFDTD::Simulate(int SimulateVoxelIndex)
         {
             for (int x = 0; x < XSize; x++)
             {
-                for (int y = 0; y < YSize; y++)
+                for (int z = 0; z < ZSize; z++)
                 {
-                    for (int z = 0; z < ZSize; z++)
-                    {
-                        PLVoxel& CurrentVoxel = (*Lattice)[ThreeDimToOneDim(x, y, z, XSize, YSize)];
-                        PLVoxel NextVoxelX = x + 1 >= XSize ? PLVoxel() : (*Lattice)[ThreeDimToOneDim(x + 1, y, z, XSize, YSize)];
-                        PLVoxel NextVoxelY = y + 1 >= YSize ? PLVoxel() : (*Lattice)[ThreeDimToOneDim(x, y + 1, z, XSize, YSize)];
-                        PLVoxel NextVoxelZ = z + 1 >= ZSize ? PLVoxel() : (*Lattice)[ThreeDimToOneDim(x, y, z + 1, XSize, YSize)];
-                        
-                        double Beta = static_cast<double>(CurrentVoxel.Beta);
-                        
-                        const double Divergance = ((NextVoxelX.ParticleVelocityX - CurrentVoxel.ParticleVelocityX) + (NextVoxelY.ParticleVelocityY - CurrentVoxel.ParticleVelocityY) + (NextVoxelZ.ParticleVelocityZ - CurrentVoxel.ParticleVelocityZ));
-                        CurrentVoxel.AirPressure = Beta * (CurrentVoxel.AirPressure - UpdateCoefficents * Divergance);
-                    }
+                    PLVoxel& CurrentVoxel = (*Lattice)[ThreeDimToOneDim(x, y, z, XSize, YSize)];
+                    PLVoxel NextVoxelX = x + 1 >= XSize ? PLVoxel() : (*Lattice)[ThreeDimToOneDim(x + 1, y, z, XSize, YSize)];
+                    PLVoxel NextVoxelY = y + 1 >= YSize ? PLVoxel() : (*Lattice)[ThreeDimToOneDim(x, y + 1, z, XSize, YSize)];
+                    PLVoxel NextVoxelZ = z + 1 >= ZSize ? PLVoxel() : (*Lattice)[ThreeDimToOneDim(x, y, z + 1, XSize, YSize)];
+                    
+                    double Beta = static_cast<double>(CurrentVoxel.Beta);
+                    
+                    const double Divergance = ((NextVoxelX.ParticleVelocityX - CurrentVoxel.ParticleVelocityX) + (NextVoxelY.ParticleVelocityY - CurrentVoxel.ParticleVelocityY) + (NextVoxelZ.ParticleVelocityZ - CurrentVoxel.ParticleVelocityZ));
+                    CurrentVoxel.AirPressure = Beta * (CurrentVoxel.AirPressure - UpdateCoefficents * Divergance);
                 }
             }
         }
@@ -61,32 +63,29 @@ void SimulatorFDTD::Simulate(int SimulateVoxelIndex)
         {
             for (int x = 1; x < XSize; x++)
             {
-                for (int y = 0; y < YSize; y++)
+                for (int z = 0; z < ZSize; z++)
                 {
-                    for (int z = 0; z < ZSize; z++)
-                    {
-                        // Basically don't understand any of this!!!
-                        
-                        const PLVoxel& PreviousVoxel = (*Lattice)[ThreeDimToOneDim(x-1, y, z, XSize, YSize)];
-                        
-                        const double BetaNext = static_cast<double>(PreviousVoxel.Beta);
-                        const double AbsorptionNext = PreviousVoxel.Absorptivity;
-                        const double YNext = (1.f - AbsorptionNext) / (1.f + AbsorptionNext);  // What is Y? Yee?
-                        
-                        PLVoxel& CurrentVoxel = (*Lattice)[ThreeDimToOneDim(x, y, z, XSize, YSize)];
-                        
-                        const double BetaThis = static_cast<double>(CurrentVoxel.Beta);
-                        const double AbsorptionThis = CurrentVoxel.Absorptivity;
-                        const double YThis = (1.f - AbsorptionThis) / (1.f + AbsorptionThis);  // What is Y?
-                        
-                        const double GradientX = (CurrentVoxel.AirPressure - PreviousVoxel.AirPressure);
-                        const double AirCellUpdate = CurrentVoxel.ParticleVelocityX - UpdateCoefficents * GradientX;
-                        
-                        const double YBoundary = BetaThis * YNext + BetaNext * YThis;
-                        const double WallCellUpdate = YBoundary * (PreviousVoxel.AirPressure * BetaNext + CurrentVoxel.AirPressure * BetaThis);
-                        
-                        CurrentVoxel.ParticleVelocityX = BetaThis * BetaNext * AirCellUpdate + (BetaNext - BetaThis) * WallCellUpdate;
-                    }
+                    // Basically don't understand any of this!!!
+                    
+                    const PLVoxel& PreviousVoxel = (*Lattice)[ThreeDimToOneDim(x-1, y, z, XSize, YSize)];
+                    
+                    const double BetaNext = static_cast<double>(PreviousVoxel.Beta);
+                    const double AbsorptionNext = PreviousVoxel.Absorptivity;
+                    const double YNext = (1.f - AbsorptionNext) / (1.f + AbsorptionNext);  // What is Y? Yee?
+                    
+                    PLVoxel& CurrentVoxel = (*Lattice)[ThreeDimToOneDim(x, y, z, XSize, YSize)];
+                    
+                    const double BetaThis = static_cast<double>(CurrentVoxel.Beta);
+                    const double AbsorptionThis = CurrentVoxel.Absorptivity;
+                    const double YThis = (1.f - AbsorptionThis) / (1.f + AbsorptionThis);  // What is Y?
+                    
+                    const double GradientX = (CurrentVoxel.AirPressure - PreviousVoxel.AirPressure);
+                    const double AirCellUpdate = CurrentVoxel.ParticleVelocityX - UpdateCoefficents * GradientX;
+                    
+                    const double YBoundary = BetaThis * YNext + BetaNext * YThis;
+                    const double WallCellUpdate = YBoundary * (PreviousVoxel.AirPressure * BetaNext + CurrentVoxel.AirPressure * BetaThis);
+                    
+                    CurrentVoxel.ParticleVelocityX = BetaThis * BetaNext * AirCellUpdate + (BetaNext - BetaThis) * WallCellUpdate;
                 }
             }
         }
@@ -129,32 +128,29 @@ void SimulatorFDTD::Simulate(int SimulateVoxelIndex)
         {
             for (int x = 0; x < XSize; x++)
             {
-                for (int y = 0; y < YSize; y++)
+                for (int z = 1; z < ZSize; z++)
                 {
-                    for (int z = 1; z < ZSize; z++)
-                    {
-                        // Basically don't understand any of this!!!
+                    // Basically don't understand any of this!!!
 
-                        const PLVoxel& PreviousVoxel = (*Lattice)[ThreeDimToOneDim(x, y, z-1, XSize, YSize)];
+                    const PLVoxel& PreviousVoxel = (*Lattice)[ThreeDimToOneDim(x, y, z-1, XSize, YSize)];
 
-                        const double BetaNext = static_cast<double>(PreviousVoxel.Beta);
-                        const double AbsorptionNext = PreviousVoxel.Absorptivity;
-                        const double YNext = (1.f - AbsorptionNext) / (1.f + AbsorptionNext);  // What is Y?
+                    const double BetaNext = static_cast<double>(PreviousVoxel.Beta);
+                    const double AbsorptionNext = PreviousVoxel.Absorptivity;
+                    const double YNext = (1.f - AbsorptionNext) / (1.f + AbsorptionNext);  // What is Y?
 
-                        PLVoxel& CurrentVoxel = (*Lattice)[ThreeDimToOneDim(x, y, z, XSize, YSize)];
+                    PLVoxel& CurrentVoxel = (*Lattice)[ThreeDimToOneDim(x, y, z, XSize, YSize)];
 
-                        const double BetaThis = static_cast<double>(CurrentVoxel.Beta);
-                        const double AbsorptionThis = CurrentVoxel.Absorptivity;
-                        const double YThis = (1.f - AbsorptionThis) / (1.f + AbsorptionThis);  // What is Y?
+                    const double BetaThis = static_cast<double>(CurrentVoxel.Beta);
+                    const double AbsorptionThis = CurrentVoxel.Absorptivity;
+                    const double YThis = (1.f - AbsorptionThis) / (1.f + AbsorptionThis);  // What is Y?
 
-                        const double GradientZ = (CurrentVoxel.AirPressure - PreviousVoxel.AirPressure);
-                        const double AirCellUpdate = CurrentVoxel.ParticleVelocityZ - UpdateCoefficents * GradientZ;
+                    const double GradientZ = (CurrentVoxel.AirPressure - PreviousVoxel.AirPressure);
+                    const double AirCellUpdate = CurrentVoxel.ParticleVelocityZ - UpdateCoefficents * GradientZ;
 
-                        const double YBoundary = BetaThis * YNext + BetaNext * YThis;
-                        const double WallCellUpdate = YBoundary * (PreviousVoxel.AirPressure * BetaNext + CurrentVoxel.AirPressure * BetaThis);
+                    const double YBoundary = BetaThis * YNext + BetaNext * YThis;
+                    const double WallCellUpdate = YBoundary * (PreviousVoxel.AirPressure * BetaNext + CurrentVoxel.AirPressure * BetaThis);
 
-                        CurrentVoxel.ParticleVelocityZ = BetaThis * BetaNext * AirCellUpdate + (BetaNext - BetaThis) * WallCellUpdate;
-                    }
+                    CurrentVoxel.ParticleVelocityZ = BetaThis * BetaNext * AirCellUpdate + (BetaNext - BetaThis) * WallCellUpdate;
                 }
             }
         }
