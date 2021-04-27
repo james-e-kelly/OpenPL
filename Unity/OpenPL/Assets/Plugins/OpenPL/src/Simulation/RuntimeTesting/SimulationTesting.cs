@@ -25,8 +25,6 @@ namespace OpenPL
 
         public bool DebugMeshes;
         public bool ShowVoxels;
-        public float VoxelSize = 1f;
-        public Vector3 simulationSize = new Vector3(10, 10, 10);
 
         void Start()
         {
@@ -191,6 +189,14 @@ namespace OpenPL
 
         void OnDrawGizmos()
         {
+            if (!RuntimeManager.Instance)
+            {
+                return;
+            }
+
+            Vector3 simulationSize = RuntimeManager.Instance.simulationSize;
+            float VoxelSize = RuntimeManager.Instance.VoxelSize;
+
             Gizmos.color = Color.white;
             Gizmos.DrawWireCube(Vector3.zero, simulationSize);
 
