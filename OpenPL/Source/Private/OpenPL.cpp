@@ -107,14 +107,14 @@ PL_RESULT PL_Scene_CreateVoxels(PL_SCENE* Scene, PLVector SceneSize, float Voxel
     return Scene->CreateVoxels(SceneSize, VoxelSize);
 }
 
-PL_RESULT PL_Scene_AddMesh(PL_SCENE* Scene, PLVector* WorldPosition, PLQuaternion* WorldRotation, PLVector* WorldScale, PLVector* Vertices, int VerticesLength, int* Indices, int IndicesLength, int* OutIndex)
+PL_RESULT PL_Scene_AddMesh(PL_SCENE* Scene, PLVector WorldPosition, PLQuaternion WorldRotation, PLVector WorldScale, PLVector* Vertices, int VerticesLength, int* Indices, int IndicesLength, int* OutIndex)
 {
-    if (!Scene || !WorldPosition || !WorldRotation || !WorldScale)
+    if (!Scene)
     {
         return PL_ERR_INVALID_PARAM;
     }
     
-    return Scene->AddAndConvertGameMesh(*WorldPosition, *WorldRotation, *WorldScale, Vertices, VerticesLength, Indices, IndicesLength, OutIndex);
+    return Scene->AddAndConvertGameMesh(WorldPosition, WorldRotation, WorldScale, Vertices, VerticesLength, Indices, IndicesLength, OutIndex);
 }
 
 PL_RESULT PL_Scene_RemoveMesh(PL_SCENE* Scene, int IndexToRemove)
@@ -137,14 +137,14 @@ PL_RESULT PL_Scene_FillVoxelsWithGeometry(PL_SCENE* Scene)
     return Scene->FillVoxelsWithGeometry();
 }
 
-PL_RESULT PL_Scene_AddListenerLocation(PL_SCENE* Scene, PLVector* Position, int* OutIndex)
+PL_RESULT PL_Scene_AddListenerLocation(PL_SCENE* Scene, PLVector Position, int* OutIndex)
 {
-    if (!Scene || !Position || !OutIndex)
+    if (!Scene || !OutIndex)
     {
         return PL_ERR_INVALID_PARAM;
     }
     
-    return Scene->AddListenerLocation(*Position, *OutIndex);
+    return Scene->AddListenerLocation(Position, *OutIndex);
 }
 
 PL_RESULT PL_Scene_RemoveListenerLocation(PL_SCENE* Scene, int IndexToRemove)
@@ -157,14 +157,14 @@ PL_RESULT PL_Scene_RemoveListenerLocation(PL_SCENE* Scene, int IndexToRemove)
     return Scene->RemoveListenerLocation(IndexToRemove);
 }
 
-PL_RESULT PL_Scene_AddSourceLocation(PL_SCENE* Scene, PLVector* Position, int* OutIndex)
+PL_RESULT PL_Scene_AddSourceLocation(PL_SCENE* Scene, PLVector Position, int* OutIndex)
 {
-    if (!Scene || !Position || !OutIndex)
+    if (!Scene || !OutIndex)
     {
         return PL_ERR_INVALID_PARAM;
     }
     
-    return Scene->AddSourceLocation(*Position, *OutIndex);
+    return Scene->AddSourceLocation(Position, *OutIndex);
 }
 
 PL_RESULT PL_Scene_RemoveSourceLocation(PL_SCENE* Scene, int IndexToRemove)

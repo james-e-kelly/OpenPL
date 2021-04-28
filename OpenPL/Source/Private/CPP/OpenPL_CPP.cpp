@@ -47,7 +47,7 @@ namespace OpenPL
 
     PL_RESULT PLScene::AddMesh(PLVector WorldPosition, PLQuaternion WorldRotation, PLVector WorldScale, PLVector* Vertices, int VerticesLength, int* Indices, int IndicesLength, int* OutIndex)
     {
-        return PL_Scene_AddMesh(reinterpret_cast<PL_SCENE*>(this), &WorldPosition, &WorldRotation, &WorldScale, Vertices, VerticesLength, Indices, IndicesLength, OutIndex);
+        return PL_Scene_AddMesh(reinterpret_cast<PL_SCENE*>(this), WorldPosition, WorldRotation, WorldScale, Vertices, VerticesLength, Indices, IndicesLength, OutIndex);
     }
 
     PL_RESULT PLScene::RemoveMesh(int IndexToRemove)
@@ -62,7 +62,7 @@ namespace OpenPL
 
     PL_RESULT PLScene::AddListenerLocation(PLVector Position, int* OutIndex)
     {
-        return PL_Scene_AddListenerLocation(reinterpret_cast<PL_SCENE*>(this), &Position, OutIndex);
+        return PL_Scene_AddListenerLocation(reinterpret_cast<PL_SCENE*>(this), Position, OutIndex);
     }
 
     PL_RESULT PLScene::RemoveListenerLocation(int IndexToRemove)
@@ -72,7 +72,7 @@ namespace OpenPL
 
     PL_RESULT PLScene::AddSourceLocation(PLVector Position, int* OutIndex)
     {
-        return PL_Scene_AddSourceLocation(reinterpret_cast<PL_SCENE*>(this), &Position, OutIndex);
+        return PL_Scene_AddSourceLocation(reinterpret_cast<PL_SCENE*>(this), Position, OutIndex);
     }
 
     PL_RESULT PLScene::RemoveSourceLocation(int IndexToRemove)

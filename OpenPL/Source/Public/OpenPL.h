@@ -103,7 +103,7 @@ extern "C"
      * @param IndicesLength Length of the indicies array.
      * @param OutIndex If successful, the index the mesh is stored at for later deletion.
      */
-    PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_AddMesh(PL_SCENE* Scene, PLVector* WorldPosition, PLQuaternion* WorldRotation, PLVector* WorldScale, PLVector* Vertices, int VerticesLength, int* Indices, int IndicesLength, int* OutIndex);
+    PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_AddMesh(PL_SCENE* Scene, PLVector WorldPosition, PLQuaternion WorldRotation, PLVector WorldScale, PLVector* Vertices, int VerticesLength, int* Indices, int IndicesLength, int* OutIndex);
     
     /**
      * Removes a mesh from the scene.
@@ -131,7 +131,7 @@ extern "C"
      * @param OutIndex Index of the listener in the array.
      * @see PL_Scene_RemoveListenerLocation
      */
-    PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_AddListenerLocation(PL_SCENE* Scene, PLVector* Position, int* OutIndex);
+    PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_AddListenerLocation(PL_SCENE* Scene, PLVector Position, int* OutIndex);
     
     /**
      * Removes a listener from the scene.
@@ -153,7 +153,7 @@ extern "C"
      * @param OutIndex Index of the source in the array.
      * @see PL_Scene_RemoveSourceLocation
      */
-    PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_AddSourceLocation(PL_SCENE* Scene, PLVector* Position, int* OutIndex);
+    PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_AddSourceLocation(PL_SCENE* Scene, PLVector Position, int* OutIndex);
     
     /**
      * Removes a source from the scene.
