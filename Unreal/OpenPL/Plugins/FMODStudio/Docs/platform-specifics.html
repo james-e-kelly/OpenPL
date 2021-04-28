@@ -1,0 +1,163 @@
+<html>
+<head>
+<title>Platform Specifics</title>
+<link rel="stylesheet" href="style/docs.css">
+<link rel="stylesheet" href="style/code_highlight.css">
+<script type="text/javascript" src="scripts/language-selector.js"></script></head>
+<body>
+<div class="docs-body">
+<div class="manual-toc">
+<p>UE4 Integration 2.01</p>
+<ul>
+<li><a href="welcome.html">Welcome to the FMOD UE4 Integration</a></li>
+<li><a href="user-guide.html">User Guide</a></li>
+<li><a href="settings.html">Settings</a></li>
+<li><a href="plugins.html">Plugins</a></li>
+<li><a href="api-reference.html">API Reference</a></li>
+<li><a href="blueprint-reference.html">Blueprint Reference</a></li>
+<li class="manual-current-chapter manual-active-chapter"><a href="platform-specifics.html">Platform Specifics</a><ul>
+<li><a href="#android">Android</a><ul>
+<li><a href="#deployment-of-android-plugins">Deployment of Android plugins</a></li>
+</ul>
+</li>
+<li><a href="#tvos">TVOS</a></li>
+<li><a href="#linux">Linux</a></li>
+<li><a href="#xbox-one">Xbox One</a><ul>
+<li><a href="#enabling-xboxone-microphone-input">Enabling XboxOne Microphone Input</a></li>
+<li><a href="#copying-dlls-to-build">Copying dll's to build</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="troubleshooting.html">Troubleshooting</a></li>
+<li><a href="glossary.html">Glossary</a></li>
+</ul>
+</div>
+<div class="manual-content api">
+<h1>7. Platform Specifics</h1>
+<p>Some platforms require some extra steps to run properly.</p>
+<h2 id="android"><a href="#android">7.1 Android</a></h2>
+<p>To deploy on Android, make sure FMODStudio is in your game's directory, not in the Engine plugins directory. When FMODStudio is in your game's plugin directory, the engine will rebuild the plugin for Android and deploy all the files properly.</p>
+<h3 id="deployment-of-android-plugins"><a href="#deployment-of-android-plugins">7.1.1 Deployment of Android plugins</a></h3>
+<p>FMOD supports DSP plugins, which will be stand-alone .so files that will need to be packaged into the build. Add the .so file into the <code>FMODStudio/Binaries/Android/{Architecture}</code> directory. Unreal will also need an APL file so it knows to package the .so file. To do this, you will need to write an APL file and drop it into the <code>FMODStudio/Binaries/Android</code> directory. The FMODStudio.build.cs file looks for any file ending with __APL.xml_ and will pass that along to the unreal build tool for packaging.</p>
+<p>The APL is a custom xml file format which is documented in the engine file AndroidPluginLanguage.cs. Here is a sample APL file for libovrfmod.so:</p>
+<div class="highlight language-xml"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="c">&lt;!--Plugin additions--&gt;</span>
+<span class="nt">&lt;root</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- init section is always evaluated once per architecture --&gt;</span>
+    <span class="nt">&lt;init&gt;</span>
+        <span class="nt">&lt;log</span> <span class="na">text=</span><span class="s">&quot;ovrfmod APL init&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/init&gt;</span>
+
+    <span class="c">&lt;!-- optional files or directories to copy to Intermediate/Android/APK --&gt;</span>
+    <span class="nt">&lt;resourceCopies&gt;</span>
+        <span class="nt">&lt;log</span> <span class="na">text=</span><span class="s">&quot;ovrfmod APL copying files for $S(Architecture)/&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;copyFile</span> <span class="na">src=</span><span class="s">&quot;$S(PluginDir)/$S(Architecture)/libovrfmod.so&quot;</span>
+                    <span class="na">dst=</span><span class="s">&quot;$S(BuildDir)/libs/$S(Architecture)/libovrfmod.so&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/resourceCopies&gt;</span>
+
+    <span class="c">&lt;!-- optional libraries to load in GameActivity.java before libUE4.so --&gt;</span>
+    <span class="nt">&lt;soLoadLibrary&gt;</span>
+        <span class="nt">&lt;log</span> <span class="na">text=</span><span class="s">&quot;ovrfmod APL adding loadLibrary references&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;loadLibrary</span> <span class="na">name=</span><span class="s">&quot;ovrfmod&quot;</span> <span class="na">failmsg=</span><span class="s">&quot;ovrfmod not loaded and required!&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/soLoadLibrary&gt;</span>
+<span class="nt">&lt;/root&gt;</span>
+</pre></div>
+
+
+<p>You only need to write this if you want to load a DSP plugin on Android.</p>
+<h2 id="tvos"><a href="#tvos">7.2 TVOS</a></h2>
+<p>To build for TVOS, make sure FMODStudio is in your game's directory and not in the Engine plugins directory.</p>
+<h2 id="linux"><a href="#linux">7.3 Linux</a></h2>
+<p>To deploy on linux, you will need to rebuild the engine from source via github. For compiling linux from windows, see this <a href="https://wiki.unrealengine.com/Compiling_For_Linux">page</a> for instructions how to get up and running with UE4. Then, add in both the fmodstudio linux .zip and windows .zip on top of each other into the engine plugins directory.</p>
+<p>The last thing you will need to do is to get the FMOD .so libraries into a directory that the executable can read them. The easiest way is to copy them from</p>
+<div class="highlight language-text"><pre><span></span>&lt;DeployedDir&gt;\Engine\Plugins\FMODStudio\Binaries\Linux\x86_64
+</pre></div>
+
+
+<p>to</p>
+<div class="highlight language-text"><pre><span></span>&lt;DeployedDir&gt;\&lt;GameName&gt;\Binaries\Linux
+</pre></div>
+
+
+<p>To see what directories the .so files can be located, look at LinuxToolChain.cs. Currently there are only a set of hard coded directories that are supported.</p>
+<h2 id="xbox-one"><a href="#xbox-one">7.4 Xbox One</a></h2>
+<h3 id="enabling-xboxone-microphone-input"><a href="#enabling-xboxone-microphone-input">7.4.1 Enabling XboxOne Microphone Input</a></h3>
+<p>To enable FMOD Studio the use of any microphone input, including Kinect, on the Xbox One. The Engine ini file specific for the platform, located in '/Config/XboxOne/XboxOneEngine.ini', needs to have the following lines added:</p>
+<div class="highlight language-xml"><pre><span></span>[AppxManifest]
+Package.Capabilities.mx:Capability[0].Name=kinectAudio
+Package.Capabilities.mx:Capability[1].Name=kinectGamechat
+</pre></div>
+
+
+<h3 id="copying-dlls-to-build"><a href="#copying-dlls-to-build">7.4.2 Copying dll's to build</a></h3>
+<div class="admonition warning">
+<p>This has been solved in 2.01.07, you only need to follow these steps if you are using an older version.</p>
+</div>
+<p>Add the following to GetFilesToDeployOrStage in XboxOnePlatform.Automation.cs, before the end of the function:</p>
+<div class="highlight language-text"><pre><span></span>// FMOD code start
+DirectoryReference FMODDLLPath = null;
+if (Directory.Exists(Path.Combine(SC.ProjectRoot.ToString(), &quot;Plugins/FMODStudio&quot;)))
+{
+    FMODDLLPath = DirectoryReference.Combine(SC.ProjectRoot, &quot;Plugins/FMODStudio/Binaries/XBoxOne/&quot;);
+}
+else if (Directory.Exists(Path.Combine(SC.LocalRoot.ToString(), &quot;Engine/Plugins/FMODStudio&quot;)))
+{
+    FMODDLLPath = DirectoryReference.Combine(SC.LocalRoot, &quot;Engine/Plugins/FMODStudio/Binaries/XBoxOne/&quot;);
+}
+else
+{
+    LogError(&quot;Failed to find FMODStudio plugin in game or engine directory&quot;);
+}
+if (FMODDLLPath != null)
+{
+    Log.TraceInformation(&quot;Copying FMOD dlls to loose directory: &quot; + RelativeBinPath);
+    StagedDirectoryReference RelativeBinPathRef = new StagedDirectoryReference(RelativeBinPath);
+    StageFileIfExists(StagedFileType.NonUFS, FileReference.Combine(FMODDLLPath, &quot;fmod.dll&quot;), RelativeBinPathRef, SC);
+    StageFileIfExists(StagedFileType.NonUFS, FileReference.Combine(FMODDLLPath, &quot;fmodL.dll&quot;), RelativeBinPathRef, SC);
+    StageFileIfExists(StagedFileType.NonUFS, FileReference.Combine(FMODDLLPath, &quot;fmodstudio.dll&quot;), RelativeBinPathRef, SC);
+    StageFileIfExists(StagedFileType.NonUFS, FileReference.Combine(FMODDLLPath, &quot;fmodstudioL.dll&quot;), RelativeBinPathRef, SC);
+}
+// FMOD code end
+</pre></div>
+
+
+<p>Add the following to PrepTargetForDeployment in XboxOneDeploy.cs, in the same scope as 'DestDir':</p>
+<div class="highlight language-text"><pre><span></span>// FMOD code start
+string FMODDLLPath = null;
+if (Directory.Exists(Path.Combine(ProjectDirectory.FullName, &quot;Plugins/FMODStudio&quot;)))
+{
+    FMODDLLPath = Path.Combine(ProjectDirectory.FullName, &quot;Plugins/FMODStudio/Binaries/XBoxOne/&quot;);
+}
+else if (Directory.Exists(Path.Combine(RelativeEnginePath, &quot;Plugins/FMODStudio&quot;)))
+{
+    FMODDLLPath = Path.Combine(RelativeEnginePath, &quot;Plugins/FMODStudio/Binaries/XBoxOne/&quot;);
+}
+else
+{
+    Log.TraceWarning(&quot;Failed to find FMODStudio plugin in game or engine directory&quot;);
+}
+if (FMODDLLPath != null)
+{
+    Log.TraceInformation(&quot;...copying the FMOD dlls...&quot;);
+    string FMODDLLName = &quot;fmod.dll&quot;;
+    Log.TraceInformation(&quot;\tcopying &quot; + FMODDLLPath + FMODDLLName + &quot; to &quot; + DestDir + &quot;/&quot; + FMODDLLName);
+    CopyFile(FMODDLLPath + FMODDLLName, DestDir + &quot;/&quot; + FMODDLLName, true);
+    FMODDLLName = &quot;fmodL.dll&quot;;
+    Log.TraceInformation(&quot;\tcopying &quot; + FMODDLLPath + FMODDLLName + &quot; to &quot; + DestDir + &quot;/&quot; + FMODDLLName);
+    CopyFile(FMODDLLPath + FMODDLLName, DestDir + &quot;/&quot; + FMODDLLName, true);
+    FMODDLLName = &quot;fmodstudio.dll&quot;;
+    Log.TraceInformation(&quot;\tcopying &quot; + FMODDLLPath + FMODDLLName + &quot; to &quot; + DestDir + &quot;/&quot; + FMODDLLName);
+    CopyFile(FMODDLLPath + FMODDLLName, DestDir + &quot;/&quot; + FMODDLLName, true);
+    FMODDLLName = &quot;fmodstudioL.dll&quot;;
+    Log.TraceInformation(&quot;\tcopying &quot; + FMODDLLPath + FMODDLLName + &quot; to &quot; + DestDir + &quot;/&quot; + FMODDLLName);
+    CopyFile(FMODDLLPath + FMODDLLName, DestDir + &quot;/&quot; + FMODDLLName, true);
+}
+// FMOD code end
+</pre></div></div>
+
+<p class="manual-footer">UE4 Integration 2.01.07 (2020-12-18). &copy; 2020 Firelight Technologies Pty Ltd.</p>
+</body>
+</html>
+
+</div>

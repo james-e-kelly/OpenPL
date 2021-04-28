@@ -1,0 +1,844 @@
+<html>
+<head>
+<title>API Reference | UFMODBlueprintStatics</title>
+<link rel="stylesheet" href="style/docs.css">
+<link rel="stylesheet" href="style/code_highlight.css">
+<script type="text/javascript" src="scripts/language-selector.js"></script></head>
+<body>
+<div class="docs-body">
+<div class="manual-toc">
+<p>UE4 Integration 2.01</p>
+<ul>
+<li><a href="welcome.html">Welcome to the FMOD UE4 Integration</a></li>
+<li><a href="user-guide.html">User Guide</a></li>
+<li><a href="settings.html">Settings</a></li>
+<li><a href="plugins.html">Plugins</a></li>
+<li class="manual-current-chapter manual-inactive-chapter"><a href="api-reference.html">API Reference</a><ul class="subchapters"><li><a href="api-reference-ffmodstudiomodule.html">FFMODStudioModule</a></li><li><a href="api-reference-ifmodstudiomodule.html">IFMODStudioModule</a></li><li><a href="api-reference-fmodutils.html">FMODUtils</a></li><li class="manual-current-chapter manual-active-chapter"><a href="api-reference-ufmodblueprintstatics.html">UFMODBlueprintStatics</a></li><li><a href="api-reference-ufmodaudiocomponent.html">UFMODAudioComponent</a></li><li><a href="api-reference-afmodambientsound.html">AFMODAmbientSound</a></li><li><a href="api-reference-ufmodanimnotifyplay.html">UFMODAnimNotifyPlay</a></li><li><a href="api-reference-ffmodlistener.html">FFMODListener</a></li><li><a href="api-reference-ufmodbank.html">UFMODBank</a></li><li><a href="api-reference-ufmodbus.html">UFMODBus</a></li><li><a href="api-reference-ufmodvca.html">UFMODVCA</a></li><li><a href="api-reference-ufmodevent.html">UFMODEvent</a></li><li><a href="api-reference-ufmodsnapshot.html">UFMODSnapshot</a></li><li><a href="api-reference-ufmodsnapshotreverb.html">UFMODSnapshotReverb</a></li><li><a href="api-reference-ufmodasset.html">UFMODAsset</a></li><li><a href="api-reference-ufmodsettings.html">UFMODSettings</a></li><li><a href="api-reference-ffmodassettable.html">FFmodAssetTable</a></li><li><a href="api-reference-ffmodfilecallbacks.html">FFMODFileCallbacks</a></li><li><a href="api-reference-ffmodbankupdatenotifier.html">FFMODBankUpdateNotifier</a></li><li><a href="api-reference-fmodplatformloaddll_generic.html">FMODPlatformLoadDll_Generic</a></li><li><a href="api-reference-ffmodeventcontrolsectiontemplate.html">FFMODEventControlSectionTemplate</a></li><li><a href="api-reference-ffmodeventparametersectiontemplate.html">FFMODEventParameterSectionTemplate</a></li><li><a href="api-reference-ufmodeventcontrolsection.html">UFMODEventControlSection</a></li><li><a href="api-reference-ufmodeventcontroltrack.html">UFMODEventControlTrack</a></li><li><a href="api-reference-ufmodeventparametertrack.html">UFMODEventParameterTrack</a></li></ul></li>
+<li><a href="blueprint-reference.html">Blueprint Reference</a></li>
+<li><a href="platform-specifics.html">Platform Specifics</a></li>
+<li><a href="troubleshooting.html">Troubleshooting</a></li>
+<li><a href="glossary.html">Glossary</a></li>
+</ul>
+</div>
+<div class="manual-content api">
+<h1>5. API Reference | UFMODBlueprintStatics</h1>
+<div class="admonition warning">
+<p class="admonition-title">This documentation is preliminary and is subject to change.</p>
+</div>
+<p>This class inherits from <a href="https://api.unrealengine.com/INT/API/Runtime/Engine/Kismet/UBlueprintFunctionLibrary/index.html">UBlueprintFunctionLibrary</a></p>
+<p><strong>Defines:</strong></p>
+<ul>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ffmodeventinstance" title="Wrapped FMOD::Studio::EventInstance for use in blueprints.">FFMODEventInstance</a> Wrapped FMOD::Studio::EventInstance for use in blueprints.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#efmod_studio_stop_mode" title="Studio stop mode enum for use in blueprints.">EFMOD_STUDIO_STOP_MODE</a> Studio stop mode enum for use in blueprints.</li>
+</ul>
+<p><strong>Methods:</strong></p>
+<ul>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_findassetbyname" title="Find an asset by name.">UFMODBlueprintStatics::FindAssetByName</a> Find an asset by name.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_findeventbyname" title="Find an Event by name.">UFMODBlueprintStatics::FindEventByName</a> Find an Event by name.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_findeventinstances" title="Return a list of all event instances that are playing for this event.">UFMODBlueprintStatics::FindEventInstances</a> Return a list of all event instances that are playing for this event.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_getglobalparameterbyname" title="Get a global parameter value from the System.">UFMODBlueprintStatics::GetGlobalParameterByName</a> Get a global parameter value from the System.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_setglobalparameterbyname" title="Set a global parameter from the System.">UFMODBlueprintStatics::SetGlobalParameterByName</a> Set a global parameter from the System.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_getoutputdrivers" title="List all output device names.">UFMODBlueprintStatics::GetOutputDrivers</a> List all output device names.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_setoutputdriverbyname" title="Set current output device by name or part of the name.">UFMODBlueprintStatics::SetOutputDriverByName</a> Set current output device by name or part of the name.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_setoutputdriverbyindex" title="Set current output device by its index from GetOutputDrivers.">UFMODBlueprintStatics::SetOutputDriverByIndex</a> Set current output device by its index from GetOutputDrivers.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_mixersuspend" title="Suspend the FMOD mixer.">UFMODBlueprintStatics::MixerSuspend</a> Suspend the FMOD mixer.</li>
+<li>
+<p><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_mixerresume" title="Resume the FMOD mixer.">UFMODBlueprintStatics::MixerResume</a> Resume the FMOD mixer.</p>
+</li>
+<li>
+<p><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_loadbank" title="Load a bank.">UFMODBlueprintStatics::LoadBank</a> Load a bank.</p>
+</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_unloadbank" title="Unload a bank.">UFMODBlueprintStatics::UnloadBank</a> Unload a bank.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_isbankloaded" title="Return true if a bank is loaded.">UFMODBlueprintStatics::IsBankLoaded</a> Return true if a bank is loaded.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_loadbanksampledata" title="Load bank sample data.">UFMODBlueprintStatics::LoadBankSampleData</a> Load bank sample data.</li>
+<li>
+<p><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_unloadbanksampledata" title="Unload bank sample data.">UFMODBlueprintStatics::UnloadBankSampleData</a> Unload bank sample data.</p>
+</li>
+<li>
+<p><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_bussetvolume" title="Set volume on a bus.">UFMODBlueprintStatics::BusSetVolume</a> Set volume on a bus.</p>
+</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_bussetpaused" title="Pause/Unpause all events going through the bus.">UFMODBlueprintStatics::BusSetPaused</a> Pause/Unpause all events going through the bus.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_bussetmute" title="Mute/Unmute the bus.">UFMODBlueprintStatics::BusSetMute</a> Mute/Unmute the bus.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_busstopallevents" title="Stop all EventInstances routed into the bus.">UFMODBlueprintStatics::BusStopAllEvents</a> Stop all EventInstances routed into the bus.</li>
+<li>
+<p><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_vcasetvolume" title="Set volume on a VCA.">UFMODBlueprintStatics::VCASetVolume</a> Set volume on a VCA.</p>
+</li>
+<li>
+<p><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_playevent2d" title="Play an event without a specified location.">UFMODBlueprintStatics::PlayEvent2D</a> Play an event without a specified location.</p>
+</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_playeventatlocation" title="Plays an event at the given location.">UFMODBlueprintStatics::PlayEventAtLocation</a> Plays an event at the given location.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_playeventattached" title="Play an event attached to and following the specified component.">UFMODBlueprintStatics::PlayEventAttached</a> Play an event attached to and following the specified component.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_eventinstanceisvalid" title="Return whether this FMOD Event Instance is valid.">UFMODBlueprintStatics::EventInstanceIsValid</a> Return whether this FMOD Event Instance is valid.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_eventinstancesetvolume" title="Set volume on an FMOD Event Instance.">UFMODBlueprintStatics::EventInstanceSetVolume</a> Set volume on an FMOD Event Instance.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_eventinstancesetpitch" title="Set pitch on an FMOD Event Instance.">UFMODBlueprintStatics::EventInstanceSetPitch</a> Set pitch on an FMOD Event Instance.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_eventinstancesetpaused" title="Pause/Unpause an FMOD Event Instance.">UFMODBlueprintStatics::EventInstanceSetPaused</a> Pause/Unpause an FMOD Event Instance.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_eventinstancegetparameter" title="Get a parameter on an FMOD Event Instance.">UFMODBlueprintStatics::EventInstanceGetParameter</a> Get a parameter on an FMOD Event Instance.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_eventinstancesetparameter" title="Set a parameter on an FMOD Event Instance.">UFMODBlueprintStatics::EventInstanceSetParameter</a> Set a parameter on an FMOD Event Instance.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_eventinstancesetproperty" title="Set an FMOD event property on an FMOD Event Instance.">UFMODBlueprintStatics::EventInstanceSetProperty</a> Set an FMOD event property on an FMOD Event Instance.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_eventinstanceplay" title="Play an FMOD Event Instance.">UFMODBlueprintStatics::EventInstancePlay</a> Play an FMOD Event Instance.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_eventinstancestop" title="Mute/Unmute the bus.">UFMODBlueprintStatics::EventInstanceStop</a> Mute/Unmute the bus.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_eventinstancetriggercue" title="Trigger a cue on an FMOD Event Instance.">UFMODBlueprintStatics::EventInstanceTriggerCue</a> Trigger a cue on an FMOD Event Instance.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_eventinstancesettransform" title="Set 3D attributes on an FMOD Event Instance.">UFMODBlueprintStatics::EventInstanceSetTransform</a> Set 3D attributes on an FMOD Event Instance.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_loadeventsampledata" title="Load event sample data.">UFMODBlueprintStatics::LoadEventSampleData</a> Load event sample data.</li>
+<li><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_unloadeventsampledata" title="Unload event sample data.">UFMODBlueprintStatics::UnloadEventSampleData</a> Unload event sample data.</li>
+</ul>
+<h2 api="function" id="ufmodblueprintstatics_eventinstancesetvolume"><a href="#ufmodblueprintstatics_eventinstancesetvolume">UFMODBlueprintStatics::EventInstanceSetVolume</a></h2>
+<p>Set volume on an FMOD Event Instance.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">EventInstanceSetVolume</span><span class="p">(</span>
+  <span class="n">FFMODEventInstance</span> <span class="n">EventInstance</span><span class="p">,</span>
+  <span class="kt">float</span> <span class="n">Volume</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>EventInstance</dt>
+<dd>Event Instance to use.</dd>
+<dt>Volume</dt>
+<dd>Volume value to set.</dd>
+</dl>
+<p><strong>See Also:</strong> <a href="">FMOD::Studio::EventInstance</a></p>
+<h2 api="function" id="ufmodblueprintstatics_eventinstancesetparameter"><a href="#ufmodblueprintstatics_eventinstancesetparameter">UFMODBlueprintStatics::EventInstanceSetParameter</a></h2>
+<p>Set a parameter on an FMOD Event Instance.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">EventInstanceSetParameter</span><span class="p">(</span>
+  <span class="n">FFMODEventInstance</span> <span class="n">EventInstance</span><span class="p">,</span>
+  <span class="n">FName</span> <span class="n">Name</span><span class="p">,</span>
+  <span class="kt">float</span> <span class="n">Value</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>EventInstance</dt>
+<dd><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ffmodeventinstance" title="Wrapped FMOD::Studio::EventInstance for use in blueprints.">FFMODEventInstance</a> to use.</dd>
+<dt>Name</dt>
+<dd>Name of the parameter.</dd>
+<dt>Value</dt>
+<dd>Value to set the parameter to.</dd>
+</dl>
+<h2 api="function" id="ufmodblueprintstatics_setglobalparameterbyname"><a href="#ufmodblueprintstatics_setglobalparameterbyname">UFMODBlueprintStatics::SetGlobalParameterByName</a></h2>
+<p>Set a global parameter from the System.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">SetGlobalParameterByName</span><span class="p">(</span>
+  <span class="n">FName</span> <span class="n">Name</span><span class="p">,</span>
+  <span class="kt">float</span> <span class="n">Value</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>Name</dt>
+<dd>Name of parameter.</dd>
+<dt>Value</dt>
+<dd>Value to apply to the parameter.</dd>
+</dl>
+<h2 api="function" id="ufmodblueprintstatics_busstopallevents"><a href="#ufmodblueprintstatics_busstopallevents">UFMODBlueprintStatics::BusStopAllEvents</a></h2>
+<p>Stop all EventInstances routed into the bus.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">BusStopAllEvents</span><span class="p">(</span>
+  <span class="k">class</span> <span class="nc">UFMODBus</span> <span class="o">*</span><span class="n">Bus</span><span class="p">,</span>
+  <span class="n">EFMOD_STUDIO_STOP_MODE</span> <span class="n">stopMode</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>Bus</dt>
+<dd><a class="apilink" href="api-reference-ufmodbus.html" title="">UFMODBus</a> to use.</dd>
+<dt>stopMode</dt>
+<dd>Desired stop mode.</dd>
+</dl>
+<p><strong>See Also:</strong> <a href="https://fmod.com/resources/documentation-api?version=2.1&amp;page=studio-api-eventinstance.html#fmod_studio_stop_mode">FMOD_STUDIO_STOP_MODE</a></p>
+<h2 api="function" id="ufmodblueprintstatics_setoutputdriverbyname"><a href="#ufmodblueprintstatics_setoutputdriverbyname">UFMODBlueprintStatics::SetOutputDriverByName</a></h2>
+<p>Set current output device by name or part of the name.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">SetOutputDriverByName</span><span class="p">(</span>
+  <span class="n">FString</span> <span class="n">NewDriverName</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>NewDriverName</dt>
+<dd>Name of new driver to use.</dd>
+</dl>
+<p><strong>See Also:</strong> <a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_getoutputdrivers" title="List all output device names.">UFMODBlueprintStatics::GetOutputDrivers</a></p>
+<h2 api="function" id="ufmodblueprintstatics_playeventatlocation"><a href="#ufmodblueprintstatics_playeventatlocation">UFMODBlueprintStatics::PlayEventAtLocation</a></h2>
+<p>Plays an event at the given location.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="n">FFMODEventInstance</span> <span class="nf">PlayEventAtLocation</span><span class="p">(</span>
+  <span class="n">UObject</span> <span class="o">*</span><span class="n">WorldContextObject</span><span class="p">,</span>
+  <span class="n">UFMODEvent</span> <span class="o">*</span><span class="n">Event</span><span class="p">,</span>
+  <span class="k">const</span> <span class="n">FTransform</span> <span class="o">&amp;</span><span class="n">Location</span><span class="p">,</span>
+  <span class="kt">bool</span> <span class="n">bAutoPlay</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>WorldContextObject</dt>
+<dd>Object from current world context.</dd>
+<dt>Event</dt>
+<dd><a class="apilink" href="api-reference-ufmodevent.html" title="">UFMODEvent</a> to use.</dd>
+<dt>Location</dt>
+<dd>World position to play event at.</dd>
+<dt>bAutoPlay</dt>
+<dd>Start the event automatically.</dd>
+</dl>
+<p>This returns an FMOD Event Instance.<br />
+The sound does not travel with any actor.</p>
+<h2 api="function" id="ufmodblueprintstatics_setoutputdriverbyindex"><a href="#ufmodblueprintstatics_setoutputdriverbyindex">UFMODBlueprintStatics::SetOutputDriverByIndex</a></h2>
+<p>Set current output device by its index from GetOutputDrivers.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">SetOutputDriverByIndex</span><span class="p">(</span>
+  <span class="kt">int</span> <span class="n">NewDriverIndex</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>NewDriverIndex</dt>
+<dd>Index of driver to use.</dd>
+</dl>
+<p><strong>See Also:</strong> <a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_getoutputdrivers" title="List all output device names.">UFMODBlueprintStatics::GetOutputDrivers</a></p>
+<h2 api="function" id="ufmodblueprintstatics_eventinstancetriggercue"><a href="#ufmodblueprintstatics_eventinstancetriggercue">UFMODBlueprintStatics::EventInstanceTriggerCue</a></h2>
+<p>Trigger a cue on an FMOD Event Instance.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">EventInstanceTriggerCue</span><span class="p">(</span>
+  <span class="n">FFMODEventInstance</span> <span class="n">EventInstance</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>EventInstance</dt>
+<dd><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ffmodeventinstance" title="Wrapped FMOD::Studio::EventInstance for use in blueprints.">FFMODEventInstance</a> to use.</dd>
+</dl>
+<p><strong>See Also:</strong> <a href="https://fmod.com/resources/documentation-api?version=2.1&amp;page=white-papers-transitioning-from-fmodex.html#sustain-points-and-key-off">Sustain Points and Key Off</a></p>
+<h2 api="function" id="ufmodblueprintstatics_eventinstanceisvalid"><a href="#ufmodblueprintstatics_eventinstanceisvalid">UFMODBlueprintStatics::EventInstanceIsValid</a></h2>
+<p>Return whether this FMOD Event Instance is valid.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">bool</span> <span class="nf">EventInstanceIsValid</span><span class="p">(</span>
+  <span class="n">FFMODEventInstance</span> <span class="n">EventInstance</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>EventInstance</dt>
+<dd><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ffmodeventinstance" title="Wrapped FMOD::Studio::EventInstance for use in blueprints.">FFMODEventInstance</a> to use.</dd>
+</dl>
+<p>The instance will be invalidated when the sound stops.</p>
+<h2 api="function" id="ufmodblueprintstatics_vcasetvolume"><a href="#ufmodblueprintstatics_vcasetvolume">UFMODBlueprintStatics::VCASetVolume</a></h2>
+<p>Set volume on a VCA.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">VCASetVolume</span><span class="p">(</span>
+  <span class="n">UFMODVCA</span> <span class="o">*</span><span class="n">Vca</span><span class="p">,</span>
+  <span class="kt">float</span> <span class="n">Volume</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>Vca</dt>
+<dd><a class="apilink" href="api-reference-ufmodvca.html" title="">UFMODVCA</a> to use.</dd>
+<dt>Volume</dt>
+<dd>Volume value.</dd>
+</dl>
+<h2 api="function" id="ufmodblueprintstatics_getoutputdrivers"><a href="#ufmodblueprintstatics_getoutputdrivers">UFMODBlueprintStatics::GetOutputDrivers</a></h2>
+<p>List all output device names.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="n">TArray</span><span class="o">&lt;</span><span class="n">FString</span><span class="o">&gt;</span> <span class="n">GetOutputDrivers</span><span class="p">();</span>
+</pre></div>
+
+
+<p><strong>See Also:</strong> <a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_setoutputdriverbyindex" title="Set current output device by its index from GetOutputDrivers.">UFMODBlueprintStatics::SetOutputDriverByIndex</a>, <a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_setoutputdriverbyname" title="Set current output device by name or part of the name.">UFMODBlueprintStatics::SetOutputDriverByName</a></p>
+<h2 api="function" id="ufmodblueprintstatics_loadbank"><a href="#ufmodblueprintstatics_loadbank">UFMODBlueprintStatics::LoadBank</a></h2>
+<p>Load a bank.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">LoadBank</span><span class="p">(</span>
+  <span class="n">UFMODBank</span> <span class="o">*</span><span class="n">Bank</span><span class="p">,</span>
+  <span class="kt">bool</span> <span class="n">bBlocking</span><span class="p">,</span>
+  <span class="kt">bool</span> <span class="n">bLoadSampleData</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>Bank</dt>
+<dd><a class="apilink" href="api-reference-ufmodbank.html" title="">UFMODBank</a> to use.</dd>
+<dt>bBlocking</dt>
+<dd>Whether the bank will load synchronously.</dd>
+<dt>bLoadSampleData</dt>
+<dd>Whether sample data will be preloaded immediately.</dd>
+</dl>
+<h2 api="function" id="ufmodblueprintstatics_bussetpaused"><a href="#ufmodblueprintstatics_bussetpaused">UFMODBlueprintStatics::BusSetPaused</a></h2>
+<p>Pause/Unpause all events going through the bus.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">BusSetPaused</span><span class="p">(</span>
+  <span class="k">class</span> <span class="nc">UFMODBus</span> <span class="o">*</span><span class="n">Bus</span><span class="p">,</span>
+  <span class="kt">bool</span> <span class="n">bPaused</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>Bus</dt>
+<dd><a class="apilink" href="api-reference-ufmodbus.html" title="">UFMODBus</a> to use.</dd>
+<dt>bPaused</dt>
+<dd>Pause value.</dd>
+</dl>
+<h2 api="function" id="ufmodblueprintstatics_findeventbyname"><a href="#ufmodblueprintstatics_findeventbyname">UFMODBlueprintStatics::FindEventByName</a></h2>
+<p>Find an Event by name.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="n">UFMODEvent</span> <span class="o">*</span><span class="nf">FindEventByName</span><span class="p">(</span>
+  <span class="k">const</span> <span class="n">FString</span> <span class="o">&amp;</span><span class="n">Name</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>Name</dt>
+<dd>The event name.</dd>
+</dl>
+<p><strong>See Also:</strong> <a class="apilink" href="api-reference-ufmodevent.html" title="">UFMODEvent</a></p>
+<h2 api="function" id="ufmodblueprintstatics_eventinstanceplay"><a href="#ufmodblueprintstatics_eventinstanceplay">UFMODBlueprintStatics::EventInstancePlay</a></h2>
+<p>Play an FMOD Event Instance.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">EventInstancePlay</span><span class="p">(</span>
+  <span class="n">FFMODEventInstance</span> <span class="n">EventInstance</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>EventInstance</dt>
+<dd><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ffmodeventinstance" title="Wrapped FMOD::Studio::EventInstance for use in blueprints.">FFMODEventInstance</a> to use.</dd>
+</dl>
+<h2 api="struct" id="ffmodeventinstance"><a href="#ffmodeventinstance">FFMODEventInstance</a></h2>
+<p>Wrapped FMOD::Studio::EventInstance for use in blueprints.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">struct</span> <span class="n">FFMODEventInstance</span><span class="p">{</span>
+  <span class="n">FMOD</span><span class="o">::</span><span class="n">Studio</span><span class="o">::</span><span class="n">EventInstance</span> <span class="o">*</span><span class="n">Instance</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">FFMODEventInstance</span><span class="p">;</span>
+</pre></div>
+
+
+<dl>
+<dt id="ffmodeventinstance_instance">Instance</dt>
+<dd><a href="https://fmod.com/resources/documentation-api?version=2.1&amp;page=studio-api-eventinstance.html">FMOD::Studio::EventInstance</a> to use.</dd>
+</dl>
+<h2 api="function" id="ufmodblueprintstatics_findeventinstances"><a href="#ufmodblueprintstatics_findeventinstances">UFMODBlueprintStatics::FindEventInstances</a></h2>
+<p>Return a list of all event instances that are playing for this event.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="n">TArray</span><span class="o">&lt;</span><span class="n">FFMODEventInstance</span><span class="o">&gt;</span> <span class="n">FindEventInstances</span><span class="p">(</span>
+  <span class="n">UObject</span> <span class="o">*</span><span class="n">WorldContextObject</span><span class="p">,</span>
+  <span class="n">UFMODEvent</span> <span class="o">*</span><span class="n">Event</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>WorldContextObject</dt>
+<dd>Object from current world context.</dd>
+<dt>Event</dt>
+<dd><a class="apilink" href="api-reference-ufmodevent.html" title="">UFMODEvent</a> to find instances of.</dd>
+</dl>
+<p>Be careful using this function because it is possible to find and alter any playing sound, even ones owned by other audio components.</p>
+<p><strong>See Also:</strong> <a class="apilink" href="api-reference-ufmodblueprintstatics.html#ffmodeventinstance" title="Wrapped FMOD::Studio::EventInstance for use in blueprints.">FFMODEventInstance</a></p>
+<h2 api="function" id="ufmodblueprintstatics_findassetbyname"><a href="#ufmodblueprintstatics_findassetbyname">UFMODBlueprintStatics::FindAssetByName</a></h2>
+<p>Find an asset by name.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="n">UFMODAsset</span> <span class="o">*</span><span class="nf">FindAssetByName</span><span class="p">(</span>
+  <span class="k">const</span> <span class="n">FString</span> <span class="o">&amp;</span><span class="n">Name</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>Name</dt>
+<dd>The asset name.</dd>
+</dl>
+<p><strong>See Also:</strong> <a class="apilink" href="api-reference-ufmodasset.html" title="">UFMODAsset</a></p>
+<h2 api="function" id="ufmodblueprintstatics_playeventattached"><a href="#ufmodblueprintstatics_playeventattached">UFMODBlueprintStatics::PlayEventAttached</a></h2>
+<p>Play an event attached to and following the specified component.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="k">class</span> <span class="nc">UFMODAudioComponent</span> <span class="o">*</span><span class="nf">PlayEventAttached</span><span class="p">(</span>
+  <span class="n">UFMODEvent</span> <span class="o">*</span><span class="n">Event</span><span class="p">,</span>
+  <span class="n">USceneComponent</span> <span class="o">*</span><span class="n">AttachToComponent</span><span class="p">,</span>
+  <span class="n">FName</span> <span class="n">AttachPointName</span><span class="p">,</span>
+  <span class="n">FVector</span> <span class="n">Location</span><span class="p">,</span>
+  <span class="n">EAttachLocation</span><span class="o">::</span><span class="n">Type</span> <span class="n">LocationType</span><span class="p">,</span>
+  <span class="kt">bool</span> <span class="n">bStopWhenAttachedToDestroyed</span><span class="p">,</span>
+  <span class="kt">bool</span> <span class="n">bAutoPlay</span><span class="p">,</span>
+  <span class="kt">bool</span> <span class="n">bAutoDestroy</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>Event</dt>
+<dd><a class="apilink" href="api-reference-ufmodevent.html" title="">UFMODEvent</a> to use.</dd>
+<dt>AttachToComponent</dt>
+<dd>Component to attach to.</dd>
+<dt>AttachPointName <span><a class="token" href="glossary.html#documentation-conventions" title="Optional">Opt</a></span></dt>
+<dd>Named point within the AttachComponent to play the sound at.</dd>
+<dt>Location</dt>
+<dd>Depending on the value of Location Type this is either a relative offset from the attach component/point or an absolute world position that will be translated to a relative offset.</dd>
+<dt>LocationType</dt>
+<dd>Location is a relative offset or an absolute world position.</dd>
+<dt>bStopWhenAttachedToDestroyed</dt>
+<dd>The sound should stop playing when the owner of the attach to component is destroyed.</dd>
+<dt>bAutoPlay</dt>
+<dd>Start the event automatically.</dd>
+<dt>bAutoDestroy</dt>
+<dd>Automatically destroy the audio component when the sound is stopped.</dd>
+</dl>
+<h2 api="struct" id="efmod_studio_stop_mode"><a href="#efmod_studio_stop_mode">EFMOD_STUDIO_STOP_MODE</a></h2>
+<p>Studio stop mode enum for use in blueprints.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">enum</span> <span class="n">EFMOD_STUDIO_STOP_MODE</span><span class="p">{</span>
+  <span class="n">ALLOWFADEOUT</span><span class="p">,</span>
+  <span class="n">IMMEDIATE</span>
+<span class="p">}</span> <span class="n">EFMOD_STUDIO_STOP_MODE</span><span class="p">;</span>
+</pre></div>
+
+
+<dl>
+<dt id="efmod_studio_stop_mode_allowfadeout">ALLOWFADEOUT</dt>
+<dd>Allow AHDSR modulators to complete their release, and DSP effect tails to play out.</dd>
+<dt id="efmod_studio_stop_mode_immediate">IMMEDIATE</dt>
+<dd>Stop the event instance immediately.</dd>
+</dl>
+<p><strong>See Also:</strong> <a href="https://fmod.com/resources/documentation-api?version=2.1&amp;page=studio-api-eventinstance.html#fmod_studio_stop_mode">FMOD_STUDIO_STOP_MODE</a></p>
+<h2 api="function" id="ufmodblueprintstatics_eventinstancestop"><a href="#ufmodblueprintstatics_eventinstancestop">UFMODBlueprintStatics::EventInstanceStop</a></h2>
+<p>Mute/Unmute the bus.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">EventInstanceStop</span><span class="p">(</span>
+  <span class="n">FFMODEventInstance</span> <span class="n">EventInstance</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>EventInstance</dt>
+<dd></dd>
+</dl>
+<h2 api="function" id="ufmodblueprintstatics_playevent2d"><a href="#ufmodblueprintstatics_playevent2d">UFMODBlueprintStatics::PlayEvent2D</a></h2>
+<p>Play an event without a specified location.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="n">FFMODEventInstance</span> <span class="nf">PlayEvent2D</span><span class="p">(</span>
+  <span class="n">UObject</span> <span class="o">*</span><span class="n">WorldContextObject</span><span class="p">,</span>
+  <span class="n">UFMODEvent</span> <span class="o">*</span><span class="n">Event</span><span class="p">,</span>
+  <span class="kt">bool</span> <span class="n">bAutoPlay</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>WorldContextObject</dt>
+<dd>Object from current world context.</dd>
+<dt>Event</dt>
+<dd><a class="apilink" href="api-reference-ufmodevent.html" title="">UFMODEvent</a> to use.</dd>
+<dt>bAutoPlay</dt>
+<dd>Start the event automatically.</dd>
+</dl>
+<p>This returns an <a class="apilink" href="api-reference-ufmodblueprintstatics.html#ffmodeventinstance" title="Wrapped FMOD::Studio::EventInstance for use in blueprints.">FFMODEventInstance</a>.<br />
+The sound does not travel with any actor.</p>
+<h2 api="function" id="ufmodblueprintstatics_unloadbanksampledata"><a href="#ufmodblueprintstatics_unloadbanksampledata">UFMODBlueprintStatics::UnloadBankSampleData</a></h2>
+<p>Unload bank sample data.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">UnloadBankSampleData</span><span class="p">(</span>
+  <span class="n">UFMODBank</span> <span class="o">*</span><span class="n">Bank</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>Bank</dt>
+<dd><a class="apilink" href="api-reference-ufmodbank.html" title="">UFMODBank</a> to use.</dd>
+</dl>
+<h2 api="function" id="ufmodblueprintstatics_bussetvolume"><a href="#ufmodblueprintstatics_bussetvolume">UFMODBlueprintStatics::BusSetVolume</a></h2>
+<p>Set volume on a bus.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">BusSetVolume</span><span class="p">(</span>
+  <span class="k">class</span> <span class="nc">UFMODBus</span> <span class="o">*</span><span class="n">Bus</span><span class="p">,</span>
+  <span class="kt">float</span> <span class="n">Volume</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>Bus</dt>
+<dd><a class="apilink" href="api-reference-ufmodbus.html" title="">UFMODBus</a> to use.</dd>
+<dt>Volume</dt>
+<dd>
+<p>Volume value.</p>
+<ul>
+<li><span class="label">Units:</span> Linear</li>
+<li><span class="label">Range:</span> [0, 1]</li>
+</ul>
+</dd>
+</dl>
+<h2 api="function" id="ufmodblueprintstatics_eventinstancesettransform"><a href="#ufmodblueprintstatics_eventinstancesettransform">UFMODBlueprintStatics::EventInstanceSetTransform</a></h2>
+<p>Set 3D attributes on an FMOD Event Instance.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">EventInstanceSetTransform</span><span class="p">(</span>
+  <span class="n">FFMODEventInstance</span> <span class="n">EventInstance</span><span class="p">,</span>
+  <span class="k">const</span> <span class="n">FTransform</span> <span class="o">&amp;</span><span class="n">Location</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>EventInstance</dt>
+<dd><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ffmodeventinstance" title="Wrapped FMOD::Studio::EventInstance for use in blueprints.">FFMODEventInstance</a> to use.</dd>
+<dt>Location</dt>
+<dd>Location to place event.</dd>
+</dl>
+<h2 api="function" id="ufmodblueprintstatics_isbankloaded"><a href="#ufmodblueprintstatics_isbankloaded">UFMODBlueprintStatics::IsBankLoaded</a></h2>
+<p>Return true if a bank is loaded.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">bool</span> <span class="nf">IsBankLoaded</span><span class="p">(</span>
+  <span class="n">UFMODBank</span> <span class="o">*</span><span class="n">Bank</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>Bank</dt>
+<dd><a class="apilink" href="api-reference-ufmodbank.html" title="">UFMODBank</a> to query.</dd>
+</dl>
+<p><strong>See Also:</strong> <a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_loadbank" title="Load a bank.">UFMODBlueprintStatics::LoadBank</a></p>
+<h2 api="function" id="ufmodblueprintstatics_mixerresume"><a href="#ufmodblueprintstatics_mixerresume">UFMODBlueprintStatics::MixerResume</a></h2>
+<p>Resume the FMOD mixer.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">MixerResume</span><span class="p">();</span>
+</pre></div>
+
+
+<p>Used when resuming the application.</p>
+<h2 api="function" id="ufmodblueprintstatics_getglobalparameterbyname"><a href="#ufmodblueprintstatics_getglobalparameterbyname">UFMODBlueprintStatics::GetGlobalParameterByName</a></h2>
+<p>Get a global parameter value from the System.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">float</span> <span class="nf">GetGlobalParameterByName</span><span class="p">(</span>
+  <span class="n">FName</span> <span class="n">Name</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>Name</dt>
+<dd>Name of the parameter.</dd>
+</dl>
+<p><strong>See Also:</strong> <a class="apilink" href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_setglobalparameterbyname" title="Set a global parameter from the System.">UFMODBlueprintStatics::SetGlobalParameterByName</a></p>
+<h2 api="function" id="ufmodblueprintstatics_unloadeventsampledata"><a href="#ufmodblueprintstatics_unloadeventsampledata">UFMODBlueprintStatics::UnloadEventSampleData</a></h2>
+<p>Unload event sample data.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">UnloadEventSampleData</span><span class="p">(</span>
+  <span class="n">UObject</span> <span class="o">*</span><span class="n">WorldContextObject</span><span class="p">,</span>
+  <span class="n">UFMODEvent</span> <span class="o">*</span><span class="n">Event</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>WorldContextObject</dt>
+<dd>Object from current world context.</dd>
+<dt>Event</dt>
+<dd><a class="apilink" href="api-reference-ufmodevent.html" title="">UFMODEvent</a> to use.</dd>
+</dl>
+<h2 api="function" id="ufmodblueprintstatics_mixersuspend"><a href="#ufmodblueprintstatics_mixersuspend">UFMODBlueprintStatics::MixerSuspend</a></h2>
+<p>Suspend the FMOD mixer.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">MixerSuspend</span><span class="p">();</span>
+</pre></div>
+
+
+<p>Used when suspending the application.</p>
+<h2 api="function" id="ufmodblueprintstatics_bussetmute"><a href="#ufmodblueprintstatics_bussetmute">UFMODBlueprintStatics::BusSetMute</a></h2>
+<p>Mute/Unmute the bus.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">BusSetMute</span><span class="p">(</span>
+  <span class="k">class</span> <span class="nc">UFMODBus</span> <span class="o">*</span><span class="n">Bus</span><span class="p">,</span>
+  <span class="kt">bool</span> <span class="n">bMute</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>Bus</dt>
+<dd><a class="apilink" href="api-reference-ufmodbus.html" title="">UFMODBus</a> to use.</dd>
+<dt>bMute</dt>
+<dd>Mute value.</dd>
+</dl>
+<h2 api="function" id="ufmodblueprintstatics_eventinstancesetproperty"><a href="#ufmodblueprintstatics_eventinstancesetproperty">UFMODBlueprintStatics::EventInstanceSetProperty</a></h2>
+<p>Set an FMOD event property on an FMOD Event Instance.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">EventInstanceSetProperty</span><span class="p">(</span>
+  <span class="n">FFMODEventInstance</span> <span class="n">EventInstance</span><span class="p">,</span>
+  <span class="n">EFMODEventProperty</span><span class="o">::</span><span class="n">Type</span> <span class="n">Property</span><span class="p">,</span>
+  <span class="kt">float</span> <span class="n">Value</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>EventInstance</dt>
+<dd><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ffmodeventinstance" title="Wrapped FMOD::Studio::EventInstance for use in blueprints.">FFMODEventInstance</a> to use.</dd>
+<dt>Property</dt>
+<dd><a href="https://fmod.com/resources/documentation-api?version=2.1&amp;page=studio-api-eventinstance.html#fmod_studio_event_property">FMOD_STUDIO_EVENT_PROPERTY</a> to set.</dd>
+<dt>Value</dt>
+<dd>Value of property.</dd>
+</dl>
+<h2 api="function" id="ufmodblueprintstatics_eventinstancesetpitch"><a href="#ufmodblueprintstatics_eventinstancesetpitch">UFMODBlueprintStatics::EventInstanceSetPitch</a></h2>
+<p>Set pitch on an FMOD Event Instance.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">EventInstanceSetPitch</span><span class="p">(</span>
+  <span class="n">FFMODEventInstance</span> <span class="n">EventInstance</span><span class="p">,</span>
+  <span class="kt">float</span> <span class="n">Pitch</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>EventInstance</dt>
+<dd><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ffmodeventinstance" title="Wrapped FMOD::Studio::EventInstance for use in blueprints.">FFMODEventInstance</a> to use.</dd>
+<dt>Pitch</dt>
+<dd>Pitch value.</dd>
+</dl>
+<h2 api="function" id="ufmodblueprintstatics_eventinstancesetpaused"><a href="#ufmodblueprintstatics_eventinstancesetpaused">UFMODBlueprintStatics::EventInstanceSetPaused</a></h2>
+<p>Pause/Unpause an FMOD Event Instance.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">EventInstanceSetPaused</span><span class="p">(</span>
+  <span class="n">FFMODEventInstance</span> <span class="n">EventInstance</span><span class="p">,</span>
+  <span class="kt">bool</span> <span class="n">Paused</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>EventInstance</dt>
+<dd><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ffmodeventinstance" title="Wrapped FMOD::Studio::EventInstance for use in blueprints.">FFMODEventInstance</a> to use.</dd>
+<dt>Paused</dt>
+<dd>Paused value.</dd>
+</dl>
+<h2 api="function" id="ufmodblueprintstatics_unloadbank"><a href="#ufmodblueprintstatics_unloadbank">UFMODBlueprintStatics::UnloadBank</a></h2>
+<p>Unload a bank.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">UnloadBank</span><span class="p">(</span>
+  <span class="n">UFMODBank</span> <span class="o">*</span><span class="n">Bank</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>Bank</dt>
+<dd><a class="apilink" href="api-reference-ufmodbank.html" title="">UFMODBank</a> to use.</dd>
+</dl>
+<h2 api="function" id="ufmodblueprintstatics_loadeventsampledata"><a href="#ufmodblueprintstatics_loadeventsampledata">UFMODBlueprintStatics::LoadEventSampleData</a></h2>
+<p>Load event sample data.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">LoadEventSampleData</span><span class="p">(</span>
+  <span class="n">UObject</span> <span class="o">*</span><span class="n">WorldContextObject</span><span class="p">,</span>
+  <span class="n">UFMODEvent</span> <span class="o">*</span><span class="n">Event</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>WorldContextObject</dt>
+<dd>Object from current world context.</dd>
+<dt>Event</dt>
+<dd><a class="apilink" href="api-reference-ufmodevent.html" title="">UFMODEvent</a> to use.</dd>
+</dl>
+<p>This can be done ahead of time to avoid loading stalls.</p>
+<h2 api="function" id="ufmodblueprintstatics_eventinstancegetparameter"><a href="#ufmodblueprintstatics_eventinstancegetparameter">UFMODBlueprintStatics::EventInstanceGetParameter</a></h2>
+<p>Get a parameter on an FMOD Event Instance.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">float</span> <span class="nf">EventInstanceGetParameter</span><span class="p">(</span>
+  <span class="n">FFMODEventInstance</span> <span class="n">EventInstance</span><span class="p">,</span>
+  <span class="n">FName</span> <span class="n">Name</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>EventInstance</dt>
+<dd><a class="apilink" href="api-reference-ufmodblueprintstatics.html#ffmodeventinstance" title="Wrapped FMOD::Studio::EventInstance for use in blueprints.">FFMODEventInstance</a> to use.</dd>
+<dt>Name</dt>
+<dd>Name of parameter.</dd>
+</dl>
+<h2 api="function" id="ufmodblueprintstatics_loadbanksampledata"><a href="#ufmodblueprintstatics_loadbanksampledata">UFMODBlueprintStatics::LoadBankSampleData</a></h2>
+<p>Load bank sample data.</p>
+<p>
+<div class="language-selector">
+<div class="language-tab" data-language="language-cpp">C++</div>
+</div>
+</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">LoadBankSampleData</span><span class="p">(</span>
+  <span class="n">UFMODBank</span> <span class="o">*</span><span class="n">Bank</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<dl>
+<dt>Bank</dt>
+<dd><a class="apilink" href="api-reference-ufmodbank.html" title="">UFMODBank</a> to use.</dd>
+</dl></div>
+
+<p class="manual-footer">UE4 Integration 2.01.07 (2020-12-18). &copy; 2020 Firelight Technologies Pty Ltd.</p>
+</body>
+</html>
+
+</div>

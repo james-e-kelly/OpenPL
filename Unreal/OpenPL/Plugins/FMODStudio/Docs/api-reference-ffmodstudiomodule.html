@@ -1,0 +1,130 @@
+<html>
+<head>
+<title>API Reference | FFMODStudioModule</title>
+<link rel="stylesheet" href="style/docs.css">
+<link rel="stylesheet" href="style/code_highlight.css">
+<script type="text/javascript" src="scripts/language-selector.js"></script></head>
+<body>
+<div class="docs-body">
+<div class="manual-toc">
+<p>UE4 Integration 2.01</p>
+<ul>
+<li><a href="welcome.html">Welcome to the FMOD UE4 Integration</a></li>
+<li><a href="user-guide.html">User Guide</a></li>
+<li><a href="settings.html">Settings</a></li>
+<li><a href="plugins.html">Plugins</a></li>
+<li class="manual-current-chapter manual-inactive-chapter"><a href="api-reference.html">API Reference</a><ul class="subchapters"><li class="manual-current-chapter manual-active-chapter"><a href="api-reference-ffmodstudiomodule.html">FFMODStudioModule</a></li><li><a href="api-reference-ifmodstudiomodule.html">IFMODStudioModule</a></li><li><a href="api-reference-fmodutils.html">FMODUtils</a></li><li><a href="api-reference-ufmodblueprintstatics.html">UFMODBlueprintStatics</a></li><li><a href="api-reference-ufmodaudiocomponent.html">UFMODAudioComponent</a></li><li><a href="api-reference-afmodambientsound.html">AFMODAmbientSound</a></li><li><a href="api-reference-ufmodanimnotifyplay.html">UFMODAnimNotifyPlay</a></li><li><a href="api-reference-ffmodlistener.html">FFMODListener</a></li><li><a href="api-reference-ufmodbank.html">UFMODBank</a></li><li><a href="api-reference-ufmodbus.html">UFMODBus</a></li><li><a href="api-reference-ufmodvca.html">UFMODVCA</a></li><li><a href="api-reference-ufmodevent.html">UFMODEvent</a></li><li><a href="api-reference-ufmodsnapshot.html">UFMODSnapshot</a></li><li><a href="api-reference-ufmodsnapshotreverb.html">UFMODSnapshotReverb</a></li><li><a href="api-reference-ufmodasset.html">UFMODAsset</a></li><li><a href="api-reference-ufmodsettings.html">UFMODSettings</a></li><li><a href="api-reference-ffmodassettable.html">FFmodAssetTable</a></li><li><a href="api-reference-ffmodfilecallbacks.html">FFMODFileCallbacks</a></li><li><a href="api-reference-ffmodbankupdatenotifier.html">FFMODBankUpdateNotifier</a></li><li><a href="api-reference-fmodplatformloaddll_generic.html">FMODPlatformLoadDll_Generic</a></li><li><a href="api-reference-ffmodeventcontrolsectiontemplate.html">FFMODEventControlSectionTemplate</a></li><li><a href="api-reference-ffmodeventparametersectiontemplate.html">FFMODEventParameterSectionTemplate</a></li><li><a href="api-reference-ufmodeventcontrolsection.html">UFMODEventControlSection</a></li><li><a href="api-reference-ufmodeventcontroltrack.html">UFMODEventControlTrack</a></li><li><a href="api-reference-ufmodeventparametertrack.html">UFMODEventParameterTrack</a></li></ul></li>
+<li><a href="blueprint-reference.html">Blueprint Reference</a></li>
+<li><a href="platform-specifics.html">Platform Specifics</a></li>
+<li><a href="troubleshooting.html">Troubleshooting</a></li>
+<li><a href="glossary.html">Glossary</a></li>
+</ul>
+</div>
+<div class="manual-content api">
+<h1>5. API Reference | FFMODStudioModule</h1>
+<div class="admonition warning">
+<p class="admonition-title">This documentation is preliminary and is subject to change.</p>
+</div>
+<p>This class inherits from <a class="apilink" href="api-reference-ifmodstudiomodule.html" title="">IFMODStudioModule</a>.</p>
+<p><strong>Defines:</strong></p>
+<ul>
+<li><span class="dead-link" class="apilink" href="#fmodmemoryalloc" title="">FMODMemoryAlloc</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#fmodmemoryrealloc" title="">FMODMemoryRealloc</span class="dead-link"> </li>
+<li>
+<p><span class="dead-link" class="apilink" href="#fmodmemoryfree" title="">FMODMemoryFree</span class="dead-link"> </p>
+</li>
+<li>
+<p><span class="dead-link" class="apilink" href="#ffmodsnapshotentry" title="">FFMODSnapshotEntry</span class="dead-link"> </p>
+</li>
+<li>
+<p><span class="dead-link" class="apilink" href="#ffmodstudiosystemclocksink" title="">FFMODStudioSystemClockSink</span class="dead-link"> </p>
+</li>
+<li>
+<p><span class="dead-link" class="apilink" href="#namedbankentry" title="">NamedBankEntry</span class="dead-link"></p>
+</li>
+</ul>
+<p><strong>Properties:</strong></p>
+<ul>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_studiosystem" title="">FFMODStudioModule::StudioSystem</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_auditioninginstance" title="">FFMODStudioModule::AuditioningInstance</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_ontick" title="">FFMODStudioModule::OnTick</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_clocksinks" title="">FFMODStudioModule::ClockSinks</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_tickdelegatehandle" title="">FFMODStudioModule::TickDelegateHandle</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_assettable" title="">FFMODStudioModule::AssetTable</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_bankupdatenotifier" title="">FFMODStudioModule::BankUpdateNotifier</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_failedbankloads" title="">FFMODStudioModule::FailedBankLoads</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_requiredplugins" title="">FFMODStudioModule::RequiredPlugins</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_max_listeners" title="">FFMODStudioModule::MAX_LISTENERS</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_listeners" title="">FFMODStudioModule::Listeners</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_listenercount" title="">FFMODStudioModule::ListenerCount</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_reverbsnapshots" title="">FFMODStudioModule::ReverbSnapshots</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_bsimulating" title="">FFMODStudioModule::bSimulating</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_bisinpie" title="">FFMODStudioModule::bIsInPIE</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_busesound" title="">FFMODStudioModule::bUseSound</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_blistenermoved" title="">FFMODStudioModule::bListenerMoved</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_ballowliveupdate" title="">FFMODStudioModule::bAllowLiveUpdate</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_bbanksloaded" title="">FFMODStudioModule::bBanksLoaded</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_baselibpath" title="">FFMODStudioModule::BaseLibPath</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_corelibhandle" title="">FFMODStudioModule::CoreLibHandle</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_studiolibhandle" title="">FFMODStudioModule::StudioLibHandle</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_bmixerpaused" title="">FFMODStudioModule::bMixerPaused</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_mempool" title="">FFMODStudioModule::MemPool</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_bloadallsampledata" title="">FFMODStudioModule::bLoadAllSampleData</span class="dead-link"> </li>
+</ul>
+<p><strong>Methods:</strong></p>
+<ul>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_handleapplicationwilldeactivate" title="">FFMODStudioModule::HandleApplicationWillDeactivate</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_handleapplicationhasreactivated" title="">FFMODStudioModule::HandleApplicationHasReactivated</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_startupmodule" title="">FFMODStudioModule::StartupModule</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_postloadcallback" title="">FFMODStudioModule::PostLoadCallback</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_shutdownmodule" title="">FFMODStudioModule::ShutdownModule</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_getdllpath" title="">FFMODStudioModule::GetDllPath</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_loaddll" title="">FFMODStudioModule::LoadDll</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_loadlibraries" title="">FFMODStudioModule::LoadLibraries</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_loadbanks" title="">FFMODStudioModule::LoadBanks</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_handlebanksupdated" title="">FFMODStudioModule::HandleBanksUpdated</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_createstudiosystem" title="">FFMODStudioModule::CreateStudioSystem</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_destroystudiosystem" title="">FFMODStudioModule::DestroyStudioSystem</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_tick" title="">FFMODStudioModule::Tick</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_updateviewportposition" title="">FFMODStudioModule::UpdateViewportPosition</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_getstudiosystem" title="">FFMODStudioModule::GetStudioSystem</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_geteventdescription" title="">FFMODStudioModule::GetEventDescription</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_createauditioninginstance" title="">FFMODStudioModule::CreateAuditioningInstance</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_stopauditioninginstance" title="">FFMODStudioModule::StopAuditioningInstance</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_setlistenerposition" title="">FFMODStudioModule::SetListenerPosition</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_finishsetlistenerposition" title="">FFMODStudioModule::FinishSetListenerPosition</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_getnearestlistener" title="">FFMODStudioModule::GetNearestListener</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_haslistenermoved" title="">FFMODStudioModule::HasListenerMoved</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_refreshsettings" title="">FFMODStudioModule::RefreshSettings</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_setsystempaused" title="">FFMODStudioModule::SetSystemPaused</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_setinpie" title="">FFMODStudioModule::SetInPIE</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_findassetbyname" title="">FFMODStudioModule::FindAssetByName</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_findeventbyname" title="">FFMODStudioModule::FindEventByName</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_getbankpath" title="">FFMODStudioModule::GetBankPath</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_banksreloadeddelegate" title="">FFMODStudioModule::BanksReloadedDelegate</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_banksreloadedevent" title="">FFMODStudioModule::BanksReloadedEvent</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_getfailedbankloads" title="">FFMODStudioModule::GetFailedBankLoads</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_getrequiredplugins" title="">FFMODStudioModule::GetRequiredPlugins</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_addrequiredplugin" title="">FFMODStudioModule::AddRequiredPlugin</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_usesound" title="">FFMODStudioModule::UseSound</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_loadplugin" title="">FFMODStudioModule::LoadPlugin</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_logerror" title="">FFMODStudioModule::LogError</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_arebanksloaded" title="">FFMODStudioModule::AreBanksLoaded</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_resetinterpolation" title="">FFMODStudioModule::ResetInterpolation</span class="dead-link"> </li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_" title="">FFMODStudioModule::</span class="dead-link"></li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_" title="">FFMODStudioModule::</span class="dead-link"></li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_" title="">FFMODStudioModule::</span class="dead-link"></li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_" title="">FFMODStudioModule::</span class="dead-link"></li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_" title="">FFMODStudioModule::</span class="dead-link"></li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_" title="">FFMODStudioModule::</span class="dead-link"></li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_" title="">FFMODStudioModule::</span class="dead-link"></li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_" title="">FFMODStudioModule::</span class="dead-link"></li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_" title="">FFMODStudioModule::</span class="dead-link"></li>
+<li><span class="dead-link" class="apilink" href="#ffmodstudiomodule_" title="">FFMODStudioModule::</span class="dead-link"></li>
+</ul></div>
+
+<p class="manual-footer">UE4 Integration 2.01.07 (2020-12-18). &copy; 2020 Firelight Technologies Pty Ltd.</p>
+</body>
+</html>
+
+</div>

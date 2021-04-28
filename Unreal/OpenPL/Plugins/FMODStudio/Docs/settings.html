@@ -1,0 +1,110 @@
+<html>
+<head>
+<title>Settings</title>
+<link rel="stylesheet" href="style/docs.css">
+<link rel="stylesheet" href="style/code_highlight.css">
+<script type="text/javascript" src="scripts/language-selector.js"></script></head>
+<body>
+<div class="docs-body">
+<div class="manual-toc">
+<p>UE4 Integration 2.01</p>
+<ul>
+<li><a href="welcome.html">Welcome to the FMOD UE4 Integration</a></li>
+<li><a href="user-guide.html">User Guide</a></li>
+<li class="manual-current-chapter manual-active-chapter"><a href="settings.html">Settings</a><ul>
+<li><a href="#basic">Basic</a><ul>
+<li><a href="#load-all-banks">Load All Banks</a></li>
+<li><a href="#load-all-sample-data">Load All Sample Data</a></li>
+<li><a href="#enable-live-update">Enable Live Update</a></li>
+<li><a href="#enable-editor-live-update">Enable Editor Live Update</a></li>
+<li><a href="#bank-output-directory">Bank Output Directory</a></li>
+<li><a href="#output-format">Output Format</a></li>
+</ul>
+</li>
+<li><a href="#init">Init</a><ul>
+<li><a href="#vol-0-virtual">Vol 0 Virtual</a></li>
+<li><a href="#vol-0-virtual-level">Vol 0 Virtual Level</a></li>
+<li><a href="#sample-rate">Sample Rate</a></li>
+<li><a href="#match-hardware-sample-rate">Match Hardware Sample Rate</a></li>
+<li><a href="#real-channel-count">Real Channel Count</a></li>
+<li><a href="#total-channel-count">Total Channel Count</a></li>
+<li><a href="#dsp-buffer-length">DSP Buffer Length</a></li>
+<li><a href="#dsp-buffer-count">DSP Buffer Count</a></li>
+<li><a href="#file-buffer-size">File Buffer Size</a></li>
+<li><a href="#studio-update-period">Studio Update Period</a></li>
+<li><a href="#initial-output-driver-name">Initial Output Driver Name</a></li>
+<li><a href="#lock-all-buses">Lock All Buses</a></li>
+<li><a href="#memory-pool-sizes">Memory Pool Sizes</a></li>
+</ul>
+</li>
+<li><a href="#advanced">Advanced</a><ul>
+<li><a href="#live-update-port">Live Update Port</a></li>
+<li><a href="#editor-live-update-port">Editor Live Update Port</a></li>
+<li><a href="#plugin-files">Plugin Files</a></li>
+<li><a href="#content-browser-prefix">Content Browser Prefix</a></li>
+<li><a href="#force-platform-name">Force Platform Name</a></li>
+<li><a href="#master-bank-name">Master Bank Name</a></li>
+<li><a href="#skip-load-bank-name">Skip Load Bank Name</a></li>
+<li><a href="#encryption-key">Encryption Key</a></li>
+<li><a href="#wav-writer-path">Wav Writer Path</a></li>
+<li><a href="#logging-level">Logging Level</a></li>
+<li><a href="#occlusion-parameter">Occlusion Parameter</a></li>
+<li><a href="#ambient-volume-parameter">Ambient Volume Parameter</a></li>
+<li><a href="#ambient-lpf-parameter">Ambient LPF Parameter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="plugins.html">Plugins</a></li>
+<li><a href="api-reference.html">API Reference</a></li>
+<li><a href="blueprint-reference.html">Blueprint Reference</a></li>
+<li><a href="platform-specifics.html">Platform Specifics</a></li>
+<li><a href="troubleshooting.html">Troubleshooting</a></li>
+<li><a href="glossary.html">Glossary</a></li>
+</ul>
+</div>
+<div class="manual-content api">
+<h1>3. Settings</h1>
+<p>The FMOD UE4 Integration settings can be found in the UE4 Editor, under "Project Settings &gt; Plugins &gt; FMOD Studio".<br />
+<img alt="Settings" src="images/project-settings.png" /></p>
+<h2 id="basic"><a href="#basic">3.1 Basic</a></h2>
+<h3 id="load-all-banks"><a href="#load-all-banks">3.1.1 Load All Banks</a></h3>
+<h3 id="load-all-sample-data"><a href="#load-all-sample-data">3.1.2 Load All Sample Data</a></h3>
+<h3 id="enable-live-update"><a href="#enable-live-update">3.1.3 Enable Live Update</a></h3>
+<h3 id="enable-editor-live-update"><a href="#enable-editor-live-update">3.1.4 Enable Editor Live Update</a></h3>
+<h3 id="bank-output-directory"><a href="#bank-output-directory">3.1.5 Bank Output Directory</a></h3>
+<h3 id="output-format"><a href="#output-format">3.1.6 Output Format</a></h3>
+<h2 id="init"><a href="#init">3.2 Init</a></h2>
+<h3 id="vol-0-virtual"><a href="#vol-0-virtual">3.2.1 Vol 0 Virtual</a></h3>
+<h3 id="vol-0-virtual-level"><a href="#vol-0-virtual-level">3.2.2 Vol 0 Virtual Level</a></h3>
+<h3 id="sample-rate"><a href="#sample-rate">3.2.3 Sample Rate</a></h3>
+<h3 id="match-hardware-sample-rate"><a href="#match-hardware-sample-rate">3.2.4 Match Hardware Sample Rate</a></h3>
+<h3 id="real-channel-count"><a href="#real-channel-count">3.2.5 Real Channel Count</a></h3>
+<h3 id="total-channel-count"><a href="#total-channel-count">3.2.6 Total Channel Count</a></h3>
+<h3 id="dsp-buffer-length"><a href="#dsp-buffer-length">3.2.7 DSP Buffer Length</a></h3>
+<h3 id="dsp-buffer-count"><a href="#dsp-buffer-count">3.2.8 DSP Buffer Count</a></h3>
+<h3 id="file-buffer-size"><a href="#file-buffer-size">3.2.9 File Buffer Size</a></h3>
+<h3 id="studio-update-period"><a href="#studio-update-period">3.2.10 Studio Update Period</a></h3>
+<h3 id="initial-output-driver-name"><a href="#initial-output-driver-name">3.2.11 Initial Output Driver Name</a></h3>
+<h3 id="lock-all-buses"><a href="#lock-all-buses">3.2.12 Lock All Buses</a></h3>
+<h3 id="memory-pool-sizes"><a href="#memory-pool-sizes">3.2.13 Memory Pool Sizes</a></h3>
+<h2 id="advanced"><a href="#advanced">3.3 Advanced</a></h2>
+<h3 id="live-update-port"><a href="#live-update-port">3.3.1 Live Update Port</a></h3>
+<h3 id="editor-live-update-port"><a href="#editor-live-update-port">3.3.2 Editor Live Update Port</a></h3>
+<h3 id="plugin-files"><a href="#plugin-files">3.3.3 Plugin Files</a></h3>
+<h3 id="content-browser-prefix"><a href="#content-browser-prefix">3.3.4 Content Browser Prefix</a></h3>
+<h3 id="force-platform-name"><a href="#force-platform-name">3.3.5 Force Platform Name</a></h3>
+<h3 id="master-bank-name"><a href="#master-bank-name">3.3.6 Master Bank Name</a></h3>
+<h3 id="skip-load-bank-name"><a href="#skip-load-bank-name">3.3.7 Skip Load Bank Name</a></h3>
+<h3 id="encryption-key"><a href="#encryption-key">3.3.8 Encryption Key</a></h3>
+<h3 id="wav-writer-path"><a href="#wav-writer-path">3.3.9 Wav Writer Path</a></h3>
+<h3 id="logging-level"><a href="#logging-level">3.3.10 Logging Level</a></h3>
+<h3 id="occlusion-parameter"><a href="#occlusion-parameter">3.3.11 Occlusion Parameter</a></h3>
+<h3 id="ambient-volume-parameter"><a href="#ambient-volume-parameter">3.3.12 Ambient Volume Parameter</a></h3>
+<h3 id="ambient-lpf-parameter"><a href="#ambient-lpf-parameter">3.3.13 Ambient LPF Parameter</a></h3></div>
+
+<p class="manual-footer">UE4 Integration 2.01.07 (2020-12-18). &copy; 2020 Firelight Technologies Pty Ltd.</p>
+</body>
+</html>
+
+</div>

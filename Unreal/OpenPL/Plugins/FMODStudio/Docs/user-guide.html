@@ -1,0 +1,524 @@
+<html>
+<head>
+<title>User Guide</title>
+<link rel="stylesheet" href="style/docs.css">
+<link rel="stylesheet" href="style/code_highlight.css">
+<script type="text/javascript" src="scripts/language-selector.js"></script></head>
+<body>
+<div class="docs-body">
+<div class="manual-toc">
+<p>UE4 Integration 2.01</p>
+<ul>
+<li><a href="welcome.html">Welcome to the FMOD UE4 Integration</a></li>
+<li class="manual-current-chapter manual-active-chapter"><a href="user-guide.html">User Guide</a><ul>
+<li><a href="#installing-the-integration">Installing the integration</a><ul>
+<li><a href="#windows">Windows</a></li>
+<li><a href="#mac">Mac</a></li>
+</ul>
+</li>
+<li><a href="#updatingupgrading-the-integration">Updating/Upgrading the Integration</a></li>
+<li><a href="#setting-up-your-project">Setting up your project</a><ul>
+<li><a href="#automatically">Automatically</a></li>
+<li><a href="#manually">Manually</a></li>
+<li><a href="#confirm-the-banks-are-built-and-loaded">Confirm the Banks are Built and Loaded</a></li>
+<li><a href="#naming-considerations">Naming Considerations</a></li>
+</ul>
+</li>
+<li><a href="#compiling-the-plugin-optional">Compiling the plugin (Optional)</a></li>
+<li><a href="#programming-support">Programming Support</a><ul>
+<li><a href="#programming-with-the-fmod-ue4-integration">Programming with the FMOD UE4 Integration</a></li>
+<li><a href="#programming-with-the-fmod-studio-c-api">Programming with the FMOD Studio C++ API</a></li>
+<li><a href="#further-programming-documentation">Further Programming Documentation</a></li>
+</ul>
+</li>
+<li><a href="#making-sounds">Making sounds</a><ul>
+<li><a href="#ambient-sounds">Ambient Sounds</a></li>
+<li><a href="#playing-sounds-from-blueprint">Playing Sounds From Blueprint</a></li>
+<li><a href="#other-avenues">Other avenues</a></li>
+</ul>
+</li>
+<li><a href="#listener">Listener</a><ul>
+<li><a href="#example">Example</a></li>
+</ul>
+</li>
+<li><a href="#working-with-banks">Working with Banks</a><ul>
+<li><a href="#studio-bank-output-directory">Studio Bank Output Directory</a></li>
+<li><a href="#assigning-events-to-banks">Assigning Events to Banks</a></li>
+<li><a href="#loading-banks-within-unreal">Loading Banks within Unreal</a><ul>
+<li><a href="#in-editor">In Editor</a></li>
+<li><a href="#in-game">In Game</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sequencer-integration">Sequencer Integration</a><ul>
+<li><a href="#adding-fmod-events-to-a-level-sequence">Adding FMOD Events to a Level Sequence</a></li>
+<li><a href="#adding-event-sub-tracks">Adding Event Sub-Tracks</a></li>
+<li><a href="#event-control-sub-track">Event Control Sub-Track</a></li>
+<li><a href="#parameter-track">Parameter Track</a></li>
+</ul>
+</li>
+<li><a href="#occlusion">Occlusion</a><ul>
+<li><a href="#occlusion-settings">Occlusion Settings</a></li>
+</ul>
+</li>
+<li><a href="#reverb-zones">Reverb Zones</a><ul>
+<li><a href="#snapshot-reverb-effects">Snapshot Reverb Effects</a></li>
+<li><a href="#ambient-zone-settings">Ambient Zone Settings</a></li>
+</ul>
+</li>
+<li><a href="#callbacks">Callbacks</a></li>
+<li><a href="#localization">Localization</a><ul>
+<li><a href="#setting-up-audio-tables">Setting up Audio Tables</a></li>
+<li><a href="#loading-localized-banks">Loading Localized Banks</a></li>
+</ul>
+</li>
+<li><a href="#programmer-sounds">Programmer Sounds</a><ul>
+<li><a href="#programmer-sounds-via-audio-tables">Programmer Sounds via Audio Tables</a><ul>
+<li><a href="#choosing-the-audio-entry-to-play">Choosing the audio entry to play</a></li>
+</ul>
+</li>
+<li><a href="#programmer-sounds-by-path">Programmer Sounds by Path</a></li>
+<li><a href="#programmer-sounds-via-api">Programmer Sounds via API</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li><a href="#deployment">Deployment</a><ul>
+<li><a href="#packaging-banks">Packaging banks</a></li>
+<li><a href="#mutli-platform-builds">Mutli-platform builds</a></li>
+<li><a href="#bank-files-inside-content-directory">Bank Files Inside Content Directory</a></li>
+<li><a href="#deploying-fmod-audio-plugins">Deploying FMOD audio plugins</a></li>
+<li><a href="#loading-blueprints-before-plugin-load">Loading blueprints before plugin load</a></li>
+<li><a href="#disabling-unreal-audio-device">Disabling Unreal Audio Device</a></li>
+<li><a href="#enabling-live-update">Enabling Live Update</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="settings.html">Settings</a></li>
+<li><a href="plugins.html">Plugins</a></li>
+<li><a href="api-reference.html">API Reference</a></li>
+<li><a href="blueprint-reference.html">Blueprint Reference</a></li>
+<li><a href="platform-specifics.html">Platform Specifics</a></li>
+<li><a href="troubleshooting.html">Troubleshooting</a></li>
+<li><a href="glossary.html">Glossary</a></li>
+</ul>
+</div>
+<div class="manual-content api">
+<h1>2. User Guide</h1>
+<p>The FMOD UE4 Integration is a plugin that allows you to use the FMOD APIs and projects from the FMOD Studio authoring tool in your UE4 game.</p>
+<p>Normally you will just need one copy of the integration. If you develop for multiple platforms at once, you can copy multiple integrations over the top of each other.</p>
+<hr />
+<h2 id="installing-the-integration"><a href="#installing-the-integration">2.1 Installing the integration</a></h2>
+<p>The integration consists of a single FMODStudio folder which can be placed in either the <code>Engine/Plugins</code> directory or your UE4 game's Plugin directory <code>{ProjectName}/Plugins</code>. The next steps show how to install it into your Engine directory, so it will be available for all projects using UE4.</p>
+<h3 id="windows"><a href="#windows">2.1.1 Windows</a></h3>
+<p>Browse to your UE4 Engine folder and unzip FMODStudio into the plugins directory.</p>
+<p><img alt="UE4 Engine Tree" src="images/engine-tree.png" /></p>
+<h3 id="mac"><a href="#mac">2.1.2 Mac</a></h3>
+<p>Use Finder to browse to your <code>/Users/Shared/UnrealEngine/4.X/Engine</code> directory and drop FMODStudio into the plugins directory.</p>
+<p><img alt="UE4 Engine Tree OSX" src="images/engine-mac.png" /></p>
+<p>If you have trouble getting the plugin working on a certain platform, then try putting FMODStudio in your game's Plugins directory instead of the engine.</p>
+<p>Otherwise see the <a href="troubleshooting.html#check-the-plugin-is-installed">TroubleShooting</a> section.</p>
+<hr />
+<h2 id="updatingupgrading-the-integration"><a href="#updatingupgrading-the-integration">2.2 Updating/Upgrading the Integration</a></h2>
+<p>Start by replacing the old FMODStudio folder with the new version:</p>
+<ul>
+<li>Delete the old FMODStudio folder then follow the same steps from <a href="user-guide.html#installing-the-integration">Installing the integration</a>.</li>
+</ul>
+<p>If you are updating to a newer <a href="glossary.html#version">minor version</a> of FMOD no additional steps are required unless specified in the <a href="https://fmod.com/resources/documentation-api?version=2.1&amp;page=welcome-revision-history.html">revision history</a>.</p>
+<p>Upgrading to a newer <a href="glossary.html#version">major version</a> of FMOD is usually only recommend for projects at or near the beginning of development, because new major versions may  introduce behavioral and breaking changes. If you are upgrading to a new major version, you will need to read over:</p>
+<ul>
+<li><a href="welcome.html">What's new in FMOD UE4 Integration...</a></li>
+<li><a href="https://fmod.com/resources/documentation-api?version=2.1&amp;page=welcome.html">What's new in FMOD API...</a></li>
+</ul>
+<p>These will describe specific changes that might need to be made to your project.</p>
+<h2 id="setting-up-your-project"><a href="#setting-up-your-project">2.3 Setting up your project</a></h2>
+<p>There are settings in both UE4 and FMOD Studio that need to be configured to link the two together.</p>
+<p>If you have any trouble setting up your project, use the automatic method. These settings can always be changed later.</p>
+<h3 id="automatically"><a href="#automatically">2.3.1 Automatically</a></h3>
+<p>You can run the "Help &gt; FMOD Validate" option in the UE4 Help menu. It finds and fixes common issues, and can automatically set up your FMOD Studio project for you!</p>
+<p>It will check the following:</p>
+<ul>
+<li>You are running the right version of FMOD Studio</li>
+<li>Your FMOD Studio bank export path is correct</li>
+<li>Banks have been exported</li>
+<li>Studio events have been added to the banks</li>
+<li>Any plugins have been added to the plugin list</li>
+<li>FMOD has been added to the packaging settings for deployment</li>
+</ul>
+<h3 id="manually"><a href="#manually">2.3.2 Manually</a></h3>
+<p>From your FMOD Studio Project, select "Edit &gt; Preferences..." ("FMOD Studio &gt; Preferences..." on Mac) and select the build tab. Set your built banks output directory to a directory called "FMOD" under your game's content path.</p>
+<p><img alt="Studio export path" src="images/studio-export-path.png" /></p>
+<p>Now select "File &gt; Build". This will build bank files for events that have been assigned to banks. You should do this whenever project data has been modified.</p>
+<h3 id="confirm-the-banks-are-built-and-loaded"><a href="#confirm-the-banks-are-built-and-loaded">2.3.3 Confirm the Banks are Built and Loaded</a></h3>
+<p>Now, open UE4 and look at the content browser. The plug-in defaults to looking in <code>Content/FMOD</code> directory for banks, so if you have exported banks there, assets should appear in the content window automatically. These represent items in your Studio project which update automatically when banks are built.</p>
+<p><img alt="Content browser" src="images/fmod-content.png" /></p>
+<p>For more information about banks, see the <a href="user-guide.html#working-with-banks">Banks</a> page.</p>
+<h3 id="naming-considerations"><a href="#naming-considerations">2.3.4 Naming Considerations</a></h3>
+<p>The FMOD UE4 integration will create UE4 assets to represent the objects in your FMOD Studio project. These are the assets you see in the content browser. The names of the assets are based on the names you use in FMOD Studio, but there are some limitations imposed by UE4 which may not apply in FMOD Studio:</p>
+<ul>
+<li>UE4 asset names may not contain spaces, tabs, or any of the following characters: <code>"',/.:|&amp;!~@#(){}[]=;^%$`</code></li>
+<li>UE4 asset folder names may not contain spaces, tabs, or any of the following characters: <code>"',\\|/&amp;!~@#(){}[]=;^%$`</code></li>
+</ul>
+<p>If you use any of these illegal characters in your FMOD Studio folder names or object names then the integration will generate a name for you by replacing the illegal characters. The generated names are not guaranteed to be unique and if a generated name duplicates another asset's name then one of the assets will be hidden by the other and the hidden asset will be inaccessible.</p>
+<p>To avoid any unexpected behavior or confusion we recommend that FMOD Studio folder names and object names are named in line with the limitations imposed by UE4.</p>
+<hr />
+<h2 id="compiling-the-plugin-optional"><a href="#compiling-the-plugin-optional">2.4 Compiling the plugin (Optional)</a></h2>
+<p>If you want to recompile the plugin, you can drop the plugin into a code project under your game's <code>Plugins/FMODStudio</code> directory, then re-generate the project. This might be useful if you want to use the plugin with a different version of the engine, such as a new pre-release of UE4. You can also do this if you want to get the plugin from github.</p>
+<p>To recompile the plugin after downloading it from FMOD, do the following:</p>
+<ul>
+<li>Delete the <code>FMODStudio/Intermediate</code> directory.</li>
+<li>Delete the <code>FMODStudio/Binaries/Platform/UE4*.*</code> files. Leave the fmod libraries in the binaries directory!</li>
+<li>Create a new code project using UE4.</li>
+<li>Copy the plugin into <code>YourGame/Plugins/FMODStudio</code>.</li>
+<li>Regenerate the game's solution or xcode project.</li>
+<li>Build the game for "Development Editor".</li>
+<li>Build the game for whatever other configurations you need.</li>
+</ul>
+<p>To compile the plugin after downloading the source from github, do the following</p>
+<ul>
+<li>Add FMOD dynamic libraries into the <code>FMODStudio/Binaries/Platform/</code> directory. The libs can be obtained in the programmers API download or from the FMOD for UE4 download.</li>
+<li>Create a new code project using UE4.</li>
+<li>Copy the plugin into <code>YourGame/Plugins/FMODStudio</code>.</li>
+<li>Regenerate the game's solution or XCode project.</li>
+<li>Build the game for development editor.</li>
+<li>Build the game for whatever other configurations you need.</li>
+</ul>
+<p>When rebuilding the plugin inside a code project, make sure you haven't also left it in the engine directory as well!</p>
+<hr />
+<h2 id="programming-support"><a href="#programming-support">2.5 Programming Support</a></h2>
+<p>You are able to interface with the FMOD UE4 Integration and/or the FMOD C++ APIs.</p>
+<h3 id="programming-with-the-fmod-ue4-integration"><a href="#programming-with-the-fmod-ue4-integration">2.5.1 Programming with the FMOD UE4 Integration</a></h3>
+<p>To reference FMOD Studio, the programmer will need to add the following to their .Build.cs file:</p>
+<ul>
+<li>Add "FMODStudio" to <code>PrivateDependencyModuleNames</code></li>
+</ul>
+<p>To add some FMOD Events to a class, do the following:</p>
+<ul>
+<li>Include "FMODEvent.h" at the top of your own class</li>
+<li>Add a <a href="api-reference-ufmodevent.html">UFMODEvent</a> * and mark with the <code>UPROPERTY</code> macro like any other field</li>
+</ul>
+<p>To play the event at a location, do the following:</p>
+<ul>
+<li>Include "FMODBlueprintStatics.h" in the file you want to trigger the sound</li>
+<li>Call <a href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_playeventatlocation">UFMODBlueprintStatics::PlayEventAtLocation</a> with the following arguments:<ul>
+<li>Set WorldContextObject to any UObject in the world, such as the owning actor object</li>
+<li>Set Event to the UFMODEvent stored in the class or passed into your function</li>
+<li>Set Transform to the place in the world you want to play the sound</li>
+<li>Set bAutoPlay to true so that it starts the sound automatically</li>
+</ul>
+</li>
+</ul>
+<p>You can also call <a href="api-reference-ufmodblueprintstatics.html#ufmodblueprintstatics_playeventattached">UFMODBlueprintStatics::PlayEventAttached</a> to create a new audio component attached to an actor, which will update the location automatically as the actor moves around the world.</p>
+<h3 id="programming-with-the-fmod-studio-c-api"><a href="#programming-with-the-fmod-studio-c-api">2.5.2 Programming with the FMOD Studio C++ API</a></h3>
+<p>Programmers can interface with FMOD Studio directly by including "fmod_studio.hpp".</p>
+<p>The Studio system can be obtained by <span class="dead-link" href="api-reference-ifmodstudiomodule.html#ifmodstudiomodule_getstudiosystem">GetStudioSystem</span class="dead-link">. The function takes an enum because there may be a separate Studio system for auditioning in-editor and the proper system for play-in-editor. Normally, you will want to obtain the system with <span class="dead-link" href="api-reference-ifmodstudiomodule.html#efmodsystemcontext">EFMODSystemContext.Runtime</span class="dead-link"> since that is the real system used in game.</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">IFMODStudioModule</span><span class="o">::</span><span class="n">IsAvailable</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="n">FMOD</span><span class="o">::</span><span class="n">Studio</span><span class="o">::</span><span class="n">System</span><span class="o">*</span> <span class="n">StudioSystem</span> <span class="o">=</span> <span class="n">IFMODStudioModule</span><span class="o">::</span><span class="n">Get</span><span class="p">().</span><span class="n">GetStudioSystem</span><span class="p">(</span><span class="n">EFMODSystemContext</span><span class="o">::</span><span class="n">Runtime</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">StudioSystem</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Use it here</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>You can use a mixture of FMOD Studio wrapper and FMOD Studio API functions. For example:</p>
+<div class="highlight language-cpp"><pre><span></span><span class="c1">// Call wrapper helper function to create and start an event instance</span>
+<span class="n">FFMODEventInstance</span> <span class="n">InstanceWrapper</span> <span class="o">=</span> <span class="n">UFMODBlueprintStatics</span><span class="o">::</span><span class="n">PlayEventAtLocation</span><span class="p">(</span><span class="n">ThisActor</span><span class="p">,</span> <span class="n">MyEvent</span><span class="p">,</span> <span class="n">FTransform</span><span class="p">(</span><span class="n">MyLocation</span><span class="p">),</span> <span class="nb">true</span><span class="p">);</span>
+<span class="n">FMOD</span><span class="o">::</span><span class="n">Studio</span><span class="o">::</span><span class="n">EventInstance</span><span class="o">*</span> <span class="n">Instance</span> <span class="o">=</span> <span class="n">InstanceWrapper</span><span class="p">.</span><span class="n">Instance</span><span class="p">;</span>
+<span class="c1">// Call into FMOD API directly</span>
+<span class="n">Instance</span><span class="o">-&gt;</span><span class="n">setVolume</span><span class="p">(</span><span class="mf">0.5f</span><span class="p">);</span>
+<span class="c1">// The instance handle will be cleaned up automatically when the sound finishes</span>
+</pre></div>
+
+
+<h3 id="further-programming-documentation"><a href="#further-programming-documentation">2.5.3 Further Programming Documentation</a></h3>
+<p>For further documentation, see:<br />
+- <a href="api-reference.html">Integration API Reference</a><br />
+- <a href="https://fmod.com/resources/documentation-api?version=2.1&amp;page=welcome.html">FMOD API Reference</a>.</p>
+<hr />
+<h2 id="making-sounds"><a href="#making-sounds">2.6 Making sounds</a></h2>
+<p>The FMOD UE4 integration provides multiple ways in which Studio events can be played.</p>
+<h3 id="ambient-sounds"><a href="#ambient-sounds">2.6.1 Ambient Sounds</a></h3>
+<p>The simplest way to play a looping ambience, is to drag and drop an event from the content browser into a scene viewport.</p>
+<p><img alt="Drag sample" src="images/drag-ambient.png" /></p>
+<p>For example, try dragging the <code>Game/FMOD/Events/Ambience/Forest</code> event into a level. This will create an <a href="api-reference-afmodambientsound.html">FMODAmbientSound</a>. Hit Play to begin playing in editor, and you should immediately hear the Forest ambience.</p>
+<p>Make sure you drag an event into the main viewport. Dragging a bank into main viewport won't do anything.</p>
+<h3 id="playing-sounds-from-blueprint"><a href="#playing-sounds-from-blueprint">2.6.2 Playing Sounds From Blueprint</a></h3>
+<p>Another easy way to trigger a sound is via blueprint. You can use the play event at location function to quickly trigger any given event.</p>
+<p><img alt="Blueprint Sample" src="images/blueprint-sample.png" /></p>
+<p>In the example shown below, the Single_Explosion event is triggered at the location of the camera, every time the spacebar is pressed.</p>
+<p><img alt="Blueprint simple playback" src="images/blueprint-play-simple.png" /></p>
+<h3 id="other-avenues"><a href="#other-avenues">2.6.3 Other avenues</a></h3>
+<p>Keep in mind that more advanced control is also available from blueprints. There are graph functions for playing and stopping events, setting parameters, and loading or unloading banks. You can also add <a href="api-reference-ufmodaudiocomponent.html">FMODAudioComponents</a> to blueprints, allowing you attach audio directly to an object.</p>
+<hr />
+<h2 id="listener"><a href="#listener">2.7 Listener</a></h2>
+<p>FMOD can support up to 8 listeners in game. The <a href="api-reference-ffmodlistener.html">FMODListeners</a> will follow the UE4 listeners which by default is attached to the camera, but we can move them by moving the UE4 listeners.</p>
+<p>This is particularly useful for Third-Person and Top-Down style games.</p>
+<h3 id="example"><a href="#example">2.7.1 Example</a></h3>
+<p>Using <a href="http://api.unrealengine.com/INT/BlueprintAPI/Game/Audio/SetAudioListenerOverride/index.html">SetAudioListenerOverride</a> allows you either attach the listener to a component or set the transform and rotation manually.</p>
+<p><img alt="Listener Override" src="images/set-audio-listener-override.png" /></p>
+<hr />
+<h2 id="working-with-banks"><a href="#working-with-banks">2.8 Working with Banks</a></h2>
+<p>Content created in FMOD Studio is exported into bank files. These bank files can then be loaded within Unreal using the FMOD UE4 integration. Banks can contain multiple events, which will implicitly pull in any audio assets they depend on.</p>
+<p><img alt="Studio bank layout" src="images/studio-bank-layout.png" /></p>
+<p>Loading a bank will load all metadata, which contains information about all the events, parameters, and other data needed for all events assigned to that bank.</p>
+<h3 id="studio-bank-output-directory"><a href="#studio-bank-output-directory">2.8.1 Studio Bank Output Directory</a></h3>
+<p>It is highly recommended that banks are exported to the Content directory of your project (see <a href="user-guide.html#deployment">Deployment</a> for more information). This can set via the built banks output directory setting in the FMOD Studio, which can be found in "Edit &gt; Preferences..." on Windows (or "FMOD Studio &gt; Preferences..." on Mac), under the Build tab.</p>
+<p><img alt="Studio export path" src="images/studio-export-path.png" /></p>
+<p>When using the UE4 editor, as long as you match the FMOD Studio built banks output directory to the bank output directory specified in the Unreal project settings ("Edit &gt; Project Settings &gt; FMOD Studio"), the integration will find and load all bank content automatically.</p>
+<p><img alt="Project Settings" src="images/project-settings.png" /></p>
+<h3 id="assigning-events-to-banks"><a href="#assigning-events-to-banks">2.8.2 Assigning Events to Banks</a></h3>
+<p>Before a new FMOD Studio event can be used in Unreal, it must first be assigned and built to a bank which can be loaded by Unreal. This can be done within FMOD Studio via the context menu of an event, or by dragging and dropping an event onto a bank.</p>
+<p><img alt="Assign events to banks" src="images/assign-to-bank.png" /></p>
+<p>Events are typically assigned to the same bank when they should be loaded and unloaded at the same time. For example, you might put all the events for the Goblin enemy within the Goblin bank.</p>
+<p>Once you have assigned your events to a bank, you should rebuild your banks. This is done via the "File &gt; Build..." menu item.</p>
+<p><img alt="Build menu" src="images/build-menu.png" /></p>
+<h3 id="loading-banks-within-unreal"><a href="#loading-banks-within-unreal">2.8.3 Loading Banks within Unreal</a></h3>
+<p>The banks built in FMOD Studio are loaded in editor by the plugin, so that you can browse Events, Buses, Snapshots, etc. from the Studio Project. You are able to customize the way the banks are loaded in game, to suit your requirement, otherwise by default all the banks will be loaded at initialization.</p>
+<h4 id="in-editor"><a href="#in-editor">In Editor</a></h4>
+<p>Within the Unreal editor, banks are loaded automatically as soon they are built. When correctly configured, any data within banks (e.g. events, mixer strips) should appear within the content browser under <code>Game/FMOD</code> by default.</p>
+<p><img alt="Content view" src="images/content-view.png" /></p>
+<h4 id="in-game"><a href="#in-game">In Game</a></h4>
+<p>The FMOD UE4 integration will load all banks by default. If you would like to manually control bank loading, this behavior can be disabled via the load all banks checkbox withing the FMOD Studio settings dialog ("Edit &gt; Project Settings &gt; FMOD Studio").</p>
+<p>If using split banks, make sure to load the assets bank first and using load sample data on the metadata bank.</p>
+<p>Banks can then manually be loaded and unloaded using the <code>Load Bank</code> and <code>Unload Bank</code> blueprint functions.</p>
+<p><img alt="Banks blueprint" src="images/banks-blueprint.png" /></p>
+<div class="admonition warning">
+<p>The Master Bank does not need to be loaded manually. It is automatically loaded at startup.</p>
+</div>
+<hr />
+<h2 id="sequencer-integration"><a href="#sequencer-integration">2.9 Sequencer Integration</a></h2>
+<p>FMOD is integrated into Unreal Engine 4's Sequencer.</p>
+<h3 id="adding-fmod-events-to-a-level-sequence"><a href="#adding-fmod-events-to-a-level-sequence">2.9.1 Adding FMOD Events to a Level Sequence</a></h3>
+<p>Events can be added in one of two ways:</p>
+<ol>
+<li>
+<p>Ambient sounds already placed in the level may be possessed by the level sequence. Add ambient sound actors to the sequence by clicking the <img alt="Add actor button" src="images/add-actor-button.png" /> button in the Sequencer editor and choosing the ambient sound actor to add. Alternatively the actor can be dragged from the World Outliner into the Sequencer editor.<br />
+<img alt="Possess actor" src="images/possess-actor.png" /><br />
+Possessed events will retain any state set by the level sequence when playback is complete. The level sequence's Restore State setting can be enabled to restore the state of possessed events (and any other actors possessed by the level sequence).</p>
+</li>
+<li>
+<p>New events may be spawned from Sequencer. Sequencer can spawn FMOD events during playback. To create a spawned event drag an FMOD event from the Content Browser into the Sequencer editor.<br />
+<img alt="Audio Table" src="images/audio-table.png" /><br />
+Spawned events will not automatically play when spawned.</p>
+</li>
+</ol>
+<h3 id="adding-event-sub-tracks"><a href="#adding-event-sub-tracks">2.9.2 Adding Event Sub-Tracks</a></h3>
+<p>Once added to a sequence additional sub-tracks are required to do anything interesting. Sub-tracks can be added by clicking the <img alt="Add track button" src="images/add-track-button.png" /> button in the object's track. FMOD adds two new sub-track types for events in addition to the standard Sequencer sub-tracks.</p>
+<ol>
+<li>Event control tracks allow events to be played and stopped.</li>
+<li>Parameter tracks allow event parameters to be animated using Sequencer's keyframe animation tools.</li>
+</ol>
+<p><img alt="Event tracks" src="images/event-tracks.png" /></p>
+<h3 id="event-control-sub-track"><a href="#event-control-sub-track">2.9.3 Event Control Sub-Track</a></h3>
+<p>Keyframes on the event control sub-track can be used to Play or Stop the event.</p>
+<p><img alt="Control track" src="images/control-track.png" /></p>
+<h3 id="parameter-track"><a href="#parameter-track">2.9.4 Parameter Track</a></h3>
+<p>An FMOD Event Parameter Track allows additional sub-tracks to be added for each parameter in the targeted FMOD event. Additional sub-tracks can be added by clicking the <img alt="Add parameter button" src="images/add-parameter-button.png" /> button in the FMOD Event Parameter Track.</p>
+<p><img alt="Parameter track" src="images/parameter-track.png" /></p>
+<p>Keyframes may be added to the parameter sub-tracks to control the value of the event parameter during playback of the level sequence. The Unreal Engine 4 curve editor may be used to create rich curves for FMOD event parameters.</p>
+<p><img alt="Parameter keyframe track" src="images/parameter-keyframe-curve.png" /></p>
+<p>The FMOD UE4 integration is unable to validate the range of parameter values set by Sequencer. The FMOD Engine will clamp any parameter value outside the range specified in FMOD Studio.</p>
+<hr />
+<h2 id="occlusion"><a href="#occlusion">2.10 Occlusion</a></h2>
+<p>The FMOD UE4 integration supports the use of ray casts, to drive a specified parameter, for per instance occlusion of sounds.</p>
+<h3 id="occlusion-settings"><a href="#occlusion-settings">2.10.1 Occlusion Settings</a></h3>
+<p>To enable occlusion ray casts for FMOD in your UE4 project, set the name of the parameter that will be used for occlusion in Studio.</p>
+<p><img alt="Occlusion Settings" src="images/occlusion-setting.png" /></p>
+<p>If an Event contains this parameter, the integration will set the parameter value any time the occlusion value changes.<br />
+You can disable occlusion, per instance, and adjust the Trace Channel in the Component Details window.</p>
+<p><img alt="Occlusion Settings" src="images/occlusion.png" /></p>
+<hr />
+<h2 id="reverb-zones"><a href="#reverb-zones">2.11 Reverb Zones</a></h2>
+<p>The FMOD UE4 integration supports the use of the standard UE4 audio volumes to trigger Studio's advanced snapshot system.</p>
+<h3 id="snapshot-reverb-effects"><a href="#snapshot-reverb-effects">2.11.1 Snapshot Reverb Effects</a></h3>
+<p>The workflow to use reverb zones is to set up snapshots in FMOD Studio. Snapshots can modify global reverb effects, change any bus volume, and modify any DSP value. To help trigger snapshots for reverb effects, the integration exports all snapshots as reverb effects in the <code>FMOD/Reverbs</code> folder.</p>
+<p><img alt="Reverb assets" src="images/reverb-assets.png" /></p>
+<p>These reverb effects can be dragged into audio volume Reverb Settings panel to be triggered when the audio listener enters the audio zone. It uses the same logic as the inbuilt UE4 audio system to determine which audio volume should be enabled, based on the priority of the volume.</p>
+<p><img alt="Reverb settings" src="images/reverb-settings.png" /></p>
+<p>By default, snapshots apply instantly. To have a snapshot fade in, one of two things can be done. The first is by adding a AHDSR modulation to the intensity dial. The second way is to expose the intensity as a parameter, which allows it to be driven from the integration.</p>
+<p><img alt="Reverb snapshot intensity" src="images/reverb-snapshot-intensity.png" /></p>
+<p>If the snapshot has its intensity exposed as a parameter, then the integration will ramp in the intensity over time based on the audio volume's Volume and Fade Time settings. If the snapshot does not expose its intensity as a parameter, then these values will not do anything.</p>
+<h3 id="ambient-zone-settings"><a href="#ambient-zone-settings">2.11.2 Ambient Zone Settings</a></h3>
+<p>Another feature of the UE4 audio system is the ability to have an ambient effect applied to selected instances, based on both the listener position and the emitter position. Unlike the global reverb effects, this is something which is applied per instance.</p>
+<p><img alt="Reverb ambient" src="images/reverb-ambient.png" /></p>
+<p>Only some sounds should be affected by the ambient settings. To enable the ambient effect your Events will need two parameters, one for volume and one for LPF.<br />
+You will need to add these parameter names to the integration settings.</p>
+<p><img alt="Reverb user property" src="images/ambient-setting.png" /></p>
+<p>If an Event contains these parameters, the integration will set the parameter value any time the ambient values change.</p>
+<div class="admonition warning">
+<p>Only FMOD audio components are affected by ambient zones. The simpler <code>PlayEventAtLocation</code> blueprint function to spawn one-shots does not apply ambient effects.</p>
+</div>
+<hr />
+<h2 id="callbacks"><a href="#callbacks">2.12 Callbacks</a></h2>
+<p>You can hook up event callbacks using blueprints. FMOD Audio component callbacks are only triggered if the enable callback option is ticked. This is because each component that triggers callbacks can incur a small CPU overhead, so it has to be turned on explicitly for the components you want to use.</p>
+<p><img alt="Callback enable" src="images/callback-enable.png" /></p>
+<p>Once enabled, then tempo beat callbacks and timeline callbacks can be added in blueprints. One way is via the <code>Assign On Timeline Beat</code> and <code>Assign On Timeline Marker</code> blueprint actions. For FMOD audio components used in blueprint actors, you can add events from the details window instead.</p>
+<p><img alt="Callback blueprints" src="images/callback-bp.png" /></p>
+<p>You can trigger various actions to occur on the beat or when a timeline hits a named marker. The event contains the same fields as <code>FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES</code> and <code>FMOD_STUDIO_TIMELINE_MARKER_PROPERTIES</code>.</p>
+<p><img alt="Callback example" src="images/callback-example.png" /></p>
+<hr />
+<h2 id="localization"><a href="#localization">2.13 Localization</a></h2>
+<p>Localized audio tables are a special kind of audio table with features that facilitate localization. We recommend using localized audio tables if your game supports multiple spoken languages, or if you intend to add support for additional languages in a future patch.</p>
+<h3 id="setting-up-audio-tables"><a href="#setting-up-audio-tables">2.13.1 Setting up Audio Tables</a></h3>
+<p><a href="https://fmod.com/resources/documentation-api?version=2.1&amp;page=dialogue-and-localization.html#audio-tables">Audio Tables</a> are lists of audio files stored outside your FMOD Studio project's asset folder. You can use audio tables to control localized sounds. See the <a href="https://fmod.com/resources/documentation-studio?version=2.1&amp;page=dialogue-and-localization.html#localized-audio-tables">Dialogue and Localization</a> section of the <a href="https://fmod.com/resources/documentation-studio?version=2.1&amp;page=welcome-to-fmod-studio.html">FMOD Studio Docs</a> on how to set up an audio table in your project.</p>
+<p><img alt="Audio Table" src="images/audio-table.png" /></p>
+<h3 id="loading-localized-banks"><a href="#loading-localized-banks">2.13.2 Loading Localized Banks</a></h3>
+<p>Audio tables are assigned to an associated bank, this means that in order to change the currently loaded audio table you will need to change the bank. Only one localized bank should be loaded at a time, otherwise just the first one to be loaded will be used.</p>
+<p>You will need to define the different locale names and codes in the Localization Settings.</p>
+<p><img alt="Localization Settings" src="images/settings-locale.png" /></p>
+<p>Only the locale that is selected as default will have it's bank loaded at startup, if <a href="file:///D:/Source/release.2.0/docs/ue4/build/settings.html#load-all-banks">Load All Banks</a> has been enabled in the settings.</p>
+<p>To change the locale, you will need to:</p>
+<ul>
+<li>unload the bank</li>
+<li>change the locale</li>
+<li>then reload the bank</li>
+</ul>
+<p><img alt="Load locale bank" src="images/unload-setlocale-load.png" /></p>
+<hr />
+<h2 id="programmer-sounds"><a href="#programmer-sounds">2.14 Programmer Sounds</a></h2>
+<p>FMOD Studio events can include programmer sound modules that are controlled at runtime. There are a few different ways of hooking them up.</p>
+<h3 id="programmer-sounds-via-audio-tables"><a href="#programmer-sounds-via-audio-tables">2.14.1 Programmer Sounds via Audio Tables</a></h3>
+<p>With this approach, you don't need to do any programming at all!</p>
+<h4 id="choosing-the-audio-entry-to-play"><a href="#choosing-the-audio-entry-to-play">Choosing the audio entry to play</a></h4>
+<p>Create an event with a programmer sound module on it. If the module has a name, then if nothing else is assigned then that sound will be used. For example, if the sound designer sets the module name as "Welcome", then the audio table entry "Welcome" will be used by default.</p>
+<p><img alt="Studio programmer sound" src="images/studio-programmer.png" /></p>
+<p>To select at runtime what audio entry to use, set the programmer sound name field in the <a href="">FMODAudioComponent</a>.</p>
+<p><img alt="Programmer asset name" src="images/programmer-asset-name.png" /></p>
+<p>Or you can assign the name via blueprint.</p>
+<p><img alt="Programmer blueprint" src="images/programmer-bp.png" /></p>
+<p>The name has to be one of the audio asset entries of a loaded audio table, or it won't find the sound to play.</p>
+<p>Be careful to set the name before you play the audio component. If the name is assigned after the event has started, it may not play the right sound.</p>
+<h3 id="programmer-sounds-by-path"><a href="#programmer-sounds-by-path">2.14.2 Programmer Sounds by Path</a></h3>
+<p>With this approach, you can easily play any media file for your event.</p>
+<p>You can set up a programmer sound to point directly to a file. To do this, set the FMOD audio component's programmer sound name to the path to the .wav or .ogg file that you want to load. If this path is relative, it will be looked up relative to the content directory.</p>
+<p><img alt="Programmer file path" src="images/programmer-file-path.png" /></p>
+<p>If you do this, you'll need to make sure that directory with the media files is added to directories to package in the packaging settings, otherwise it will work in the editor, but not when packaged into the final game.</p>
+<h3 id="programmer-sounds-via-api"><a href="#programmer-sounds-via-api">2.14.3 Programmer Sounds via API</a></h3>
+<p>With this approach, you have the most flexibility for programmers.</p>
+<p>If you are writing code, you can programmatically set the FMOD Sound to use by calling the FMOD audio component function <code>SetProgrammerSound</code>. Here is an example of setting the sound from code:</p>
+<div class="highlight language-cpp"><pre><span></span><span class="kt">void</span> <span class="n">AExampleGameMode</span><span class="o">::</span><span class="n">InitAudio</span><span class="p">(</span><span class="n">UFMODAudioComponent</span><span class="o">*</span> <span class="n">AudioComponent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">AudioComponent</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">FMOD</span><span class="o">::</span><span class="n">Studio</span><span class="o">::</span><span class="n">System</span><span class="o">*</span> <span class="n">System</span> <span class="o">=</span> <span class="n">IFMODStudioModule</span><span class="o">::</span><span class="n">Get</span><span class="p">().</span><span class="n">GetStudioSystem</span><span class="p">(</span><span class="n">EFMODSystemContext</span><span class="o">::</span><span class="n">Runtime</span><span class="p">);</span>
+        <span class="n">FMOD</span><span class="o">::</span><span class="n">System</span><span class="o">*</span> <span class="n">CoreSystem</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+        <span class="n">System</span><span class="o">-&gt;</span><span class="n">getCoreSystem</span><span class="p">(</span><span class="o">&amp;</span><span class="n">CoreSystem</span><span class="p">);</span>
+
+        <span class="c1">// Create sound in memory</span>
+        <span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">EXAMPLE_SOUND_LEN</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">;</span>
+        <span class="kt">float</span> <span class="n">ExampleData</span><span class="p">[</span><span class="n">EXAMPLE_SOUND_LEN</span><span class="p">];</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">EXAMPLE_SOUND_LEN</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">ExampleData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">FMath</span><span class="o">::</span><span class="n">Sin</span><span class="p">((</span><span class="kt">float</span><span class="p">)</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="n">FMOD_CREATESOUNDEXINFO</span> <span class="n">SoundInfo</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+        <span class="n">SoundInfo</span><span class="p">.</span><span class="n">cbsize</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">SoundInfo</span><span class="p">);</span>
+        <span class="n">SoundInfo</span><span class="p">.</span><span class="n">format</span> <span class="o">=</span> <span class="n">FMOD_SOUND_FORMAT_PCMFLOAT</span><span class="p">;</span>
+        <span class="n">SoundInfo</span><span class="p">.</span><span class="n">defaultfrequency</span> <span class="o">=</span> <span class="mi">12000</span><span class="p">;</span>
+        <span class="n">SoundInfo</span><span class="p">.</span><span class="n">numchannels</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">SoundInfo</span><span class="p">.</span><span class="n">length</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span> <span class="o">*</span> <span class="n">EXAMPLE_SOUND_LEN</span><span class="p">;</span>
+
+        <span class="n">FMOD</span><span class="o">::</span><span class="n">Sound</span><span class="o">*</span> <span class="n">Sound</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">CoreSystem</span><span class="o">-&gt;</span><span class="n">createSound</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">ExampleData</span><span class="p">),</span> <span class="n">FMOD_OPENMEMORY</span> <span class="o">|</span> <span class="n">FMOD_OPENRAW</span> <span class="o">|</span> <span class="n">FMOD_LOOP_OFF</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">SoundInfo</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Sound</span><span class="p">)</span> <span class="o">==</span> <span class="n">FMOD_OK</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">AudioComponent</span><span class="o">-&gt;</span><span class="n">SetProgrammerSound</span><span class="p">(</span><span class="n">Sound</span><span class="p">);</span>
+            <span class="c1">// Note: Need to remember to release the sound *after* the audio component has finished using it.</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h3 id="troubleshooting"><a href="#troubleshooting">2.14.4 Troubleshooting</a></h3>
+<p>Also, when setting the name to an audio table entry, you will need to make sure the audio table bank is already loaded before the event starts.</p>
+<p>The FMOD audio component only supports a single programmer sound per event. If you want to have an event that has multiple programmer sounds, each one playing a different sound, then you'll need to create the event directly via the FMOD API and provide your own callback. You can look at how the FMOD audio component programmer sound callback works and use that as a base for your own class.</p>
+<hr />
+<h2 id="deployment"><a href="#deployment">2.15 Deployment</a></h2>
+<p>These steps describe how to prepare your project for deployment. This is relevant to both the Launch option as well as the "File &gt; Package Project" menu item.<br />
+If any platforms require specific steps, they can be found in <a href="platform-specifics.html">Platform Specifics</a>.</p>
+<h3 id="packaging-banks"><a href="#packaging-banks">2.15.1 Packaging banks</a></h3>
+<p>The directory containing the built FMOD banks should be added to the "Additional Non-Asset Directories To Copy" list. You will be prompted to do this in the FMOD Studio settings pane of Unreal project settings ("Edit &gt; Project Settings &gt; FMOD Studio"):</p>
+<p><img alt="Project deployment" src="images/project-deploy.png" /></p>
+<p>This can also be done manually by selecting the "Edit &gt; Project Settings..." menu item and navigating to the Packaging section from the left hand pane, under the Project heading and adding the bank output directory to the "Additional Non-Asset Directories to Copy" list.</p>
+<p>When the bank output directory is added to the "Additional Non-Asset Directories to Copy" list the banks will be copied as loose files when packaging your project. This is the recommended approach. It is possible to have the banks added to UE4's .PAK file by adding the bank output directory to the "Additional Non-Asset Directories to Package" list, but we no longer recommend this approach because adding the banks to the .PAK file can lead to the packaged project deadlocking in the filesystem.</p>
+<h3 id="mutli-platform-builds"><a href="#mutli-platform-builds">2.15.2 Mutli-platform builds</a></h3>
+<p>Each platform will look for its own type of banks in its own directory. Make sure you have added the platform to FMOD Studio project. The platforms are:</p>
+<ul>
+<li>Desktop (Windows, Mac, Linux)</li>
+<li>PS4</li>
+<li>XBox One</li>
+<li>Switch</li>
+<li>Mobile (Android, iOS, tvOS)</li>
+</ul>
+<p>If you only have the Desktop banks and want to run on another platform, you can set force platform name to Desktop in the FMOD advanced settings.</p>
+<h3 id="bank-files-inside-content-directory"><a href="#bank-files-inside-content-directory">2.15.3 Bank Files Inside Content Directory</a></h3>
+<p>The above directory name is relative to your Content directory. It is highly recommended that banks be placed within the content directory, as paths outside this directory will not deploy correctly to all platforms. For example:</p>
+<ul>
+<li>Mac doesn't allow support directories outside the content directory at all.</li>
+<li>Windows and Android have issues looking up directories outside the Content directory when used with packages.</li>
+</ul>
+<p>This doesn't mean you need to put your whole Studio project inside the content directory. You can customize Studio by editing the Preferences and choosing a directory to export banks to, as described in the <a href="user-guide.html#working-with-banks">Working with Banks</a> page.</p>
+<p>The integration will load the platform bank files automatically. On PC it will load from <code>FMOD/Desktop</code> but on Android and IOS it will look for banks under <code>FMOD/Mobile</code>.</p>
+<p>If you use FMOD as the directory to deploy and have multiple platform banks exported, then they will all be packaged up. To slim down your final package size, you may need to tweak the additional directories setting on a per platform basis. That way you only package <code>FMOD/Mobile</code> for Android, <code>FMOD/Desktop</code> for PC, <code>FMOD/PS4</code> for PS4, etc.</p>
+<h3 id="deploying-fmod-audio-plugins"><a href="#deploying-fmod-audio-plugins">2.15.4 Deploying FMOD audio plugins</a></h3>
+<p>You will need to make sure the plugins are deployed as well. Unreal deployment doesn't access to the settings information so you will need to create an extra file that lists the plugins you want to deploy.</p>
+<p>Create a file "plugins.txt" in the <code>FMODStudio/Binaries/Platform/</code> directory. The text file should contain the plugin names (just the name without file extension).</p>
+<p>For example, to deploy fmod_gain.dll on Win64 builds, create a file <code>FMODStudio/Binaries/Win64/plugins.txt</code> with the following contents:</p>
+<div class="highlight language-text"><pre><span></span>fmod_gain
+</pre></div>
+
+
+<h3 id="loading-blueprints-before-plugin-load"><a href="#loading-blueprints-before-plugin-load">2.15.5 Loading blueprints before plugin load</a></h3>
+<p>One issue to be aware of is where blueprints are serialized from disk too early, before any plugins are loaded. This can occur from the following code, which is included by default in example C++ projects constructor:</p>
+<div class="highlight language-cpp"><pre><span></span><span class="k">static</span> <span class="n">ConstructorHelpers</span><span class="o">::</span><span class="n">FClassFinder</span><span class="o">&lt;</span><span class="n">APawn</span><span class="o">&gt;</span> <span class="n">PlayerPawnClassFinder</span><span class="p">(</span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;/Game/FirstPersonCPP/Blueprints/FirstPersonCharacter&quot;</span><span class="p">));</span>
+</pre></div>
+
+
+<p>The finder will serialize the first person character blueprint, but any FMOD references will fail to load since the FMOD plugin has not been created yet. To make sure that the FMOD plugin is loaded first, add the line of code above the class finder.</p>
+<div class="highlight language-cpp"><pre><span></span><span class="n">IFMODStudioModule</span><span class="o">::</span><span class="n">Get</span><span class="p">();</span>
+</pre></div>
+
+
+<h3 id="disabling-unreal-audio-device"><a href="#disabling-unreal-audio-device">2.15.6 Disabling Unreal Audio Device</a></h3>
+<p>By default FMOD Studio works side-by-side with the inbuilt Unreal audio device on the following platforms:</p>
+<ul>
+<li>Windows Desktop</li>
+<li>Universal Windows Platform</li>
+<li>Linux</li>
+<li>MacOS</li>
+<li>Android</li>
+<li>PS4</li>
+<li>Switch</li>
+<li>Stadia</li>
+</ul>
+<p>Any of the platforms listed below will not work with the inbuilt Unreal audio:</p>
+<ul>
+<li>iOS / tvOS - Both UE4 and FMOD require exclusive control of the AudioSession to correctly handle interruptions.</li>
+<li>Xbox One - Both UE4 and FMOD will attempt to consume all of the available XMA resources, this will cause the second system to fail initialization.</li>
+</ul>
+<p>To disable the Unreal audio while leaving the FMOD Studio audio, the standard Unreal ini file setting can be used.</p>
+<p>For each required platform, add a new file <code>/Config/{Platform}/{Platform}Engine.ini</code> with this section:</p>
+<div class="highlight language-xml"><pre><span></span>[Audio]
+AudioDeviceModuleName=
+AudioMixerModuleName=
+</pre></div>
+
+
+<p>The audio device can be disabled for every platform that you want to ship with.</p>
+<h3 id="enabling-live-update"><a href="#enabling-live-update">2.15.7 Enabling Live Update</a></h3>
+<p>The default permissions won't allow FMOD to set up a socket properly for live update. Uncheck the enable live update option in FMOD settings to avoid errors.</p>
+<p>If you get a deployment error "resource.resw is in use by other process", go to the <code>YourGame/Config/DefaultGame.ini</code> and remove the following:</p>
+<div class="highlight language-xml"><pre><span></span>-CulturesToStage=en
++CulturesToStage=en
+</pre></div></div>
+
+<p class="manual-footer">UE4 Integration 2.01.07 (2020-12-18). &copy; 2020 Firelight Technologies Pty Ltd.</p>
+</body>
+</html>
+
+</div>
