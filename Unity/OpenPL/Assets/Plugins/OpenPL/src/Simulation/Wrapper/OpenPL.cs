@@ -187,7 +187,7 @@ namespace OpenPL
         /// <returns></returns>
         public RESULT AddMesh(ref PLVector WorldPosition, ref PLQuaternion WorldRotation, ref PLVector WorldScale, IntPtr Vertices, int VerticesLength, IntPtr Indices, int IndicesLength, out int OutIndex)
         {
-            return PL_Scene_AddMesh(Handle, ref WorldPosition, ref WorldRotation, ref WorldScale, Vertices, VerticesLength, Indices, IndicesLength, out OutIndex);
+            return PL_Scene_AddMesh(Handle, WorldPosition, WorldRotation, WorldScale, Vertices, VerticesLength, Indices, IndicesLength, out OutIndex);
         }
 
         /// <summary>
@@ -280,7 +280,7 @@ namespace OpenPL
         static extern RESULT PL_Scene_Release(IntPtr Scene);
 
         [DllImport(PLATFORM.dll)]
-        static extern RESULT PL_Scene_AddMesh(IntPtr Scene, ref PLVector WorldPosition, ref PLQuaternion WorldRotation, ref PLVector WorldScale, IntPtr Vertices, int VerticesLength, IntPtr Indices, int IndicesLength, out int OutIndex);
+        static extern RESULT PL_Scene_AddMesh(IntPtr Scene, PLVector WorldPosition, PLQuaternion WorldRotation, PLVector WorldScale, IntPtr Vertices, int VerticesLength, IntPtr Indices, int IndicesLength, out int OutIndex);
 
         [DllImport(PLATFORM.dll)]
         static extern RESULT PL_Scene_RemoveMesh(IntPtr Scene, int IndexToRemove);
