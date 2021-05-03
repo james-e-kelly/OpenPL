@@ -13,15 +13,15 @@ public class OpenPropagationLibrary : ModuleRules
         
         if (Target.IsInPlatformGroup(UnrealPlatformGroup.Windows))
         {
-            PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../../Binaries", "Win64/OpenPL.dll"));
+            PublicAdditionalLibraries.Add(Path.Combine(PluginDirectory, "Binaries", "Win64/OpenPL.dll"));
         }
         else if (Target.Platform == UnrealTargetPlatform.Mac)
         {
-            PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../../Binaries", "Mac/OpenPL.dylib"));
+            PublicAdditionalLibraries.Add(Path.Combine(PluginDirectory, "Binaries", "Mac/OpenPL.dylib"));
         }
         else if (Target.Platform == UnrealTargetPlatform.Linux)
         {
-            PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../../Binaries", "Linux/libOpenPL.so"));
+            PublicAdditionalLibraries.Add(Path.Combine(PluginDirectory, "Binaries", "Linux/libOpenPL.so"));
         }
 		
 		PublicDependencyModuleNames.AddRange(
