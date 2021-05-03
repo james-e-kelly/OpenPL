@@ -13,6 +13,14 @@ class PLScene;
 class FOpenPropagationLibraryModule : public IModuleInterface
 {
 public:
+    
+    static inline FOpenPropagationLibraryModule &Get() { return FModuleManager::LoadModuleChecked<FOpenPropagationLibraryModule>("OpenPropagationLibrary"); }
+
+    static inline bool IsAvailable() { return FModuleManager::Get().IsModuleLoaded("OpenPropagationLibrary"); }
+    
+    OpenPL::PLSystem* GetSystem() { return SystemInstance; }
+    
+    OpenPL::PLScene* CreateScene();
 
 	/** IModuleInterface implementation */
 	virtual void StartupModule() override;

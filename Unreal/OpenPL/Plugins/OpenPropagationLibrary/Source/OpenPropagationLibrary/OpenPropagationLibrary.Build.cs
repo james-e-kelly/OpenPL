@@ -10,20 +10,19 @@ public class OpenPropagationLibrary : ModuleRules
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
         
         PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Public/OpenPL"));
-		
-		PublicIncludePaths.AddRange(
-			new string[] {
-				// ... add public include paths required here ...
-			}
-			);
-				
-		
-		PrivateIncludePaths.AddRange(
-			new string[] {
-				// ... add other private include paths required here ...
-			}
-			);
-			
+        
+        if (Target.IsInPlatformGroup(UnrealPlatformGroup.Windows))
+        {
+            PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../../Binaries", "Win64/OpenPL.dll"));
+        }
+        else if (Target.Platform == UnrealTargetPlatform.Mac)
+        {
+            PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../../Binaries", "Mac/OpenPL.dylib"));
+        }
+        else if (Target.Platform == UnrealTargetPlatform.Linux)
+        {
+            PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../../Binaries", "Linux/libOpenPL.so"));
+        }
 		
 		PublicDependencyModuleNames.AddRange(
 			new string[]
@@ -42,14 +41,6 @@ public class OpenPropagationLibrary : ModuleRules
 				"Slate",
 				"SlateCore",
 				// ... add private dependencies that you statically link with here ...	
-			}
-			);
-		
-		
-		DynamicallyLoadedModuleNames.AddRange(
-			new string[]
-			{
-				// ... add any modules that your module loads dynamically here ...
 			}
 			);
 	}

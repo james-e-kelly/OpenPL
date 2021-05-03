@@ -1,0 +1,6 @@
+# For the sake of testing, we want to include the binaries in the repo
+# However, in the future it'd be better to download this locally
+!Binaries/**/*
+.DS_Store
+UE4Editor*
+*.modules

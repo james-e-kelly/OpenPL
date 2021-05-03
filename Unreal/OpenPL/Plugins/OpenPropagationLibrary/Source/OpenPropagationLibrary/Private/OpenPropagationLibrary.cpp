@@ -8,16 +8,24 @@
 void FOpenPropagationLibraryModule::StartupModule()
 {
     PL_RESULT SystemCreateResult = OpenPL::System_Create(&SystemInstance);
-    
-    
-	
 }
 
 void FOpenPropagationLibraryModule::ShutdownModule()
 {
-	// This function may be called during shutdown to clean up your module.  For modules that support dynamic reloading,
-	// we call this function before unloading the module.
-	
+    if (SystemInstance)
+    {
+        SystemInstance->Release();
+    }
+}
+
+OpenPL::PLScene* FOpenPropagationLibraryModule::CreateScene()
+{
+    OpenPL::PLScene* Result = nullptr;
+    if (SystemInstance)
+    {
+        SystemInstance->CreateScene(&Result);
+    }
+    return Result;
 }
 
 #undef LOCTEXT_NAMESPACE
