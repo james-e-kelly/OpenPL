@@ -31,6 +31,8 @@ void ARuntimeOpenPL::BeginPlay()
         return;
     }
     
+    Scene->CreateVoxels(PLVector(10,10,10), 1);
+    
     for (AStaticMeshActor* MeshActor : StaticMeshes)
     {
         TArray<PLVector> Vertices;
@@ -76,6 +78,13 @@ void ARuntimeOpenPL::BeginPlay()
             Scene->AddMesh(ConvertUnrealVectorToPL(MeshActor->GetActorLocation()), ConvertUnrealVectorToPL4(MeshActor->GetActorRotation().Euler()), ConvertUnrealVectorToPL(MeshActor->GetActorScale()), Vertices.GetData(), VertexCount, ActualIndices.GetData(), TriangleCount, &AddedMeshIndex);
         }
     }
+    
+    Scene->FillVoxelsWithGeometry();
+    
+    int VoxelCount;
+    Scene->GetVoxelsCount(&VoxelCount);
+    
+    Scene->Simulate(PLVector(0,0,0));
 }
 
 // Called every frame
