@@ -31,6 +31,8 @@ void ARuntimeOpenPL::BeginPlay()
         return;
     }
     
+    EventInstance = UFMODBlueprintStatics::PlayEventAtLocation(this, TestFMODEvent, GetActorTransform(), true);
+    
     Scene->CreateVoxels(PLVector(10,10,10), 1);
     
     for (AStaticMeshActor* MeshActor : StaticMeshes)
@@ -73,7 +75,7 @@ void ARuntimeOpenPL::BeginPlay()
             {
                 ActualIndices.Add(static_cast<int>(Indices[i]));
             }
-            //        PL_RESULT JUCE_PUBLIC_FUNCTION AddMesh(PLVector WorldPosition, PLQuaternion WorldRotation, PLVector WorldScale, PLVector* Vertices, int VerticesLength, int* Indices, int IndicesLength, int* OutIndex);
+
             int32 AddedMeshIndex = -1;
             Scene->AddMesh(ConvertUnrealVectorToPL(MeshActor->GetActorLocation()), ConvertUnrealVectorToPL4(MeshActor->GetActorRotation().Euler()), ConvertUnrealVectorToPL(MeshActor->GetActorScale()), Vertices.GetData(), VertexCount, ActualIndices.GetData(), TriangleCount, &AddedMeshIndex);
         }
@@ -85,6 +87,39 @@ void ARuntimeOpenPL::BeginPlay()
     Scene->GetVoxelsCount(&VoxelCount);
     
     Scene->Simulate(PLVector(0,0,0));
+    
+    PL_RESULT DrawGraphResult = Scene->DrawGraph(PLVector(1,1,1));
+    
+    /*
+     listenerLocation = Listener.transform.position;
+     listenerEmitterLocation = new Vector3(listenerLocation.x, emitterLocation.y, listenerLocation.z);
+
+     int VoxelIndex;
+     RuntimeManager.CheckResult(SceneInstance.Encode(PLVector(0,0,0), out VoxelIndex), "Encode");
+     string DesktopPath = global::System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+     string currentIRFilePath = DesktopPath + "/" + VoxelIndex.ToString() + ".wav";
+     if (global::System.IO.File.Exists(currentIRFilePath) && lastVoxel == VoxelIndex)
+     {
+         yield return new WaitForSeconds(1f);
+         continue;
+     }
+     UnityEngine.Debug.Log(currentIRFilePath);
+
+     lastVoxel = VoxelIndex;
+
+     int channels, sampleRate;
+     float[] ir = WAV.Read(currentIRFilePath, out channels, out sampleRate);
+
+     byte[] array = new byte[ir.Length + 1];
+     array[0] = (byte)channels;
+     Buffer.BlockCopy(ir, 0, array, 1, ir.Length);
+
+     reverbDSP.setParameterData((int)FMOD.DSP_CONVOLUTION_REVERB.IR, array);
+
+     UnityEngine.Debug.Log("SENT IR");
+
+     yield return new WaitForSeconds(0.2f);
+     */
 }
 
 // Called every frame

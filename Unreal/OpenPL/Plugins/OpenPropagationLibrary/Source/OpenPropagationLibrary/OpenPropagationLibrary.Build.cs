@@ -43,5 +43,7 @@ public class OpenPropagationLibrary : ModuleRules
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
+            
+        PrivateDependencyModuleNames.AddRange(new string[] { "FMODStudio" });
 	}
 }
