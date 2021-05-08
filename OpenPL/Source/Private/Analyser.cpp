@@ -10,7 +10,9 @@
 
 #include "Analyser.h"
 #include "Simulators/Simulator.h"
+#include "PL_SYSTEM.h"
 #include "PL_SCENE.h"
+#include "FreeGrid.h"
 #include <sstream>
 
 void Analyser::Encode(Simulator* Simulator, PLVector EncodingPosition, int* OutVoxelIndex)
@@ -77,11 +79,25 @@ void Analyser::GetOcclusion(Simulator* Simulator, PLVector EncodingPosition, flo
     const int NumSamples = Simulator->GetTimeSteps();
     const float SamplingRate = Simulator->GetSamplingRate();
     
-    int EncodingIndex;
-    Simulator->GetScene()->GetVoxelIndexOfPosition(EncodingPosition, &EncodingIndex);
+    const PL_SCENE* Scene = Simulator->GetScene();
+    
+    // It can be assumed the encoding position in the emitter location
+    int EmitterIndex;   // The array index
+    int EmitterX, EmitterY, EmitterZ;   // The 3D world indexes of the emitter
+    Scene->GetVoxelIndexOfPosition(EncodingPosition, &EmitterIndex);
+    Scene->GetThreeDimensionalIndexOfIndex(EmitterIndex, EmitterX, EmitterY, EmitterZ);
     
     const std::vector<std::vector<PLVoxel>>& SimulatedLattice = Simulator->GetSimulatedLattice();
-    const std::vector<PLVoxel> Response = SimulatedLattice[EncodingIndex];
+    const std::vector<PLVoxel> Response = SimulatedLattice[EmitterIndex];   // Response at the emitter location
+    
+    PLVector ListenerLocation;
+    PL_SYSTEM* System;
+    Scene->GetSystem(&System);
+    System->GetListenerPosition(ListenerLocation);
+    int ListenerIndex;
+    int ListenerX, ListenerY, ListenerZ;
+    Scene->GetVoxelIndexOfPosition(ListenerLocation, &ListenerIndex);
+    Scene->GetThreeDimensionalIndexOfIndex(ListenerIndex, ListenerX, ListenerY, ListenerZ);
 
     //
     // ONSET DELAY
@@ -112,18 +128,15 @@ void Analyser::GetOcclusion(Simulator* Simulator, PLVector EncodingPosition, flo
 
          // Normalize dry energy by free-space energy to obtain geometry-based
          // obstruction gain with distance attenuation factored out
-//         Real EfreePr = 0.0f;
-//         {
-//             const int listenerX = (int)(listenerPos.x * (1.f / m_dx));
-//             const int listenerY = (int)(listenerPos.z * (1.f / m_dx));
-//             const int emitterX = gridIndex.x;
-//             const int emitterY = gridIndex.y;
-//
-//             EfreePr = m_freeGrid->GetEFreePerR(listenerX, listenerY, emitterX, emitterY);
-//         }
+         double EfreePr = 0.0f;
+         {
+             FreeGrid* FreeGrid;
+             Scene->GetFreeGrid(&FreeGrid);
+             EfreePr = FreeGrid->GetFreeEnergy(ListenerX, ListenerZ, EmitterX, EmitterZ);
+         }
 
-//         float E = (Edry / EfreePr);
-//         ObstructionGain = std::sqrt(E);
+         float E = (Edry / EfreePr);
+         ObstructionGain = std::sqrt(E);
      }
      
     *OutOcclusion = ObstructionGain;

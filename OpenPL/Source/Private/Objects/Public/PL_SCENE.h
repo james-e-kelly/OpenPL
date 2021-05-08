@@ -18,6 +18,7 @@
 #include <atomic>
 
 class Simulator;
+class FreeGrid;
 
 /**
  * The scene class is the main work horse of the simulation.
@@ -160,6 +161,8 @@ public:
     
     PL_RESULT GetSimulator(Simulator** OutSimulator) const;
     
+    PL_RESULT GetFreeGrid(FreeGrid** OutFreeGrid) const;
+    
     PL_RESULT GetVoxelLatticeSize(int& X, int& Y, int& Z) const;
     
     PL_RESULT GetTimeSteps(int& OutTimeSteps);
@@ -183,6 +186,9 @@ private:
     
     /**Pointer to the object that will run our specific simulation. Can be anything from FDTD to rectangular decomposition etc.*/
     std::unique_ptr<Simulator> SimulatorPointer;
+    
+    /** Does the free energy ready for occlusion*/
+    std::unique_ptr<FreeGrid> FreeGridPointer;
     
     enum ThreadStatus
     {

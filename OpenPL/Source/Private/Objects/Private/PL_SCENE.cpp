@@ -18,6 +18,7 @@
 #include "Simulators/SimulatorBasic.h"
 #include <boost/timer/timer.hpp>
 #include "Analyser.h"
+#include "FreeGrid.h"
 
 Eigen::Vector3d CreateEigenVectorFromPL(const PLVector& Vector)
 {
@@ -116,6 +117,13 @@ PL_RESULT PL_SCENE::CreateVoxels(const PLVector& SceneSize, float VoxelSize)
     StringStream << "Created Voxels. Size: " << Voxels.Voxels.size() << ". Center: " << ScenePosition << ". BottomBackLeft: " << BottomBackLeft << ". First Voxel: " << FirstVoxelPosition << ". First Index: " << FirstVoxelIndex;
     
     DebugLog(StringStream.str().c_str());
+    
+    if (!FreeGridPointer)
+    {
+        FreeGridPointer = std::unique_ptr<FreeGrid>(new FreeGrid());
+        
+        FreeGridPointer->Init(this);
+    }
     
     return PL_OK;
 }
@@ -683,6 +691,18 @@ PL_RESULT PL_SCENE::GetSimulator(Simulator** OutSimulator) const
     }
     
     *OutSimulator = SimulatorPointer.get();
+    
+    return PL_OK;
+}
+
+PL_RESULT PL_SCENE::GetFreeGrid(FreeGrid** OutFreeGrid) const
+{
+    if (!OutFreeGrid)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
+    *OutFreeGrid = FreeGridPointer.get();
     
     return PL_OK;
 }
