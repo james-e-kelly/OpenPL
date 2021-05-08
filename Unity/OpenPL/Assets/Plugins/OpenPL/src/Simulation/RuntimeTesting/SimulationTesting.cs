@@ -118,12 +118,12 @@ namespace OpenPL
 
                 float Occlusion;
                 RuntimeManager.CheckResult(SceneInstance.GetOcclusion(listenerEmitterLocation.ToPLVector(), out Occlusion), "Get Occlusion");
-                Occlusion -= 1;
-                Occlusion = Mathf.Clamp01(Occlusion);
+                //Occlusion -= 1;
+                //Occlusion = Mathf.Clamp01(Occlusion);
 
                 eventEmitter.SetParameter("Occlusion", Occlusion);
 
-                UnityEngine.Debug.Log(Occlusion);
+                //UnityEngine.Debug.Log(Occlusion);
 
                 yield return new WaitForSeconds(0.2f);
             }
