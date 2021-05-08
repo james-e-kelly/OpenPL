@@ -58,6 +58,11 @@ float Simulator::GetSamplingRate() const
     return SamplingRate;
 }
 
+int Simulator::GetTimeSteps() const
+{
+    return TimeSteps;
+}
+
 void Simulator::GaussianPulse()
 {
     Pulse.resize(TimeSteps);

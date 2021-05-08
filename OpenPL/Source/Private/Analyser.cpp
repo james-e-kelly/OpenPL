@@ -71,3 +71,60 @@ void Analyser::Encode(Simulator* Simulator, PLVector EncodingPosition, int* OutV
          writer->writeFromAudioSampleBuffer (buffer, 0, buffer.getNumSamples());
      */
 }
+
+void Analyser::GetOcclusion(Simulator* Simulator, PLVector EncodingPosition, float* OutOcclusion)
+{
+    const int NumSamples = Simulator->GetTimeSteps();
+    const float SamplingRate = Simulator->GetSamplingRate();
+    
+    int EncodingIndex;
+    Simulator->GetScene()->GetVoxelIndexOfPosition(EncodingPosition, &EncodingIndex);
+    
+    const std::vector<std::vector<PLVoxel>>& SimulatedLattice = Simulator->GetSimulatedLattice();
+    const std::vector<PLVoxel> Response = SimulatedLattice[EncodingIndex];
+
+    //
+    // ONSET DELAY
+    //
+    int OnsetSample = 0; // first sample that meets a certain threshold
+    for (; OnsetSample < NumSamples; ++OnsetSample)
+    {
+        double Next = Response[OnsetSample].AirPressure;
+        if (std::abs(Next) > 0.00000316f)   // precomputed value for -110db
+        {
+            break;
+        }
+    }
+    
+     const int DirectGainSamples = static_cast<int>(0.01f * SamplingRate);    // go forward 10ms
+     const int DirectEnd = OnsetSample + DirectGainSamples;
+
+     float ObstructionGain = 0.0f;
+     {
+         float Edry = 0;
+
+         int j = 0;
+         for (; j < DirectEnd; ++j)
+         {
+             const double AirPressure = Response[j].AirPressure;
+             Edry += AirPressure * AirPressure;
+         }
+
+         // Normalize dry energy by free-space energy to obtain geometry-based
+         // obstruction gain with distance attenuation factored out
+//         Real EfreePr = 0.0f;
+//         {
+//             const int listenerX = (int)(listenerPos.x * (1.f / m_dx));
+//             const int listenerY = (int)(listenerPos.z * (1.f / m_dx));
+//             const int emitterX = gridIndex.x;
+//             const int emitterY = gridIndex.y;
+//
+//             EfreePr = m_freeGrid->GetEFreePerR(listenerX, listenerY, emitterX, emitterY);
+//         }
+
+//         float E = (Edry / EfreePr);
+//         ObstructionGain = std::sqrt(E);
+     }
+     
+    *OutOcclusion = ObstructionGain;
+}

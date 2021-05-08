@@ -21,5 +21,15 @@ class Analyser
 {
 public:
     
+    /**
+     * Writes an impulse response file to disk.
+     *
+     * @param Simulator Simulator to take data from
+     * @param EncodingPosition Position to make the impulse response from
+     * @param OutVoxelIndex
+     
+     */
     void Encode(Simulator* Simulator, PLVector EncodingPosition, int* OutVoxelIndex);
+    
+    void GetOcclusion(Simulator* Simulator, PLVector EncodingPosition, float* OutOcclusion);
 };

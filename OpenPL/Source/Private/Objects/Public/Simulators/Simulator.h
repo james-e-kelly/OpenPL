@@ -29,6 +29,8 @@ public:
     
     float GetSamplingRate() const;
     
+    int GetTimeSteps() const;
+    
     virtual ~Simulator() { }
     
 protected:
