@@ -281,3 +281,24 @@ PL_RESULT PL_Scene_Encode(PL_SCENE* Scene, PLVector EncodingPosition, int* OutVo
     
     return PL_OK;
 }
+
+PL_RESULT PL_Scene_GetOcclusion(PL_SCENE* Scene, PLVector EmitterLocation, float* OutOcclusion)
+{
+    if (!Scene)
+    {
+        return PL_ERR_INVALID_PARAM;
+    }
+    
+    Simulator* Simulator;
+    Scene->GetSimulator(&Simulator);
+    
+    if (!Simulator)
+    {
+        return PL_ERR;
+    }
+    
+    Analyser Analyser;
+    Analyser.GetOcclusion(Simulator, EmitterLocation, OutOcclusion);
+    
+    return PL_OK;
+}

@@ -270,6 +270,11 @@ namespace OpenPL
             return PL_Scene_Encode(Handle, EncodingPosition, out OutVoxelIndex);
         }
 
+        public RESULT GetOcclusion(PLVector EmitterLocation, out float OutOcclusion)
+        {
+            return PL_Scene_GetOcclusion(Handle, EmitterLocation, out OutOcclusion);
+        }
+
         public IntPtr Handle;
 
         public Scene(IntPtr Ptr) { Handle = Ptr; }
@@ -311,5 +316,8 @@ namespace OpenPL
 
         [DllImport(PLATFORM.dll)]
         static extern RESULT PL_Scene_Encode(IntPtr Scene, PLVector EncodingPosition, out int OutVoxelIndex);
+
+        [DllImport(PLATFORM.dll)]
+        static extern RESULT PL_Scene_GetOcclusion(IntPtr Scene, PLVector EmitterLocation, out float OutOcclusion);
     }
 }
