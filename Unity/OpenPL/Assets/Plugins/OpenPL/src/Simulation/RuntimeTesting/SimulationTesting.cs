@@ -92,7 +92,7 @@ namespace OpenPL
 
             emitterLocation = eventEmitter.transform.position;
 
-            RuntimeManager.CheckResult(SceneInstance.Simulate(emitterLocation.ToPLVector()), "Scene.Simulate");
+            RuntimeManager.CheckResult(SceneInstance.Simulate(listenerLocation.ToPLVector()), "Scene.Simulate");
             
             listenerEmitterLocation = new Vector3(listenerLocation.x, emitterLocation.y, listenerLocation.z);
 
@@ -105,12 +105,9 @@ namespace OpenPL
             }
         }
 
-        FMOD.DSP reverbDSP;
         Vector3 emitterLocation;
         Vector3 listenerEmitterLocation;
         Vector3 listenerLocation;
-
-        int lastVoxel = -1;
 
         IEnumerator UpdateSimulation()
         {
@@ -119,29 +116,12 @@ namespace OpenPL
                 listenerLocation = Listener.transform.position;
                 listenerEmitterLocation = new Vector3(listenerLocation.x, emitterLocation.y, listenerLocation.z);
 
-                int VoxelIndex;
-                RuntimeManager.CheckResult(SceneInstance.Encode(listenerEmitterLocation.ToPLVector(), out VoxelIndex), "Encode");
-                string DesktopPath = global::System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                string currentIRFilePath = DesktopPath + "/" + VoxelIndex.ToString() + ".wav";
-                if (global::System.IO.File.Exists(currentIRFilePath) && lastVoxel == VoxelIndex)
-                {
-                    yield return new WaitForSeconds(1f);
-                    continue;
-                }
-                UnityEngine.Debug.Log(currentIRFilePath);
+                float Occlusion;
+                RuntimeManager.CheckResult(SceneInstance.GetOcclusion(listenerEmitterLocation.ToPLVector(), out Occlusion), "Get Occlusion");
 
-                lastVoxel = VoxelIndex;
+                eventEmitter.SetParameter("Occlusion", Occlusion);
 
-                int channels, sampleRate;
-                float[] ir = WAV.Read(currentIRFilePath, out channels, out sampleRate);
-
-                byte[] array = new byte[ir.Length + 1];
-                array[0] = (byte)channels;
-                Buffer.BlockCopy(ir, 0, array, 1, ir.Length);
-
-                reverbDSP.setParameterData((int)FMOD.DSP_CONVOLUTION_REVERB.IR, array);
-
-                UnityEngine.Debug.Log("SENT IR");
+                UnityEngine.Debug.Log(Occlusion);
 
                 yield return new WaitForSeconds(0.2f);
             }
@@ -158,33 +138,8 @@ namespace OpenPL
                 UnityEngine.Debug.LogError("No event");
                 yield break;
             }
-
-            if (eventEmitter.EventInstance.getChannelGroup(out FMOD.ChannelGroup group) == FMOD.RESULT.OK)
-            {
-                int dspNum = -1;
-                group.getNumDSPs(out dspNum);
-
-                for (int i = 0; i < dspNum; i++)
-                {
-                    FMOD.DSP dsp;
-                    if (group.getDSP(i, out dsp) == FMOD.RESULT.OK)
-                    {
-                        FMOD.DSP_TYPE type;
-                        dsp.getType(out type);
-
-                        if (type == FMOD.DSP_TYPE.CONVOLUTIONREVERB)
-                        {
-                            reverbDSP = dsp;
-                            yield return UpdateSimulation();
-                        }
-                    }
-                }
-            }
-            else
-            {
-                UnityEngine.Debug.Log("No channel group");
-            }
-            yield return null;
+            
+            yield return UpdateSimulation();
         }
 
         void OnDrawGizmos()
