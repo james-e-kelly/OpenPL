@@ -517,6 +517,9 @@
     <ClCompile Include="..\..\Source\Private\DebugOpenGL.cpp">
       <Filter>OpenPL\Source\Private\Objects\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Private\FreeGrid.cpp">
+      <Filter>OpenPL\Source\Private\Objects\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Private\Objects\Public\MatPlotPlotter.cpp">
       <Filter>OpenPL\Source\Private\Objects\Private</Filter>
     </ClCompile>
@@ -2284,6 +2287,9 @@
       <Filter>OpenPL\Source\Private\Objects\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Private\Objects\Public\DebugOpenGL.h">
+      <Filter>OpenPL\Source\Private\Objects\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Private\Objects\Public\FreeGrid.h">
       <Filter>OpenPL\Source\Private\Objects\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Private\Objects\Public\MatPlotPlotter.h">

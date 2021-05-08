@@ -249,6 +249,10 @@
 			isa = PBXBuildFile;
 			fileRef = 6FA7401ABB0DD0217DFCE0B7;
 		};
+		B7847384888E19E8D9B2CF0A = {
+			isa = PBXBuildFile;
+			fileRef = 7023667CDB78A8988CAA8158;
+		};
 		659436F445C7402412FEBAB6 = {
 			isa = PBXBuildFile;
 			fileRef = EE5A4DFBFB083FFA24C04847;
@@ -370,6 +374,13 @@
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = algebra.cpp;
 			path = "../../External/matplotplusplus/source/3rd_party/nodesoup/src/algebra.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		0F0313069AF57C40760333DB = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = FreeGrid.h;
+			path = ../../Source/Private/Objects/Public/FreeGrid.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		109678623E9CD0C77202CB08 = {
@@ -790,6 +801,13 @@
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = legend.cpp;
 			path = ../../External/matplotplusplus/source/matplot/core/legend.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		7023667CDB78A8988CAA8158 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = FreeGrid.cpp;
+			path = ../../Source/Private/FreeGrid.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		728D14A100DA4D4D9D450248 = {
@@ -1599,6 +1617,7 @@
 				1D29FE4606A2D8DF4D7A696C,
 				5B6F58D6B13A170D959F32A1,
 				6FA7401ABB0DD0217DFCE0B7,
+				7023667CDB78A8988CAA8158,
 				EE5A4DFBFB083FFA24C04847,
 				51AEE0E3931BC98051493CD6,
 				2059C9BD7A495C812A606E93,
@@ -1624,6 +1643,7 @@
 				48CB7AF8385250D3B204FFA8,
 				886B20075970B9BFAB2FEEAD,
 				8A936F127DFBB7BB4E9A5DD9,
+				0F0313069AF57C40760333DB,
 				07894880A7A751895C590D78,
 				CBB59A4EDC42B7D715DBCA46,
 				384C12B37629136E188B646A,
@@ -2095,6 +2115,7 @@
 				851C4AD42B6A2BE6F064620C,
 				8C8C2BDEA6B67D5B75FF8ADA,
 				4E0983667197F22375524F37,
+				B7847384888E19E8D9B2CF0A,
 				659436F445C7402412FEBAB6,
 				FF3F43DF8DD11EF9DBAEA2E1,
 				D7894FCB90431EB2E838612D,

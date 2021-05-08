@@ -121,6 +121,7 @@ OBJECTS_DYNAMIC_LIBRARY := \
   $(JUCE_OBJDIR)/SimulatorFDTD_2d5ea08e.o \
   $(JUCE_OBJDIR)/Analyser_3eb4be94.o \
   $(JUCE_OBJDIR)/DebugOpenGL_c9be1d97.o \
+  $(JUCE_OBJDIR)/FreeGrid_3339a87.o \
   $(JUCE_OBJDIR)/MatPlotPlotter_686b885f.o \
   $(JUCE_OBJDIR)/PL_SCENE_668326e5.o \
   $(JUCE_OBJDIR)/PL_SYSTEM_1515a820.o \
@@ -392,6 +393,11 @@ $(JUCE_OBJDIR)/Analyser_3eb4be94.o: ../../Source/Private/Analyser.cpp
 $(JUCE_OBJDIR)/DebugOpenGL_c9be1d97.o: ../../Source/Private/DebugOpenGL.cpp
 	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
 	@echo "Compiling DebugOpenGL.cpp"
+	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_DYNAMIC_LIBRARY) $(JUCE_CFLAGS_DYNAMIC_LIBRARY) -o "$@" -c "$<"
+
+$(JUCE_OBJDIR)/FreeGrid_3339a87.o: ../../Source/Private/FreeGrid.cpp
+	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
+	@echo "Compiling FreeGrid.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_DYNAMIC_LIBRARY) $(JUCE_CFLAGS_DYNAMIC_LIBRARY) -o "$@" -c "$<"
 
 $(JUCE_OBJDIR)/MatPlotPlotter_686b885f.o: ../../Source/Private/Objects/Public/MatPlotPlotter.cpp
