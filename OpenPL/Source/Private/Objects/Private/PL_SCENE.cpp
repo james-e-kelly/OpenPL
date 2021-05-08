@@ -120,6 +120,12 @@ PL_RESULT PL_SCENE::CreateVoxels(const PLVector& SceneSize, float VoxelSize)
     
     if (!FreeGridPointer)
     {
+        // Open all the voxels so the simulation actually works
+        for (auto& Voxel : Voxels.Voxels)
+        {
+            Voxel.Beta = 1;
+        }
+        
         FreeGridPointer = std::unique_ptr<FreeGrid>(new FreeGrid());
         
         FreeGridPointer->Init(this);
