@@ -65,7 +65,7 @@ double FreeGrid::SimulateFreeFieldEnergy(PL_SCENE* Scene)
     double freeFieldEnergy = CalculateEFree(Response, SamplingRate);
 
     // discrete distance on grid
-    const double r = double(OneMeterInFrontOfListerner.X - ScenePosition.X) * VoxelSize;
+    const double r = 1;
     // Normalize to exactly 1m assuming 1/r energy attenuation
     freeFieldEnergy *= r;
 
