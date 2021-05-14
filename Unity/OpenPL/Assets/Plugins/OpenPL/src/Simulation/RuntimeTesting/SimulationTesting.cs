@@ -93,8 +93,6 @@ namespace OpenPL
             emitterLocation = eventEmitter.transform.position;
 
             RuntimeManager.CheckResult(SceneInstance.Simulate(listenerLocation.ToPLVector()), "Scene.Simulate");
-            
-            listenerEmitterLocation = new Vector3(listenerLocation.x, emitterLocation.y, listenerLocation.z);
 
             //RuntimeManager.CheckResult(SceneInstance.DrawGraph(listenerEmitterLocation.ToPLVector()), "DrawGraph");
             //RuntimeManager.CheckResult(SceneInstance.DrawGraph(emitterLocation.ToPLVector()), "DrawGraph");
@@ -106,7 +104,6 @@ namespace OpenPL
         }
 
         Vector3 emitterLocation;
-        Vector3 listenerEmitterLocation;
         Vector3 listenerLocation;
 
         IEnumerator UpdateSimulation()
@@ -114,18 +111,22 @@ namespace OpenPL
             while (eventEmitter && eventEmitter.IsPlaying())
             {
                 listenerLocation = Listener.transform.position;
-                listenerEmitterLocation = new Vector3(listenerLocation.x, emitterLocation.y, listenerLocation.z);
+                Vector3 emitterLocationWithListenerY = new Vector3(emitterLocation.x, listenerLocation.y, emitterLocation.z);
+
+                RuntimeManager.CheckResult(SceneInstance.Simulate(listenerLocation.ToPLVector()), "Scene.Simulate");
 
                 float Occlusion;
-                RuntimeManager.CheckResult(SceneInstance.GetOcclusion(listenerEmitterLocation.ToPLVector(), out Occlusion), "Get Occlusion");
+                RuntimeManager.CheckResult(SceneInstance.GetOcclusion(emitterLocationWithListenerY.ToPLVector(), out Occlusion), "Get Occlusion");
                 //Occlusion -= 1;
                 //Occlusion = Mathf.Clamp01(Occlusion);
 
-                eventEmitter.SetParameter("Occlusion", Occlusion);
+                eventEmitter.EventInstance.setVolume(Mathf.Clamp01(Occlusion));
+                //eventEmitter.SetParameter("Occlusion", Occlusion);
+
 
                 //UnityEngine.Debug.Log(Occlusion);
 
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(0.5f);
             }
 
             yield return null;
