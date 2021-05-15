@@ -26,8 +26,15 @@ namespace OpenPL
         public bool DebugMeshes;
         public bool ShowVoxels;
 
+        public bool disable;
+
         void Start()
         {
+            if (disable)
+            {
+                return;
+            }
+
             AcousticGeometry[] allGameObjects = FindObjectsOfType<AcousticGeometry>();
 
             for (int i = 0; i < allGameObjects.Length; i++)
@@ -118,13 +125,16 @@ namespace OpenPL
                 //Occlusion -= 1;
                 //Occlusion = Mathf.Clamp01(Occlusion);
 
-                eventEmitter.EventInstance.setVolume(Mathf.Clamp01(Occlusion));
-                //eventEmitter.SetParameter("Occlusion", Occlusion);
+                //eventEmitter.EventInstance.setVolume(Mathf.Clamp01(Occlusion));
+                eventEmitter.EventInstance.getChannelGroup(out FMOD.ChannelGroup group);
+                //group.setVolumeRamp(true);
+                //group.setVolume(Mathf.Clamp01(Occlusion));
+                eventEmitter.SetParameter("Occlusion", 1 - Mathf.Clamp01(Occlusion));
 
 
                 //UnityEngine.Debug.Log(Occlusion);
 
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.1f);
             }
 
             yield return null;
@@ -132,7 +142,7 @@ namespace OpenPL
 
         IEnumerator WaitForEventInstance()
         {
-            yield return new WaitForSeconds(5);
+            yield return null;
 
             if (!eventEmitter)
             {
