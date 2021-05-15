@@ -493,7 +493,7 @@ PL_RESULT PL_SCENE::Simulate(PLVector SimulationLocation)
             boost::timer::auto_cpu_timer SimulationTimer(Stream);
             SimulatorPointer->Simulate(VoxelIndex);
         }
-        DebugLog(Stream.str().c_str());
+//        DebugLog(Stream.str().c_str());
     }
     else
     {
