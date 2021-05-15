@@ -94,9 +94,6 @@ namespace OpenPL
 
             RuntimeManager.CheckResult(SceneInstance.Simulate(listenerLocation.ToPLVector()), "Scene.Simulate");
 
-            //RuntimeManager.CheckResult(SceneInstance.DrawGraph(listenerEmitterLocation.ToPLVector()), "DrawGraph");
-            //RuntimeManager.CheckResult(SceneInstance.DrawGraph(emitterLocation.ToPLVector()), "DrawGraph");
-
             if (middlewarePlatform == MiddlewarePlatform.FMOD)
             {
                 StartCoroutine(WaitForEventInstance());
