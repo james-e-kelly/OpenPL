@@ -111,6 +111,7 @@ namespace OpenPL
             while (eventEmitter && eventEmitter.IsPlaying())
             {
                 listenerLocation = Listener.transform.position;
+                emitterLocation = eventEmitter.transform.position;
                 Vector3 emitterLocationWithListenerY = new Vector3(emitterLocation.x, listenerLocation.y, emitterLocation.z);
 
                 RuntimeManager.CheckResult(SceneInstance.Simulate(listenerLocation.ToPLVector()), "Scene.Simulate");
