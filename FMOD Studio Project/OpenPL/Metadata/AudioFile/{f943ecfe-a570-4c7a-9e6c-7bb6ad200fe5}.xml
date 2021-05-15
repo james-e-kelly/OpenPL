@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{f943ecfe-a570-4c7a-9e6c-7bb6ad200fe5}">
+		<property name="assetPath">
+			<value>DrumLoop1.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>3.75</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{b5246884-c7d4-4a6a-a2af-488c2b313c25}</destination>
+		</relationship>
+	</object>
+</objects>

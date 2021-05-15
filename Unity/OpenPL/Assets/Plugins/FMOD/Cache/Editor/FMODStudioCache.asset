@@ -19,7 +19,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-5566588870235115041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35,12 +35,75 @@ MonoBehaviour:
   Path: ../../FMOD Studio Project/OpenPL/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637560814540000000
+  lastModified: 637566766330000000
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 792
+    Value: 840
   Exists: 1
+--- !u!114 &-1708912262462314812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Test/Occlusion
+  m_EditorClassIdentifier: 
+  Name: Occlusion
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-843445421301143583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Test/Occlusion
+  m_EditorClassIdentifier: 
+  Name: Occlusion
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-503991706668631470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TestMusic
+  m_EditorClassIdentifier: 
+  Path: event:/TestMusic
+  guid: 83344139f3d5e24b9ea74eb4f2bd1978
+  Banks:
+  - {fileID: 3252562418664440579}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3750
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,12 +121,13 @@ MonoBehaviour:
   - {fileID: 3252562418664440579}
   EditorEvents:
   - {fileID: 5652723017909027173}
+  - {fileID: -503991706668631470}
   EditorParameters: []
   MasterBanks:
   - {fileID: 3252562418664440579}
   StringsBanks:
   - {fileID: -5566588870235115041}
-  stringsBankWriteTime: 637560814540000000
+  stringsBankWriteTime: 637566766330000000
   cacheVersion: 6
 --- !u!114 &3252562418664440579
 MonoBehaviour:
@@ -80,7 +144,7 @@ MonoBehaviour:
   Path: ../../FMOD Studio Project/OpenPL/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637560814540000000
+  lastModified: 637566766330000000
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -104,7 +168,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -5945142301264155401}
+  - {fileID: -843445421301143583}
   MinDistance: 1
   MaxDistance: 20
   Length: 3241
