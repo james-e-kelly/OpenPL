@@ -137,7 +137,13 @@ void Analyser::GetOcclusion(Simulator* Simulator, PLVector EncodingPosition, flo
 
          float E = (Edry / EfreePr);
          ObstructionGain = std::sqrt(E);
+         
+         std::ostringstream StringStream;
+         StringStream << "Occlusion: " << ObstructionGain << ". Final Energy: " << E << ". Energy From Geometry: " << Edry << ". Energy From Grid: " << EfreePr;
+         DebugLog(StringStream.str().c_str());
      }
+    
+//    double r = 1.0f / std::max(0.001f, ObstructionGain);
      
     *OutOcclusion = ObstructionGain;
 }
