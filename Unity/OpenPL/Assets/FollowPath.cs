@@ -9,28 +9,17 @@ public class FollowPath : MonoBehaviour
     int currentTarget = 0;
 
     public float movementSpeed = 1;
-    public float currentLerp = 0;
-
-    Vector3 startPosition;
 
     IEnumerator Start()
     {
-        startPosition = transform.position;
-
         while (true)
         {
             Transform currentTransform = path[currentTarget];
 
-            transform.position = Vector3.Lerp(startPosition, currentTransform.position, currentLerp);
+            transform.position = Vector3.MoveTowards(transform.position, currentTransform.position, Time.deltaTime * movementSpeed);
 
-            currentLerp += Time.deltaTime * movementSpeed;
-
-            if (currentLerp >= 1)
+            if (Vector3.Distance(transform.position, currentTransform.position) < 0.01f)
             {
-                currentLerp = 0;
-
-                startPosition = transform.position;
-
                 currentTarget++;
 
                 if (currentTarget >= path.Length)
