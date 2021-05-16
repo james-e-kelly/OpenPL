@@ -73,5 +73,6 @@ namespace OpenPL
         PL_RESULT JUCE_PUBLIC_FUNCTION GetVoxelAbsorpivity(float* OutAbsorpivity, int Index);
         PL_RESULT JUCE_PUBLIC_FUNCTION DrawGraph(PLVector GraphPosition);
         PL_RESULT JUCE_PUBLIC_FUNCTION Encode(PLVector EncodingPosition, int* OutVoxelIndex);
+        PL_RESULT JUCE_PUBLIC_FUNCTION GetOcclusion(PLVector EmitterLocation, float* OutOcclusion);
     };
 }

@@ -114,4 +114,9 @@ namespace OpenPL
     {
         return PL_Scene_Encode(reinterpret_cast<PL_SCENE*>(this), EncodingPosition, OutVoxelIndex);
     }
+
+    PL_RESULT PLScene::GetOcclusion(PLVector EmitterLocation, float* OutOcclusion)
+    {
+        return PL_Scene_GetOcclusion(reinterpret_cast<PL_SCENE*>(this), EmitterLocation, OutOcclusion);
+    }
 }
