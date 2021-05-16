@@ -6,8 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "OpenPL.hpp"
 #include "Templates/UniquePtr.h"
-#include "FMODBlueprintStatics.h"
-#include "FMODEvent.h"
+#include "FMODAmbientSound.h"
 #include "RuntimeOpenPL.generated.h"
 
 UCLASS()
@@ -33,9 +32,9 @@ protected:
     TArray<class AStaticMeshActor*> StaticMeshes;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    UFMODEvent* TestFMODEvent;
-    
-    FFMODEventInstance EventInstance;
+    AFMODAmbientSound* FMODEvent;
 
     TUniquePtr<OpenPL::PLScene> Scene;
+    
+    class APawn* Player;
 };

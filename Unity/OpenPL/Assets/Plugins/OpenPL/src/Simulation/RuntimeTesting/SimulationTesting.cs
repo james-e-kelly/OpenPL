@@ -23,6 +23,8 @@ namespace OpenPL
 
         public FMODUnity.StudioEventEmitter eventEmitter;
 
+        public GameObject wwiseEmitter;
+
         public bool DebugMeshes;
         public bool ShowVoxels;
 
@@ -105,10 +107,35 @@ namespace OpenPL
             {
                 StartCoroutine(WaitForEventInstance());
             }
+            else if (middlewarePlatform == MiddlewarePlatform.Wwise)
+            {
+                StartCoroutine(UpdateWwiseSimulation());
+            }
         }
 
         Vector3 emitterLocation;
         Vector3 listenerLocation;
+
+        IEnumerator UpdateWwiseSimulation()
+        {
+            yield return null;
+
+            while (wwiseEmitter != null)
+            {
+                listenerLocation = Listener.transform.position;
+                emitterLocation = wwiseEmitter.transform.position;
+                Vector3 emitterLocationWithListenerY = new Vector3(emitterLocation.x, listenerLocation.y, emitterLocation.z);
+
+                RuntimeManager.CheckResult(SceneInstance.Simulate(listenerLocation.ToPLVector()), "Scene.Simulate");
+
+                float Occlusion;
+                RuntimeManager.CheckResult(SceneInstance.GetOcclusion(emitterLocationWithListenerY.ToPLVector(), out Occlusion), "Get Occlusion");
+
+                AkSoundEngine.SetObjectObstructionAndOcclusion(wwiseEmitter, Listener, 0, 1 - Mathf.Clamp01(Occlusion));
+
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
 
         IEnumerator UpdateSimulation()
         {

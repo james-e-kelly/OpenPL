@@ -375,7 +375,7 @@ MonoBehaviour:
         ObjectType: 3
         guid: 1a7b9a4aa3559f41b17ab3458a38a69e
       Path: Events/Default Work Unit/Play_DrumTest
-      maxAttenuation: 40
+      maxAttenuation: 20
       maxDuration: -1
       minDuration: -1
   RtpcWwu:

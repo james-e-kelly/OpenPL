@@ -7,6 +7,8 @@
 #include "Components/StaticMeshComponent.h"
 #include "Engine/StaticMesh.h"
 #include "OpenPLUtils.h"
+#include "Kismet/GameplayStatics.h"
+#include "GameFramework/Pawn.h"
 
 using namespace OpenPL;
 
@@ -30,8 +32,6 @@ void ARuntimeOpenPL::BeginPlay()
     {
         return;
     }
-    
-    EventInstance = UFMODBlueprintStatics::PlayEventAtLocation(this, TestFMODEvent, GetActorTransform(), true);
     
     Scene->CreateVoxels(PLVector(10,10,10), 1);
     
@@ -87,39 +87,8 @@ void ARuntimeOpenPL::BeginPlay()
     Scene->GetVoxelsCount(&VoxelCount);
     
     Scene->Simulate(PLVector(0,0,0));
-    
-    PL_RESULT DrawGraphResult = Scene->DrawGraph(PLVector(1,1,1));
-    
-    /*
-     listenerLocation = Listener.transform.position;
-     listenerEmitterLocation = new Vector3(listenerLocation.x, emitterLocation.y, listenerLocation.z);
-
-     int VoxelIndex;
-     RuntimeManager.CheckResult(SceneInstance.Encode(PLVector(0,0,0), out VoxelIndex), "Encode");
-     string DesktopPath = global::System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-     string currentIRFilePath = DesktopPath + "/" + VoxelIndex.ToString() + ".wav";
-     if (global::System.IO.File.Exists(currentIRFilePath) && lastVoxel == VoxelIndex)
-     {
-         yield return new WaitForSeconds(1f);
-         continue;
-     }
-     UnityEngine.Debug.Log(currentIRFilePath);
-
-     lastVoxel = VoxelIndex;
-
-     int channels, sampleRate;
-     float[] ir = WAV.Read(currentIRFilePath, out channels, out sampleRate);
-
-     byte[] array = new byte[ir.Length + 1];
-     array[0] = (byte)channels;
-     Buffer.BlockCopy(ir, 0, array, 1, ir.Length);
-
-     reverbDSP.setParameterData((int)FMOD.DSP_CONVOLUTION_REVERB.IR, array);
-
-     UnityEngine.Debug.Log("SENT IR");
-
-     yield return new WaitForSeconds(0.2f);
-     */
+        
+    Player = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
 }
 
 // Called every frame
@@ -127,5 +96,11 @@ void ARuntimeOpenPL::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+    if (Player)
+    {
+        FVector ListenerLocation = Player->GetActorLocation();
+        FVector EmitterLocation = FMODEvent->GetActorLocation();
+        EmitterLocation.Z = ListenerLocation.Z;
+    }
 }
 

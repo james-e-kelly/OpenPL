@@ -1097,8 +1097,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Listener: {fileID: 916664086}
-  middlewarePlatform: 0
+  middlewarePlatform: 1
   eventEmitter: {fileID: 1348753776}
+  wwiseEmitter: {fileID: 1348753774}
   DebugMeshes: 0
   ShowVoxels: 0
   disable: 0
