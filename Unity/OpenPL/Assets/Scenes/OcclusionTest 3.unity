@@ -800,8 +800,7 @@ MonoBehaviour:
   - {fileID: 1914896630}
   - {fileID: 1378954735}
   - {fileID: 808421033}
-  movementSpeed: 0.4
-  currentLerp: 0
+  movementSpeed: 6
 --- !u!1 &1378954734
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,6 +940,7 @@ MonoBehaviour:
   eventEmitter: {fileID: 1348753776}
   DebugMeshes: 0
   ShowVoxels: 0
+  disable: 0
 --- !u!114 &1919804530
 MonoBehaviour:
   m_ObjectHideFlags: 0
