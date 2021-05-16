@@ -4,6 +4,7 @@
 		<UserProjectSettings Name="" ID="{0E7AEF7D-01DC-48E3-8215-3E1844CB70B9}">
 			<PropertyList>
 				<Property Name="AudioFilesImporter\Path" Type="string" Value="Z:\Users\Shared\CURRENT\Education\Uni\Year 4\Final Year Project\Development\"/>
+				<Property Name="Event Action List\{4A9A7B1A-55A3-419F-B17A-B3458A38A69E}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="EventView\FilterMode1" Type="int32" Value="2"/>
 				<Property Name="ExternalSourcesInputPath" Type="string">
 					<ValueList>
@@ -18,6 +19,9 @@
 				<Property Name="Game Profiler\Voice Monitor\LastBus" Type="string" Value="{00000000-0000-0000-0000-000000000000}"/>
 				<Property Name="General\LatestLanguage" Type="int32" Value="684519430"/>
 				<Property Name="General\LatestPlatform" Type="string" Value="Mac"/>
+				<Property Name="GenerateSoundBanks\x64_SelectedLanguages" Type="string" Value=""/>
+				<Property Name="GenerateSoundBanks\x64_SelectedPlatforms" Type="string" Value=""/>
+				<Property Name="GenerateSoundBanks\x64_SelectedSoundBanks" Type="string" Value="e6HIwtH3hEi5+/pyH51Rnw=="/>
 				<Property Name="HardwareController\CurrentSession" Type="string" Value="{00000000-0000-0000-0000-000000000000}"/>
 				<Property Name="MeterView\LastObject1" Type="string" Value="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
 				<Property Name="MeterView\MeterMode1" Type="int32" Value="1"/>
