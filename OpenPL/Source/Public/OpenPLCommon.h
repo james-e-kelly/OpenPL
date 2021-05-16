@@ -10,7 +10,12 @@
 
 #pragma once
 
-#include <JuceHeader.h>
+#ifdef JUCE_DLL_BUILD
+    #include <JuceHeader.h>
+#else
+    #define JUCE_PUBLIC_FUNCTION
+    #define JUCE_API
+#endif
 
 typedef struct PL_SYSTEM    PL_SYSTEM;
 typedef struct PL_SCENE     PL_SCENE;
