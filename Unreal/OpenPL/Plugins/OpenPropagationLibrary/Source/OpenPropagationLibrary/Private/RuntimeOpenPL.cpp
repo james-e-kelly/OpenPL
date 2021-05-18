@@ -9,6 +9,7 @@
 #include "OpenPLUtils.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/Pawn.h"
+#include "FMODAudioComponent.h"
 
 using namespace OpenPL;
 
@@ -101,6 +102,21 @@ void ARuntimeOpenPL::Tick(float DeltaTime)
         FVector ListenerLocation = Player->GetActorLocation();
         FVector EmitterLocation = FMODEvent->GetActorLocation();
         EmitterLocation.Z = ListenerLocation.Z;
+        
+        float OutOcclusion;
+        Scene->GetOcclusion(PLVector(EmitterLocation.X, EmitterLocation.Y, EmitterLocation.Z), &OutOcclusion);
+        
+        UFMODAudioComponent* AudioComponent = FMODEvent->AudioComponent;
+        
+        if (OutOcclusion > 1)
+        {
+            OutOcclusion = 1;
+        }
+        if (OutOcclusion < 0)
+        {
+            OutOcclusion = 0;
+        }
+        AudioComponent->SetParameter("Occlusion", 1 - OutOcclusion);
     }
 }
 

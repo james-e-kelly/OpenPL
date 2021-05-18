@@ -202,6 +202,11 @@ extern "C"
      * @param EncodingPosition Position of the impulse response.
      */
     PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_Encode(PL_SCENE* Scene, PLVector EncodingPosition, int* OutVoxelIndex);
+
+    /**
+     * Get the occlusion value of the emitter location.
+     */
+    PL_RESULT JUCE_PUBLIC_FUNCTION PL_Scene_GetOcclusion(PL_SCENE* Scene, PLVector EmitterLocation, float* OutOcclusion);
     
 #ifdef __cplusplus
 }
