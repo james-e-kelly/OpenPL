@@ -88,6 +88,13 @@ void Analyser::GetOcclusion(Simulator* Simulator, PLVector EncodingPosition, flo
     Scene->GetThreeDimensionalIndexOfIndex(EmitterIndex, EmitterX, EmitterY, EmitterZ);
     
     const std::vector<std::vector<PLVoxel>>& SimulatedLattice = Simulator->GetSimulatedLattice();
+    
+    if (EmitterIndex < 0 || EmitterIndex >= SimulatedLattice.size())
+    {
+        *OutOcclusion = 1;
+        return;
+    }
+    
     const std::vector<PLVoxel> Response = SimulatedLattice[EmitterIndex];   // Response at the emitter location
     
     PLVector ListenerLocation;
@@ -97,6 +104,13 @@ void Analyser::GetOcclusion(Simulator* Simulator, PLVector EncodingPosition, flo
     int ListenerIndex;
     int ListenerX, ListenerY, ListenerZ;
     Scene->GetVoxelIndexOfPosition(ListenerLocation, &ListenerIndex);
+    
+    if (ListenerIndex < 0 || ListenerIndex >= SimulatedLattice.size())
+    {
+        *OutOcclusion = 1;
+        return;
+    }
+    
     Scene->GetThreeDimensionalIndexOfIndex(ListenerIndex, ListenerX, ListenerY, ListenerZ);
 
     //
