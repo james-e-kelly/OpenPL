@@ -69,7 +69,7 @@ void ARuntimeOpenPL::BeginPlay()
             {
                 const FVector& VertexPos = VertexBuffer.VertexPosition(i);
                 const FVector& VertexWorld = MeshActor->GetTransform().TransformPosition(VertexPos);
-                Vertices.Add(PLVector(VertexWorld.X / 100, VertexWorld.Y / 100, VertexWorld.Z));
+                Vertices.Add(PLVector(VertexWorld.X / 100, VertexWorld.Z / 100, VertexWorld.Y));
             }
             
             for (int i = 0; i < Indices.Num(); i++)
@@ -86,8 +86,6 @@ void ARuntimeOpenPL::BeginPlay()
     
     int VoxelCount;
     Scene->GetVoxelsCount(&VoxelCount);
-    
-    Scene->Simulate(PLVector(0,0,0));
         
     Player = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
 }
