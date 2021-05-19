@@ -69,7 +69,7 @@ void ARuntimeOpenPL::BeginPlay()
             {
                 const FVector& VertexPos = VertexBuffer.VertexPosition(i);
                 const FVector& VertexWorld = MeshActor->GetTransform().TransformPosition(VertexPos);
-                Vertices.Add(PLVector(VertexWorld.X, VertexWorld.Y, VertexWorld.Z));
+                Vertices.Add(PLVector(VertexWorld.X / 100, VertexWorld.Y / 100, VertexWorld.Z));
             }
             
             for (int i = 0; i < Indices.Num(); i++)
@@ -103,8 +103,10 @@ void ARuntimeOpenPL::Tick(float DeltaTime)
         FVector EmitterLocation = FMODEvent->GetActorLocation();
         EmitterLocation.Z = ListenerLocation.Z;
         
+        Scene->Simulate(ConvertUnrealVectorToPL(ListenerLocation));
+        
         float OutOcclusion;
-        Scene->GetOcclusion(PLVector(EmitterLocation.X, EmitterLocation.Y, EmitterLocation.Z), &OutOcclusion);
+        Scene->GetOcclusion(ConvertUnrealVectorToPL(EmitterLocation), &OutOcclusion);
         
         UFMODAudioComponent* AudioComponent = FMODEvent->AudioComponent;
         

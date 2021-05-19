@@ -13,13 +13,13 @@
 
 inline PLVector ConvertUnrealVectorToPL(FVector UnrealVector)
 {
-    PLVector Result (UnrealVector.X, UnrealVector.Y, UnrealVector.Z);
+    PLVector Result (UnrealVector.X / 100, UnrealVector.Y / 100, UnrealVector.Z / 100);
     return Result;
 }
 
 inline PLVector4 ConvertUnrealVectorToPL4(FVector UnrealVector)
 {
-    PLVector4 Result { UnrealVector.X, UnrealVector.Y, UnrealVector.Z, 1 };
+    PLVector4 Result { UnrealVector.X / 100, UnrealVector.Y / 100, UnrealVector.Z / 100, 1 };
     return Result;
 }
 
