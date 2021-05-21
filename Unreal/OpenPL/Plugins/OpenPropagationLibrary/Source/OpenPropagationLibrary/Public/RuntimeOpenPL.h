@@ -29,6 +29,9 @@ public:
 protected:
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    bool bShowMeshes;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     TArray<class AStaticMeshActor*> StaticMeshes;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite)

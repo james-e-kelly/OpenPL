@@ -34,7 +34,7 @@ void ARuntimeOpenPL::BeginPlay()
         return;
     }
     
-    Scene->CreateVoxels(PLVector(10,10,10), 1);
+    Scene->CreateVoxels(PLVector(20,10,20), 0.9f);
     
     for (AStaticMeshActor* MeshActor : StaticMeshes)
     {
@@ -68,26 +68,38 @@ void ARuntimeOpenPL::BeginPlay()
             for (int i = 0; i < VertexCount; i++)
             {
                 const FVector& VertexPos = VertexBuffer.VertexPosition(i);
-                const FVector& VertexWorld = MeshActor->GetTransform().TransformPosition(VertexPos);
-                Vertices.Add(PLVector(VertexWorld.X / 100, VertexWorld.Z / 100, VertexWorld.Y));
+                Vertices.Add(ConvertUnrealVectorToPL(VertexPos));
             }
             
             for (int i = 0; i < Indices.Num(); i++)
             {
                 ActualIndices.Add(static_cast<int>(Indices[i]));
             }
+            
+            FVector Scale = MeshActor->GetActorScale();
 
             int32 AddedMeshIndex = -1;
-            Scene->AddMesh(ConvertUnrealVectorToPL(MeshActor->GetActorLocation()), ConvertUnrealVectorToPL4(MeshActor->GetActorRotation().Euler()), ConvertUnrealVectorToPL(MeshActor->GetActorScale()), Vertices.GetData(), VertexCount, ActualIndices.GetData(), TriangleCount, &AddedMeshIndex);
+            Scene->AddMesh(ConvertUnrealVectorToPL(MeshActor->GetActorLocation()), ConvertUnrealVectorToPL4(MeshActor->GetActorRotation().Euler()),
+                           PLVector(Scale.Y, Scale.Z, Scale.X), Vertices.GetData(), VertexCount, ActualIndices.GetData(), TriangleCount, &AddedMeshIndex);
         }
     }
-    
-    Scene->FillVoxelsWithGeometry();
+
     
     int VoxelCount;
     Scene->GetVoxelsCount(&VoxelCount);
         
     Player = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+    
+    FVector ListenerLocation = Player->GetActorLocation();
+    
+    OpenPLModule.GetSystem()->SetListenerPosition(ConvertUnrealVectorToPL(ListenerLocation));
+                                                   
+    Scene->FillVoxelsWithGeometry();
+    
+    if (bShowMeshes)
+    {
+        Scene->Debug();
+    }
 }
 
 // Called every frame
@@ -100,6 +112,9 @@ void ARuntimeOpenPL::Tick(float DeltaTime)
         FVector ListenerLocation = Player->GetActorLocation();
         FVector EmitterLocation = FMODEvent->GetActorLocation();
         EmitterLocation.Z = ListenerLocation.Z;
+        
+        FOpenPropagationLibraryModule& OpenPLModule = FOpenPropagationLibraryModule::Get();
+        OpenPLModule.GetSystem()->SetListenerPosition(ConvertUnrealVectorToPL(ListenerLocation));
         
         Scene->Simulate(ConvertUnrealVectorToPL(ListenerLocation));
         

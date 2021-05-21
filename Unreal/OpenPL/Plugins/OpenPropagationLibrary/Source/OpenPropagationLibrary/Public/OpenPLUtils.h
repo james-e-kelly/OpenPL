@@ -19,7 +19,7 @@ inline PLVector ConvertUnrealVectorToPL(FVector UnrealVector)
 
 inline PLVector4 ConvertUnrealVectorToPL4(FVector UnrealVector)
 {
-    PLVector4 Result { UnrealVector.Y / 100, UnrealVector.Z / 100, UnrealVector.X / 100, 1 };
+    PLVector4 Result { UnrealVector.Y, UnrealVector.Z, UnrealVector.X, 1 };
     return Result;
 }
 
