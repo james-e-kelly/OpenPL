@@ -23,4 +23,10 @@ inline PLVector4 ConvertUnrealVectorToPL4(FVector UnrealVector)
     return Result;
 }
 
+inline FVector ConvertPLToUnreal(PLVector Vector)
+{
+    FVector Result(Vector.Z * 100, Vector.X * 100, Vector.Y * 100);
+    return Result;
+}
+
 #endif /* OpenPLUtils_h */

@@ -10,6 +10,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/Pawn.h"
 #include "FMODAudioComponent.h"
+#include "DrawDebugHelpers.h"
 
 using namespace OpenPL;
 
@@ -34,7 +35,7 @@ void ARuntimeOpenPL::BeginPlay()
         return;
     }
     
-    Scene->CreateVoxels(PLVector(20,10,20), 0.9f);
+    Scene->CreateVoxels(ConvertUnrealVectorToPL(SimulationSize), VoxelSize / 100);
     
     for (AStaticMeshActor* MeshActor : StaticMeshes)
     {
@@ -96,9 +97,31 @@ void ARuntimeOpenPL::BeginPlay()
                                                    
     Scene->FillVoxelsWithGeometry();
     
+    Scene->Simulate(ConvertUnrealVectorToPL(ListenerLocation));
+    
     if (bShowMeshes)
     {
         Scene->Debug();
+    }
+
+    DrawDebugBox(GetWorld(), FVector(0,0,0), SimulationSize, FColor::White, true, -1, 0, 10);
+    
+    for(int i = 0; i < VoxelCount; ++i)
+    {
+        PLVector Location;
+        FVector UnrealLocation;
+        float Absorpivity;
+        Scene->GetVoxelLocation(&Location, i);
+        Scene->GetVoxelAbsorpivity(&Absorpivity, i);
+        UnrealLocation = ConvertPLToUnreal(Location);
+        if (Absorpivity > 0.f)
+        {
+            DrawDebugBox(GetWorld(), UnrealLocation, FVector(VoxelSize,VoxelSize,VoxelSize), FColor::Green, true, -1, 0, 10);
+        }
+        else if (bShowAllVoxels)
+        {
+            DrawDebugBox(GetWorld(), UnrealLocation, FVector(VoxelSize,VoxelSize,VoxelSize), FColor::White, true, -1, 0, 10);
+        }
     }
 }
 
@@ -112,6 +135,8 @@ void ARuntimeOpenPL::Tick(float DeltaTime)
         FVector ListenerLocation = Player->GetActorLocation();
         FVector EmitterLocation = FMODEvent->GetActorLocation();
         EmitterLocation.Z = ListenerLocation.Z;
+        
+        DrawDebugBox(GetWorld(), EmitterLocation, FVector(50,50,50), FColor::Purple, false, 0.05f, 0, 5);
         
         FOpenPropagationLibraryModule& OpenPLModule = FOpenPropagationLibraryModule::Get();
         OpenPLModule.GetSystem()->SetListenerPosition(ConvertUnrealVectorToPL(ListenerLocation));

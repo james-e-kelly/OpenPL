@@ -32,6 +32,15 @@ protected:
     bool bShowMeshes;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    bool bShowAllVoxels;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    FVector SimulationSize;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float VoxelSize;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     TArray<class AStaticMeshActor*> StaticMeshes;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
