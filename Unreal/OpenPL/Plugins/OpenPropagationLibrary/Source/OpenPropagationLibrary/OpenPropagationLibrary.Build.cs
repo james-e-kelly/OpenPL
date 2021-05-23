@@ -45,5 +45,7 @@ public class OpenPropagationLibrary : ModuleRules
 			);
             
         PrivateDependencyModuleNames.AddRange(new string[] { "FMODStudio" });
+        
+        PublicDependencyModuleNames.AddRange(new string[] { "AkAudio" });
 	}
 }
