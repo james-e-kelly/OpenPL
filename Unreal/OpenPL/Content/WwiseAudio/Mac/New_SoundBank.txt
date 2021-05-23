@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	2257575446	Play_DrumTest			\Default Work Unit\Play_DrumTest	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	369784412	DrumTest	Z:\Users\Shared\CURRENT\Education\Uni\Year 4\Final Year Project\Development\OpenPL\Wwise Project\OpenPL\.cache\Mac\SFX\DrumLoop1_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\DrumTest		720144
+
