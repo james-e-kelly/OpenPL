@@ -7,6 +7,7 @@
 #include "OpenPL.hpp"
 #include "Templates/UniquePtr.h"
 #include "FMODAmbientSound.h"
+#include "AkAmbientSound.h"
 #include "RuntimeOpenPL.generated.h"
 
 UCLASS()
@@ -29,6 +30,9 @@ public:
 protected:
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    bool bUseWwise;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     bool bShowMeshes;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -45,6 +49,9 @@ protected:
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     AFMODAmbientSound* FMODEvent;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    AAkAmbientSound* WwiseEvent;
 
     TUniquePtr<OpenPL::PLScene> Scene;
     

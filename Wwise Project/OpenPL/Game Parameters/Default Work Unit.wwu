@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{92767829-EAE0-4242-9D69-E5868775D868}" SchemaVersion="103">
 	<GameParameters>
-		<WorkUnit Name="Default Work Unit" ID="{92767829-EAE0-4242-9D69-E5868775D868}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{92767829-EAE0-4242-9D69-E5868775D868}" PersistMode="Standalone">
+			<ChildrenList>
+				<GameParameter Name="Occlusion" ID="{F2A1E150-8319-451A-AB20-DB143D961889}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="0"/>
+						<Property Name="Max" Type="Real64" Value="1"/>
+					</PropertyList>
+				</GameParameter>
+			</ChildrenList>
+		</WorkUnit>
 	</GameParameters>
 </WwiseDocument>

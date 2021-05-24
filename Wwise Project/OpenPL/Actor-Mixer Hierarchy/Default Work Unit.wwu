@@ -63,6 +63,34 @@
 					<PropertyList>
 						<Property Name="3DSpatialization" Type="int16" Value="1"/>
 						<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+						<Property Name="Lowpass" Type="int16">
+							<RTPCList>
+								<RTPC Name="" ID="{95E357E4-9892-44B6-8399-0B7EE1E1413D}" ShortID="840422104">
+									<ReferenceList>
+										<Reference Name="ControlInput">
+											<ObjectRef Name="Occlusion" ID="{F2A1E150-8319-451A-AB20-DB143D961889}" WorkUnitID="{92767829-EAE0-4242-9D69-E5868775D868}"/>
+										</Reference>
+									</ReferenceList>
+									<Curve Name="" ID="{F17C7070-8900-4323-91D4-43001FF8BC9E}">
+										<PropertyList>
+											<Property Name="Flags" Type="int32" Value="65537"/>
+										</PropertyList>
+										<PointList>
+											<Point>
+												<XPos>0</XPos>
+												<YPos>0</YPos>
+												<Flags>5</Flags>
+											</Point>
+											<Point>
+												<XPos>1</XPos>
+												<YPos>72</YPos>
+												<Flags>37</Flags>
+											</Point>
+										</PointList>
+									</Curve>
+								</RTPC>
+							</RTPCList>
+						</Property>
 						<Property Name="Volume" Type="Real64">
 							<ValueList>
 								<Value>-3</Value>

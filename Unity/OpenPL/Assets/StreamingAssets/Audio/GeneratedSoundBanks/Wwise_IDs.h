@@ -16,6 +16,11 @@ namespace AK
         static const AkUniqueID PLAY_DRUMTEST = 2257575446U;
     } // namespace EVENTS
 
+    namespace GAME_PARAMETERS
+    {
+        static const AkUniqueID OCCLUSION = 183903552U;
+    } // namespace GAME_PARAMETERS
+
     namespace BANKS
     {
         static const AkUniqueID INIT = 1355168291U;

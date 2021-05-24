@@ -11,6 +11,8 @@
 #include "GameFramework/Pawn.h"
 #include "FMODAudioComponent.h"
 #include "DrawDebugHelpers.h"
+#include "AkAudioDevice.h"
+#include "AkComponent.h"
 
 using namespace OpenPL;
 
@@ -133,7 +135,7 @@ void ARuntimeOpenPL::Tick(float DeltaTime)
     if (Player)
     {
         FVector ListenerLocation = Player->GetActorLocation();
-        FVector EmitterLocation = FMODEvent->GetActorLocation();
+        FVector EmitterLocation = bUseWwise ? WwiseEvent->GetActorLocation() : FMODEvent->GetActorLocation();
         EmitterLocation.Z = ListenerLocation.Z;
         
         DrawDebugBox(GetWorld(), EmitterLocation, FVector(50,50,50), FColor::Purple, false, 0.05f, 0, 5);
@@ -146,8 +148,6 @@ void ARuntimeOpenPL::Tick(float DeltaTime)
         float OutOcclusion;
         Scene->GetOcclusion(ConvertUnrealVectorToPL(EmitterLocation), &OutOcclusion);
         
-        UFMODAudioComponent* AudioComponent = FMODEvent->AudioComponent;
-        
         if (OutOcclusion > 1)
         {
             OutOcclusion = 1;
@@ -156,7 +156,18 @@ void ARuntimeOpenPL::Tick(float DeltaTime)
         {
             OutOcclusion = 0;
         }
-        AudioComponent->SetParameter("Occlusion", 1 - OutOcclusion);
+        
+        if (bUseWwise)
+        {
+            WwiseEvent->AkComponent->SetRTPCValue(nullptr, 1 - OutOcclusion, 0, FString("Occlusion"));
+        }
+        else
+        {
+            UFMODAudioComponent* AudioComponent = FMODEvent->AudioComponent;
+            
+            AudioComponent->SetParameter("Occlusion", 1 - OutOcclusion);
+        }
+        
     }
 }
 
