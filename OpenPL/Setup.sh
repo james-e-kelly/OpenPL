@@ -14,6 +14,11 @@ cd "`dirname "$0"`"
 
 echo -e "${RED}==> ${NOCOLOR}${BOLD}Installing OpenPL${NOCOLOR}"
 
+if [ ! -d "External" ]
+then
+    mkdir External
+fi
+
 # Stop advice for detatched heads
 # We're not cloning the projects to make commits so this is fine
 git config --global advice.detachedHead false
