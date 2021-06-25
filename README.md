@@ -1,7 +1,5 @@
 # OpenPL (Open Propagation Library)
 
-[![OpenPL Builder](https://github.com/KarateKidzz/OpenPL/actions/workflows/openpl_build.yml/badge.svg?branch=develop)](https://github.com/KarateKidzz/OpenPL/actions/workflows/openpl_build.yml)
-
 OpenPL is a [University of Portsmouth](https://www.port.ac.uk/) dissertation project to learn about [Project Triton/Acoustics](https://github.com/microsoft/ProjectAcoustics).
 
 Written with [JUCE v6.0.7](https://github.com/juce-framework/JUCE).
